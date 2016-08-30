@@ -1,12 +1,13 @@
-package stmts;
+package sketchobj.stmts;
 
-import core.*;
+import sketchobj.core.*;
+import sketchobj.expr.Expression;
 
 public class StmtFor extends Statement {
-	private SketchExpr cond;
+	private Expression cond;
 	private Statement init, incr, body;
 
-	public StmtFor(Statement init, SketchExpr cond, Statement incr, Statement body, boolean isCanonical) {
+	public StmtFor(Statement init, Expression cond, Statement incr, Statement body, boolean isCanonical) {
 		this.init = init;
 		this.cond = cond;
 		this.incr = incr;

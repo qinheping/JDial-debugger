@@ -1,11 +1,13 @@
-package core;
+package sketchobj.core;
 import java.util.List;
 
-public class TypeArray extends SketchType {
-    private final SketchType base;
-    private final SketchExpr length;
+import sketchobj.expr.Expression;
+
+public class TypeArray extends Type {
+    private final Type base;
+    private final Expression length;
     //private final List<SketchExpr> dims;
-	public TypeArray(SketchType base, SketchExpr length){
+	public TypeArray(Type base, Expression length){
 		this.base = base;
 		this.length = length;
 	}
@@ -19,7 +21,7 @@ public class TypeArray extends SketchType {
         return this.getBase() + "[" + s + "]";
     }
 
-	private SketchType getBase() {
+	private Type getBase() {
 		return base;
 	}
 }

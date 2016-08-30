@@ -1,12 +1,13 @@
-package stmts;
-import core.SketchExpr;
+package sketchobj.stmts;
+import sketchobj.expr.ExprBinary;
+import sketchobj.expr.Expression;
 public class StmtAssign extends Statement{
-	private SketchExpr lhs, rhs;
+	private Expression lhs, rhs;
     private int op;	// operation += -= *= /=
 
     /** Creates a new assignment statement with the specified left-
      * and right-hand sides and no operation (i.e., 'lhs=rhs;'). */
-    public StmtAssign(SketchExpr lhs, SketchExpr rhs, int op)
+    public StmtAssign(Expression lhs, Expression rhs, int op)
     {
         this.lhs = lhs;
         this.rhs = rhs;
@@ -14,20 +15,20 @@ public class StmtAssign extends Statement{
 
     /** Creates a new assignment statement with the specified left-
      * and right-hand sides and no operation (i.e., 'lhs=rhs;'). */
-    public StmtAssign(SketchExpr lhs, SketchExpr rhs)
+    public StmtAssign(Expression lhs, Expression rhs)
     {
         this(lhs, rhs, 0);
     }
     
 
     /** Returns the left-hand side of this. */
-    public SketchExpr getLHS()
+    public Expression getLHS()
     {
         return lhs;
     }
 
     /** Returns the right-hand side of this. */
-    public SketchExpr getRHS()
+    public Expression getRHS()
     {
         return rhs;
     }

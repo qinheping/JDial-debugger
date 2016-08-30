@@ -81,21 +81,21 @@ primitiveType
 	;
 
 numericType
-	:	integralType
-	|	floatingPointType
+	:	integralType							# numericIntegeralType
+	|	floatingPointType						# numericFloatingPointType
 	;
 
-integralType
-	:	'byte'
-	|	'short'
-	|	'int'
-	|	'long'
-	|	'char'
+integralType									
+	:	'byte'								# integeralType
+	|	'short'								# integeralType
+	|	'int'								# integeralType
+	|	'long'								# integeralType
+	|	'char'								# integeralType
 	;
 
 floatingPointType
-	:	'float'
-	|	'double'
+	:	'float'								# floatingPointType
+	|	'double'							# floatingPointType
 	;
 
 referenceType
@@ -149,7 +149,7 @@ arrayType
 	;
 
 dims
-	:	annotation* '[' ']' (annotation* '[' ']')*
+	:	annotation* '[' ']' (annotation* '[' ']')*				# dims
 	;
 
 typeParameter
@@ -355,8 +355,8 @@ variableDeclarator
 	:	variableDeclaratorId ('=' variableInitializer)?
 	;
 
-variableDeclaratorId
-	:	Identifier dims?
+variableDeclaratorId								
+	:	Identifier dims?						# variableDeclaratorId
 	;
 
 variableInitializer
@@ -365,19 +365,19 @@ variableInitializer
 	;
 
 unannType
-	:	unannPrimitiveType
-	|	unannReferenceType
+	:	unannPrimitiveType						# unannTypePri
+	|	unannReferenceType						# unannTypeRef
 	;
 
 unannPrimitiveType
-	:	numericType
-	|	'boolean'
+	:	numericType							# unannPrimitiveType
+	|	'boolean'							# unannBooleanType
 	;
 
 unannReferenceType
 	:	unannClassOrInterfaceType
 	|	unannTypeVariable
-	|	unannArrayType
+	|	unannArrayType							# unannReferenceTypeArray
 	;
 
 unannClassOrInterfaceType
@@ -419,13 +419,13 @@ unannTypeVariable
 	;
 
 unannArrayType
-	:	unannPrimitiveType dims
+	:	unannPrimitiveType dims							# unannArrayTypePri
 	|	unannClassOrInterfaceType dims
 	|	unannTypeVariable dims
 	;
 
 methodDeclaration
-	:	methodModifier* methodHeader methodBody
+	:	methodModifier* methodHeader methodBody					# methodDeclaration
 	;
 
 methodModifier
@@ -442,31 +442,31 @@ methodModifier
 	;
 
 methodHeader
-	:	result methodDeclarator throws_?
-	|	typeParameters annotation* result methodDeclarator throws_?
+	:	result methodDeclarator throws_?					# methodHeader
+	|	typeParameters annotation* result methodDeclarator throws_?		
 	;
 
 result
-	:	unannType
+	:	unannType								# result
 	|	'void'
 	;
 
 methodDeclarator
-	:	Identifier '(' formalParameterList? ')' dims?
+	:	Identifier '(' formalParameterList? ')' dims?				# methodDeclarator
 	;
 
 formalParameterList
-	:	formalParameters ',' lastFormalParameter
-	|	lastFormalParameter
+	:	formalParameters ',' lastFormalParameter				# formalParameterList
+	|	lastFormalParameter							# onlyOneParameter
 	;
 
 formalParameters
-	:	formalParameter (',' formalParameter)*
+	:	formalParameter (',' formalParameter)*					# formalParameters
 	|	receiverParameter (',' formalParameter)*
 	;
 
 formalParameter
-	:	variableModifier* unannType variableDeclaratorId
+	:	variableModifier* unannType variableDeclaratorId			# formalParameter
 	;
 
 variableModifier
@@ -497,8 +497,8 @@ exceptionType
 	;
 
 methodBody
-	:	block
-	|	';'
+	:	block										# methodBody
+	|	';'										
 	;
 
 instanceInitializer
@@ -713,17 +713,17 @@ variableInitializerList
  */
 
 block
-	:	'{' blockStatements? '}'
+	:	'{' blockStatements? '}'						# block
 	;
 
 blockStatements
-	:	blockStatement blockStatement*
+	:	blockStatement blockStatement*						# blcokStatements
 	;
 
 blockStatement
-	:	localVariableDeclarationStatement
-	|	classDeclaration
-	|	statement
+	:	localVariableDeclarationStatement					# localVarDecl
+	|	classDeclaration					
+	|	statement								# singleStatement
 	;
 
 localVariableDeclarationStatement
@@ -735,12 +735,12 @@ localVariableDeclaration
 	;
 
 statement
-	:	statementWithoutTrailingSubstatement
-	|	labeledStatement
-	|	ifThenStatement
-	|	ifThenElseStatement
-	|	whileStatement
-	|	forStatement
+	:	statementWithoutTrailingSubstatement					# withoutTrailingSubstatement
+	|	labeledStatement							
+	|	ifThenStatement								# statementIfThen
+	|	ifThenElseStatement							# statementIfThenIfThenElse
+	|	whileStatement								# statementIfThenWhile
+	|	forStatement								# statementFor
 	;
 
 statementNoShortIf

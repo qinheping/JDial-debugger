@@ -1,19 +1,19 @@
-package stmts;
+package sketchobj.stmts;
 
-import core.SketchExpr;
+import sketchobj.expr.Expression;
 
 public class StmtWhile {
-    SketchExpr cond;
+    Expression cond;
     Statement body;
     
 
-    public StmtWhile(SketchExpr cond, Statement body)
+    public StmtWhile(Expression cond, Statement body)
     {
         this.cond = cond;
         this.body = body;
     }
     /** Returns the loop condition. */
-    public SketchExpr getCond()
+    public Expression getCond()
     {
         return cond;
     }

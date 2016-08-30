@@ -1,6 +1,6 @@
-package core;
+package sketchobj.core;
 
-public class TypePrimitive extends SketchType {
+public class TypePrimitive extends Type {
 	/** Type constant for bit types. */
 	public static final int TYPE_BIT = 1;
 	/** Type constant for int types. */
@@ -63,7 +63,7 @@ public class TypePrimitive extends SketchType {
 	 * @param type
 	 *            integer type number, one of the TYPE_* constants
 	 */
-	private TypePrimitive(int type) {
+	public TypePrimitive(int type) {
 		this.type = type;
 	}
 

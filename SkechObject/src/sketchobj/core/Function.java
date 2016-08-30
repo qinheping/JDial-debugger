@@ -1,8 +1,9 @@
-package core;
+package sketchobj.core;
 import java.util.*;
-import stmts.Statement;
 
-public class SketchFunction extends SketchObject {
+import sketchobj.stmts.Statement;
+
+public class Function extends SketchObject {
 	public static enum FcnType {
         // Uninterpreted Function
         Uninterp("uninterp"),
@@ -32,17 +33,25 @@ public class SketchFunction extends SketchObject {
         }
     }
     private  String name; // or null
-	private  SketchType returnType;
+	private  Type returnType;
     private  List<Parameter> params;
     private  Statement body;
     private  FcnType fcnType;
 	
-    public SketchFunction(String name, SketchType returnType, List<Parameter> params, Statement body, FcnType fcnType){
+    public Function(String name, Type returnType, List<Parameter> params, Statement body, FcnType fcnType){
     	this.name = name;
     	this.returnType = returnType;
     	this.params = params;
     	this.body = body;
     	this.fcnType = fcnType;
     }
-
+   
+    public Function(FcnHeader head, Statement body){
+    	this.name = head.name;
+    	this.returnType = head.returnType;
+    	this.params = head.params;
+    	this.body = body;
+    	this.fcnType = FcnType.Static;
+    }
+    
 }

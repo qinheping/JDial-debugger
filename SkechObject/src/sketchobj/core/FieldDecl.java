@@ -1,22 +1,24 @@
-package core;
+package sketchobj.core;
 import java.util.Collections;
 import java.util.List;
 
-public class FieldDecl {
-	private List<SketchType> types;
-	private List<String> names;
-	private List<SketchExpr> inits;
+import sketchobj.expr.Expression;
 
-	public FieldDecl( List<SketchType> types, List<String> names, List<SketchExpr> inits) {
-		this.types = new java.util.ArrayList<SketchType>(types);
+public class FieldDecl {
+	private List<Type> types;
+	private List<String> names;
+	private List<Expression> inits;
+
+	public FieldDecl( List<Type> types, List<String> names, List<Expression> inits) {
+		this.types = new java.util.ArrayList<Type>(types);
 		this.names = new java.util.ArrayList<String>(names);
-		this.inits = new java.util.ArrayList<SketchExpr>(inits);
+		this.inits = new java.util.ArrayList<Expression>(inits);
 	}
-    public SketchType getType(int n)
+    public Type getType(int n)
     {
         return types.get(n);
     }
-    public List<SketchType> getTypes()
+    public List<Type> getTypes()
     {
         return Collections.unmodifiableList(types);
     }
@@ -44,9 +46,9 @@ public class FieldDecl {
      *            <code>null</code> if the field is
      *            uninitialized
      */
-    public SketchExpr getInit(int n)
+    public Expression getInit(int n)
     {
-        return (SketchExpr)inits.get(n);
+        return (Expression)inits.get(n);
     }
 
     /**

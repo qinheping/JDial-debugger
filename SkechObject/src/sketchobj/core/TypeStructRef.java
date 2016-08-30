@@ -1,8 +1,8 @@
-package core;
+package sketchobj.core;
 import java.util.Collection;
 import java.util.Collections;
 
-public class TypeStructRef extends SketchType{
+public class TypeStructRef extends Type{
     private String name;
     private final boolean isUnboxed;
     public TypeStructRef(String name, boolean isUnboxed) {
@@ -15,7 +15,7 @@ public class TypeStructRef extends SketchType{
     }
     public boolean isStruct () { return true; }
     
-    public Collection<SketchType> getBaseTypes() {
-        return Collections.singletonList((SketchType) this);
+    public Collection<Type> getBaseTypes() {
+        return Collections.singletonList((Type) this);
     }
 }

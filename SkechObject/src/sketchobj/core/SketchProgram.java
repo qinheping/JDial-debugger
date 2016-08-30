@@ -1,4 +1,4 @@
-package core;
+package sketchobj.core;
 
 public class SketchProgram extends SketchObject{
 	public SketchProgram(){

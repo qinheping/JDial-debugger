@@ -1,4 +1,4 @@
-package stmts;
+package sketchobj.stmts;
 
 import java.util.Collections;
 import java.util.List;
