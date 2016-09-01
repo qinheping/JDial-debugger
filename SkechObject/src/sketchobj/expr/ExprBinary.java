@@ -250,7 +250,8 @@ public class ExprBinary extends Expression{
     public String toString()
     {
         String theOp = getOpString();
-        String lstr, rstr;
+        String lstr = null;
+        String rstr = null;
         if(left instanceof ExprConstInt || left instanceof ExprVar){
             lstr = left.toString();
         }else{

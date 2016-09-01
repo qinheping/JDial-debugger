@@ -11,11 +11,19 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface simpleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#literal}.
+	 * Visit a parse tree produced by the {@code literalInt}
+	 * labeled alternative in {@link simpleJavaParser#literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLiteral(simpleJavaParser.LiteralContext ctx);
+	T visitLiteralInt(simpleJavaParser.LiteralIntContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code listeral_unused}
+	 * labeled alternative in {@link simpleJavaParser#literal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListeral_unused(simpleJavaParser.Listeral_unusedContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleJavaParser#type}.
 	 * @param ctx the parse tree
@@ -361,11 +369,19 @@ public interface simpleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVariableDeclaratorId(simpleJavaParser.VariableDeclaratorIdContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#variableInitializer}.
+	 * Visit a parse tree produced by the {@code varInitExpr}
+	 * labeled alternative in {@link simpleJavaParser#variableInitializer}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariableInitializer(simpleJavaParser.VariableInitializerContext ctx);
+	T visitVarInitExpr(simpleJavaParser.VarInitExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code varInitArray}
+	 * labeled alternative in {@link simpleJavaParser#variableInitializer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVarInitArray(simpleJavaParser.VarInitArrayContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code unannTypePri}
 	 * labeled alternative in {@link simpleJavaParser#unannType}.
@@ -898,47 +914,11 @@ public interface simpleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLocalVariableDeclaration(simpleJavaParser.LocalVariableDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code withoutTrailingSubstatement}
-	 * labeled alternative in {@link simpleJavaParser#statement}.
+	 * Visit a parse tree produced by {@link simpleJavaParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWithoutTrailingSubstatement(simpleJavaParser.WithoutTrailingSubstatementContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code labledStat}
-	 * labeled alternative in {@link simpleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLabledStat(simpleJavaParser.LabledStatContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementIfThen}
-	 * labeled alternative in {@link simpleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementIfThen(simpleJavaParser.StatementIfThenContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementIfThenIfThenElse}
-	 * labeled alternative in {@link simpleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementIfThenIfThenElse(simpleJavaParser.StatementIfThenIfThenElseContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementIfThenWhile}
-	 * labeled alternative in {@link simpleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementIfThenWhile(simpleJavaParser.StatementIfThenWhileContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementFor}
-	 * labeled alternative in {@link simpleJavaParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementFor(simpleJavaParser.StatementForContext ctx);
+	T visitStatement(simpleJavaParser.StatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleJavaParser#statementNoShortIf}.
 	 * @param ctx the parse tree
@@ -1210,11 +1190,19 @@ public interface simpleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrimary(simpleJavaParser.PrimaryContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#primaryNoNewArray}.
+	 * Visit a parse tree produced by the {@code primaryLiteral}
+	 * labeled alternative in {@link simpleJavaParser#primaryNoNewArray}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrimaryNoNewArray(simpleJavaParser.PrimaryNoNewArrayContext ctx);
+	T visitPrimaryLiteral(simpleJavaParser.PrimaryLiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code primary_unused}
+	 * labeled alternative in {@link simpleJavaParser#primaryNoNewArray}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrimary_unused(simpleJavaParser.Primary_unusedContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleJavaParser#primaryNoNewArray_lf_arrayAccess}.
 	 * @param ctx the parse tree
@@ -1450,71 +1438,180 @@ public interface simpleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditionalExpression(simpleJavaParser.ConditionalExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#conditionalOrExpression}.
+	 * Visit a parse tree produced by the {@code conditionalOrToAnd}
+	 * labeled alternative in {@link simpleJavaParser#conditionalOrExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitConditionalOrExpression(simpleJavaParser.ConditionalOrExpressionContext ctx);
+	T visitConditionalOrToAnd(simpleJavaParser.ConditionalOrToAndContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#conditionalAndExpression}.
+	 * Visit a parse tree produced by the {@code expandConditionalOrExpr}
+	 * labeled alternative in {@link simpleJavaParser#conditionalOrExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitConditionalAndExpression(simpleJavaParser.ConditionalAndExpressionContext ctx);
+	T visitExpandConditionalOrExpr(simpleJavaParser.ExpandConditionalOrExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#inclusiveOrExpression}.
+	 * Visit a parse tree produced by the {@code conditianalAndToInclusiveOr}
+	 * labeled alternative in {@link simpleJavaParser#conditionalAndExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInclusiveOrExpression(simpleJavaParser.InclusiveOrExpressionContext ctx);
+	T visitConditianalAndToInclusiveOr(simpleJavaParser.ConditianalAndToInclusiveOrContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#exclusiveOrExpression}.
+	 * Visit a parse tree produced by the {@code expandConditionalAndExpr}
+	 * labeled alternative in {@link simpleJavaParser#conditionalAndExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExclusiveOrExpression(simpleJavaParser.ExclusiveOrExpressionContext ctx);
+	T visitExpandConditionalAndExpr(simpleJavaParser.ExpandConditionalAndExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#andExpression}.
+	 * Visit a parse tree produced by the {@code inclusiveToExclusive}
+	 * labeled alternative in {@link simpleJavaParser#inclusiveOrExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAndExpression(simpleJavaParser.AndExpressionContext ctx);
+	T visitInclusiveToExclusive(simpleJavaParser.InclusiveToExclusiveContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#equalityExpression}.
+	 * Visit a parse tree produced by the {@code expandInclusiveOrExpr}
+	 * labeled alternative in {@link simpleJavaParser#inclusiveOrExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitEqualityExpression(simpleJavaParser.EqualityExpressionContext ctx);
+	T visitExpandInclusiveOrExpr(simpleJavaParser.ExpandInclusiveOrExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#relationalExpression}.
+	 * Visit a parse tree produced by the {@code exclusiveToAnd}
+	 * labeled alternative in {@link simpleJavaParser#exclusiveOrExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRelationalExpression(simpleJavaParser.RelationalExpressionContext ctx);
+	T visitExclusiveToAnd(simpleJavaParser.ExclusiveToAndContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#shiftExpression}.
+	 * Visit a parse tree produced by the {@code expandExclusiveOrExpr}
+	 * labeled alternative in {@link simpleJavaParser#exclusiveOrExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitShiftExpression(simpleJavaParser.ShiftExpressionContext ctx);
+	T visitExpandExclusiveOrExpr(simpleJavaParser.ExpandExclusiveOrExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#additiveExpression}.
+	 * Visit a parse tree produced by the {@code expandAndExpr}
+	 * labeled alternative in {@link simpleJavaParser#andExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAdditiveExpression(simpleJavaParser.AdditiveExpressionContext ctx);
+	T visitExpandAndExpr(simpleJavaParser.ExpandAndExprContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#multiplicativeExpression}.
+	 * Visit a parse tree produced by the {@code andToEquality}
+	 * labeled alternative in {@link simpleJavaParser#andExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultiplicativeExpression(simpleJavaParser.MultiplicativeExpressionContext ctx);
+	T visitAndToEquality(simpleJavaParser.AndToEqualityContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#unaryExpression}.
+	 * Visit a parse tree produced by the {@code eqToRelational}
+	 * labeled alternative in {@link simpleJavaParser#equalityExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryExpression(simpleJavaParser.UnaryExpressionContext ctx);
+	T visitEqToRelational(simpleJavaParser.EqToRelationalContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandEqExpr}
+	 * labeled alternative in {@link simpleJavaParser#equalityExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandEqExpr(simpleJavaParser.ExpandEqExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code relationalToShift}
+	 * labeled alternative in {@link simpleJavaParser#relationalExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRelationalToShift(simpleJavaParser.RelationalToShiftContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandRelationalExpr}
+	 * labeled alternative in {@link simpleJavaParser#relationalExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandRelationalExpr(simpleJavaParser.ExpandRelationalExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandShiftLeft}
+	 * labeled alternative in {@link simpleJavaParser#shiftExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandShiftLeft(simpleJavaParser.ExpandShiftLeftContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandShiftUnused}
+	 * labeled alternative in {@link simpleJavaParser#shiftExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandShiftUnused(simpleJavaParser.ExpandShiftUnusedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code shiftToAdditive}
+	 * labeled alternative in {@link simpleJavaParser#shiftExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitShiftToAdditive(simpleJavaParser.ShiftToAdditiveContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandShiftRight}
+	 * labeled alternative in {@link simpleJavaParser#shiftExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandShiftRight(simpleJavaParser.ExpandShiftRightContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code additiveTomul}
+	 * labeled alternative in {@link simpleJavaParser#additiveExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdditiveTomul(simpleJavaParser.AdditiveTomulContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandAdditiveExpr}
+	 * labeled alternative in {@link simpleJavaParser#additiveExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandAdditiveExpr(simpleJavaParser.ExpandAdditiveExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code mulToUnary}
+	 * labeled alternative in {@link simpleJavaParser#multiplicativeExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMulToUnary(simpleJavaParser.MulToUnaryContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandMulExpr}
+	 * labeled alternative in {@link simpleJavaParser#multiplicativeExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandMulExpr(simpleJavaParser.ExpandMulExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code preOp}
+	 * labeled alternative in {@link simpleJavaParser#unaryExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPreOp(simpleJavaParser.PreOpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code opUnary_unused}
+	 * labeled alternative in {@link simpleJavaParser#unaryExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpUnary_unused(simpleJavaParser.OpUnary_unusedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code notPlusMinus}
+	 * labeled alternative in {@link simpleJavaParser#unaryExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotPlusMinus(simpleJavaParser.NotPlusMinusContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleJavaParser#preIncrementExpression}.
 	 * @param ctx the parse tree
@@ -1528,11 +1625,26 @@ public interface simpleJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPreDecrementExpression(simpleJavaParser.PreDecrementExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link simpleJavaParser#unaryExpressionNotPlusMinus}.
+	 * Visit a parse tree produced by the {@code expandNotPlusMinus}
+	 * labeled alternative in {@link simpleJavaParser#unaryExpressionNotPlusMinus}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryExpressionNotPlusMinus(simpleJavaParser.UnaryExpressionNotPlusMinusContext ctx);
+	T visitExpandNotPlusMinus(simpleJavaParser.ExpandNotPlusMinusContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandNotPlusMinusBNot}
+	 * labeled alternative in {@link simpleJavaParser#unaryExpressionNotPlusMinus}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandNotPlusMinusBNot(simpleJavaParser.ExpandNotPlusMinusBNotContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code expandNotPlusMinusNot}
+	 * labeled alternative in {@link simpleJavaParser#unaryExpressionNotPlusMinus}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpandNotPlusMinusNot(simpleJavaParser.ExpandNotPlusMinusNotContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link simpleJavaParser#postfixExpression}.
 	 * @param ctx the parse tree

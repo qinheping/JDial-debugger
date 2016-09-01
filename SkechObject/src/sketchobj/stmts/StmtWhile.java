@@ -2,7 +2,7 @@ package sketchobj.stmts;
 
 import sketchobj.expr.Expression;
 
-public class StmtWhile {
+public class StmtWhile extends Statement{
     Expression cond;
     Statement body;
     

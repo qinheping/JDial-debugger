@@ -24,4 +24,15 @@ public class FcnHeader extends SketchObject {
     public void setReturnType(Type t){
     	this.returnType = t;
     }
+    public String toString(){
+    	String result = "";
+    	result += name;
+    	result = returnType.toString()+" "+result;
+    	result = result + "(";
+    	for(Parameter p: params){
+    		result = result + p.toString();
+    	}
+    	result = result + ")";
+    	return result;
+    }
 }

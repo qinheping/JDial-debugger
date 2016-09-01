@@ -8,4 +8,7 @@ public class StmtExpr extends Statement{
 	    {
 	        this.expr = expr;
 	    }
+	 public String toString(){
+		 return expr.toString()+";";
+	 }
 }

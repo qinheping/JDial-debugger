@@ -1,5 +1,12 @@
 package sketchobj.expr;
 
-public class Expression {
+import sketchobj.core.SketchObject;
+
+public class Expression extends SketchObject{
+
+	public Integer getIValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

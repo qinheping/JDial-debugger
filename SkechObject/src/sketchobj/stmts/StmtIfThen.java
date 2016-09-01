@@ -2,15 +2,6 @@ package sketchobj.stmts;
 
 import sketchobj.expr.Expression;
 
-/**
- * A standard conditional statement.  This has a conditional expression
- * and two optional statements.  If the condition is true, the first
- * statement (the consequent) is executed; otherwise, the second statement
- * (the alternative) is executed.
- *
- * @author  David Maze &lt;dmaze@cag.lcs.mit.edu&gt;
- * @version $Id$
- */
 public class StmtIfThen extends Statement
 {
     private Expression cond;

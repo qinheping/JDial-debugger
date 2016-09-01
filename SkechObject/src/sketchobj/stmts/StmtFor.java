@@ -15,7 +15,7 @@ public class StmtFor extends Statement {
 	}
 
 	public String toString() {
-		String result = "for(...){\n";
+		String result = "for("+init.toString()+"; "+cond.toString()+"; "+ incr.toString()+ "){\n";
 		result += this.body + "}\n";
 		return result;
 	}

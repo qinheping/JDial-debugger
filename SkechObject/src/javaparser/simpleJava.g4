@@ -58,12 +58,12 @@ grammar simpleJava;
  */
 
 literal
-	:	IntegerLiteral
-	|	FloatingPointLiteral
-	|	BooleanLiteral
-	|	CharacterLiteral
-	|	StringLiteral
-	|	NullLiteral
+	:	IntegerLiteral				# literalInt
+	|	FloatingPointLiteral		# listeral_unused
+	|	BooleanLiteral				# listeral_unused
+	|	CharacterLiteral			# listeral_unused
+	|	StringLiteral				# listeral_unused
+	|	NullLiteral					# listeral_unused
 	;
 
 /*
@@ -348,7 +348,7 @@ fieldModifier
 	;
 
 variableDeclaratorList
-	:	variableDeclarator (',' variableDeclarator)*
+	:	variableDeclarator (',' variableDeclarator)*	// variableDeclaratorList
 	;
 
 variableDeclarator
@@ -360,8 +360,8 @@ variableDeclaratorId
 	;
 
 variableInitializer
-	:	expression
-	|	arrayInitializer
+	:	expression								# varInitExpr
+	|	arrayInitializer						# varInitArray
 	;
 
 unannType
@@ -735,12 +735,12 @@ localVariableDeclaration
 	;
 
 statement
-	:	statementWithoutTrailingSubstatement					# withoutTrailingSubstatement
-	|	labeledStatement							# labledStat
-	|	ifThenStatement								# statementIfThen
-	|	ifThenElseStatement							# statementIfThenIfThenElse
-	|	whileStatement								# statementIfThenWhile
-	|	forStatement								# statementFor
+	:	statementWithoutTrailingSubstatement					
+	|	labeledStatement							
+	|	ifThenStatement								
+	|	ifThenElseStatement							
+	|	whileStatement								
+	|	forStatement								
 	;
 
 statementNoShortIf
@@ -961,17 +961,17 @@ primary
 	;
 
 primaryNoNewArray
-	:	literal
-	|	typeName ('[' ']')* '.' 'class'
-	|	'void' '.' 'class'
-	|	'this'
-	|	typeName '.' 'this'
-	|	'(' expression ')'
-	|	classInstanceCreationExpression
-	|	fieldAccess
-	|	arrayAccess
-	|	methodInvocation
-	|	methodReference
+	:	literal								# primaryLiteral
+	|	typeName ('[' ']')* '.' 'class'		# primary_unused
+	|	'void' '.' 'class'	# primary_unused
+	|	'this'	# primary_unused
+	|	typeName '.' 'this'	# primary_unused
+	|	'(' expression ')'	# primary_unused
+	|	classInstanceCreationExpression	# primary_unused
+	|	fieldAccess	# primary_unused
+	|	arrayAccess	# primary_unused
+	|	methodInvocation	# primary_unused
+	|	methodReference	# primary_unused
 	;
 
 primaryNoNewArray_lf_arrayAccess
@@ -1228,98 +1228,98 @@ conditionalExpression
 	;
 
 conditionalOrExpression
-	:	conditionalAndExpression
-	|	conditionalOrExpression '||' conditionalAndExpression
+	:	conditionalAndExpression										# conditionalOrToAnd
+	|	conditionalOrExpression '||' conditionalAndExpression			# expandConditionalOrExpr
 	;
 
 conditionalAndExpression
-	:	inclusiveOrExpression
-	|	conditionalAndExpression '&&' inclusiveOrExpression
+	:	inclusiveOrExpression											# conditianalAndToInclusiveOr
+	|	conditionalAndExpression '&&' inclusiveOrExpression				# expandConditionalAndExpr
 	;
 
 inclusiveOrExpression
-	:	exclusiveOrExpression
-	|	inclusiveOrExpression '|' exclusiveOrExpression
+	:	exclusiveOrExpression											# inclusiveToExclusive
+	|	inclusiveOrExpression '|' exclusiveOrExpression					# expandInclusiveOrExpr
 	;
 
 exclusiveOrExpression
-	:	andExpression
-	|	exclusiveOrExpression '^' andExpression
+	:	andExpression													# exclusiveToAnd
+	|	exclusiveOrExpression '^' andExpression							# expandExclusiveOrExpr
 	;
 
 andExpression
-	:	equalityExpression
-	|	andExpression '&' equalityExpression
+	:	equalityExpression												# andToEquality
+	|	andExpression '&' equalityExpression							# expandAndExpr
 	;
 
 equalityExpression
-	:	relationalExpression
-	|	equalityExpression '==' relationalExpression
-	|	equalityExpression '!=' relationalExpression
+	:	relationalExpression											# eqToRelational
+	|	equalityExpression '==' relationalExpression					# expandEqExpr
+	|	equalityExpression '!=' relationalExpression					# expandEqExpr
 	;
 
 relationalExpression
-	:	shiftExpression
-	|	relationalExpression '<' shiftExpression
-	|	relationalExpression '>' shiftExpression
-	|	relationalExpression '<=' shiftExpression
-	|	relationalExpression '>=' shiftExpression
-	|	relationalExpression 'instanceof' referenceType
+	:	shiftExpression													# relationalToShift
+	|	relationalExpression '<' shiftExpression						# expandRelationalExpr
+	|	relationalExpression '>' shiftExpression						# expandRelationalExpr
+	|	relationalExpression '<=' shiftExpression						# expandRelationalExpr
+	|	relationalExpression '>=' shiftExpression						# expandRelationalExpr
+	|	relationalExpression 'instanceof' referenceType					# expandRelationalExpr
 	;
 
 shiftExpression
-	:	additiveExpression
-	|	shiftExpression '<' '<' additiveExpression
-	|	shiftExpression '>' '>' additiveExpression
-	|	shiftExpression '>' '>' '>' additiveExpression
+	:	additiveExpression												# shiftToAdditive
+	|	shiftExpression '<' '<' additiveExpression						# expandShiftLeft
+	|	shiftExpression '>' '>' additiveExpression						# expandShiftRight
+	|	shiftExpression '>' '>' '>' additiveExpression					# expandShiftUnused
 	;
 
 additiveExpression
-	:	multiplicativeExpression
-	|	additiveExpression '+' multiplicativeExpression
-	|	additiveExpression '-' multiplicativeExpression
+	:	multiplicativeExpression										# additiveTomul
+	|	additiveExpression '+' multiplicativeExpression					# expandAdditiveExpr
+	|	additiveExpression '-' multiplicativeExpression					# expandAdditiveExpr
 	;
 
 multiplicativeExpression
-	:	unaryExpression
-	|	multiplicativeExpression '*' unaryExpression
-	|	multiplicativeExpression '/' unaryExpression
-	|	multiplicativeExpression '%' unaryExpression
+	:	unaryExpression													# mulToUnary
+	|	multiplicativeExpression '*' unaryExpression					# expandMulExpr
+	|	multiplicativeExpression '/' unaryExpression					# expandMulExpr
+	|	multiplicativeExpression '%' unaryExpression					# expandMulExpr
 	;
 
 unaryExpression
-	:	preIncrementExpression
-	|	preDecrementExpression
-	|	'+' unaryExpression
-	|	'-' unaryExpression
-	|	unaryExpressionNotPlusMinus
+	:	preIncrementExpression			# preOp
+	|	preDecrementExpression			# preOp
+	|	'+' unaryExpression				# opUnary_unused
+	|	'-' unaryExpression				# opUnary_unused
+	|	unaryExpressionNotPlusMinus		# notPlusMinus
 	;
 
-preIncrementExpression
+preIncrementExpression			// done
 	:	'++' unaryExpression
 	;
 
-preDecrementExpression
+preDecrementExpression			// done
 	:	'--' unaryExpression
 	;
 
 unaryExpressionNotPlusMinus
-	:	postfixExpression
-	|	'~' unaryExpression
-	|	'!' unaryExpression
-	|	castExpression
+	:	postfixExpression				# expandNotPlusMinus
+	|	'~' unaryExpression				# expandNotPlusMinusBNot
+	|	'!' unaryExpression				# expandNotPlusMinusNot
+	|	castExpression					# expandNotPlusMinus
 	;
 
-postfixExpression
-	:	(	primary
-		|	expressionName
-		)
+postfixExpression			// done but bad
+	:	(	primary							
+		|	expressionName				
+		)	
 		(	postIncrementExpression_lf_postfixExpression
 		|	postDecrementExpression_lf_postfixExpression
 		)*
 	;
 
-postIncrementExpression
+postIncrementExpression		// done
 	:	postfixExpression '++'
 	;
 
@@ -1327,7 +1327,7 @@ postIncrementExpression_lf_postfixExpression
 	:	'++'
 	;
 
-postDecrementExpression
+postDecrementExpression		// done
 	:	postfixExpression '--'
 	;
 
@@ -1335,7 +1335,7 @@ postDecrementExpression_lf_postfixExpression
 	:	'--'
 	;
 
-castExpression
+castExpression				// unsupport
 	:	'(' primitiveType ')' unaryExpression
 	|	'(' referenceType additionalBound* ')' unaryExpressionNotPlusMinus
 	|	'(' referenceType additionalBound* ')' lambdaExpression
