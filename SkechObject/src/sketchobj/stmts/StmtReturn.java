@@ -41,4 +41,11 @@ public class StmtReturn extends Statement
             return "return;";
         }
     }
+
+
+
+	@Override
+	public int replaceConst(int index) {
+		return value.replaceConst(index);
+	}
 }

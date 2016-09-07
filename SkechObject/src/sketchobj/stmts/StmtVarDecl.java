@@ -225,6 +225,8 @@ public class StmtVarDecl extends Statement
             if (inits.get(i) != null)
                 result.append(" = " + inits.get(i));
         }
+        if(types.size() == 1)
+        	result.append(";");
         return result.toString();
     }
 
@@ -316,4 +318,16 @@ public class StmtVarDecl extends Statement
     public Iterator<VarDeclEntry> iterator() {
         return new VarDeclEntryIterator();
     }
+
+	@Override
+	public int replaceConst(int index) {
+		if(this.inits.size() != 0){
+			for(Expression e: inits){
+				index = e.replaceConst(index);
+			}
+			return index;
+		}
+		else
+		return index;
+	}
 }

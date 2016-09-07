@@ -50,4 +50,11 @@ public class ExprVar extends Expression
             return false;
         return name.equals(((ExprVar)o).name);
     }
+
+
+
+	@Override
+	public int replaceConst(int index) {
+		return index;
+	}
 }

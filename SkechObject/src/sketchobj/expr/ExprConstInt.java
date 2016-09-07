@@ -57,4 +57,9 @@ public class ExprConstInt extends ExprConstant
     {
         return Integer.toString(val);
     }
+
+	@Override
+	public int replaceConst(int index) {
+		return 0;
+	}
 }

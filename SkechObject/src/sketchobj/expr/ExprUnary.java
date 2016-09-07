@@ -7,16 +7,22 @@ public class ExprUnary extends Expression
     // Operators:
 	/**	negation (!x) */
     public static final int UNOP_NOT = 1;
+    
 	/**	bitwise negation (~x) */
     public static final int UNOP_BNOT = 2;
+    
 	/**	arithmetic negation (-x) */
     public static final int UNOP_NEG = 3;
+    
 	/**	++x */
     public static final int UNOP_PREINC = 4;
+    
 	/**	x++ */
     public static final int UNOP_POSTINC = 5;
+    
 	/**	--x */
     public static final int UNOP_PREDEC = 6;
+    
 	/**	x-- */
     public static final int UNOP_POSTDEC = 7;
 
@@ -116,4 +122,9 @@ public class ExprUnary extends Expression
     	fillPrePostOpStr (prePostOp);
         return prePostOp[0] + "(" + expr.toString() + ")" + prePostOp[1];
     }
+
+	@Override
+	public int replaceConst(int index) {
+		return index;
+	}
 }

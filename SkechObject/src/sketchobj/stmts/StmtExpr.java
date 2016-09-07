@@ -11,4 +11,8 @@ public class StmtExpr extends Statement{
 	 public String toString(){
 		 return expr.toString()+";";
 	 }
+	@Override
+	public int replaceConst(int index) {
+		return expr.replaceConst(index);
+	}
 }

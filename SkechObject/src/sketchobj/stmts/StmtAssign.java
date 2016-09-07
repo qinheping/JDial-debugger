@@ -52,6 +52,11 @@ public class StmtAssign extends Statement{
         case ExprBinary.BINOP_DIV: theOp = "/="; break;
         default: theOp = "?= (" + op + ")"; break;
         }
-        return lhs + " " + theOp + " " + rhs;
+        return lhs + " " + theOp + " " + rhs+";";
     }
+
+	@Override
+	public int replaceConst(int index) {
+		return rhs.replaceConst(index);
+	}
 }

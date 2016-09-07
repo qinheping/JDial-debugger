@@ -20,4 +20,9 @@ public class StmtFunDecl extends Statement {
     public String toString() {
         return decl.toString();
     }
+
+	@Override
+	public int replaceConst(int index) {
+		return 0;
+	}
 }

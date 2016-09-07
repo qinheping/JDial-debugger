@@ -31,4 +31,11 @@ public class StmtDoWhile extends Statement
     {
         return cond;
     }
+
+
+	@Override
+	public int replaceConst(int index) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

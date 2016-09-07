@@ -23,4 +23,10 @@ public class StmtMinimize extends Statement {
     public String toString() {
         return "minimize(" + minimizeExpr + ")";
     }
+
+	@Override
+	public int replaceConst(int index) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

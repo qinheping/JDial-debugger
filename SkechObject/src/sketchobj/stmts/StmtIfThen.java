@@ -77,4 +77,13 @@ public class StmtIfThen extends Statement
     	return result;
     }
 
+
+
+	@Override
+	public int replaceConst(int index) {
+		index = cons.replaceConst(index);
+		index = alt.replaceConst(index);
+		return index;
+	}
+
 }

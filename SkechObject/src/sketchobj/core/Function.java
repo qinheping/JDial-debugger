@@ -77,7 +77,7 @@ public class Function extends SketchObject {
 
 	public String toString() {
 		String result;
-		return fcnType.toString() + " " + returnType.toString()+ " " + name + "(" + printParams() + ")" + "{\n"+ body.toString()+ "}";
+		return fcnType.cCodeName + " " + returnType.toString()+ " " + name + "(" + printParams() + ")" + "{\n"+ body.toString()+ "}";
 	}
 
 }

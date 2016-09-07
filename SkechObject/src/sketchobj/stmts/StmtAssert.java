@@ -161,4 +161,11 @@ public class StmtAssert extends Statement {
 //	            return "Assert at " + getCx() + " (" + _my_rand.nextLong() + ")";
 //	        return msg;
 //	    }
+
+
+		@Override
+		public int replaceConst(int index) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 }

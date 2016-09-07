@@ -19,4 +19,12 @@ public class StmtFor extends Statement {
 		result += this.body + "}\n";
 		return result;
 	}
+
+	@Override
+	public int replaceConst(int index) {
+		index = init.replaceConst(index);
+		index = incr.replaceConst(index);
+		index = body.replaceConst(index);
+		return index;
+	}
 }

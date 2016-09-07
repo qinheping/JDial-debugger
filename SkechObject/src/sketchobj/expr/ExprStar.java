@@ -9,7 +9,11 @@ public class ExprStar extends Expression
    public ExprStar(){
 	   
    }
-   public String tString(){
+   public String toString(){
 	   return "??";
    }
+@Override
+public int replaceConst(int index) {
+	return index;
+}
 }

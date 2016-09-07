@@ -12,6 +12,10 @@ public class StmtBlock extends Statement {
 	public StmtBlock(List<? extends Statement> stmts) {
 		this.stmts = Collections.unmodifiableList(stmts);
 	}
+	
+	public StmtBlock(){
+		this.stmts = new ArrayList<Statement>();
+	}
 
 	/** Create a new StmtBlock for a pair of statements. */
 	public StmtBlock(Statement stmt1, Statement stmt2) {
@@ -19,6 +23,10 @@ public class StmtBlock extends Statement {
 		lst.add(stmt1);
 		lst.add(stmt2);
 		this.stmts = Collections.unmodifiableList(lst);
+	}
+	
+	public void addStmt(Statement stmt){
+		this.stmts.add(stmt);
 	}
 
 	public String toString() {
@@ -38,7 +46,7 @@ public class StmtBlock extends Statement {
 	public List<Statement> getStmts() {
 		return stmts;
 	}
-
+	
 	@Override
 	public int size() {
 		int sz = 0;
@@ -48,5 +56,13 @@ public class StmtBlock extends Statement {
 			}
 		}
 		return sz;
+	}
+
+	@Override
+	public int replaceConst(int index) {
+		for(Statement stm: stmts){
+			index = stm.replaceConst(index);
+		}
+		return index;
 	}
 }
