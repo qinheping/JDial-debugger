@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import constrainfactory.ConstData;
+
 public class ExprFunCall extends Expression
 {
     private final String name;
@@ -83,8 +85,8 @@ public class ExprFunCall extends Expression
     }
 
 	@Override
-	public int replaceConst(int index) {
+	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return index;
+		return new ConstData(index);
 	}
 }
