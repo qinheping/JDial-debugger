@@ -1,5 +1,7 @@
 package sketchobj.expr;
 
+import constrainfactory.ConstData;
+
 public class ExprVar extends Expression
 {
     private String name;
@@ -54,7 +56,7 @@ public class ExprVar extends Expression
 
 
 	@Override
-	public int replaceConst(int index) {
-		return index;
+	public ConstData replaceConst(int index) {
+		return new ConstData(index);
 	}
 }

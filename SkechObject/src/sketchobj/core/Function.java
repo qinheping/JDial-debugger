@@ -58,6 +58,10 @@ public class Function extends SketchObject {
 		this.body = body;
 		this.fcnType = FcnType.Static;
 	}
+	
+	public Statement getBody(){
+		return this.body;
+	}
 
 	public String printParams() {
 		String s = "";
@@ -76,7 +80,6 @@ public class Function extends SketchObject {
 	}
 
 	public String toString() {
-		String result;
 		return fcnType.cCodeName + " " + returnType.toString()+ " " + name + "(" + printParams() + ")" + "{\n"+ body.toString()+ "}";
 	}
 

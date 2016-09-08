@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import constrainfactory.ConstData;
+
 public class StmtBlock extends Statement {
 
 	protected List<Statement> stmts;
@@ -12,8 +14,8 @@ public class StmtBlock extends Statement {
 	public StmtBlock(List<? extends Statement> stmts) {
 		this.stmts = Collections.unmodifiableList(stmts);
 	}
-	
-	public StmtBlock(){
+
+	public StmtBlock() {
 		this.stmts = new ArrayList<Statement>();
 	}
 
@@ -24,8 +26,8 @@ public class StmtBlock extends Statement {
 		lst.add(stmt2);
 		this.stmts = Collections.unmodifiableList(lst);
 	}
-	
-	public void addStmt(Statement stmt){
+
+	public void addStmt(Statement stmt) {
 		this.stmts.add(stmt);
 	}
 
@@ -46,7 +48,7 @@ public class StmtBlock extends Statement {
 	public List<Statement> getStmts() {
 		return stmts;
 	}
-	
+
 	@Override
 	public int size() {
 		int sz = 0;
@@ -59,10 +61,7 @@ public class StmtBlock extends Statement {
 	}
 
 	@Override
-	public int replaceConst(int index) {
-		for(Statement stm: stmts){
-			index = stm.replaceConst(index);
-		}
-		return index;
+	public ConstData replaceConst(int index) {
+		return new ConstData(null, stmts, index, 0);
 	}
 }

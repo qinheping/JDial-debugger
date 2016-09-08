@@ -2,6 +2,7 @@ package constrainfactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import sketchobj.core.*;
 import sketchobj.core.Function.FcnType;
@@ -12,14 +13,15 @@ public class ConstrainFactory {
 	static int constNumber = 0;
 	static int hitline = 0;
 	static int hitnumber = 2;
+	
 
 	static public Function addConstFun(int index, int ori, Type t) {
 		Expression condition = new ExprBinary(new ExprVar("const" + index + "change"), "==", new ExprConstInt(1));
 		StmtReturn return_1 = new StmtReturn(new ExprStar());
 		StmtReturn return_2 = new StmtReturn(new ExprConstInt(ori));
 		Statement ifst = new StmtIfThen(condition, return_1, return_2);
-
-		return new Function("Const" + index, t, new ArrayList(), ifst, FcnType.Static);
+		
+		return new Function("Const" + index, t, new ArrayList<Parameter>(), ifst, FcnType.Static);
 	}
 
 	public ConstrainFactory() {
@@ -55,7 +57,22 @@ public class ConstrainFactory {
 		return result;
 	}
 	
-	static public Satement repalceConst(Statement source){
-		
+	static public void repalceConst(Statement source){
+		Stack<SketchObject> stmtStack = new Stack<SketchObject>();
+		int index = 0;
+		stmtStack.push(source);
+		while(!stmtStack.empty()){
+			SketchObject target = stmtStack.pop();
+			ConstData data = target.replaceConst(index);
+			index = data.getIndex();
+			pushAll(stmtStack,data.getChildren());
+		}
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	static public void pushAll(Stack s, List l){
+		for(int i = l.size() - 1; i >=0; i--){
+			s.push(l.get(i));
+		}
 	}
 }

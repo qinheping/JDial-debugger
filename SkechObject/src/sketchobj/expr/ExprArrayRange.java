@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import constrainfactory.ConstData;
+import sketchobj.core.SketchObject;
+import sketchobj.core.Type;
+
 /**
  * An array-range reference. A[0:2] means the first 3 elements of A, and A[4::2] means
  * elements 4 and 5 of A. See Sketch language manual for more information.
@@ -195,4 +199,17 @@ public class ExprArrayRange extends Expression
 
         return base;
     }
+
+	@Override
+	public ConstData replaceConst(int index) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		Expression cond = this.index.start;
+		if (cond instanceof ExprConstant) {
+			int value = ((ExprConstant) cond).getVal();
+			Type t = ((ExprConstant) cond).getType();
+			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
+			return new ConstData(t, toAdd, index + 1, value);
+		}
+		return new ConstData(null, toAdd, index, 0);
+	}
 }

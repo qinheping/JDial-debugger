@@ -1,5 +1,12 @@
 package sketchobj.expr;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import constrainfactory.ConstData;
+import sketchobj.core.SketchObject;
+import sketchobj.core.Type;
+
 public class ExprBinary extends Expression{
 	public static final int BINOP_ADD = 1;
     public static final int BINOP_SUB = 2;
@@ -300,4 +307,25 @@ public class ExprBinary extends Expression{
             default: throw new IllegalArgumentException ("unknown operator "+ op);
         }
     }
+
+	@Override
+	public ConstData replaceConst(int index) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		if (left instanceof ExprConstant) {
+			int value = ((ExprConstant) left).getVal();
+			Type t = ((ExprConstant) left).getType();
+			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
+			toAdd.add(this);
+			return new ConstData(t, toAdd, index + 1, value);
+		}
+		if (right instanceof ExprConstant) {
+			int value = ((ExprConstant) right).getVal();
+			Type t = ((ExprConstant) right).getType();
+			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
+			return new ConstData(t, toAdd, index + 1, value);
+		}
+		toAdd.add(left);
+		toAdd.add(right);
+		return new ConstData(null, toAdd, index, 0);
+	}
 }

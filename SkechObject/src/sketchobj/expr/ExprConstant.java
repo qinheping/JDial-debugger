@@ -1,5 +1,7 @@
 package sketchobj.expr;
 
+import sketchobj.core.Type;
+
 abstract public class ExprConstant extends Expression
 {
     // Go Java go!  If we don't have this, the compiler complains:
@@ -13,6 +15,8 @@ abstract public class ExprConstant extends Expression
     	return true;
     }
 
+    public abstract Type getType();
+    public abstract int getVal();
     /**
      * Create a new constant-valued expression corresponding to a
      * String value.  val must be a valid real number, according to

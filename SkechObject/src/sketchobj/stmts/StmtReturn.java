@@ -1,5 +1,13 @@
 package sketchobj.stmts;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import constrainfactory.ConstData;
+import sketchobj.core.SketchObject;
+import sketchobj.core.Type;
+import sketchobj.expr.ExprConstant;
+import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.Expression;
 
 /**
@@ -45,7 +53,15 @@ public class StmtReturn extends Statement
 
 
 	@Override
-	public int replaceConst(int index) {
+	public ConstData replaceConst(int index) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		if(value instanceof ExprConstant)
+		{
+			int v = ((ExprConstant)value).getVal();
+			Type t = ((ExprConstant)value).getType();
+			value = new ExprFunCall("Const"+index,new ArrayList<Expression>());
+			return new ConstData(t, toAdd, index+1, v);
+		}
 		return value.replaceConst(index);
 	}
 }

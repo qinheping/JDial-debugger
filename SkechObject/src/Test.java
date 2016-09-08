@@ -3,10 +3,18 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+
 import constrainfactory.ConstrainFactory;
+import javaparser.simpleJavaLexer;
+import javaparser.simpleJavaParser;
 import sketchobj.core.Function;
+import sketchobj.core.SketchObject;
 import sketchobj.core.TypePrimitive;
 import sketchobj.stmts.Statement;
+import visitor.EvalVisitor;
 
 public class Test {
 
@@ -37,6 +45,22 @@ public class Test {
 		System.out.println(s);
 	}
 	
-	
+	@org.junit.Test
+	public void testReplaceConst() {
+		ANTLRInputStream input = new ANTLRInputStream(
+				"int largestGap(int[] a){ int max = 1; a[1] = 10; c = max++; int min = 100;  for(int i=0; i < a.Length; i++){ if(max < a[i]) max = a[i]; }return max-min;}");
+		Function f = (Function) compile(input);
+		Statement s = f.getBody();
+		System.out.println(s);
+		ConstrainFactory.repalceConst(s);
+		System.out.println(s);
+	}
 
+	public static SketchObject compile(ANTLRInputStream input) {
+		simpleJavaLexer lexer = new simpleJavaLexer(input);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		simpleJavaParser parser = new simpleJavaParser(tokens);
+		ParseTree tree = parser.methodDeclaration();
+		return new EvalVisitor().visit(tree);
+	}
 }

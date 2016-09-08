@@ -2,11 +2,13 @@ package sketchobj.stmts;
 
 import java.util.Random;
 
+import constrainfactory.ConstData;
 import sketchobj.expr.Expression;
 
 public class StmtAssert extends Statement {
 	  Expression cond;
-	    private String msg = null;
+	    @SuppressWarnings("unused")
+		private String msg = null;
 	    public static final int NORMAL = 0;
 	    public static final int SUPER = 1;
 	    public static final int UBER = 2;
@@ -152,7 +154,8 @@ public class StmtAssert extends Statement {
 	        this.msg = msg;
 	    }
 
-	    private Random _my_rand = new Random();
+	    @SuppressWarnings("unused")
+		private Random _my_rand = new Random();
 	    /**
 	     * @return the msg
 	     */
@@ -164,8 +167,8 @@ public class StmtAssert extends Statement {
 
 
 		@Override
-		public int replaceConst(int index) {
+		public ConstData replaceConst(int index) {
 			// TODO Auto-generated method stub
-			return 0;
+			return null;
 		}
 }

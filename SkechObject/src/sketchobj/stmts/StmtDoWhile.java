@@ -1,5 +1,6 @@
 package sketchobj.stmts;
 
+import constrainfactory.ConstData;
 import sketchobj.expr.Expression;
 
 public class StmtDoWhile extends Statement
@@ -34,8 +35,8 @@ public class StmtDoWhile extends Statement
 
 
 	@Override
-	public int replaceConst(int index) {
+	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 }

@@ -1,5 +1,9 @@
 package sketchobj.expr;
 
+import constrainfactory.ConstData;
+import sketchobj.core.Type;
+import sketchobj.core.TypePrimitive;
+
 public class ExprConstInt extends ExprConstant
 {
     private final int val;
@@ -59,7 +63,12 @@ public class ExprConstInt extends ExprConstant
     }
 
 	@Override
-	public int replaceConst(int index) {
-		return 0;
+	public ConstData replaceConst(int index) {
+		return null;
+	}
+
+	@Override
+	public Type getType() {
+		return new TypePrimitive(4);
 	}
 }

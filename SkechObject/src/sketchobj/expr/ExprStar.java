@@ -1,8 +1,7 @@
 package sketchobj.expr;
 
-import java.util.List;
 
-import sketchobj.core.Type;
+import constrainfactory.ConstData;
 
 public class ExprStar extends Expression
 {
@@ -13,7 +12,7 @@ public class ExprStar extends Expression
 	   return "??";
    }
 @Override
-public int replaceConst(int index) {
-	return index;
+public ConstData replaceConst(int index) {
+	return null;
 }
 }

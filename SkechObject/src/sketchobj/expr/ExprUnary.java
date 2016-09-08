@@ -1,6 +1,11 @@
 package sketchobj.expr;
 
+import java.util.ArrayList;
+import java.util.List;
 
+import constrainfactory.ConstData;
+import sketchobj.core.SketchObject;
+import sketchobj.core.Type;
 
 public class ExprUnary extends Expression
 {
@@ -124,7 +129,14 @@ public class ExprUnary extends Expression
     }
 
 	@Override
-	public int replaceConst(int index) {
-		return index;
+	public ConstData replaceConst(int index) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		if (expr.getClass().equals(ExprConstant.class)) {
+			int value = ((ExprConstant) expr).getVal();
+			Type t = ((ExprConstant) expr).getType();
+			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
+			return new ConstData(t, toAdd, index + 1, value);
+		}
+		return new ConstData(null, toAdd, index, 0);
 	}
 }

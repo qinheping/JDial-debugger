@@ -1,5 +1,11 @@
 package sketchobj.stmts;
+import java.util.ArrayList;
+
+import constrainfactory.ConstData;
+import sketchobj.core.Type;
 import sketchobj.expr.ExprBinary;
+import sketchobj.expr.ExprConstant;
+import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.Expression;
 public class StmtAssign extends Statement{
 	private Expression lhs, rhs;
@@ -55,8 +61,15 @@ public class StmtAssign extends Statement{
         return lhs + " " + theOp + " " + rhs+";";
     }
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public int replaceConst(int index) {
+	public ConstData replaceConst(int index) {
+		if (rhs instanceof ExprConstant) {
+			int value = ((ExprConstant) rhs).getVal();
+			Type t = ((ExprConstant) rhs).getType();
+			rhs = new ExprFunCall("Const" + index, new ArrayList<Expression>());
+			return new ConstData(t, new ArrayList(), index + 1, value);
+		}
 		return rhs.replaceConst(index);
 	}
 }

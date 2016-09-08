@@ -1,5 +1,6 @@
 package sketchobj.stmts;
 
+import constrainfactory.ConstData;
 import sketchobj.core.SketchObject;
 
 public abstract class Statement extends SketchObject{
@@ -24,6 +25,6 @@ public abstract class Statement extends SketchObject{
 		return this.sorceCode;
 	}
 	
-	public abstract int replaceConst(int index);
+	public abstract ConstData replaceConst(int index);
 
 }

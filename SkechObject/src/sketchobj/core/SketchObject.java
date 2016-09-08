@@ -1,5 +1,7 @@
 package sketchobj.core;
 
+import constrainfactory.ConstData;
+
 public abstract class SketchObject {
 	protected int indentation;	// for toString
 
@@ -9,6 +11,11 @@ public abstract class SketchObject {
 
 	public void setIndentation(int indentation) {
 		this.indentation = indentation;
+	}
+
+	public ConstData replaceConst(int index) {
+		// TODO Auto-generated method stub
+		return new ConstData(index);
 	}
 	
 }

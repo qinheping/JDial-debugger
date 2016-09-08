@@ -1,5 +1,6 @@
 package sketchobj.stmts;
 
+import constrainfactory.ConstData;
 import sketchobj.core.Function;
 
 /**
@@ -22,7 +23,7 @@ public class StmtFunDecl extends Statement {
     }
 
 	@Override
-	public int replaceConst(int index) {
-		return 0;
+	public ConstData replaceConst(int index) {
+		return null;
 	}
 }

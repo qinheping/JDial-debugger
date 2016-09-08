@@ -1,5 +1,6 @@
 package sketchobj.stmts;
 
+import constrainfactory.ConstData;
 import sketchobj.expr.Expression;
 
 /**
@@ -10,7 +11,6 @@ public class StmtMinimize extends Statement {
     private final Expression minimizeExpr;
     public final boolean userGenerated;
 
-    @SuppressWarnings("deprecation")
     public StmtMinimize(Expression minimizeExpr, final boolean userWritten) {
         this.minimizeExpr = minimizeExpr;
         this.userGenerated = userWritten;
@@ -25,8 +25,8 @@ public class StmtMinimize extends Statement {
     }
 
 	@Override
-	public int replaceConst(int index) {
+	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 }

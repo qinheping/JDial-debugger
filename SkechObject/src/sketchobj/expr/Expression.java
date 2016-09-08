@@ -1,5 +1,6 @@
 package sketchobj.expr;
 
+import constrainfactory.ConstData;
 import sketchobj.core.SketchObject;
 
 public abstract class Expression extends SketchObject{
@@ -9,6 +10,6 @@ public abstract class Expression extends SketchObject{
 		return null;
 	}
 	
-	public abstract int replaceConst(int index);
+	public abstract ConstData replaceConst(int index);
 
 }

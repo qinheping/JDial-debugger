@@ -3,6 +3,8 @@ package sketchobj.expr;
 import java.util.ArrayList;
 import java.util.List;
 
+import constrainfactory.ConstData;
+
 /**
  * An array initializer.  This is an expression like the right hand
  * side of <code>a[3] = {1, 2, 3}</code>.  Each array initializer
@@ -100,4 +102,10 @@ public class ExprArrayInit extends Expression
 	}
 	return true;
     }
+
+	@Override
+	public ConstData replaceConst(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
