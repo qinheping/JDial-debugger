@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import constrainfactory.ConstData;
-import constrainfactory.ConstrainFactory;
+import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -63,7 +63,7 @@ public class StmtWhile extends Statement {
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
-		body = new StmtBlock(ConstrainFactory.recordState(linenumber, new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
+		body = new StmtBlock(ConstraintFactory.recordState(linenumber, new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
 		m.putAll(this.getCtx().getAllVars());
 		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m,linenumber+1);
 	}

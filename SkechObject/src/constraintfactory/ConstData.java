@@ -1,4 +1,4 @@
-package constrainfactory;
+package constraintfactory;
 
 import java.util.ArrayList;
 import java.util.List;

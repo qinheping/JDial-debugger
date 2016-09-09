@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 

@@ -1,11 +1,9 @@
 import java.io.*;
 
-import parser.parser;
-import ast.CoderNode;
-import java_cup.runtime.Symbol;
 
-public class CallCVC4 {
-	public CallCVC4(){
+
+public class CallSketch {
+	public CallSketch(){
 		
 	}
 	

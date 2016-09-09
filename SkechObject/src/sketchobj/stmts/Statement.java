@@ -3,7 +3,7 @@ package sketchobj.stmts;
 
 import java.util.Map;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;

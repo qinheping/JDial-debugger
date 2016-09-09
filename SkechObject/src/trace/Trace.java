@@ -1,5 +1,6 @@
 package trace;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Trace {
@@ -9,6 +10,11 @@ public class Trace {
 	public Trace(int length, List<ProgState> traces){
 		this.setLength(length);
 		this.setTraces(traces);
+	}
+
+	public Trace() {
+		traces = new ArrayList<ProgState>();
+		length = 0;
 	}
 
 	public int getLength() {

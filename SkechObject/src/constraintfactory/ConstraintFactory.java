@@ -1,4 +1,4 @@
-package constrainfactory;
+package constraintfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +10,18 @@ import sketchobj.core.*;
 import sketchobj.core.Function.FcnType;
 import sketchobj.expr.*;
 import sketchobj.stmts.*;
+import trace.ProgState;
+import trace.Trace;
 
-public class ConstrainFactory {
+public class ConstraintFactory {
 	static int constNumber = 0;
 	static int hitline = 0;
 	static int hitnumber = 2;
+	
+	Trace oriTrace;
+	ProgState finalState;
+	int finalCount;
+	int finalLine;
 	
 
 	static public Function addConstFun(int index, int ori, Type t) {
@@ -26,8 +33,22 @@ public class ConstrainFactory {
 		return new Function("Const" + index, t, new ArrayList<Parameter>(), ifst, FcnType.Static);
 	}
 
-	public ConstrainFactory() {
+	public ConstraintFactory() {
 		constNumber = 0;
+	}
+
+	public ConstraintFactory(Trace oriTrace, ProgState finalState, int finalCount, int finalLine) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Statement addConstraint(Statement source){
+
+		Statement s = source;
+		Statement temp = ConstraintFactory.repalceConst(s);
+		ConstraintFactory.addRecordStmt((StmtBlock) s);
+		System.out.println(temp);
+		System.out.println(s);
+		return s;
 	}
 
 	static public Statement constChangeDecl(int index, Type t) {

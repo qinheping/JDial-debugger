@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 

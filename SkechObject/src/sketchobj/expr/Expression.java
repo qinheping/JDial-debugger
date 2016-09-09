@@ -1,6 +1,6 @@
 package sketchobj.expr;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 import sketchobj.core.SketchObject;
 
 public abstract class Expression extends SketchObject{

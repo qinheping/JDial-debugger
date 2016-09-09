@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import constrainfactory.ConstData;
-import constrainfactory.ConstrainFactory;
+import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -118,10 +118,10 @@ public class StmtIfThen extends Statement {
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
-		this.cons = new StmtBlock(ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars()), cons);
+		this.cons = new StmtBlock(ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars()), cons);
 		m.putAll(((StmtBlock) cons).stmts.get(1).addRecordStmt((StmtBlock) cons, 1, m, linenumber + 1));
 		if (alt != null) {
-			this.alt = new StmtBlock(ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars()), alt);
+			this.alt = new StmtBlock(ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars()), alt);
 			m.putAll(((StmtBlock) alt).stmts.get(1).addRecordStmt((StmtBlock) alt, 1, m, linenumber + 1));
 		}
 		return m;

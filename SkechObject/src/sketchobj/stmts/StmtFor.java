@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import constrainfactory.ConstData;
-import constrainfactory.ConstrainFactory;
+import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import sketchobj.core.*;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
@@ -58,7 +58,7 @@ public class StmtFor extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
 		m.putAll(body.getCtx().getAllVars());
-		body = new StmtBlock(ConstrainFactory.recordState(linenumber, new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
+		body = new StmtBlock(ConstraintFactory.recordState(linenumber, new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
 		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m,linenumber+1);
 	}
 }

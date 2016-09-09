@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 
 public class ExprFunCall extends Expression
 {

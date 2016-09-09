@@ -3,7 +3,7 @@ package sketchobj.expr;
 import java.util.ArrayList;
 import java.util.List;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 
 /**
  * An array initializer.  This is an expression like the right hand

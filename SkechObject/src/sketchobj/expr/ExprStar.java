@@ -1,7 +1,7 @@
 package sketchobj.expr;
 
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 
 public class ExprStar extends Expression
 {

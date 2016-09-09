@@ -1,6 +1,6 @@
 package sketchobj.core;
 
-import constrainfactory.ConstData;
+import constraintfactory.ConstData;
 
 public abstract class SketchObject {
 	protected int indentation;	// for toString

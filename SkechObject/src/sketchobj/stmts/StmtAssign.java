@@ -3,8 +3,8 @@ package sketchobj.stmts;
 import java.util.ArrayList;
 import java.util.Map;
 
-import constrainfactory.ConstData;
-import constrainfactory.ConstrainFactory;
+import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 import sketchobj.expr.ExprBinary;
@@ -98,7 +98,7 @@ public class StmtAssign extends Statement {
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 		parent.stmts.set(index,
-				new StmtBlock(this, ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars())));
+				new StmtBlock(this, ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars())));
 		m.putAll(this.getCtx().getAllVars());
 		return m;
 	}
