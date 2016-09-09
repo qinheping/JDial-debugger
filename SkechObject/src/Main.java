@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import constraintfactory.ConstraintFactory;
 import javaparser.simpleJavaLexer;
 import javaparser.simpleJavaParser;
+import sketchobj.core.FcnHeader;
 import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
 import trace.ProgState;
@@ -25,7 +26,7 @@ public class Main {
 		
 		//int finalLine = oriTrace.getTraces().get(finalCount).getLine();
 		int finalLine = 0;
-		ConstraintFactory cf = new ConstraintFactory(oriTrace, finalState, finalCount, finalLine);
+		ConstraintFactory cf = new ConstraintFactory(oriTrace, finalState, finalCount, finalLine, new FcnHeader(root.getName(),root.getReturnType(),root.getParames()));
 		cf.addConstraint(root.getBody());
 	}
 

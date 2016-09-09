@@ -62,6 +62,18 @@ public class Function extends SketchObject {
 	public Statement getBody(){
 		return this.body;
 	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public Type getReturnType(){
+		return this.returnType;
+	}
+	
+	public List<Parameter> getParames(){
+		return this.params;
+	}
 
 	public String printParams() {
 		String s = "";
