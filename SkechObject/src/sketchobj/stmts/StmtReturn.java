@@ -2,8 +2,10 @@ package sketchobj.stmts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import constrainfactory.ConstData;
+import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.expr.ExprConstant;
@@ -63,5 +65,21 @@ public class StmtReturn extends Statement
 			return new ConstData(t, toAdd, index+1, v);
 		}
 		return value.replaceConst(index);
+	}
+
+
+
+	@Override
+	public Context buildContext(Context ctx) {
+		this.setCtx(ctx);
+		return ctx;
+	}
+
+
+
+	@Override
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+		// TODO Auto-generated method stub
+		return m;
 	}
 }

@@ -2,8 +2,10 @@ package sketchobj.stmts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import constrainfactory.ConstData;
+import constrainfactory.ConstrainFactory;
 import sketchobj.core.*;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
@@ -39,5 +41,24 @@ public class StmtFor extends Statement {
 			return new ConstData(t, toAdd, index + 1, value);
 		}
 		return new ConstData(null, toAdd, index, 0);
+	}
+
+	@Override
+	public Context buildContext(Context ctx) {
+		this.setCtx(ctx);		
+		ctx.pushNewVars();
+		ctx = init.buildContext(ctx);
+		ctx = incr.buildContext(ctx);
+		ctx = body.buildContext(ctx);
+		ctx.popVars();
+		return ctx;
+		
+	}
+
+	@Override
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+		m.putAll(body.getCtx().getAllVars());
+		body = new StmtBlock(ConstrainFactory.recordState(linenumber, new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
+		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m,linenumber+1);
 	}
 }

@@ -1,9 +1,13 @@
 package sketchobj.stmts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import constrainfactory.ConstData;
+import constrainfactory.ConstrainFactory;
+import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.expr.ExprConstant;
@@ -87,8 +91,8 @@ public class StmtIfThen extends Statement {
 	public ConstData replaceConst(int index) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();
 		toAdd.add(cons);
-		if(alt != null)
-		toAdd.add(alt);
+		if (alt != null)
+			toAdd.add(alt);
 		if (cond instanceof ExprConstant) {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
@@ -96,6 +100,31 @@ public class StmtIfThen extends Statement {
 			return new ConstData(t, toAdd, index + 1, value);
 		}
 		return new ConstData(null, toAdd, index, 0);
+	}
+
+	@Override
+	public Context buildContext(Context ctx) {
+		this.setCtx(ctx);
+		ctx.pushVars(new HashMap<String, Type>());
+		cons.buildContext(ctx);
+		ctx.popVars();
+		if (alt != null) {
+			ctx.pushNewVars();
+			alt.buildContext(ctx);
+			ctx.popVars();
+		}
+		return ctx;
+	}
+
+	@Override
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+		this.cons = new StmtBlock(ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars()), cons);
+		m.putAll(((StmtBlock) cons).stmts.get(1).addRecordStmt((StmtBlock) cons, 1, m, linenumber + 1));
+		if (alt != null) {
+			this.alt = new StmtBlock(ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars()), alt);
+			m.putAll(((StmtBlock) alt).stmts.get(1).addRecordStmt((StmtBlock) alt, 1, m, linenumber + 1));
+		}
+		return m;
 	}
 
 }

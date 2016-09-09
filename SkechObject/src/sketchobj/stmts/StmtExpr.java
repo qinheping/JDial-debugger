@@ -2,23 +2,28 @@ package sketchobj.stmts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import constrainfactory.ConstData;
+import constrainfactory.ConstrainFactory;
+import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.Expression;
 
-public class StmtExpr extends Statement{
+public class StmtExpr extends Statement {
 	private Expression expr;
-	 public StmtExpr( Expression expr)
-	    {
-	        this.expr = expr;
-	    }
-	 public String toString(){
-		 return expr.toString()+";";
-	 }
+
+	public StmtExpr(Expression expr) {
+		this.expr = expr;
+	}
+
+	public String toString() {
+		return expr.toString() + ";";
+	}
+
 	@Override
 	public ConstData replaceConst(int index) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();
@@ -29,5 +34,19 @@ public class StmtExpr extends Statement{
 			return new ConstData(t, toAdd, index + 1, value);
 		}
 		return expr.replaceConst(index);
+	}
+
+	@Override
+	public Context buildContext(Context ctx) {
+		this.setCtx(ctx);
+		return ctx;
+	}
+
+	@Override
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+		parent.stmts.set(index,
+				new StmtBlock(this, ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars())));
+		m.putAll(this.getCtx().getAllVars());
+		return m;
 	}
 }

@@ -13,6 +13,7 @@ import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
 import sketchobj.core.TypePrimitive;
 import sketchobj.stmts.Statement;
+import sketchobj.stmts.StmtBlock;
 import visitor.EvalVisitor;
 
 public class Test {
@@ -54,7 +55,17 @@ public class Test {
 		System.out.println(ConstrainFactory.repalceConst(s));
 		System.out.println(s);
 	}
-
+	@org.junit.Test
+	public void testRecordStmt() {
+		ANTLRInputStream input = new ANTLRInputStream(
+				"int largestGap(int[] a){ int max = 1; a[1] = 10; c = max++; int min = 100;  for(int i=0; i < a.Length; i++){ if(max < a[i]) max = a[i]; }return max-min;}");
+		Function f = (Function) compile(input);
+		Statement s = f.getBody();
+		ConstrainFactory.repalceConst(s);
+		ConstrainFactory.addRecordStmt((StmtBlock) s);
+		System.out.println(s);
+	}
+	
 	public static SketchObject compile(ANTLRInputStream input) {
 		simpleJavaLexer lexer = new simpleJavaLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);

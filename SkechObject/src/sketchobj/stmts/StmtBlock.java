@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import constrainfactory.ConstData;
+import sketchobj.core.Context;
+import sketchobj.core.Type;
 
 public class StmtBlock extends Statement {
 
-	protected List<Statement> stmts;
+	public List<Statement> stmts;
 
 	public StmtBlock(List<? extends Statement> stmts) {
 		this.stmts = Collections.unmodifiableList(stmts);
@@ -63,5 +66,23 @@ public class StmtBlock extends Statement {
 	@Override
 	public ConstData replaceConst(int index) {
 		return new ConstData(null, stmts, index, 0);
+	}
+
+	@Override
+	public Context buildContext(Context ctx) {
+		this.setCtx(ctx);
+		for (int i = 1; i < this.stmts.size(); i++) {
+			ctx = stmts.get(i - 1).buildContext(ctx);
+		}
+		ctx = this.stmts.get(this.stmts.size()-1).buildContext(ctx);
+		return ctx;
+	}
+
+	@Override
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+		for (int i = 0; i < stmts.size(); i++) {
+			m.putAll(stmts.get(i).addRecordStmt(this, i, m, linenumber + i));
+		}
+		return m;
 	}
 }

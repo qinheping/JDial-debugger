@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Vector;
 
 import constrainfactory.ConstData;
+import constrainfactory.ConstrainFactory;
+import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.expr.ExprConstant;
@@ -319,11 +322,29 @@ public class StmtVarDecl extends Statement {
 					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>()));
 
 					return new ConstData(t, toAdd, index + 1, value);
-				}else{
+				} else {
 					toAdd.add(inits.get(i));
 				}
 			}
 		}
 		return new ConstData(null, toAdd, index, 0);
+	}
+
+	@Override
+	public Context buildContext(Context ctx) {
+		for (int i = 0; i < names.size(); i++) {
+			ctx.addVar(names.get(i), types.get(i));
+		}
+		this.setCtx(ctx);
+		return ctx;
+	}
+
+	@Override
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+		parent.stmts = new ArrayList<Statement>(parent.stmts);
+		parent.stmts.set(index,
+				new StmtBlock(this, ConstrainFactory.recordState(linenumber, this.getCtx().getAllVars())));
+		m.putAll(this.getCtx().getAllVars());
+		return m;
 	}
 }

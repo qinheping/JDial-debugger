@@ -1,8 +1,11 @@
 package sketchobj.stmts;
 
+import java.util.Map;
 import java.util.Random;
 
 import constrainfactory.ConstData;
+import sketchobj.core.Context;
+import sketchobj.core.Type;
 import sketchobj.expr.Expression;
 
 public class StmtAssert extends Statement {
@@ -168,6 +171,18 @@ public class StmtAssert extends Statement {
 
 		@Override
 		public ConstData replaceConst(int index) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Context buildContext(Context ctx) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
 			// TODO Auto-generated method stub
 			return null;
 		}

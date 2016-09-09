@@ -1,7 +1,9 @@
 package constrainfactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import sketchobj.core.*;
@@ -82,10 +84,24 @@ public class ConstrainFactory {
 		return new StmtBlock(list);
 	}
 	
+	static public void buildContext(StmtBlock sb){
+		sb.buildContext(new Context());
+	}
+	
+	static public Map<String, Type> addRecordStmt(StmtBlock sorce){
+		buildContext(sorce);
+		
+		return sorce.addRecordStmt(null,0,new HashMap<String,Type> (), 1);
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	static public void pushAll(Stack s, List l){
 		for(int i = l.size() - 1; i >=0; i--){
 			s.push(l.get(i));
 		}
+	}
+
+	public static Statement recordState(int linenumber, Map<String, Type> allVars) {
+		return recordState(linenumber,new ArrayList<String>( allVars.keySet()));
 	}
 }
