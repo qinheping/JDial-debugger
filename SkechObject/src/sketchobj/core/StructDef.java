@@ -22,4 +22,16 @@ public class StructDef implements Iterable<Entry<String, Type>>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<String> getFieldOrder() {
+		return fieldOrder;
+	}
+
+	public Map<String, Type> getFieldTypMap() {
+		return fieldTypMap;
+	}
 }

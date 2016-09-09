@@ -18,4 +18,7 @@ public class TypeStructRef extends Type{
     public Collection<Type> getBaseTypes() {
         return Collections.singletonList((Type) this);
     }
+	public boolean isUnboxed() {
+		return isUnboxed;
+	}
 }

@@ -28,12 +28,19 @@ public class ConstrainFactory {
 		constNumber = 0;
 	}
 
-	static public Statement constChangeDecl(int number) {
+	static public Statement constChangeDecl(int index, Type t) {
+		return new StmtVarDecl(t, "const" + index + "change", new ExprStar());
+	}
+	static public Statement constChangeDecls(int number, Type t) {
 		StmtBlock result = new StmtBlock();
 		for (int i = 0; i < number; i++) {
-			result.addStmt(new StmtVarDecl(new TypePrimitive(1), "const" + i + "change", new ExprStar()));
+			result.addStmt(new StmtVarDecl(t, "const" + i + "change", new ExprStar()));
 		}
 		return result;
+	}
+	
+	static public Statement constChangeDecl(int number) {
+		return constChangeDecls(number, new TypePrimitive(4));
 	}
 
 	static public Statement varArrayDecl(String name, int length, Type type) {
@@ -57,16 +64,22 @@ public class ConstrainFactory {
 		return result;
 	}
 	
-	static public void repalceConst(Statement source){
+	static public Statement repalceConst(Statement source){
+		List<Statement> list = new ArrayList<Statement>();
 		Stack<SketchObject> stmtStack = new Stack<SketchObject>();
 		int index = 0;
 		stmtStack.push(source);
 		while(!stmtStack.empty()){
 			SketchObject target = stmtStack.pop();
 			ConstData data = target.replaceConst(index);
+			if(data.getType() != null){
+				list.add(constChangeDecl(index,data.getType()));
+				list.add(new StmtFunDecl(addConstFun(index, data.getValue(), data.getType())));
+			}
 			index = data.getIndex();
 			pushAll(stmtStack,data.getChildren());
 		}
+		return new StmtBlock(list);
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })

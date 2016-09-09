@@ -230,8 +230,10 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return new StmtVarDecl(types, names, inits);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Expression visitVarInitArray(simpleJavaParser.VarInitArrayContext ctx) {
+		@SuppressWarnings("rawtypes")
 		List list = new ArrayList<Expression>();
 		for (int i = 0; i < ctx.arrayInitializer().variableInitializerList().variableInitializer().size(); i++) {
 			list.add(visit(ctx.arrayInitializer().variableInitializerList().variableInitializer(i)));
@@ -268,7 +270,6 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	}
 
 	/** statementExpression (',' statementExpression)* **/
-	@SuppressWarnings("unchecked")
 	@Override
 	public Statement visitStatementExpressionList(simpleJavaParser.StatementExpressionListContext ctx) {
 		List<Statement> list = new ArrayList<Statement>();

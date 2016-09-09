@@ -1,5 +1,4 @@
 package sketchobj.core;
-import java.util.List;
 
 import sketchobj.expr.Expression;
 

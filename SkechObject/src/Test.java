@@ -1,4 +1,3 @@
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class Test {
 		Function f = (Function) compile(input);
 		Statement s = f.getBody();
 		System.out.println(s);
-		ConstrainFactory.repalceConst(s);
+		System.out.println(ConstrainFactory.repalceConst(s));
 		System.out.println(s);
 	}
 

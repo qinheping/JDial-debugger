@@ -60,7 +60,7 @@ public class FieldDecl {
      *          <code>null</code>) of the initializers of the
      *          fields in this
      */
-    public List getInits()
+    public List<Expression> getInits()
     {
         return Collections.unmodifiableList(inits);
     }
