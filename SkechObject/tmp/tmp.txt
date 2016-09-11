@@ -12,14 +12,15 @@ return 5;}
 }
 
 int[6] lineArray;
+int[6] aArray = {0,0,0,0,0,0};
 int[6] bArray = {0,0,0,0,0,0};
 int[6] cArray = {0,0,0,0,0,0};
-int[6] aArray = {0,0,0,0,0,0};
 
 
 int cfinal = 0;
 int finalcount = 0;
-/n int SimpleJava(){
+
+ int SimpleJava(){
 int count = 0;
 int linehit = 0;
 int a = Const0();
@@ -31,8 +32,8 @@ aArray[count] = a;
 int b = Const1();
 (count)++;
 lineArray[count] = 2;
-bArray[count] = b;
 aArray[count] = a;
+bArray[count] = b;
 
 
 int c = a + b;
@@ -44,29 +45,30 @@ cfinal = c;
 finalcount = count;
 }
 
+aArray[count] = a;
 bArray[count] = b;
 cArray[count] = c;
-aArray[count] = a;
 
 
 return c;
 
 
-}/nharness void HammingTest(){
+}
+harness void HammingTest(){
+int[3] oringianlaArray = {2,2,2};
 int[3] oringianlbArray = {0,5,5};
 int[3] oringianlcArray = {0,0,7};
-int[3] oringianlaArray = {2,2,2};
 int correctFinal_c = 8;
 SimpleJava();
 int HammingDistance = 0;
 for(int i = 0; i < 3; (i)++){
+if(const0change == 0){
+HammingDistance = (aArray[i]) != (oringianlaArray[i]);}
+
 if(const1change == 0){
 HammingDistance = (bArray[i]) != (oringianlbArray[i]);}
 
 HammingDistance = (cArray[i]) != (oringianlcArray[i]);
-if(const0change == 0){
-HammingDistance = (aArray[i]) != (oringianlaArray[i]);}
-
 }
 
 assert (cfinal == correctFinal_c);

@@ -84,7 +84,7 @@ public class ConstraintFactory {
 		Statement block = new StmtBlock(stmts);
 		
 		
-		return block.toString() + "/n" +f.toString()+ "/n" +constraintFunction().toString();
+		return block.toString() + "\n" +f.toString()+ "\n" +constraintFunction().toString();
 	}
 
 	static public Statement constChangeDecl(int index, Type t) {

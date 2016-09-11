@@ -17,7 +17,7 @@ public class CallSketch {
 		try {
 			tmp.createNewFile();
 			WriteStringToFile(tmp,s);
-            Process proc = rt.exec(new String[]{"lib/Sketch","tmp/tmp.txt"});  
+            Process proc = rt.exec(new String[]{"lib/sketch","tmp/tmp.txt"});  
             InputStream stderr = proc.getErrorStream();  
             InputStreamReader isr = new InputStreamReader(stderr);  
             BufferedReader br = new BufferedReader(isr);  
@@ -29,11 +29,10 @@ public class CallSketch {
             if(line == null){
             	return "<error>";
             }else {            	
-            //result = "<output>\n";
+            	result = result + line + "\n";
             while ((line = input.readLine ()) != null)
             	result = result + line + "\n";
-            }	
-			tmp.delete();
+            }
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
