@@ -73,6 +73,16 @@ public class ExprArrayRange extends Expression
 	{
 		this( base, rl, false);
 	}
+    
+    public ExprArrayRange( String s, int i)
+	{
+		this( new ExprVar(s), new RangeLen(new ExprConstInt(i),null), false);
+	}
+    
+    public ExprArrayRange( String s, String i)
+	{
+		this( new ExprVar(s), new RangeLen(new ExprVar(i),null), false);
+	}
     /**
      * NOTE -- vector of array ranges for comma arrays. Since arr[x, y] = (arr[x])[y], we
      * want to set (arr[x]) as the new base, and y as the index.
@@ -201,15 +211,21 @@ public class ExprArrayRange extends Expression
     }
 
 	@Override
-	public ConstData replaceConst(int index) {
+	public ConstData replaceConst(int index,String name) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();
 		Expression cond = this.index.start;
 		if (cond instanceof ExprConstant) {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value);
+			return new ConstData(t, toAdd, index + 1, value,name);
 		}
-		return new ConstData(null, toAdd, index, 0);
+		return new ConstData(null, toAdd, index, 0,name);
+	}
+
+	@Override
+	public ConstData replaceConst(int index) {
+		// TODO Auto-generated method stub
+		return this.replaceConst(index, null);
 	}
 }

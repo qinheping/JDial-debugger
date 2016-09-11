@@ -89,4 +89,10 @@ public class ExprFunCall extends Expression
 		// TODO Auto-generated method stub
 		return new ConstData(index);
 	}
+
+	@Override
+	public ConstData replaceConst(int index, String string) {
+		// TODO Auto-generated method stub
+		return new ConstData(index,string);
+	}
 }

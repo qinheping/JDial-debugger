@@ -135,8 +135,20 @@ public class ExprUnary extends Expression
 			int value = ((ExprConstant) expr).getVal();
 			Type t = ((ExprConstant) expr).getType();
 			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value);
+			return new ConstData(t, toAdd, index + 1, value,null);
 		}
-		return new ConstData(null, toAdd, index, 0);
+		return new ConstData(null, toAdd, index, 0,null);
+	}
+
+	@Override
+	public ConstData replaceConst(int index, String string) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		if (expr.getClass().equals(ExprConstant.class)) {
+			int value = ((ExprConstant) expr).getVal();
+			Type t = ((ExprConstant) expr).getType();
+			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
+			return new ConstData(t, toAdd, index + 1, value,string);
+		}
+		return new ConstData(null, toAdd, index, 0,string);
 	}
 }

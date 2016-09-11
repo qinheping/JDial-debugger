@@ -15,7 +15,7 @@ import visitor.EvalVisitor;
 public class Main {
 	public static void main(String[] args) throws Exception {
 		ANTLRInputStream input = new ANTLRInputStream(
-				"int largestGap(int[] a){ int max = 1; a[1] = 10; c = max++; int min = 100;  for(int i=0; i < a.Length; i++){ if(max < a[i]) max = a[i]; }return max-min;}");
+				"int largestGap(int[] a){ int max = min; c = max++; int min = 100;  for(int i=0; i < a.Length; i++){ max = min;if(max < a[i]) max = a[i]; }int d = 19;return max-min;}");
 		Function root = (Function) compile(input);
 		
 		///////  specification

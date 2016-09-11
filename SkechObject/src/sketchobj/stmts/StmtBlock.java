@@ -65,12 +65,13 @@ public class StmtBlock extends Statement {
 
 	@Override
 	public ConstData replaceConst(int index) {
-		return new ConstData(null, stmts, index, 0);
+		return new ConstData(null, stmts, index, 0,null);
 	}
 
 	@Override
 	public Context buildContext(Context ctx) {
-		this.setCtx(ctx);
+		ctx = new Context(ctx);
+		this.setCtx(new Context(ctx));
 		for (int i = 1; i < this.stmts.size(); i++) {
 			ctx = stmts.get(i - 1).buildContext(ctx);
 		}
@@ -79,9 +80,9 @@ public class StmtBlock extends Statement {
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		for (int i = 0; i < stmts.size(); i++) {
-			m.putAll(stmts.get(i).addRecordStmt(this, i, m, linenumber + i));
+			m.putAll(stmts.get(i).addRecordStmt(this, i, m));
 		}
 		return m;
 	}

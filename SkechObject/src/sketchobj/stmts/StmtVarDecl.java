@@ -321,29 +321,32 @@ public class StmtVarDecl extends Statement {
 					Type t = ((ExprConstant) inits.get(i)).getType();
 					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>()));
 
-					return new ConstData(t, toAdd, index + 1, value);
+					return new ConstData(t, toAdd, index + 1, value, names.get(i));
 				} else {
 					toAdd.add(inits.get(i));
 				}
 			}
 		}
-		return new ConstData(null, toAdd, index, 0);
+		return new ConstData(null, toAdd, index, 0, null);
 	}
 
 	@Override
 	public Context buildContext(Context ctx) {
+		ctx = new Context(ctx);
 		for (int i = 0; i < names.size(); i++) {
 			ctx.addVar(names.get(i), types.get(i));
 		}
-		this.setCtx(ctx);
+		this.setCtx(new Context(ctx));
+		ctx.linePlus();
 		return ctx;
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
+
 		parent.stmts.set(index,
-				new StmtBlock(this, ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars())));
+				new StmtBlock(this, ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars())));
 		m.putAll(this.getCtx().getAllVars());
 		return m;
 	}

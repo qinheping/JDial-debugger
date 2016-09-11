@@ -43,5 +43,5 @@ public abstract class Statement extends SketchObject{
 	
 	public abstract Context buildContext(Context ctx);
 	
-	public abstract Map<String,Type> addRecordStmt(StmtBlock parent, int index, Map<String,Type> m, int linenumber);
+	public abstract Map<String,Type> addRecordStmt(StmtBlock parent, int index, Map<String,Type> m);
 }

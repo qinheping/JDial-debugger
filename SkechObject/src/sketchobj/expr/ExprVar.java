@@ -59,4 +59,11 @@ public class ExprVar extends Expression
 	public ConstData replaceConst(int index) {
 		return new ConstData(index);
 	}
+
+
+
+	@Override
+	public ConstData replaceConst(int index, String string) {
+		return new ConstData(index,string);
+	}
 }

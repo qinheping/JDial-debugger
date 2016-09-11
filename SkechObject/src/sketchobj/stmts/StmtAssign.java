@@ -83,22 +83,24 @@ public class StmtAssign extends Statement {
 			int value = ((ExprConstant) rhs).getVal();
 			Type t = ((ExprConstant) rhs).getType();
 			rhs = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, new ArrayList(), index + 1, value);
+			return new ConstData(t, new ArrayList(), index + 1, value,lhs.toString());
 		}
-		return rhs.replaceConst(index);
+		return rhs.replaceConst(index,lhs.toString());
 	}
 
 	@Override
 	public Context buildContext(Context ctx) {
-		this.setCtx(ctx);
+		ctx = new Context(ctx);
+		this.setCtx(new Context(ctx));
+		ctx.linePlus();
 		return ctx;
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 		parent.stmts.set(index,
-				new StmtBlock(this, ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars())));
+				new StmtBlock(this, ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars())));
 		m.putAll(this.getCtx().getAllVars());
 		return m;
 	}

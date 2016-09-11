@@ -97,32 +97,34 @@ public class StmtIfThen extends Statement {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value);
+			return new ConstData(t, toAdd, index + 1, value,null);
 		}
-		return new ConstData(null, toAdd, index, 0);
+		return new ConstData(null, toAdd, index, 0,null);
 	}
 
 	@Override
 	public Context buildContext(Context ctx) {
-		this.setCtx(ctx);
+		this.setCtx(new Context(ctx));
+		ctx = new Context(ctx);
+		ctx.linePlus();
 		ctx.pushVars(new HashMap<String, Type>());
-		cons.buildContext(ctx);
+		ctx = cons.buildContext(ctx);
 		ctx.popVars();
 		if (alt != null) {
 			ctx.pushNewVars();
-			alt.buildContext(ctx);
+			ctx = alt.buildContext(ctx);
 			ctx.popVars();
 		}
 		return ctx;
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
-		this.cons = new StmtBlock(ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars()), cons);
-		m.putAll(((StmtBlock) cons).stmts.get(1).addRecordStmt((StmtBlock) cons, 1, m, linenumber + 1));
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
+		this.cons = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars()), cons);
+		m.putAll(((StmtBlock) cons).stmts.get(1).addRecordStmt((StmtBlock) cons, 1, m));
 		if (alt != null) {
-			this.alt = new StmtBlock(ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars()), alt);
-			m.putAll(((StmtBlock) alt).stmts.get(1).addRecordStmt((StmtBlock) alt, 1, m, linenumber + 1));
+			this.alt = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars()), alt);
+			m.putAll(((StmtBlock) alt).stmts.get(1).addRecordStmt((StmtBlock) alt, 1, m));
 		}
 		return m;
 	}

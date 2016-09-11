@@ -62,7 +62,7 @@ public class StmtReturn extends Statement
 			int v = ((ExprConstant)value).getVal();
 			Type t = ((ExprConstant)value).getType();
 			value = new ExprFunCall("Const"+index,new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index+1, v);
+			return new ConstData(t, toAdd, index+1, v,null);
 		}
 		return value.replaceConst(index);
 	}
@@ -71,14 +71,16 @@ public class StmtReturn extends Statement
 
 	@Override
 	public Context buildContext(Context ctx) {
-		this.setCtx(ctx);
+		ctx = new Context(ctx);
+		ctx.linePlus();
+		this.setCtx(new Context(ctx));
 		return ctx;
 	}
 
 
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		// TODO Auto-generated method stub
 		return m;
 	}

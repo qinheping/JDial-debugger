@@ -10,6 +10,6 @@ public abstract class Expression extends SketchObject{
 		return null;
 	}
 	
-	public abstract ConstData replaceConst(int index);
+	public abstract ConstData replaceConst(int index, String string);
 
 }

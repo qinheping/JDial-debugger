@@ -108,4 +108,10 @@ public class ExprArrayInit extends Expression
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ConstData replaceConst(int index, String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

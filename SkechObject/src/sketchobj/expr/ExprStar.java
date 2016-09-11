@@ -15,4 +15,9 @@ public class ExprStar extends Expression
 public ConstData replaceConst(int index) {
 	return null;
 }
+@Override
+public ConstData replaceConst(int index, String string) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }

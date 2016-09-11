@@ -59,6 +59,14 @@ public class Function extends SketchObject {
 		this.fcnType = FcnType.Static;
 	}
 	
+	public Function(FcnHeader head, Statement body, FcnType ft) {
+		this.name = head.name;
+		this.returnType = head.returnType;
+		this.params = head.params;
+		this.body = body;
+		this.fcnType = ft;
+	}
+	
 	public Statement getBody(){
 		return this.body;
 	}

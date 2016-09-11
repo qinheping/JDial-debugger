@@ -41,7 +41,7 @@ public class StmtMinimize extends Statement {
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		// TODO Auto-generated method stub
 		return null;
 	}

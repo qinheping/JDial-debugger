@@ -71,4 +71,10 @@ public class ExprConstInt extends ExprConstant
 	public Type getType() {
 		return new TypePrimitive(4);
 	}
+
+	@Override
+	public ConstData replaceConst(int index, String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

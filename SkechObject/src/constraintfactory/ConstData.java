@@ -11,20 +11,31 @@ public class ConstData {
 	private List<SketchObject> children;
 	private int index;
 	private int value;
-	
+	private String name;
+
 	@SuppressWarnings("unchecked")
-	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value){
+	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name){
 		this.setType(type);
 		this.setChildren(children);
 		this.setIndex(index);
 		this.setValue(value);
+		this.setName(name);
 	}
 
 	public ConstData(int index2) {
 		this.setIndex(index2);
 		this.setType(null);
 		this.setValue(0);
-		this.setChildren(new ArrayList<SketchObject>());}
+		this.setChildren(new ArrayList<SketchObject>());
+		this.setName(null);}
+
+	public ConstData(int index2, String string) {
+		this.setIndex(index2);
+		this.setType(null);
+		this.setValue(0);
+		this.setChildren(new ArrayList<SketchObject>());
+		this.setName(name);
+	}
 
 	public List<SketchObject> getChildren() {
 		return children;
@@ -56,5 +67,13 @@ public class ConstData {
 
 	public void setValue(int value) {
 		this.value = value;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

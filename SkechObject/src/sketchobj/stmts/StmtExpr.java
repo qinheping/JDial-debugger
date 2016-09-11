@@ -31,21 +31,23 @@ public class StmtExpr extends Statement {
 			int value = ((ExprConstant) expr).getVal();
 			Type t = ((ExprConstant) expr).getType();
 			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value);
+			return new ConstData(t, toAdd, index + 1, value,null);
 		}
 		return expr.replaceConst(index);
 	}
 
 	@Override
 	public Context buildContext(Context ctx) {
-		this.setCtx(ctx);
+		ctx = new Context(ctx);
+		ctx.linePlus();
+		this.setCtx(new Context(ctx));
 		return ctx;
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts.set(index,
-				new StmtBlock(this, ConstraintFactory.recordState(linenumber, this.getCtx().getAllVars())));
+				new StmtBlock(this, ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars())));
 		m.putAll(this.getCtx().getAllVars());
 		return m;
 	}

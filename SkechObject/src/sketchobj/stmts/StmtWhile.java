@@ -45,26 +45,28 @@ public class StmtWhile extends Statement {
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(body);
-			return new ConstData(t, toAdd, index + 1, value);
+			return new ConstData(t, toAdd, index + 1, value, null);
 		}
 		toAdd.add(cond);
 		toAdd.add(body);
-		return new ConstData(null, toAdd, index, 0);
+		return new ConstData(null, toAdd, index, 0, null);
 	}
 
 	@Override
 	public Context buildContext(Context ctx) {
-		this.setCtx(ctx);
+		this.setCtx(new Context(ctx));
+		ctx = new Context(ctx);
+		ctx.linePlus();
 		ctx.pushVars(new HashMap<String, Type>());
-		body.buildContext(ctx);
+		ctx = body.buildContext(ctx);
 		ctx.popVars();
 		return ctx;
 	}
 
 	@Override
-	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m, int linenumber) {
-		body = new StmtBlock(ConstraintFactory.recordState(linenumber, new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
+	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
+		body = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
 		m.putAll(this.getCtx().getAllVars());
-		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m,linenumber+1);
+		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m);
 	}
 }
