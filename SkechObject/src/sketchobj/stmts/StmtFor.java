@@ -23,7 +23,7 @@ public class StmtFor extends Statement {
 	}
 
 	public String toString() {
-		String result = "for("+init.toString()+" "+cond.toString()+"; "+ incr.toString().substring(0, incr.toString().length()-2)+ "){\n";
+		String result = "for("+init.toString()+" "+cond.toString()+"; "+ incr.toString().substring(0, incr.toString().length()-1)+ "){\n";
 		result += this.body + "}\n";
 		return result;
 	}

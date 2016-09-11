@@ -1,24 +1,29 @@
 package trace;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ProgState {
-	private int line;
+	private Integer line;
 	private List<String> ordered_globals;
-	private Map<String,Double> globals;
+	private Map<String,Integer> globals;
 	
-	public ProgState(int line, List<String> og, Map<String, Double> g){
+	public ProgState(Integer line, List<String> og, Map<String, Integer> g){
 		this.setLine(line);
 		this.setOrdered_globals(og);
 		this.setGlobals(g);
 	}
-
-	public int getLine() {
+	public ProgState(Integer line,Map<String, Integer> g){
+		this.setLine(line);
+		this.setOrdered_globals(new ArrayList<String>(g.keySet()));
+		this.setGlobals(g);
+	}
+	public Integer getLine() {
 		return line;
 	}
 
-	public void setLine(int line) {
+	public void setLine(Integer line) {
 		this.line = line;
 	}
 
@@ -30,11 +35,11 @@ public class ProgState {
 		this.ordered_globals = ordered_globals;
 	}
 
-	public Map<String,Double> getGlobals() {
+	public Map<String,Integer> getGlobals() {
 		return globals;
 	}
 
-	public void setGlobals(Map<String,Double> globals) {
+	public void setGlobals(Map<String,Integer> globals) {
 		this.globals = globals;
 	}
 }

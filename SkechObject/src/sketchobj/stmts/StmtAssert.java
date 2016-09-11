@@ -113,6 +113,12 @@ public class StmtAssert extends Statement {
 	        this.isMax = isMax;
 	        this.isHard = isHard;
 	    }
+	    
+	    public StmtAssert(Expression cond){
+	    	this.cond = cond;
+	    	this.isHard = false;
+	    	this.isMax = 3;
+	    }
 
 	    public StmtAssert( Expression cond, String msg, boolean isSuper,
 	            boolean isHard)
@@ -132,7 +138,7 @@ public class StmtAssert extends Statement {
 
 	    /** Output to string. */
 	    public String toString () {
-	        String result = getAssertSymbol() + " (" + this.cond + ")";
+	        String result = getAssertSymbol() + " (" + this.cond + ");";
 
 	        /*
 	         * XXX/cgjones: this is being cut out because asserts need to be

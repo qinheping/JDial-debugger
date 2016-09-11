@@ -17,7 +17,7 @@ public class CallSketch {
 		try {
 			tmp.createNewFile();
 			WriteStringToFile(tmp,s);
-            Process proc = rt.exec(new String[]{"lib/cvc4","--lang=sygus","--dump-synth","tmp/tmp.txt"});  
+            Process proc = rt.exec(new String[]{"lib/Sketch","tmp/tmp.txt"});  
             InputStream stderr = proc.getErrorStream();  
             InputStreamReader isr = new InputStreamReader(stderr);  
             BufferedReader br = new BufferedReader(isr);  
@@ -28,16 +28,11 @@ public class CallSketch {
             line = input.readLine();
             if(line == null){
             	return "<error>";
-            }else 
-            if(line.equals("unsat")){            	
+            }else {            	
             //result = "<output>\n";
             while ((line = input.readLine ()) != null)
             	result = result + line + "\n";
-            }	else{
-            result = "<unknown>";
-            while ((line = br.readLine()) != null)  
-                result = result + line + "\n";  
-            }
+            }	
 			tmp.delete();
 		} catch (IOException e) {
 			e.printStackTrace();

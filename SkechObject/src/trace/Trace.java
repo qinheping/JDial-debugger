@@ -7,8 +7,8 @@ public class Trace {
 	private int length;
 	private List<ProgState> traces;
 	
-	public Trace(int length, List<ProgState> traces){
-		this.setLength(length);
+	public Trace( List<ProgState> traces){
+		this.setLength(traces.size());
 		this.setTraces(traces);
 	}
 
@@ -31,5 +31,8 @@ public class Trace {
 
 	public void setTraces(List<ProgState> traces) {
 		this.traces = traces;
+	}
+	public void addState(ProgState ps){
+		traces.add(ps);
 	}
 }

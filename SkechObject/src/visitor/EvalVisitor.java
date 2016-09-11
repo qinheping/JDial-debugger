@@ -33,7 +33,10 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** Identifier '(' formalParameterList? ')' dims? **/
 	@Override
 	public SketchObject visitMethodDeclarator(simpleJavaParser.MethodDeclaratorContext ctx) {
+		if(ctx.formalParameterList()!=null)
 		return new FcnHeader(ctx.Identifier().getText(), null, (ParametersList) visit(ctx.formalParameterList()));
+		else
+			return new FcnHeader(ctx.Identifier().getText(), null, new ArrayList<Parameter>());
 	}
 
 	/** : unannType | 'void' **/

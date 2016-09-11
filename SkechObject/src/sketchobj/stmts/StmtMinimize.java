@@ -25,7 +25,7 @@ public class StmtMinimize extends Statement {
     }
 
     public String toString() {
-        return "minimize(" + minimizeExpr + ")";
+        return "minimize(" + minimizeExpr + ");";
     }
 
 	@Override
