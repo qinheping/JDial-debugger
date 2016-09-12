@@ -344,13 +344,20 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return new ExprUnary(1, (Expression) visit(ctx.unaryExpression()));
 	}
 
+	/** (	primary							
+		|	expressionName				
+		)	
+		(	postIncrementExpression_lf_postfixExpression
+		|	postDecrementExpression_lf_postfixExpression
+		)*
+		**/
 	@Override
 	public SketchObject visitPostfixExpression(simpleJavaParser.PostfixExpressionContext ctx) {
 		Expression name = null;
 		if (ctx.getChild(0).getClass().equals(simpleJavaParser.PrimaryContext.class))
 			name = (Expression) visit(ctx.primary());
 		if (ctx.getChild(0).getClass().equals(simpleJavaParser.ExpressionNameContext.class))
-			name = new ExprVar(ctx.expressionName().Identifier().getText());
+			name = (Expression) visit(ctx.expressionName());
 		// TODO what if double ++
 		if (ctx.postIncrementExpression_lf_postfixExpression().size() != 0)
 			return new ExprUnary(5, name);
@@ -359,6 +366,24 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return name;
 	}
 
+	
+	@Override
+	public SketchObject visitExpressionName(simpleJavaParser.ExpressionNameContext ctx){
+		if(ctx.getChild(0).getClass().equals(simpleJavaParser.AmbiguousNameContext.class)){
+			return new ExprField((Expression) visit(ctx.ambiguousName()),ctx.Identifier().getText());
+		}
+		return new ExprVar(ctx.Identifier().getText());
+	}
+	
+	
+	@Override
+	public SketchObject visitAmbiguousName(simpleJavaParser.AmbiguousNameContext ctx){
+		if(ctx.getChild(0).getClass().equals(simpleJavaParser.AmbiguousNameContext.class)){
+			return new ExprField((Expression) visit(ctx.ambiguousName()),ctx.Identifier().getText());
+		}
+		return new ExprVar(ctx.Identifier().getText());
+	}
+	
 	/** leftHandSide assignmentOperator expression **/
 	@Override
 	public SketchObject visitAssignment(simpleJavaParser.AssignmentContext ctx) {
@@ -378,11 +403,6 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public SketchObject visitLeftHandSide(simpleJavaParser.LeftHandSideContext ctx) {
 		return visit(ctx.getChild(0));
-	}
-
-	@Override
-	public Expression visitExpressionName(simpleJavaParser.ExpressionNameContext ctx) {
-		return new ExprVar(ctx.Identifier().getText());
 	}
 
 	/**

@@ -23,7 +23,14 @@ public class StmtFor extends Statement {
 	}
 
 	public String toString() {
-		String result = "for("+init.toString()+" "+cond.toString()+"; "+ incr.toString().substring(0, incr.toString().length()-1)+ "){\n";
+		String result = null;
+		if (incr.toString().endsWith(";"))
+			result = "for(" + init.toString() + " " + cond.toString() + "; "
+					+ incr.toString().substring(0, incr.toString().length() - 1) + "){\n";
+		else
+			result = "for(" + init.toString() + " " + cond.toString() + "; "
+					+ incr.toString().substring(0, incr.toString().length() - 2) + "){\n";
+
 		result += this.body + "}\n";
 		return result;
 	}
@@ -38,9 +45,10 @@ public class StmtFor extends Statement {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,null);
-		}
-		return new ConstData(null, toAdd, index, 0,null);
+			return new ConstData(t, toAdd, index + 1, value, null);
+		}else
+			toAdd.add(cond);
+		return new ConstData(null, toAdd, index, 0, null);
 	}
 
 	@Override
@@ -56,13 +64,14 @@ public class StmtFor extends Statement {
 		ctx = body.buildContext(ctx);
 		ctx.popVars();
 		return ctx;
-		
+
 	}
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		m.putAll(body.getCtx().getAllVars());
-		body = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), new ArrayList<String>(init.getCtx().getAllVars().keySet())),body);
-		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m);
+		body = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(),
+				new ArrayList<String>(init.getCtx().getAllVars().keySet())), body);
+		return ((StmtBlock) body).stmts.get(1).addRecordStmt((StmtBlock) body, 1, m);
 	}
 }
