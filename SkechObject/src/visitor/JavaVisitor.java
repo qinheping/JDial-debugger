@@ -9,9 +9,36 @@ import sketchobj.expr.*;
 import sketchobj.expr.ExprArrayRange.RangeLen;
 import sketchobj.stmts.*;
 
-public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
+public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 
 	// ----------head----------
+
+	private String targetFunc;
+
+	public JavaVisitor(String targetFunc) {
+		this.targetFunc = targetFunc;
+	}
+
+	/**
+	 * compilationUnit : packageDeclaration? importDeclaration* typeDeclaration*
+	 * EOF
+	 **/
+	@Override
+	public SketchObject visitCompilationUnit(simpleJavaParser.CompilationUnitContext ctx) {
+		return visit(ctx.typeDeclaration(0).classDeclaration().normalClassDeclaration().classBody());
+	}
+
+	/**
+	 * classBody : '{' classBodyDeclaration* '}' ;
+	 */
+	@Override
+	public SketchObject visitClassBody(simpleJavaParser.ClassBodyContext ctx) {
+		for(int i = 0; i < ctx.classBodyDeclaration().size(); i++){
+			if(ctx.classBodyDeclaration().get(i).classMemberDeclaration().methodDeclaration().methodHeader().getChild(1).getChild(0).getText().equals(targetFunc))
+				return visit(ctx.classBodyDeclaration().get(i).classMemberDeclaration().methodDeclaration());
+		}
+		return null;
+	}
 
 	/** methodModifier* methodHeader methodBody **/
 	@Override
@@ -33,8 +60,8 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** Identifier '(' formalParameterList? ')' dims? **/
 	@Override
 	public SketchObject visitMethodDeclarator(simpleJavaParser.MethodDeclaratorContext ctx) {
-		if(ctx.formalParameterList()!=null)
-		return new FcnHeader(ctx.Identifier().getText(), null, (ParametersList) visit(ctx.formalParameterList()));
+		if (ctx.formalParameterList() != null)
+			return new FcnHeader(ctx.Identifier().getText(), null, (ParametersList) visit(ctx.formalParameterList()));
 		else
 			return new FcnHeader(ctx.Identifier().getText(), null, new ArrayList<Parameter>());
 	}
@@ -344,13 +371,11 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return new ExprUnary(1, (Expression) visit(ctx.unaryExpression()));
 	}
 
-	/** (	primary							
-		|	expressionName				
-		)	
-		(	postIncrementExpression_lf_postfixExpression
-		|	postDecrementExpression_lf_postfixExpression
-		)*
-		**/
+	/**
+	 * ( primary | expressionName ) (
+	 * postIncrementExpression_lf_postfixExpression |
+	 * postDecrementExpression_lf_postfixExpression )*
+	 **/
 	@Override
 	public SketchObject visitPostfixExpression(simpleJavaParser.PostfixExpressionContext ctx) {
 		Expression name = null;
@@ -366,24 +391,22 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return name;
 	}
 
-	
 	@Override
-	public SketchObject visitExpressionName(simpleJavaParser.ExpressionNameContext ctx){
-		if(ctx.getChild(0).getClass().equals(simpleJavaParser.AmbiguousNameContext.class)){
-			return new ExprField((Expression) visit(ctx.ambiguousName()),ctx.Identifier().getText());
+	public SketchObject visitExpressionName(simpleJavaParser.ExpressionNameContext ctx) {
+		if (ctx.getChild(0).getClass().equals(simpleJavaParser.AmbiguousNameContext.class)) {
+			return new ExprField((Expression) visit(ctx.ambiguousName()), ctx.Identifier().getText());
 		}
 		return new ExprVar(ctx.Identifier().getText());
 	}
-	
-	
+
 	@Override
-	public SketchObject visitAmbiguousName(simpleJavaParser.AmbiguousNameContext ctx){
-		if(ctx.getChild(0).getClass().equals(simpleJavaParser.AmbiguousNameContext.class)){
-			return new ExprField((Expression) visit(ctx.ambiguousName()),ctx.Identifier().getText());
+	public SketchObject visitAmbiguousName(simpleJavaParser.AmbiguousNameContext ctx) {
+		if (ctx.getChild(0).getClass().equals(simpleJavaParser.AmbiguousNameContext.class)) {
+			return new ExprField((Expression) visit(ctx.ambiguousName()), ctx.Identifier().getText());
 		}
 		return new ExprVar(ctx.Identifier().getText());
 	}
-	
+
 	/** leftHandSide assignmentOperator expression **/
 	@Override
 	public SketchObject visitAssignment(simpleJavaParser.AssignmentContext ctx) {
@@ -430,16 +453,17 @@ public class EvalVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	}
 
 	@Override
-	public SketchObject visitPrimaryNoNewArray_lfno_primary(simpleJavaParser.PrimaryNoNewArray_lfno_primaryContext ctx){
+	public SketchObject visitPrimaryNoNewArray_lfno_primary(
+			simpleJavaParser.PrimaryNoNewArray_lfno_primaryContext ctx) {
 		return visit(ctx.getChild(0));
 	}
-	
+
 	@Override
-	public SketchObject visitArrayAccess_lfno_primary(simpleJavaParser.ArrayAccess_lfno_primaryContext ctx){
+	public SketchObject visitArrayAccess_lfno_primary(simpleJavaParser.ArrayAccess_lfno_primaryContext ctx) {
 		RangeLen r = new RangeLen((Expression) visit(ctx.expression(0)));
 		return new ExprArrayRange((Expression) visit(ctx.expressionName()), r);
 	}
-	
+
 	@Override
 	public SketchObject visitLiteralInt(simpleJavaParser.LiteralIntContext ctx) {
 		return new ExprConstInt(ctx.IntegerLiteral().getText());

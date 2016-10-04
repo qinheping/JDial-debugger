@@ -10,7 +10,7 @@ import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
 import trace.ProgState;
 import trace.Trace;
-import visitor.EvalVisitor;
+import visitor.JavaVisitor;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
@@ -35,6 +35,6 @@ public class Main {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		simpleJavaParser parser = new simpleJavaParser(tokens);
 		ParseTree tree = parser.methodDeclaration();
-		return new EvalVisitor().visit(tree);
+		return new JavaVisitor().visit(tree);
 	}
 }

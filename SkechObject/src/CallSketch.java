@@ -21,9 +21,9 @@ public class CallSketch {
 			tmp.createNewFile();
 			WriteStringToFile(tmp, s);
 			Process proc = rt.exec(new String[] { "lib/sketch", "tmp/tmp.txt" });
-			InputStream stderr = proc.getErrorStream();
-			InputStreamReader isr = new InputStreamReader(stderr);
-			BufferedReader br = new BufferedReader(isr);
+			//InputStream stderr = proc.getErrorStream();
+			//InputStreamReader isr = new InputStreamReader(stderr);
+			//BufferedReader br = new BufferedReader(isr);
 			InputStreamReader ir = new InputStreamReader(proc.getInputStream());
 			LineNumberReader input = new LineNumberReader(ir);
 
