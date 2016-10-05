@@ -26,8 +26,10 @@ public class Main {
 		
 		//int finalLine = oriTrace.getTraces().get(finalCount).getLine();
 		int finalLine = 0;
+		
 		ConstraintFactory cf = new ConstraintFactory(oriTrace, finalState,  new FcnHeader(root.getName(),root.getReturnType(),root.getParames()));
 		cf.getScript(root.getBody());
+		
 	}
 
 	public static SketchObject compile(ANTLRInputStream input) {

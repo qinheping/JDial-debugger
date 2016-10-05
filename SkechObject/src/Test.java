@@ -126,6 +126,9 @@ public class Test {
 		System.out.println(root);
 
 		String script = cf.getScript(root.getBody());
+		
+		System.out.println(script);
+		
 		System.out.println(CallSketch.CallByString(script));
 	}
 

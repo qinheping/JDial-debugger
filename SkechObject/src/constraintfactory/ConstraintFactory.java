@@ -32,7 +32,7 @@ public class ConstraintFactory {
 	static int originalLength = 5;
 
 	static List<Expression> parameters = new ArrayList<>();
-	static int numberOfChange = 1;
+	static int numberOfChange = 2;
 
 	public ConstraintFactory(Trace oriTrace, ProgState finalState, FcnHeader fh) {
 		ConstraintFactory.fh = fh;
