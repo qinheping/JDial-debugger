@@ -1,4 +1,4 @@
-import org.antlr.v4.runtime.ANTLRInputStream;
+/*import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -8,8 +8,8 @@ import javaparser.simpleJavaParser;
 import sketchobj.core.FcnHeader;
 import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
-import trace.ProgState;
-import trace.Trace;
+import trace.ProgStateTODELETE;
+import trace.TraceTODELETE;
 import visitor.JavaVisitor;
 
 public class Main {
@@ -21,8 +21,8 @@ public class Main {
 		Function root = (Function) compile(input,null);
 		
 		///////  specification
-		Trace oriTrace = new Trace();
-		ProgState finalState = null;
+		TraceTODELETE oriTrace = new TraceTODELETE();
+		ProgStateTODELETE finalState = null;
 		int finalCount = 0;
 		///////
 		
@@ -42,3 +42,4 @@ public class Main {
 		return new JavaVisitor(target).visit(tree);
 	}
 }
+*/

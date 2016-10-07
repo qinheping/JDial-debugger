@@ -1,5 +1,6 @@
 package jsonast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +18,22 @@ public class VarList extends JsonNode{
 
 	public void setVar(List<Var> var) {
 		this.var = var;
+	}
+
+	public List<String> toStringList() {
+		List<String> result = new ArrayList<String>();
+		for(Var v: var){
+			result.add(v.getName());
+		}
+		return null;
+	}
+	
+	public Var find(String s){
+		for(Var v: var){
+			if(v.getName().equals(s))
+				return v;
+		}
+		return null;
 	}
 
 }

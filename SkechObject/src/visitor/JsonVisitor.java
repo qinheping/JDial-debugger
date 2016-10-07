@@ -27,7 +27,11 @@ public class JsonVisitor extends jsonBaseVisitor<JsonNode> {
 
 	@Override
 	public Traces visitTraces(jsonParser.TracesContext ctx) {
-		return new Traces(ctx.trace());
+		List<Trace> t = new ArrayList<Trace>();
+		for(int i = 0; i < ctx.trace().size(); i ++){
+			t.add((Trace) visit(ctx.trace(i)));
+		}
+		return new Traces(t);
 	}
 
 	@Override

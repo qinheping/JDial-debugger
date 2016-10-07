@@ -1,5 +1,7 @@
 package jsonast;
 
+import java.util.List;
+
 public class Frame extends JsonNode {
 
 	private String name;
@@ -65,6 +67,11 @@ public class Frame extends JsonNode {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public List<String> getOrdered_locals() {
+		
+		return this.ordered_varnames.toStringList();
 	}
 
 }

@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import jsonast.Trace;
+import jsonast.Traces;
 import sketchobj.core.*;
 import sketchobj.core.Function.FcnType;
 import sketchobj.expr.*;
 import sketchobj.stmts.*;
-import trace.ProgState;
-import trace.Trace;
 
 public class ConstraintFactory {
 	// TODO: repair arrayInit.replaceConst(), else statement, Expr.field, all
@@ -22,8 +22,8 @@ public class ConstraintFactory {
 	static Map<String, Set<Integer>> constMap = new HashMap<String, Set<Integer>>();
 	static List<String> varList = new ArrayList<String>();
 
-	static Trace oriTrace;
-	static ProgState finalState;
+	static Traces oriTrace;
+	static Trace finalState;
 	// static int finalCount;
 	static FcnHeader fh;
 	static int hitline = 0;
@@ -34,7 +34,7 @@ public class ConstraintFactory {
 	static List<Expression> parameters = new ArrayList<>();
 	static int numberOfChange = 2;
 
-	public ConstraintFactory(Trace oriTrace, ProgState finalState, FcnHeader fh) {
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
 		ConstraintFactory.fh = fh;
 		ConstraintFactory.oriTrace = oriTrace;
 		ConstraintFactory.finalState = finalState;
@@ -53,16 +53,16 @@ public class ConstraintFactory {
 		parameters = new ArrayList<>();
 	}
 
-	public ConstraintFactory(Trace oriTrace, ProgState finalState, FcnHeader fh, List<Expression> parameters) {
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> parameters) {
 		this(oriTrace, finalState, fh);
-		this.parameters = parameters;
+		//this.parameters = parameters;
 	}
 
-	public ConstraintFactory(Trace oriTrace, ProgState finalState, FcnHeader fh, Expression parameter) {
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, Expression parameter) {
 		this(oriTrace, finalState, fh);
 		List<Expression> l = new ArrayList<Expression>();
 		l.add(parameter);
-		this.parameters = l;
+		//this.parameters = l;
 	}
 
 	public String getScript(Statement source) {
@@ -89,7 +89,7 @@ public class ConstraintFactory {
 		stmts.add(
 				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
 
-		for (String v : finalState.getOrdered_globals()) {
+		for (String v : finalState.getOrdered_locals()) {
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), v + "final", new ExprConstInt(0),0));
 		}
 
@@ -120,8 +120,9 @@ public class ConstraintFactory {
 		for (String v : varList) {
 			List<Expression> arrayInit = new ArrayList<>();
 			for (int i = 0; i < bound; i++) {
-				if (oriTrace.getTraces().get(i).getGlobals().containsKey(v)) {
-					arrayInit.add(new ExprConstInt((int) oriTrace.getTraces().get(i).getGlobals().get(v)));
+				if (oriTrace.getTraces().get(i).getOrdered_locals().contains(v)) {
+					if(oriTrace.getTraces().get(i).getLocals().find(v).getType() == 0)
+					arrayInit.add(new ExprConstInt((int) oriTrace.getTraces().get(i).getLocals().find(v).getValue()));
 				} else {
 					// TODO check if int can be null in Sketch
 					arrayInit.add(new ExprConstInt(0));
@@ -134,9 +135,9 @@ public class ConstraintFactory {
 					"oringianl" + v + "Array", new ExprArrayInit(arrayInit),0));
 		}
 
-		for (String v : finalState.getOrdered_globals()) {
+		for (String v : finalState.getOrdered_locals()) {
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), "correctFinal_" + v,
-					new ExprConstInt(finalState.getGlobals().get(v)),0));
+					new ExprConstInt(finalState.getLocals().find(v).getValue()),0));
 		}
 
 		// f(parameters)
@@ -179,7 +180,7 @@ public class ConstraintFactory {
 		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound));
 		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i")),0);
 		stmts.add(new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false,0));
-		for (String v : finalState.getOrdered_globals()) {
+		for (String v : finalState.getOrdered_locals()) {
 			stmts.add(new StmtAssert(new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v))));
 		}
 
@@ -238,7 +239,7 @@ public class ConstraintFactory {
 		if (lineNumber == hitline) {
 			result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("linehit")),0));
 			List<Statement> consStmts = new ArrayList<>();
-			for (String v : finalState.getOrdered_globals()) {
+			for (String v : finalState.getOrdered_locals()) {
 				consStmts.add(new StmtAssign(new ExprVar(v + "final"), new ExprVar(v),0));
 			}
 			consStmts.add(new StmtAssign(new ExprVar("finalcount"), new ExprVar("count"),0));

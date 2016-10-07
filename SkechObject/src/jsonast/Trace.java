@@ -1,5 +1,7 @@
 package jsonast;
 
+import java.util.List;
+
 public class Trace extends JsonNode {
 
 	private String stdout;
@@ -8,6 +10,15 @@ public class Trace extends JsonNode {
 	private RenderStack rstack;
 	private String funcname;
 	private VarList heap;
+	
+	///
+	private List<String> ordered_globals;
+	private VarList globals;
+	
+
+	private List<String> ordered_locals;
+	private VarList locals;
+	///
 
 	public Trace(String stdout, String event, Integer line, RenderStack rstack, VarList globals, VarList oglobals,
 			String funcname, VarList heap) {
@@ -17,6 +28,11 @@ public class Trace extends JsonNode {
 		this.setRstack(rstack);
 		this.setFuncname(funcname);
 		this.setHeap(heap);
+		
+		Frame currentF = this.rstack.getFrams().get(0);
+		this.setOrdered_locals(currentF.getOrdered_locals());
+		this.setLocals(currentF.getOrdered_varnames());
+		
 	}
 
 	public String getStdout() {
@@ -65,6 +81,23 @@ public class Trace extends JsonNode {
 
 	public void setHeap(VarList heap) {
 		this.heap = heap;
+	}
+
+
+	public List<String> getOrdered_locals() {
+		return ordered_locals;
+	}
+
+	public void setOrdered_locals(List<String> ordered_locals) {
+		this.ordered_locals = ordered_locals;
+	}
+
+	public VarList getLocals() {
+		return locals;
+	}
+
+	public void setLocals(VarList locals) {
+		this.locals = locals;
 	}
 
 }
