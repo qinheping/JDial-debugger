@@ -16,7 +16,9 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		ANTLRInputStream input = new ANTLRInputStream(
 				"int largestGap(int[] a){ int max = min; c = max++; int min = 100;  for(int i=0; i < a.Length; i++){ max = min;if(max < a[i]) max = a[i]; }int d = 19;return max-min;}");
-		Function root = (Function) compile(input);
+		
+		// TODO add target in compile
+		Function root = (Function) compile(input,null);
 		
 		///////  specification
 		Trace oriTrace = new Trace();
@@ -32,11 +34,11 @@ public class Main {
 		
 	}
 
-	public static SketchObject compile(ANTLRInputStream input) {
+	public static SketchObject compile(ANTLRInputStream input, String target) {
 		simpleJavaLexer lexer = new simpleJavaLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		simpleJavaParser parser = new simpleJavaParser(tokens);
 		ParseTree tree = parser.methodDeclaration();
-		return new JavaVisitor().visit(tree);
+		return new JavaVisitor(target).visit(tree);
 	}
 }

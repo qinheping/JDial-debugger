@@ -14,12 +14,14 @@ import sketchobj.expr.Expression;
 public class StmtFor extends Statement {
 	private Expression cond;
 	private Statement init, incr, body;
+	private int line;
 
-	public StmtFor(Statement init, Expression cond, Statement incr, Statement body, boolean isCanonical) {
+	public StmtFor(Statement init, Expression cond, Statement incr, Statement body, boolean isCanonical, int i) {
 		this.init = init;
 		this.cond = cond;
 		this.incr = incr;
 		this.body = body;
+		this.line = i;
 	}
 
 	public String toString() {
@@ -53,9 +55,9 @@ public class StmtFor extends Statement {
 
 	@Override
 	public Context buildContext(Context ctx) {
+		ctx.setLinenumber(this.line);
 		this.setCtx(new Context(ctx));
 		ctx = new Context(ctx);
-		ctx.linePlus();
 		ctx.pushNewVars();
 		int temp = ctx.getLinenumber();
 		ctx = init.buildContext(ctx);

@@ -10,11 +10,14 @@ import sketchobj.expr.Expression;
 public class StmtDoWhile extends Statement {
 	Statement body;
 	Expression cond;
+	int line;
 
-	/** Creates a new while loop. */
-	public StmtDoWhile(Statement body, Expression cond) {
+	/** Creates a new while loop. 
+	 * @param i */
+	public StmtDoWhile(Statement body, Expression cond, int i) {
 		this.body = body;
 		this.cond = cond;
+		this.line = i;
 	}
 
 	@Override

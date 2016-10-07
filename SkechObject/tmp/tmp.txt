@@ -2,7 +2,7 @@ bit const0change = ??;
  int Const0(){
 if(const0change == 1){
 return ??;}else{
-return 100;}
+return 1;}
 }
 bit const1change = ??;
  int Const1(){
@@ -10,119 +10,61 @@ if(const1change == 1){
 return ??;}else{
 return 0;}
 }
-bit const2change = ??;
- int Const2(){
-if(const2change == 1){
-return ??;}else{
-return 0;}
-}
 
-int[18] lineArray;
-int[18] minArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[18] maxArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[18] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[12] lineArray;
+int[12] tArray = {0,0,0,0,0,0,0,0,0,0,0,0};
+int[12] iArray = {0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-int minfinal = 0;
-int maxfinal = 0;
+int tfinal = 0;
 int ifinal = 0;
 int finalcount = 0;
 
- int largestGap(int[] a){
+ int orig(int x){
 int count = 0;
 int linehit = 0;
-int max = Const0();
+int t = Const0();
 (count)++;
 lineArray[count] = 1;
-maxArray[count] = max;
+tArray[count] = t;
 
 
-int min = Const1();
+for(int i = x; i > (Const1()); (i)--){
 (count)++;
-lineArray[count] = 2;
-(linehit)++;
-if(linehit == 1){
-minfinal = min;
-maxfinal = max;
-ifinal = i;
-finalcount = count;
-return 0;
-}
-
-minArray[count] = min;
-maxArray[count] = max;
-
-
-for(int i = Const2(); i < (a.Length); (i)++){
-(count)++;
-lineArray[count] = 3;
-minArray[count] = min;
-maxArray[count] = max;
+lineArray[count] = 1;
+tArray[count] = t;
 iArray[count] = i;
 
-if(max < (a[i])){
+t = t + i;
 (count)++;
-lineArray[count] = 4;
-minArray[count] = min;
-maxArray[count] = max;
-iArray[count] = i;
-
-max = a[i];
-(count)++;
-lineArray[count] = 5;
-minArray[count] = min;
-maxArray[count] = max;
+lineArray[count] = 1;
+tArray[count] = t;
 iArray[count] = i;
 
 
-}
-
-if(min > (a[i])){
-(count)++;
-lineArray[count] = 6;
-minArray[count] = min;
-maxArray[count] = max;
-
-min = a[i];
-(count)++;
-lineArray[count] = 7;
-minArray[count] = min;
-maxArray[count] = max;
-
 
 }
 
-
-}
-
-return max - min;
+return t;
 
 
 }
 harness void HammingTest(){
-int[9] oringianlminArray = {0,0,0,0,0,0,0,0,0};
-int[9] oringianlmaxArray = {100,100,100,100,100,100,100,100,100};
-int[9] oringianliArray = {0,0,0,0,0,1,1,1,2};
-int correctFinal_min = 1;
-int correctFinal_max = 4;
-int correctFinal_i = 2;
-largestGap(1, 4, 2, 7);
+int[6] oringianltArray = {1,1,4,4,4,6};
+int[6] oringianliArray = {0,3,3,3,2,1};
+int correctFinal_t = 5;
+int correctFinal_i = 1;
+orig(3);
 int HammingDistance = 0;
-for(int i = 0; i < 9; (i)++){
-if(const1change == 0){
-HammingDistance = (minArray[i]) != (oringianlminArray[i]);}
-
+for(int i = 0; i < 6; (i)++){
 if(const0change == 0){
-HammingDistance = (maxArray[i]) != (oringianlmaxArray[i]);}
+HammingDistance = (tArray[i]) != (oringianltArray[i]);}
 
-if(const2change == 0){
-HammingDistance = (iArray[i]) != (oringianliArray[i]);}
-
+HammingDistance = (iArray[i]) != (oringianliArray[i]);
 }
 
-assert (minfinal == correctFinal_min);
-assert (maxfinal == correctFinal_max);
+assert (tfinal == correctFinal_t);
 assert (ifinal == correctFinal_i);
-assert (((const0change + const1change) + const2change) == 1);
+assert ((const0change + const1change) == 1);
 minimize(HammingDistance);
 }

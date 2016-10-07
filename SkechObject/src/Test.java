@@ -137,7 +137,7 @@ public class Test {
 		System.out.println();
 		System.out.println("testSumUp:");
 		ANTLRInputStream input = new ANTLRInputStream(
-				"int orig(int x){" + "int t = 1; " + "for(int i = x; i > 0; i--)" + "{t = t + i;}" + "return t;}");
+				"int orig(int x){" + "\n\n int t = 1;\n\n  int b = 2;\n" + "for(int i = x; i > 0; i--)" + "{t = t + i;}" + "return t;}");
 		Function root = (Function) compile(input,"main");
 
 		List<ProgState> traces = new ArrayList<ProgState>();
@@ -196,7 +196,8 @@ public class Test {
 		System.out.println(root);
 
 		String script = cf.getScript(root.getBody());
-		System.out.println(CallSketch.CallByString(script));
+		System.out.println(script);
+		//System.out.println(CallSketch.CallByString(script));
 	}
 
 	@org.junit.Test
@@ -299,7 +300,7 @@ public class Test {
 		simpleJavaLexer lexer = new simpleJavaLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		simpleJavaParser parser = new simpleJavaParser(tokens);
-		ParseTree tree = parser.compilationUnit();
+		ParseTree tree = parser.methodDeclaration();
 		return new JavaVisitor(target).visit(tree);
 	}
 

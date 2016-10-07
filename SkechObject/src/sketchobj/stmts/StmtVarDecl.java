@@ -22,6 +22,7 @@ public class StmtVarDecl extends Statement {
 	private List<Type> types;
 	private List<String> names;
 	private List<Expression> inits;
+	private int line;
 
 	/**
 	 * Create a new variable declaration with corresponding lists of types,
@@ -42,13 +43,15 @@ public class StmtVarDecl extends Statement {
 	 * @param inits
 	 *            List of <code>Expression</code> (or <code>null</code>)
 	 *            containing initializers of the variables declared here
+	 * @param i 
 	 */
-	public StmtVarDecl(List<? extends Type> types, List<String> names, List<? extends Expression> inits) {
+	public StmtVarDecl(List<? extends Type> types, List<String> names, List<? extends Expression> inits, int i) {
 		// TODO: check for validity, including types of object
 		// in the lists and that all three are the same length.
 		this.types = new java.util.ArrayList<Type>(types);
 		this.names = new java.util.ArrayList<String>(names);
 		this.inits = new java.util.ArrayList<Expression>(inits);
+		this.line = i;
 	}
 
 	/**
@@ -66,8 +69,8 @@ public class StmtVarDecl extends Statement {
 	 *            Expression initializing the variable, or <code>null</code> if
 	 *            the variable is uninitialized
 	 */
-	public StmtVarDecl(Type type, String name, Expression init) {
-		this(Collections.singletonList(type), Collections.singletonList(name), Collections.singletonList(init));
+	public StmtVarDecl(Type type, String name, Expression init, int i) {
+		this(Collections.singletonList(type), Collections.singletonList(name), Collections.singletonList(init),i);
 	}
 
 	public StmtVarDecl(Vector<VarDeclEntry> next) {
@@ -336,8 +339,8 @@ public class StmtVarDecl extends Statement {
 		for (int i = 0; i < names.size(); i++) {
 			ctx.addVar(names.get(i), types.get(i));
 		}
+		ctx.setLinenumber(this.line);
 		this.setCtx(new Context(ctx));
-		ctx.linePlus();
 		return ctx;
 	}
 

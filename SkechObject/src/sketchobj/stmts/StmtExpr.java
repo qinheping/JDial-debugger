@@ -15,9 +15,11 @@ import sketchobj.expr.Expression;
 
 public class StmtExpr extends Statement {
 	private Expression expr;
+	private int line;
 
-	public StmtExpr(Expression expr) {
+	public StmtExpr(Expression expr, int i) {
 		this.expr = expr;
+		this.line = i;
 	}
 
 	public String toString() {
@@ -39,7 +41,7 @@ public class StmtExpr extends Statement {
 	@Override
 	public Context buildContext(Context ctx) {
 		ctx = new Context(ctx);
-		ctx.linePlus();
+		ctx.setLinenumber(this.line);
 		this.setCtx(new Context(ctx));
 		return ctx;
 	}

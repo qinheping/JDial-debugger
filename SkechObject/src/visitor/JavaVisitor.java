@@ -232,7 +232,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 					.variableDeclaratorList().variableDeclarator().get(i).variableInitializer()));
 		}
 
-		return new StmtVarDecl(types, names, inits);
+		return new StmtVarDecl(types, names, inits,ctx.start.getLine());
 	}
 
 	@Override
@@ -257,7 +257,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 					(Expression) visit(ctx.variableDeclaratorList().variableDeclarator().get(i).variableInitializer()));
 		}
 
-		return new StmtVarDecl(types, names, inits);
+		return new StmtVarDecl(types, names, inits,ctx.start.getLine());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -290,7 +290,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** 'do' statement 'while' '(' expression ')' ';' **/
 	@Override
 	public SketchObject visitDoStatement(simpleJavaParser.DoStatementContext ctx) {
-		return new StmtDoWhile((Statement) visit(ctx.statement()), (Expression) visit(ctx.expression()));
+		return new StmtDoWhile((Statement) visit(ctx.statement()), (Expression) visit(ctx.expression()), ctx.start.getLine());
 	}
 
 	/** 'return' expression? ';' **/
@@ -304,7 +304,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	public Statement visitStatementExpressionList(simpleJavaParser.StatementExpressionListContext ctx) {
 		List<Statement> list = new ArrayList<Statement>();
 		for (int i = 0; i < ctx.statementExpression().size(); i++) {
-			list.add(new StmtExpr((Expression) visit(ctx.statementExpression(i))));
+			list.add(new StmtExpr((Expression) visit(ctx.statementExpression(i)), ctx.start.getLine()));
 		}
 		return new StmtBlock(list);
 	}
@@ -314,7 +314,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		// TODO convert expression and statement
 		if (visit(ctx.statementExpression()).getClass().equals(StmtAssign.class))
 			return (Statement) visit(ctx.statementExpression());
-		return new StmtExpr((Expression) visit(ctx.statementExpression()));
+		return new StmtExpr((Expression) visit(ctx.statementExpression()), ctx.start.getLine());
 	}
 
 	@Override
@@ -420,7 +420,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 			op = ExprBinary.BINOP_ADD;
 		if (aop.equals("-="))
 			op = ExprBinary.BINOP_SUB;
-		return new StmtAssign((Expression) visit(ctx.leftHandSide()), (Expression) visit(ctx.expression()), op);
+		return new StmtAssign((Expression) visit(ctx.leftHandSide()), (Expression) visit(ctx.expression()), op, ctx.start.getLine());
 	}
 
 	@Override
@@ -476,7 +476,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	public Statement visitForStatement(simpleJavaParser.ForStatementContext ctx) {
 		simpleJavaParser.BasicForStatementContext c = ctx.basicForStatement();
 		return new StmtFor((Statement) visit(c.forInit()), (Expression) visit(c.expression()),
-				(Statement) visit(c.forUpdate()), (Statement) visit(c.statement()), false);
+				(Statement) visit(c.forUpdate()), (Statement) visit(c.statement()), false, ctx.start.getLine());
 	}
 
 	@Override
@@ -487,20 +487,20 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** 'while' '(' expression ')' statement **/
 	@Override
 	public Statement visitWhileStatement(simpleJavaParser.WhileStatementContext ctx) {
-		return new StmtWhile((Expression) visit(ctx.expression()), (Statement) visit(ctx.statement()));
+		return new StmtWhile((Expression) visit(ctx.expression()), (Statement) visit(ctx.statement()), ctx.start.getLine());
 	}
 
 	/** 'if' '(' expression ')' statementNoShortIf 'else' statement **/
 	@Override
 	public Statement visitIfThenElseStatement(simpleJavaParser.IfThenElseStatementContext ctx) {
 		return new StmtIfThen((Expression) visit(ctx.expression()), (Statement) visit(ctx.statementNoShortIf()),
-				(Statement) visit(ctx.statementNoShortIf()));
+				(Statement) visit(ctx.statementNoShortIf()), ctx.start.getLine());
 	}
 
 	/** 'if' '(' expression ')' statement **/
 	@Override
 	public Statement visitIfThenStatement(simpleJavaParser.IfThenStatementContext ctx) {
-		return new StmtIfThen((Expression) visit(ctx.expression()), (Statement) visit(ctx.statement()), null);
+		return new StmtIfThen((Expression) visit(ctx.expression()), (Statement) visit(ctx.statement()), null, ctx.start.getLine());
 	}
 
 	@Override

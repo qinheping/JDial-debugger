@@ -15,22 +15,26 @@ import sketchobj.expr.Expression;
 public class StmtAssign extends Statement {
 	private Expression lhs, rhs;
 	private int op; // operation += -= *= /=
-
+	private int line;
+	
 	/**
 	 * Creates a new assignment statement with the specified left- and
 	 * right-hand sides and no operation (i.e., 'lhs=rhs;').
+	 * @param i 
 	 */
-	public StmtAssign(Expression lhs, Expression rhs, int op) {
+	public StmtAssign(Expression lhs, Expression rhs, int op, int i) {
 		this.lhs = lhs;
 		this.rhs = rhs;
+		this.line = i;
+		
 	}
 
 	/**
 	 * Creates a new assignment statement with the specified left- and
 	 * right-hand sides and no operation (i.e., 'lhs=rhs;').
 	 */
-	public StmtAssign(Expression lhs, Expression rhs) {
-		this(lhs, rhs, 0);
+	public StmtAssign(Expression lhs, Expression rhs, int line) {
+		this(lhs, rhs, 0, line);
 	}
 
 	/** Returns the left-hand side of this. */
@@ -91,8 +95,8 @@ public class StmtAssign extends Statement {
 	@Override
 	public Context buildContext(Context ctx) {
 		ctx = new Context(ctx);
+		ctx.setLinenumber(this.line);
 		this.setCtx(new Context(ctx));
-		ctx.linePlus();
 		return ctx;
 	}
 

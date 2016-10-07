@@ -17,10 +17,12 @@ import sketchobj.expr.Expression;
 public class StmtWhile extends Statement {
 	Expression cond;
 	Statement body;
-
-	public StmtWhile(Expression cond, Statement body) {
+	int line;
+	
+	public StmtWhile(Expression cond, Statement body, int i) {
 		this.cond = cond;
 		this.body = body;
+		this.line = i;
 	}
 
 	/** Returns the loop condition. */
@@ -54,9 +56,9 @@ public class StmtWhile extends Statement {
 
 	@Override
 	public Context buildContext(Context ctx) {
+		ctx.setLinenumber(this.line);;
 		this.setCtx(new Context(ctx));
 		ctx = new Context(ctx);
-		ctx.linePlus();
 		ctx.pushVars(new HashMap<String, Type>());
 		ctx = body.buildContext(ctx);
 		ctx.popVars();

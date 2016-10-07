@@ -19,15 +19,18 @@ public class StmtIfThen extends Statement {
 	private Statement cons, alt;
 	private boolean isSingleFunCall = false;
 	private boolean isSingleVarAssign = false;
+	private int line;
 
 	/**
 	 * Create a new conditional statement, with the specified condition,
 	 * consequent, and alternative. The two statements may be null if omitted.
+	 * @param i 
 	 */
-	public StmtIfThen(Expression cond, Statement cons, Statement alt) {
+	public StmtIfThen(Expression cond, Statement cons, Statement alt, int i) {
 		this.cond = cond;
 		this.cons = cons;
 		this.alt = alt;
+		this.line = i;
 	}
 
 	// @Override
@@ -104,9 +107,9 @@ public class StmtIfThen extends Statement {
 
 	@Override
 	public Context buildContext(Context ctx) {
+		ctx.setLinenumber(this.line);;
 		this.setCtx(new Context(ctx));
 		ctx = new Context(ctx);
-		ctx.linePlus();
 		ctx.pushVars(new HashMap<String, Type>());
 		ctx = cons.buildContext(ctx);
 		ctx.popVars();
