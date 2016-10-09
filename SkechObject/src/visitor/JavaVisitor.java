@@ -25,6 +25,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	 **/
 	@Override
 	public SketchObject visitCompilationUnit(simpleJavaParser.CompilationUnitContext ctx) {
+		
 		return visit(ctx.typeDeclaration(0).classDeclaration().normalClassDeclaration().classBody());
 	}
 
@@ -43,6 +44,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** methodModifier* methodHeader methodBody **/
 	@Override
 	public SketchObject visitMethodDeclaration(simpleJavaParser.MethodDeclarationContext ctx) {
+
 		FcnHeader head = (FcnHeader) visit(ctx.methodHeader());
 		Statement body = (Statement) visit(ctx.methodBody());
 		return new Function(head, body);

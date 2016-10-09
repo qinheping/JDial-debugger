@@ -17,5 +17,12 @@ public class RenderStack extends JsonNode{
 	public void setFrams(List<Frame> frams) {
 		this.frams = frams;
 	}
-
+	
+	public String toString(){
+		String result = "";
+		for(Frame f: frams){
+			result = "Frame: " +f.toString();
+		}
+		return result;
+	}
 }

@@ -6,13 +6,13 @@ public class Var extends JsonNode {
 
 	private String name;
 	private Integer value;
-	private Integer type;					// type  0 : int 1 : ref
+	private Integer type; // type 0 : int 1 : ref
 	private List<?> list;
 
 	public Var(String text, Integer parseInt) {
 		this.setName(text);
 		this.setValue(parseInt);
-		this.setType(0);	
+		this.setType(0);
 	}
 
 	public Var(String text, int parseInt, int i) {
@@ -55,6 +55,12 @@ public class Var extends JsonNode {
 
 	public void setList(List<?> list) {
 		this.list = list;
+	}
+
+	public String toString() {
+		if (this.type == 0)
+			return this.name + ": " + this.value + "\n";
+		return this.name + "[REF: " + this.value + "\n";
 	}
 
 }

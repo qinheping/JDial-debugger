@@ -16,4 +16,7 @@ public class Stdin extends JsonNode{
 		this.stdin = stdin;
 	}
 
+	public String toString(){
+		return this.stdin;
+	}
 }

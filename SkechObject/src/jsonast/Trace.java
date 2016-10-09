@@ -31,8 +31,12 @@ public class Trace extends JsonNode {
 		
 		Frame currentF = this.rstack.getFrams().get(0);
 		this.setOrdered_locals(currentF.getOrdered_locals());
-		this.setLocals(currentF.getOrdered_varnames());
+		this.setLocals(currentF.getEncoded_locals());
 		
+	}
+	
+	public String toString(){
+		return this.funcname+"\nEvent: "+event+"\n"+"line: "+line+"\n"+rstack.toString()+heap+locals.toString();
 	}
 
 	public String getStdout() {
@@ -99,5 +103,6 @@ public class Trace extends JsonNode {
 	public void setLocals(VarList locals) {
 		this.locals = locals;
 	}
+
 
 }

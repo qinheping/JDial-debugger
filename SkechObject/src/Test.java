@@ -26,8 +26,6 @@ import sketchobj.expr.ExprConstInt;
 import sketchobj.expr.Expression;
 import sketchobj.stmts.Statement;
 import sketchobj.stmts.StmtBlock;
-import trace.ProgStateTODELETE;
-import trace.TraceTODELETE;
 import visitor.JavaVisitor;
 import visitor.JsonVisitor;
 
@@ -43,10 +41,11 @@ public class Test {
 
 	@org.junit.Test
 	public void testMainEntrance() throws FileNotFoundException {
-		String content = new Scanner(new File("src/jsonexample")).useDelimiter("\\Z").next();
-		ANTLRInputStream input = new ANTLRInputStream(content);
-		Root root = (Root) jsoncompile(input);
-		System.out.println(root.getCode());
+		String oriTraces = new Scanner(new File("src/jsonexample")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("src/traceexample")).useDelimiter("\\Z").next();
+		
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,6);
+		me.Synthesize();
 	}
 	
 	@org.junit.Test

@@ -36,10 +36,10 @@ public class JsonVisitor extends jsonBaseVisitor<JsonNode> {
 
 	@Override
 	public Trace visitTrace(jsonParser.TraceContext ctx) {
-		return new Trace((String) ctx.stdout().STRING().getText(), (String) ctx.event().STRING().getText(),
-				(Integer) Integer.parseInt(ctx.line().getText()), (RenderStack) visit(ctx.stack_to_render().stack()),
+		return new Trace((String) ctx.stdout().STRING().getText().replace("\"", ""), (String) ctx.event().STRING().getText().replace("\"", ""),
+				(Integer) Integer.parseInt(ctx.line().NUMBER().getText()), (RenderStack) visit(ctx.stack_to_render().stack()),
 				(VarList) visit(ctx.globals()), (VarList) visit(ctx.ordered_globals()),
-				(String) ctx.func_name().STRING().getText(), (VarList) visit(ctx.heap()));
+				(String) ctx.func_name().STRING().getText().replace("\"", ""), (VarList) visit(ctx.heap()));
 	}
 
 	@Override
@@ -58,11 +58,11 @@ public class JsonVisitor extends jsonBaseVisitor<JsonNode> {
 	@Override
 	public Var visitVar(jsonParser.VarContext ctx) {
 		if (ctx.value().children.size() == 1)
-			return new Var(ctx.STRING().getText(), Integer.parseInt(ctx.value().NUMBER().getText()));
+			return new Var(ctx.STRING().getText().replace("\"", ""), Integer.parseInt(ctx.value().NUMBER().getText()));
 		if (ctx.value().getChild(1).getText().equals("REF"))
-			return new Var(ctx.STRING().getText(), Integer.parseInt(ctx.value().NUMBER().getText()), 2);
+			return new Var(ctx.STRING().getText().replace("\"", ""), Integer.parseInt(ctx.value().NUMBER().getText()), 2);
 
-		return new Var(ctx.STRING().getText(), 0, 3);
+		return new Var(ctx.STRING().getText().replace("\"", ""), 0, 3);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class JsonVisitor extends jsonBaseVisitor<JsonNode> {
 	public VarList visitVarnames(jsonParser.VarnamesContext ctx) {
 		List<Var> varl = new ArrayList<Var>();
 		for (TerminalNode s : ctx.STRING())
-			varl.add(new Var(s.getText(), 0, 0));
+			varl.add(new Var(s.getText().replace("\"", ""), 0, 0));
 		return new VarList(varl);
 	}
 
@@ -97,7 +97,7 @@ public class JsonVisitor extends jsonBaseVisitor<JsonNode> {
 		for (TerminalNode n : ctx.list().NUMBER()) {
 			intl.add(Integer.parseInt(n.getText()));
 		}
-		return new Var(ctx.STRING().getText(), intl);
+		return new Var(ctx.STRING().getText().replace("\"", ""), intl);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class MainEntrance {
 	private String json;
 	private String correctTrace;
 	private int indexOfCorrectTrace;
-	
+
 	private Root root;
 	private String code;
 	private String targetFunc;
@@ -36,14 +36,15 @@ public class MainEntrance {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
-		this.traces = root.getTraces();
-		
+		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
+		code = code.replace("\\n", "\n");
+		code = code.replace("\\t", "\t");
+
 		ANTLRInputStream input = new ANTLRInputStream(code);
-		Function function = (Function) javaCompile(input,targetFunc);
-		
+		Function function = (Function) javaCompile(input, targetFunc);
+
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()));
-		
 		String script = cf.getScript(function.getBody());
 		System.out.println(script);
 		return null;
@@ -54,7 +55,7 @@ public class MainEntrance {
 		return tr.getFuncname();
 	}
 
-	public static Root jsonRootCompile(String s){
+	public static Root jsonRootCompile(String s) {
 		ANTLRInputStream input = new ANTLRInputStream(s);
 		jsonLexer lexer = new jsonLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -62,7 +63,7 @@ public class MainEntrance {
 		ParseTree tree = parser.json();
 		return (Root) new JsonVisitor().visit(tree);
 	}
-	
+
 	public static Trace jsonTraceCompile(String s) {
 		ANTLRInputStream input = new ANTLRInputStream(s);
 		jsonLexer lexer = new jsonLexer(input);
@@ -71,11 +72,12 @@ public class MainEntrance {
 		ParseTree tree = parser.trace();
 		return (Trace) new JsonVisitor().visit(tree);
 	}
-	public static SketchObject javaCompile(ANTLRInputStream input,String target) {
+
+	public static SketchObject javaCompile(ANTLRInputStream input, String target) {
 		simpleJavaLexer lexer = new simpleJavaLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		simpleJavaParser parser = new simpleJavaParser(tokens);
-		ParseTree tree = parser.methodDeclaration();
+		ParseTree tree = parser.compilationUnit();
 		return new JavaVisitor(target).visit(tree);
 	}
 }

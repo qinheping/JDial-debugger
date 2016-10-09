@@ -20,7 +20,10 @@ public class Frame extends JsonNode {
 		this.setIs_zombie(is_zombie);
 		this.setId(id);
 	}
-
+	
+	public String toString(){
+		return name + "\n" + id+"\n"+encoded_locals.toString();
+	}
 	public String getName() {
 		return name;
 	}

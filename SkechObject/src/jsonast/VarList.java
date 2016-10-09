@@ -25,7 +25,7 @@ public class VarList extends JsonNode{
 		for(Var v: var){
 			result.add(v.getName());
 		}
-		return null;
+		return result;
 	}
 	
 	public Var find(String s){
@@ -36,4 +36,11 @@ public class VarList extends JsonNode{
 		return null;
 	}
 
+	public String toString(){
+		String result = "";
+		for(Var v: var){
+			result+=v.toString();
+		}
+		return result;
+	}
 }
