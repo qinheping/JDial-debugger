@@ -32,7 +32,7 @@ public class ConstraintFactory {
 	static int originalLength = 5;
 
 	static List<Expression> parameters = new ArrayList<>();
-	static int numberOfChange = 2;
+	static int numberOfChange = 1;
 
 	// ------------ Construct method
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
@@ -179,14 +179,14 @@ public class ConstraintFactory {
 				forBody.add(new StmtIfThen(ifCondition,
 						new StmtAssign(new ExprVar("HammingDistance"),
 								new ExprBinary(new ExprArrayRange(v + "Array", "i"), "!=",
-										new ExprArrayRange("oringianl" + v + "Array", "i")),
+										new ExprArrayRange("oringianl" + v + "Array", "i")),1,
 								1),
 						null, 0));
 
 			} else {
 				forBody.add(new StmtAssign(new ExprVar("HammingDistance"),
 						new ExprBinary(new ExprArrayRange(v + "Array", "i"), "!=",
-								new ExprArrayRange("oringianl" + v + "Array", "i")),
+								new ExprArrayRange("oringianl" + v + "Array", "i")),1,
 						1));
 			}
 

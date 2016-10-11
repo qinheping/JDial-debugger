@@ -25,6 +25,7 @@ public class StmtAssign extends Statement {
 	public StmtAssign(Expression lhs, Expression rhs, int op, int i) {
 		this.lhs = lhs;
 		this.rhs = rhs;
+		this.op = op;
 		this.line = i;
 		
 	}
