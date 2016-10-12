@@ -35,6 +35,8 @@ public class ExprBinary extends Expression {
 	private Expression left, right;
 	private ExprBinary alias;
 
+	private int line;
+	
 	/**
 	 * Create a new binary expression given the operation and the left and right
 	 * child nodes. Requires that op is a valid operator code and that left and
@@ -69,10 +71,11 @@ public class ExprBinary extends Expression {
 	 *            expression on the right of the operator
 	 */
 
-	public ExprBinary(Expression left, String sop, Expression right) {
+	public ExprBinary(Expression left, String sop, Expression right, int line) {
 		this.left = left;
 		this.right = right;
 		int lop = -1;
+		this.line = line;
 
 		if (sop.equals("+")) {
 			lop = BINOP_ADD;
@@ -370,17 +373,17 @@ public class ExprBinary extends Expression {
 			Type t = ((ExprConstant) left).getType();
 			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(this);
-			return new ConstData(t, toAdd, index + 1, value, null);
+			return new ConstData(t, toAdd, index + 1, value, null,this.line);
 		}
 		if (right instanceof ExprConstant) {
 			int value = ((ExprConstant) right).getVal();
 			Type t = ((ExprConstant) right).getType();
 			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, null);
+			return new ConstData(t, toAdd, index + 1, value, null,this.line);
 		}
 		toAdd.add(left);
 		toAdd.add(right);
-		return new ConstData(null, toAdd, index, 0, null);
+		return new ConstData(null, toAdd, index, 0, null,this.line);
 	}
 
 	@Override
@@ -391,16 +394,16 @@ public class ExprBinary extends Expression {
 			Type t = ((ExprConstant) left).getType();
 			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(this);
-			return new ConstData(t, toAdd, index + 1, value, string);
+			return new ConstData(t, toAdd, index + 1, value, string,this.line);
 		}
 		if (right instanceof ExprConstant) {
 			int value = ((ExprConstant) right).getVal();
 			Type t = ((ExprConstant) right).getType();
 			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, string);
+			return new ConstData(t, toAdd, index + 1, value, string,this.line);
 		}
 		toAdd.add(left);
 		toAdd.add(right);
-		return new ConstData(null, toAdd, index, 0, string);
+		return new ConstData(null, toAdd, index, 0, string,this.line);
 	}
 }

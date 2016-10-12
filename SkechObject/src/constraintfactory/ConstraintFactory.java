@@ -21,6 +21,8 @@ public class ConstraintFactory {
 	static int constNumber = 0;
 	static Map<String, Set<Integer>> constMap = new HashMap<String, Set<Integer>>();
 	static List<String> varList = new ArrayList<String>();
+	
+	static Map<Integer, Integer> constMapLine = new HashMap<Integer,Integer>();
 
 	static Traces oriTrace;
 	static Trace finalState;
@@ -167,42 +169,42 @@ public class ConstraintFactory {
 				List<Expression> subCondition = new ArrayList<Expression>();
 				for (Integer indexOfv : constMap.get(v)) {
 					subCondition.add(new ExprBinary(new ExprVar("const" + (indexOfv - 1) + "change"), "==",
-							new ExprConstInt(0)));
+							new ExprConstInt(0),0));
 				}
 				Expression ifCondition;
 				ifCondition = subCondition.get(0);
 				if (subCondition.size() > 1) {
 					for (int i = 1; i < subCondition.size(); i++) {
-						ifCondition = new ExprBinary(ifCondition, "&&", subCondition.get(i));
+						ifCondition = new ExprBinary(ifCondition, "&&", subCondition.get(i),0);
 					}
 				}
 				forBody.add(new StmtIfThen(ifCondition,
 						new StmtAssign(new ExprVar("HammingDistance"),
-								new ExprBinary(new ExprArrayRange(v + "Array", "i"), "!=",
-										new ExprArrayRange("oringianl" + v + "Array", "i")),1,
+								new ExprBinary(new ExprArrayRange(v + "Array", "i",0), "!=",
+										new ExprArrayRange("oringianl" + v + "Array", "i",0),0),1,
 								1),
 						null, 0));
 
 			} else {
 				forBody.add(new StmtAssign(new ExprVar("HammingDistance"),
-						new ExprBinary(new ExprArrayRange(v + "Array", "i"), "!=",
-								new ExprArrayRange("oringianl" + v + "Array", "i")),1,
+						new ExprBinary(new ExprArrayRange(v + "Array", "i",0), "!=",
+								new ExprArrayRange("oringianl" + v + "Array", "i",0),0),1,
 						1));
 			}
 
 		}
 		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
-		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound));
-		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i")), 0);
+		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound),0);
+		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"),0), 0);
 		stmts.add(new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0));
 		for (String v : finalState.getOrdered_locals()) {
-			stmts.add(new StmtAssert(new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v))));
+			stmts.add(new StmtAssert(new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v),0)));
 		}
 
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
 		for (int i = 1; i < constMap.size(); i++)
-			sumOfConstxchange = new ExprBinary(sumOfConstxchange, "+", new ExprVar("const" + i + "change"));
-		stmts.add(new StmtAssert(new ExprBinary(sumOfConstxchange, "==", new ExprConstInt(numberOfChange))));
+			sumOfConstxchange = new ExprBinary(sumOfConstxchange, "+", new ExprVar("const" + i + "change"),0);
+		stmts.add(new StmtAssert(new ExprBinary(sumOfConstxchange, "==", new ExprConstInt(numberOfChange),0)));
 
 		stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 
@@ -235,7 +237,7 @@ public class ConstraintFactory {
 	}
 
 	static public Function addConstFun(int index, int ori, Type t) {
-		Expression condition = new ExprBinary(new ExprVar("const" + index + "change"), "==", new ExprConstInt(1));
+		Expression condition = new ExprBinary(new ExprVar("const" + index + "change"), "==", new ExprConstInt(1),0);
 		StmtReturn return_1 = new StmtReturn(new ExprStar());
 		StmtReturn return_2 = new StmtReturn(new ExprConstInt(ori));
 		Statement ifst = new StmtIfThen(condition, return_1, return_2, 0);
@@ -246,13 +248,13 @@ public class ConstraintFactory {
 	static public Statement recordState(int lineNumber, List<String> Vars) {
 		StmtBlock result = new StmtBlock();
 		// count ++
-		result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("count")), 0));
+		result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("count"),0), 0));
 		// varToUpdateArray[count] = varToUpdate;
 		result.addStmt(new StmtAssign(
-				new ExprArrayRange(new ExprVar("lineArray"), new ExprArrayRange.RangeLen(new ExprVar("count"), null)),
+				new ExprArrayRange(new ExprVar("lineArray"), new ExprArrayRange.RangeLen(new ExprVar("count"), null),0),
 				new ExprConstInt(lineNumber), 0));
 		if (lineNumber == hitline) {
-			result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("linehit")), 0));
+			result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("linehit"),0), 0));
 			List<Statement> consStmts = new ArrayList<>();
 			for (String v : finalState.getOrdered_locals()) {
 				consStmts.add(new StmtAssign(new ExprVar(v + "final"), new ExprVar(v), 0));
@@ -261,13 +263,13 @@ public class ConstraintFactory {
 			consStmts.add(new StmtReturn(new ExprConstInt(0)));
 			Statement cons = new StmtBlock(consStmts);
 			Statement iflinehit = new StmtIfThen(
-					new ExprBinary(new ExprVar("linehit"), "==", new ExprConstInt(ConstraintFactory.hitnumber)), cons,
+					new ExprBinary(new ExprVar("linehit"), "==", new ExprConstInt(ConstraintFactory.hitnumber),0), cons,
 					null, 0);
 			result.addStmt(iflinehit);
 		}
 		for (String s : Vars) {
 			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(s + "Array"),
-					new ExprArrayRange.RangeLen(new ExprVar("count"), null)), new ExprVar(s), 0));
+					new ExprArrayRange.RangeLen(new ExprVar("count"), null),0), new ExprVar(s), 0));
 		}
 		return result;
 	}
@@ -282,6 +284,7 @@ public class ConstraintFactory {
 			ConstData data = target.replaceConst(index);
 			if (data.getType() != null) {
 				addToConstMap(data);
+				addToConstMapLine(data);
 				list.add(constChangeDecl(index, new TypePrimitive(1)));
 				list.add(new StmtFunDecl(addConstFun(index, data.getValue(), data.getType())));
 			}
@@ -289,6 +292,10 @@ public class ConstraintFactory {
 			pushAll(stmtStack, data.getChildren());
 		}
 		return new StmtBlock(list);
+	}
+	
+	private static void addToConstMapLine(ConstData data){
+		constMapLine.put(data.getIndex(), data.getOriline());
 	}
 
 	private static void addToConstMap(ConstData data) {
@@ -320,5 +327,8 @@ public class ConstraintFactory {
 
 	public static Statement recordState(int linenumber, Map<String, Type> allVars) {
 		return recordState(linenumber, new ArrayList<String>(allVars.keySet()));
+	}
+	public static Map<Integer, Integer> getconstMapLine(){
+		return constMapLine;
 	}
 }

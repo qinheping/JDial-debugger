@@ -65,7 +65,7 @@ public class StmtBlock extends Statement {
 
 	@Override
 	public ConstData replaceConst(int index) {
-		return new ConstData(null, stmts, index, 0,null);
+		return new ConstData(null, stmts, index, 0,null, this.getLineNumber());
 	}
 
 	@Override

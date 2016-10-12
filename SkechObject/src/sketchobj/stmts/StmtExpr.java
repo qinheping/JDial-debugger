@@ -33,7 +33,7 @@ public class StmtExpr extends Statement {
 			int value = ((ExprConstant) expr).getVal();
 			Type t = ((ExprConstant) expr).getType();
 			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,null);
+			return new ConstData(t, toAdd, index + 1, value,null,this.line);
 		}
 		return expr.replaceConst(index);
 	}

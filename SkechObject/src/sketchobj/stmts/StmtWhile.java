@@ -47,11 +47,11 @@ public class StmtWhile extends Statement {
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(body);
-			return new ConstData(t, toAdd, index + 1, value, null);
+			return new ConstData(t, toAdd, index + 1, value, null,this.line);
 		}
 		toAdd.add(cond);
 		toAdd.add(body);
-		return new ConstData(null, toAdd, index, 0, null);
+		return new ConstData(null, toAdd, index, 0, null,this.line);
 	}
 
 	@Override

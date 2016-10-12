@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -32,7 +37,7 @@ public class MainEntrance {
 		this.indexOfCorrectTrace = indexOfCorrectTrace;
 	}
 
-	public Feedback Synthesize() {
+	public Feedback Synthesize() throws InterruptedException {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
@@ -46,7 +51,14 @@ public class MainEntrance {
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()));
 		String script = cf.getScript(function.getBody());
-		System.out.println(script);
+		Map<Integer, Integer> result = CallSketch.CallByString(script);
+		List<Integer> indexset = new ArrayList<Integer>();
+		indexset.addAll(result.keySet());
+		Map<Integer, Integer> repair = new HashMap<Integer,Integer>();
+		for(Integer ke: indexset){
+			repair.put(ConstraintFactory.getconstMapLine().get(ke), result.get(ke));
+		}
+		System.out.println(repair);
 		return null;
 	}
 

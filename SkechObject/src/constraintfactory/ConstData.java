@@ -12,29 +12,23 @@ public class ConstData {
 	private int index;
 	private int value;
 	private String name;
+	private int oriline;
 
 	@SuppressWarnings("unchecked")
-	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name){
+	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name, int line){
 		this.setType(type);
 		this.setChildren(children);
 		this.setIndex(index);
 		this.setValue(value);
 		this.setName(name);
+		this.oriline = line;
 	}
 
-	public ConstData(int index2) {
-		this.setIndex(index2);
-		this.setType(null);
-		this.setValue(0);
-		this.setChildren(new ArrayList<SketchObject>());
-		this.setName(null);}
+	public ConstData(int index2,int line) {
+		this(null,new ArrayList<SketchObject>(),index2,0,null,line);}
 
-	public ConstData(int index2, String string) {
-		this.setIndex(index2);
-		this.setType(null);
-		this.setValue(0);
-		this.setChildren(new ArrayList<SketchObject>());
-		this.setName(name);
+	public ConstData(int index2, String string, int line) {
+		this(null,new ArrayList<SketchObject>(),index2,0,string,line);
 	}
 
 	public List<SketchObject> getChildren() {
@@ -75,5 +69,13 @@ public class ConstData {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getOriline() {
+		return oriline;
+	}
+
+	public void setOriline(int oriline) {
+		this.oriline = oriline;
 	}
 }

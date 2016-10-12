@@ -100,9 +100,9 @@ public class StmtIfThen extends Statement {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,null);
+			return new ConstData(t, toAdd, index + 1, value,null,this.line);
 		}
-		return new ConstData(null, toAdd, index, 0,null);
+		return new ConstData(null, toAdd, index, 0,null,this.line);
 	}
 
 	@Override

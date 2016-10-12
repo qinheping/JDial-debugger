@@ -324,13 +324,13 @@ public class StmtVarDecl extends Statement {
 					Type t = ((ExprConstant) inits.get(i)).getType();
 					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>()));
 
-					return new ConstData(t, toAdd, index + 1, value, names.get(i));
+					return new ConstData(t, toAdd, index + 1, value, names.get(i),this.line);
 				} else {
 					toAdd.add(inits.get(i));
 				}
 			}
 		}
-		return new ConstData(null, toAdd, index, 0, null);
+		return new ConstData(null, toAdd, index, 0, null,this.line);
 	}
 
 	@Override

@@ -6,6 +6,8 @@ public class ExprVar extends Expression
 {
     private String name;
 
+	private int line;
+
     /** Create a new ExprVar for a particular named variable. */
     public ExprVar( String name)
     {
@@ -57,13 +59,13 @@ public class ExprVar extends Expression
 
 	@Override
 	public ConstData replaceConst(int index) {
-		return new ConstData(index);
+		return new ConstData(index,this.line);
 	}
 
 
 
 	@Override
 	public ConstData replaceConst(int index, String string) {
-		return new ConstData(index,string);
+		return new ConstData(index,string,this.line);
 	}
 }

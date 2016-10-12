@@ -9,6 +9,8 @@ public class ExprField extends Expression
     private String name;
     private boolean hole;
     private Type typeOfHole = null;
+
+	private int line;
     private boolean isLValue = true;
 
     /** Creates a new field-reference expression, referencing the
@@ -87,12 +89,12 @@ public class ExprField extends Expression
 	@Override
 	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return new ConstData(index);
+		return new ConstData(index,this.line);
 	}
 
 	@Override
 	public ConstData replaceConst(int index, String string) {
 		// TODO Auto-generated method stub
-		return new ConstData(index,string);
+		return new ConstData(index,string,this.line);
 	}
 }

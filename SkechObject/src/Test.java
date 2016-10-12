@@ -40,7 +40,7 @@ public class Test {
 	}
 
 	@org.junit.Test
-	public void testMainEntrance() throws FileNotFoundException {
+	public void testMainEntrance() throws FileNotFoundException, InterruptedException {
 		String oriTraces = new Scanner(new File("src/jsonexample")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("src/traceexample")).useDelimiter("\\Z").next();
 		

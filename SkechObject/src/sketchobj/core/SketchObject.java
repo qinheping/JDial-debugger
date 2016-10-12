@@ -5,6 +5,7 @@ import constraintfactory.ConstData;
 public abstract class SketchObject {
 	protected int indentation;	// for toString
 
+	private int line;
 	public int getIndentation() {
 		return indentation;
 	}
@@ -15,7 +16,7 @@ public abstract class SketchObject {
 
 	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return new ConstData(index);
+		return new ConstData(index,this.line);
 	}
 	
 }

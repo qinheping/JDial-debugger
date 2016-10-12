@@ -88,7 +88,7 @@ public class StmtAssign extends Statement {
 			int value = ((ExprConstant) rhs).getVal();
 			Type t = ((ExprConstant) rhs).getType();
 			rhs = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, new ArrayList(), index + 1, value,lhs.toString());
+			return new ConstData(t, new ArrayList(), index + 1, value,lhs.toString(),this.line);
 		}
 		return rhs.replaceConst(index,lhs.toString());
 	}

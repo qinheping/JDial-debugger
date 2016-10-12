@@ -37,6 +37,7 @@ public class ExprArrayInit extends Expression
      * "elem" is one of the children.
      */
     private int dims;
+	private int line;
 
     public ExprArrayInit( Expression singleElem) {
         this.elements = new ArrayList<Expression>(1);

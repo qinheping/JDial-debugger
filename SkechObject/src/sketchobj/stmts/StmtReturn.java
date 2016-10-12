@@ -62,7 +62,7 @@ public class StmtReturn extends Statement
 			int v = ((ExprConstant)value).getVal();
 			Type t = ((ExprConstant)value).getType();
 			value = new ExprFunCall("Const"+index,new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index+1, v,null);
+			return new ConstData(t, toAdd, index+1, v,null,this.getLineNumber());
 		}
 		return value.replaceConst(index);
 	}

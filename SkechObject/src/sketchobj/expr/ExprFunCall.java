@@ -11,6 +11,7 @@ public class ExprFunCall extends Expression
     private final String name;
     private static int NEXT_UID=0;
 
+	private int line;
     private int clusterId; // Used to identify the cluster to combine funCalls.
     private int callid;
     private final List<Expression> params;
@@ -87,12 +88,12 @@ public class ExprFunCall extends Expression
 	@Override
 	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return new ConstData(index);
+		return new ConstData(index,this.line);
 	}
 
 	@Override
 	public ConstData replaceConst(int index, String string) {
 		// TODO Auto-generated method stub
-		return new ConstData(index,string);
+		return new ConstData(index,string,this.line);
 	}
 }

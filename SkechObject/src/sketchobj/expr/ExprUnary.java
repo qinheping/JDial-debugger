@@ -34,6 +34,7 @@ public class ExprUnary extends Expression
     private int op;
     private Expression expr;
 
+	private int line;
     public Integer getIValue(){
     	Integer iVal = expr.getIValue();
     	if(iVal != null){
@@ -55,10 +56,11 @@ public class ExprUnary extends Expression
 
     /** Creates a new ExprUnary applying the specified operator to the
      * specified expression. */
-    public ExprUnary( int op, Expression expr)
+    public ExprUnary( int op, Expression expr, int line)
     {
         this.op = op;
         this.expr = expr;
+        this.line = line;
     }
 
 
@@ -135,9 +137,9 @@ public class ExprUnary extends Expression
 			int value = ((ExprConstant) expr).getVal();
 			Type t = ((ExprConstant) expr).getType();
 			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,null);
+			return new ConstData(t, toAdd, index + 1, value,null,this.line);
 		}
-		return new ConstData(null, toAdd, index, 0,null);
+		return new ConstData(null, toAdd, index, 0,null,this.line);
 	}
 
 	@Override
@@ -147,8 +149,8 @@ public class ExprUnary extends Expression
 			int value = ((ExprConstant) expr).getVal();
 			Type t = ((ExprConstant) expr).getType();
 			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,string);
+			return new ConstData(t, toAdd, index + 1, value,string,this.line);
 		}
-		return new ConstData(null, toAdd, index, 0,string);
+		return new ConstData(null, toAdd, index, 0,string,this.line);
 	}
 }

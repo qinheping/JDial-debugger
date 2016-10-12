@@ -327,25 +327,25 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** '++' unaryExpression **/
 	@Override
 	public Expression visitPreIncrementExpression(simpleJavaParser.PreIncrementExpressionContext ctx) {
-		return new ExprUnary(4, (Expression) visit(ctx.unaryExpression()));
+		return new ExprUnary(4, (Expression) visit(ctx.unaryExpression()), ctx.getStart().getLine());
 	}
 
 	/** '--' unaryExpression **/
 	@Override
 	public Expression visitPreDecrementExpression(simpleJavaParser.PreDecrementExpressionContext ctx) {
-		return new ExprUnary(6, (Expression) visit(ctx.unaryExpression()));
+		return new ExprUnary(6, (Expression) visit(ctx.unaryExpression()), ctx.getStart().getLine());
 	}
 
 	/** unaryExpression '++' **/
 	@Override
 	public Expression visitPostIncrementExpression(simpleJavaParser.PostIncrementExpressionContext ctx) {
-		return new ExprUnary(5, (Expression) visit(ctx.postfixExpression()));
+		return new ExprUnary(5, (Expression) visit(ctx.postfixExpression()), ctx.getStart().getLine());
 	}
 
 	/** unaryExpression '--' **/
 	@Override
 	public Expression visitPostDecrementExpression(simpleJavaParser.PostDecrementExpressionContext ctx) {
-		return new ExprUnary(7, (Expression) visit(ctx.postfixExpression()));
+		return new ExprUnary(7, (Expression) visit(ctx.postfixExpression()), ctx.getStart().getLine());
 	}
 
 	@Override
@@ -365,12 +365,12 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 
 	@Override
 	public SketchObject visitExpandNotPlusMinusBNot(simpleJavaParser.ExpandNotPlusMinusBNotContext ctx) {
-		return new ExprUnary(2, (Expression) visit(ctx.unaryExpression()));
+		return new ExprUnary(2, (Expression) visit(ctx.unaryExpression()), ctx.getStart().getLine());
 	}
 
 	@Override
 	public SketchObject visitExpandNotPlusMinusNot(simpleJavaParser.ExpandNotPlusMinusNotContext ctx) {
-		return new ExprUnary(1, (Expression) visit(ctx.unaryExpression()));
+		return new ExprUnary(1, (Expression) visit(ctx.unaryExpression()), ctx.getStart().getLine());
 	}
 
 	/**
@@ -387,9 +387,9 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 			name = (Expression) visit(ctx.expressionName());
 		// TODO what if double ++
 		if (ctx.postIncrementExpression_lf_postfixExpression().size() != 0)
-			return new ExprUnary(5, name);
+			return new ExprUnary(5, name, ctx.getStart().getLine());
 		if (ctx.postDecrementExpression_lf_postfixExpression().size() != 0)
-			return new ExprUnary(7, name);
+			return new ExprUnary(7, name, ctx.getStart().getLine());
 		return name;
 	}
 
@@ -439,7 +439,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	public SketchObject visitArrayAccess(simpleJavaParser.ArrayAccessContext ctx) {
 		// TODO bad style NOW
 		RangeLen r = new RangeLen((Expression) visit(ctx.expression(0)));
-		return new ExprArrayRange((Expression) visit(ctx.expressionName()), r);
+		return new ExprArrayRange((Expression) visit(ctx.expressionName()), r, ctx.getStart().getLine());
 	}
 
 	@Override
@@ -463,7 +463,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public SketchObject visitArrayAccess_lfno_primary(simpleJavaParser.ArrayAccess_lfno_primaryContext ctx) {
 		RangeLen r = new RangeLen((Expression) visit(ctx.expression(0)));
-		return new ExprArrayRange((Expression) visit(ctx.expressionName()), r);
+		return new ExprArrayRange((Expression) visit(ctx.expressionName()), r, ctx.getStart().getLine());
 	}
 
 	@Override
@@ -555,7 +555,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Expression visitExpandRelationalExpr(simpleJavaParser.ExpandRelationalExprContext ctx) {
 		return new ExprBinary((Expression) visit(ctx.getChild(0)), ctx.getChild(1).getText(),
-				(Expression) visit(ctx.getChild(2)));
+				(Expression) visit(ctx.getChild(2)), ctx.getStart().getLine());
 	}
 
 	@Override
@@ -573,13 +573,13 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Expression visitExpandAdditiveExpr(simpleJavaParser.ExpandAdditiveExprContext ctx) {
 		return new ExprBinary((Expression) visit(ctx.getChild(0)), ctx.getChild(1).getText(),
-				(Expression) visit(ctx.getChild(2)));
+				(Expression) visit(ctx.getChild(2)), ctx.getStart().getLine());
 	}
 
 	@Override
 	public Expression visitExpandMulExpr(simpleJavaParser.ExpandMulExprContext ctx) {
 		return new ExprBinary((Expression) visit(ctx.getChild(0)), ctx.getChild(1).getText(),
-				(Expression) visit(ctx.getChild(2)));
+				(Expression) visit(ctx.getChild(2)), ctx.getStart().getLine());
 	}
 
 	// //TODO :
