@@ -5,13 +5,9 @@
         {
             "func_name":"SimpleJava:8",
             "encoded_locals":{
-                "a":3,
-                "b":3,
                 "c":6
             },
             "ordered_varnames":[
-                "a",
-                "b",
                 "c"
             ],
             "parent_frame_id_list":[
