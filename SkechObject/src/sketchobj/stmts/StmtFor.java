@@ -54,26 +54,34 @@ public class StmtFor extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx.setLinenumber(this.line);
-		this.setCtx(new Context(ctx));
-		ctx = new Context(ctx);
-		ctx.pushNewVars();
-		int temp = ctx.getLinenumber();
-		ctx = init.buildContext(ctx);
-		ctx = incr.buildContext(ctx);
-		ctx.setLinenumber(temp);
-		ctx = body.buildContext(ctx);
-		ctx.popVars();
-		return ctx;
+	public Context buildContext(Context prectx) {
+		prectx.setLinenumber(this.line);
+		this.setPrectx(prectx);
+		this.setPostctx(new Context(prectx));
+		Context postctx = new Context(prectx);
+		
+		postctx.pushNewVars();
+		int temp = postctx.getLinenumber();
+		postctx.setLinenumber(temp);
+		postctx = init.buildContext(postctx);
+		postctx = incr.buildContext(postctx);
+		postctx = body.buildContext(postctx);
+		postctx.popVars();
+		return postctx;
 
 	}
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-		m.putAll(body.getCtx().getAllVars());
-		body = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(),
-				new ArrayList<String>(init.getCtx().getAllVars().keySet())), body);
+		m.putAll(body.getPostctx().getAllVars());
+		StmtBlock sb = new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this);
+		sb = new StmtBlock(sb, ConstraintFactory.recordState(this.getPostctx().getLinenumber(), this.getPostctx().getAllVars()));
+		parent.stmts.set(index, sb
+				);
+		body = new StmtBlock(ConstraintFactory.recordState(this.getPostctx().getLinenumber(),
+				new ArrayList<String>(init.getPostctx().getAllVars().keySet())), body);
+		body =  new StmtBlock(body,ConstraintFactory.recordState(this.getPostctx().getLinenumber(),
+				new ArrayList<String>(init.getPostctx().getAllVars().keySet())));
 		return ((StmtBlock) body).stmts.get(1).addRecordStmt((StmtBlock) body, 1, m);
 	}
 }

@@ -12,7 +12,8 @@ public abstract class Statement extends SketchObject{
 
 	private int lineNumber;
 	private boolean sorceCode;
-	private Context ctx;
+	private Context postctx;
+	private Context prectx;
 	
 	public int size() {
 		// TODO Auto-generated method stub
@@ -33,15 +34,23 @@ public abstract class Statement extends SketchObject{
 	
 	public abstract ConstData replaceConst(int index);
 
-	public Context getCtx() {
-		return ctx;
+	public Context getPostctx() {
+		return postctx;
 	}
 
-	public void setCtx(Context ctx) {
-		this.ctx = ctx;
+	public void setPostctx(Context ctx) {
+		this.postctx = ctx;
 	}
 	
-	public abstract Context buildContext(Context ctx);
+	public abstract Context buildContext(Context prectx);
 	
 	public abstract Map<String,Type> addRecordStmt(StmtBlock parent, int index, Map<String,Type> m);
+
+	public Context getPrectx() {
+		return prectx;
+	}
+
+	public void setPrectx(Context prectx) {
+		this.prectx = prectx;
+	}
 }

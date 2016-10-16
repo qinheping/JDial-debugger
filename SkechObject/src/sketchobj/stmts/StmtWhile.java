@@ -55,20 +55,23 @@ public class StmtWhile extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx.setLinenumber(this.line);;
-		this.setCtx(new Context(ctx));
-		ctx = new Context(ctx);
-		ctx.pushVars(new HashMap<String, Type>());
-		ctx = body.buildContext(ctx);
-		ctx.popVars();
-		return ctx;
+	public Context buildContext(Context prectx) {
+		prectx = new Context(prectx);
+		prectx.setLinenumber(this.line);
+		Context postctx  = new Context(prectx);
+		this.setPostctx(new Context(postctx));
+		postctx.pushVars(new HashMap<String, Type>());
+		postctx = body.buildContext(postctx);
+		postctx.popVars();
+		return postctx;
 	}
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-		body = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), new ArrayList<String>(this.getCtx().getAllVars().keySet())),body);
-		m.putAll(this.getCtx().getAllVars());
-		return ((StmtBlock)body).stmts.get(1).addRecordStmt((StmtBlock) body,1,m);
+		parent.stmts.set(index,
+				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+		body = new StmtBlock(body,ConstraintFactory.recordState(body.getPostctx().getLinenumber(), new ArrayList<String>(body.getPostctx().getAllVars().keySet())));
+		m.putAll(this.getPostctx().getAllVars());
+		return ((StmtBlock)body).stmts.get(0).addRecordStmt((StmtBlock) body,0,m);
 	}
 }

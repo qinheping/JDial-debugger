@@ -94,19 +94,23 @@ public class StmtAssign extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx = new Context(ctx);
-		ctx.setLinenumber(this.line);
-		this.setCtx(new Context(ctx));
-		return ctx;
+	public Context buildContext(Context prectx) {
+		Context postctx = new Context(prectx);
+		prectx = new Context(prectx);
+		postctx.setLinenumber(this.line);
+		prectx.setLinenumber(this.line);
+		
+		this.setPostctx(new Context(postctx));
+		this.setPrectx(new Context(prectx));
+		return postctx;
 	}
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 		parent.stmts.set(index,
-				new StmtBlock(this, ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars())));
-		m.putAll(this.getCtx().getAllVars());
+				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+		m.putAll(this.getPrectx().getAllVars());
 		return m;
 	}
 }

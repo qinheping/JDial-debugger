@@ -5,7 +5,7 @@ import java.util.List;
 
 import jsonparser.jsonParser.TraceContext;
 
-public class Traces extends JsonNode{
+public class Traces extends JsonNode {
 
 	private List<Trace> tracelist;
 	private int length;
@@ -33,29 +33,31 @@ public class Traces extends JsonNode{
 
 	public Traces findSubTraces(String targetFunc, int bound) {
 		List<Integer> toRemove = new ArrayList<Integer>();
-		for(int i = bound; i >=0 ;i--){
-			if(!tracelist.get(i).getFuncname().equals(targetFunc)){
+		for (int i = bound; i >= 0; i--) {
+			if (!tracelist.get(i).getFuncname().equals(targetFunc)) {
 				toRemove.add(i);
 				continue;
 			}
-			if(!tracelist.get(i).getEvent().equals("step_line")){
+			if (!tracelist.get(i).getEvent().equals("step_line")) {
 				toRemove.add(i);
 				continue;
 			}
-			
+
 		}
-		for(int i: toRemove){
-			tracelist.remove(i);
+		for (int i = this.tracelist.size() - 1; i >= 0; i--) {
+			if (toRemove.contains(i)|| i > bound){
+				tracelist.remove(i);
+			}
 		}
 		this.length = this.tracelist.size();
 		return this;
 	}
 
-	public String toString(){
+	public String toString() {
 		String result = "";
 		int i = 0;
-		for(Trace t: this.tracelist){
-			result += "Trace "+ i + ": " + t.toString();
+		for (Trace t : this.tracelist) {
+			result += "Trace " + i + ": " + t.toString();
 		}
 		return result;
 	}

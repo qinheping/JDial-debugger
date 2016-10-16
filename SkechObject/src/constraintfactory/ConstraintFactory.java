@@ -87,7 +87,7 @@ public class ConstraintFactory {
 
 		// add declare of <linehit> and <count>
 		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
-		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(0), 0), s);
+		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0), s);
 
 		
 		Function f = new Function(ConstraintFactory.fh, s);
@@ -238,8 +238,8 @@ public class ConstraintFactory {
 
 	static public Function addConstFun(int index, int ori, Type t) {
 		Expression condition = new ExprBinary(new ExprVar("const" + index + "change"), "==", new ExprConstInt(1),0);
-		StmtReturn return_1 = new StmtReturn(new ExprStar());
-		StmtReturn return_2 = new StmtReturn(new ExprConstInt(ori));
+		StmtReturn return_1 = new StmtReturn(new ExprStar(),0);
+		StmtReturn return_2 = new StmtReturn(new ExprConstInt(ori),0);
 		Statement ifst = new StmtIfThen(condition, return_1, return_2, 0);
 
 		return new Function("Const" + index, t, new ArrayList<Parameter>(), ifst, FcnType.Static);
@@ -260,7 +260,7 @@ public class ConstraintFactory {
 				consStmts.add(new StmtAssign(new ExprVar(v + "final"), new ExprVar(v), 0));
 			}
 			consStmts.add(new StmtAssign(new ExprVar("finalcount"), new ExprVar("count"), 0));
-			consStmts.add(new StmtReturn(new ExprConstInt(0)));
+			consStmts.add(new StmtReturn(new ExprConstInt(0),0));
 			Statement cons = new StmtBlock(consStmts);
 			Statement iflinehit = new StmtIfThen(
 					new ExprBinary(new ExprVar("linehit"), "==", new ExprConstInt(ConstraintFactory.hitnumber),0), cons,

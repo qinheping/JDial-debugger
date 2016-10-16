@@ -1,9 +1,9 @@
 {   "stdout":"",
     "event":"step_line",
-    "line":8,
+    "line":9,
     "stack_to_render":[
         {
-            "func_name":"SimpleJava:8",
+            "func_name":"SimpleJava:9",
             "encoded_locals":{
                 "c":6
             },

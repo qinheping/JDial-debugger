@@ -298,7 +298,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	/** 'return' expression? ';' **/
 	@Override
 	public SketchObject visitReturnStatement(simpleJavaParser.ReturnStatementContext ctx) {
-		return new StmtReturn((Expression) visit(ctx.expression()));
+		return new StmtReturn((Expression) visit(ctx.expression()),ctx.start.getLine());
 	}
 
 	/** statementExpression (',' statementExpression)* **/

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -24,15 +25,17 @@ import sketchobj.expr.Expression;
 public class StmtReturn extends Statement
 {
     Expression value;
+	private int line;
 
     /** Creates a new return statement, with the specified return value
      * (or null). */
-    public StmtReturn(Expression value)
+    public StmtReturn(Expression value, int line)
     {
 //        if (value instanceof ExprConstUnit) {
 //            value = null;
 //        }
         this.value = value;
+        this.line = line;
     }
 
 
@@ -70,18 +73,32 @@ public class StmtReturn extends Statement
 
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx = new Context(ctx);
-		ctx.linePlus();
-		this.setCtx(new Context(ctx));
-		return ctx;
+	public Context buildContext(Context prectx) {
+		prectx = new Context(prectx);
+		prectx.setLinenumber(this.line);
+		this.setPrectx(new Context(prectx));
+		this.setPostctx(new Context(prectx));
+		return prectx;
 	}
 
 
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-		// TODO Auto-generated method stub
+		parent.stmts.set(index,
+				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
 		return m;
+	}
+
+
+
+	public int getLine() {
+		return line;
+	}
+
+
+
+	public void setLine(int line) {
+		this.line = line;
 	}
 }

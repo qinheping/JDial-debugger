@@ -181,14 +181,15 @@ public class StmtAssert extends Statement {
 			return null;
 		}
 
+
 		@Override
-		public Context buildContext(Context ctx) {
+		public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
+		public Context buildContext(Context prectx) {
 			// TODO Auto-generated method stub
 			return null;
 		}

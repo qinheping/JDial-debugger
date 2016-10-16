@@ -334,14 +334,17 @@ public class StmtVarDecl extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx = new Context(ctx);
+	public Context buildContext(Context prectx) {
+		prectx = new Context(prectx);
+		prectx.setLinenumber(this.line);
+		this.setPrectx(prectx);
+		Context postctx = new Context(prectx);
 		for (int i = 0; i < names.size(); i++) {
-			ctx.addVar(names.get(i), types.get(i));
+			postctx.addVar(names.get(i), types.get(i));
 		}
-		ctx.setLinenumber(this.line);
-		this.setCtx(new Context(ctx));
-		return ctx;
+		postctx.setLinenumber(this.line);
+		this.setPostctx(new Context(postctx));
+		return postctx;
 	}
 
 	@Override
@@ -349,8 +352,8 @@ public class StmtVarDecl extends Statement {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 
 		parent.stmts.set(index,
-				new StmtBlock(this, ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars())));
-		m.putAll(this.getCtx().getAllVars());
+				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+		m.putAll(this.getPostctx().getAllVars());
 		return m;
 	}
 }

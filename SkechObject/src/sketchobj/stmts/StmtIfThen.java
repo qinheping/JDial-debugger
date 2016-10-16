@@ -106,28 +106,34 @@ public class StmtIfThen extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx.setLinenumber(this.line);;
-		this.setCtx(new Context(ctx));
-		ctx = new Context(ctx);
-		ctx.pushVars(new HashMap<String, Type>());
-		ctx = cons.buildContext(ctx);
-		ctx.popVars();
+	public Context buildContext(Context prectx) {
+		prectx = new Context(prectx);
+		prectx.setLinenumber(this.line);
+		this.setPrectx(prectx);
+		this.setPostctx(prectx);
+		Context postctx = new Context(prectx);
+		postctx.pushVars(new HashMap<String, Type>());
+		postctx = cons.buildContext(postctx);
+		postctx.popVars();
 		if (alt != null) {
-			ctx.pushNewVars();
-			ctx = alt.buildContext(ctx);
-			ctx.popVars();
+			postctx.pushNewVars();
+			postctx = alt.buildContext(postctx);
+			postctx.popVars();
 		}
-		return ctx;
+		return prectx;
 	}
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-		this.cons = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars()), cons);
-		m.putAll(((StmtBlock) cons).stmts.get(1).addRecordStmt((StmtBlock) cons, 1, m));
+
+		parent.stmts.set(index,
+				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+		
+		this.cons = new StmtBlock(cons,ConstraintFactory.recordState(cons.getPostctx().getLinenumber(), cons.getPostctx().getAllVars()));
+		m.putAll(((StmtBlock) cons).stmts.get(0).addRecordStmt((StmtBlock) cons, 0, m));
 		if (alt != null) {
-			this.alt = new StmtBlock(ConstraintFactory.recordState(this.getCtx().getLinenumber(), this.getCtx().getAllVars()), alt);
-			m.putAll(((StmtBlock) alt).stmts.get(1).addRecordStmt((StmtBlock) alt, 1, m));
+			this.alt = new StmtBlock(alt,ConstraintFactory.recordState(alt.getPostctx().getLinenumber(), alt.getPostctx().getAllVars()));
+			m.putAll(((StmtBlock) alt).stmts.get(0).addRecordStmt((StmtBlock) alt, 0, m));
 		}
 		return m;
 	}

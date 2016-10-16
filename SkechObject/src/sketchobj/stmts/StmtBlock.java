@@ -69,14 +69,17 @@ public class StmtBlock extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context ctx) {
-		ctx = new Context(ctx);
-		this.setCtx(new Context(ctx));
+	public Context buildContext(Context prectx) {
+		prectx = new Context(prectx);
+		Context postctx = new Context(prectx);
 		for (int i = 1; i < this.stmts.size(); i++) {
-			ctx = stmts.get(i - 1).buildContext(ctx);
+			postctx = stmts.get(i - 1).buildContext(postctx);
 		}
-		ctx = this.stmts.get(this.stmts.size()-1).buildContext(ctx);
-		return ctx;
+		postctx = this.stmts.get(this.stmts.size()-1).buildContext(postctx);
+
+		this.setPostctx(new Context(postctx));
+		this.setPrectx(prectx);
+		return postctx;
 	}
 
 	@Override
