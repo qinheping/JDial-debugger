@@ -27,6 +27,8 @@ public class StmtAssign extends Statement {
 		this.rhs = rhs;
 		this.op = op;
 		this.line = i;
+		this.lhs.setParent(this);
+		this.rhs.setParent(this);
 		
 	}
 
@@ -112,5 +114,16 @@ public class StmtAssign extends Statement {
 				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
 		m.putAll(this.getPrectx().getAllVars());
 		return m;
+	}
+
+	@Override
+	public void replaceLinearCombination() {
+		rhs.replaceLinearCombination();
+		
+	}
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 }

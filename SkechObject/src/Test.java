@@ -1,10 +1,10 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -18,19 +18,33 @@ import jsonast.JsonNode;
 import jsonast.Root;
 import jsonparser.jsonLexer;
 import jsonparser.jsonParser;
-import sketchobj.core.FcnHeader;
 import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
 import sketchobj.core.TypePrimitive;
-import sketchobj.expr.ExprConstInt;
-import sketchobj.expr.Expression;
 import sketchobj.stmts.Statement;
 import sketchobj.stmts.StmtBlock;
 import visitor.JavaVisitor;
 import visitor.JsonVisitor;
+import bsh.EvalError;
+import bsh.Interpreter;
 
 public class Test {
 
+
+	@org.junit.Test
+	public void testbsh() throws EvalError, FileNotFoundException, IOException{
+		Interpreter i = new Interpreter();  // Construct an interpreter
+		i.set("foo", 5);                    // Set variables
+		i.set("date", new Date() ); 
+
+		Date date = (Date)i.get("date");    // retrieve a variable
+
+		// Eval a statement and get the result
+		i.eval("bar = Math.pow(2,2)");             
+		System.out.println( i.get("bar") );
+
+	}
+	
 	@org.junit.Test
 	public void testJson() throws FileNotFoundException {
 		String content = new Scanner(new File("src/jsonexample")).useDelimiter("\\Z").next();

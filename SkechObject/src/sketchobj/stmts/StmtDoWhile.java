@@ -52,4 +52,16 @@ public class StmtDoWhile extends Statement {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void replaceLinearCombination() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isBasic() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

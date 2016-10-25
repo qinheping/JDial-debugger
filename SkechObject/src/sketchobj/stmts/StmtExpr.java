@@ -19,6 +19,7 @@ public class StmtExpr extends Statement {
 
 	public StmtExpr(Expression expr, int i) {
 		this.expr = expr;
+		expr.setParent(this);
 		this.line = i;
 	}
 
@@ -56,5 +57,15 @@ public class StmtExpr extends Statement {
 				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
 		m.putAll(this.getPostctx().getAllVars());
 		return m;
+	}
+
+	@Override
+	public void replaceLinearCombination() {
+		return;
+	}
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 }

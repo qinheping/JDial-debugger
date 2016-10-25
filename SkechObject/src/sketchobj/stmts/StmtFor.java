@@ -18,9 +18,13 @@ public class StmtFor extends Statement {
 
 	public StmtFor(Statement init, Expression cond, Statement incr, Statement body, boolean isCanonical, int i) {
 		this.init = init;
+		init.setParent(this);
 		this.cond = cond;
+		cond.setParent(this);
 		this.incr = incr;
+		incr.setParent(this);
 		this.body = body;
+		body.setParent(this);
 		this.line = i;
 	}
 
@@ -83,5 +87,18 @@ public class StmtFor extends Statement {
 		body =  new StmtBlock(body,ConstraintFactory.recordState(this.getPostctx().getLinenumber(),
 				new ArrayList<String>(init.getPostctx().getAllVars().keySet())));
 		return ((StmtBlock) body).stmts.get(1).addRecordStmt((StmtBlock) body, 1, m);
+	}
+
+	@Override
+	public void replaceLinearCombination() {
+		init.replaceLinearCombination();
+		incr.replaceLinearCombination();
+		body.replaceLinearCombination();
+		
+	}
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 }

@@ -21,7 +21,9 @@ public class StmtWhile extends Statement {
 	
 	public StmtWhile(Expression cond, Statement body, int i) {
 		this.cond = cond;
+		cond.setParent(this);
 		this.body = body;
+		body.setParent(this);
 		this.line = i;
 	}
 
@@ -73,5 +75,16 @@ public class StmtWhile extends Statement {
 		body = new StmtBlock(body,ConstraintFactory.recordState(body.getPostctx().getLinenumber(), new ArrayList<String>(body.getPostctx().getAllVars().keySet())));
 		m.putAll(this.getPostctx().getAllVars());
 		return ((StmtBlock)body).stmts.get(0).addRecordStmt((StmtBlock) body,0,m);
+	}
+
+	@Override
+	public void replaceLinearCombination() {
+		cond.replaceLinearCombination();
+		body.replaceLinearCombination();
+	}
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 }

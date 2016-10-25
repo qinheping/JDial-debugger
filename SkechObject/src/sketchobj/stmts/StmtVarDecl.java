@@ -51,6 +51,9 @@ public class StmtVarDecl extends Statement {
 		this.types = new java.util.ArrayList<Type>(types);
 		this.names = new java.util.ArrayList<String>(names);
 		this.inits = new java.util.ArrayList<Expression>(inits);
+		for(Expression e: inits){
+			e.setParent(this);
+		}
 		this.line = i;
 	}
 
@@ -73,7 +76,7 @@ public class StmtVarDecl extends Statement {
 		this(Collections.singletonList(type), Collections.singletonList(name), Collections.singletonList(init),i);
 	}
 
-	public StmtVarDecl(Vector<VarDeclEntry> next) {
+/*	public StmtVarDecl(Vector<VarDeclEntry> next) {
 		this.types = new Vector<Type>(next.size());
 		this.names = new Vector<String>(next.size());
 		this.inits = new Vector<Expression>(next.size());
@@ -84,7 +87,7 @@ public class StmtVarDecl extends Statement {
 			this.inits.add(e.getInit());
 		}
 	}
-
+*/
 	/**
 	 * Get the type of the nth variable declared by this.
 	 *
@@ -355,5 +358,23 @@ public class StmtVarDecl extends Statement {
 				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
 		m.putAll(this.getPostctx().getAllVars());
 		return m;
+	}
+
+	@Override
+	public void replaceLinearCombination() {if (this.inits.size() != 0) {
+		for (int i = 0; i < inits.size(); i++) {
+			if (inits.get(i) instanceof ExprConstant) {
+				continue;
+			} else {
+				inits.get(i).replaceLinearCombination();
+			}
+		}
+	}
+		
+	}
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 }

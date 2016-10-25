@@ -60,6 +60,7 @@ public class ExprUnary extends Expression
     {
         this.op = op;
         this.expr = expr;
+        expr.setParent(this);
         this.line = line;
     }
 

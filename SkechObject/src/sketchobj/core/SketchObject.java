@@ -18,5 +18,7 @@ public abstract class SketchObject {
 		// TODO Auto-generated method stub
 		return new ConstData(index,this.line);
 	}
+
+
 	
 }

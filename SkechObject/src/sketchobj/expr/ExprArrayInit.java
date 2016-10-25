@@ -41,11 +41,14 @@ public class ExprArrayInit extends Expression
 
     public ExprArrayInit( Expression singleElem) {
         this.elements = new ArrayList<Expression>(1);
+        singleElem.setParent(this);
         elements.add(singleElem);
     }
 
     public ExprArrayInit( List<Expression> elements)
     {
+    	for(Expression e: elements)
+    		e.setParent(this);
         this.elements = elements;
 	// determine dims based on first element.  That the elements
 	// are uniform will be checked in semantic checker.

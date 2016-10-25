@@ -5,15 +5,19 @@ import java.util.Map;
 
 import constraintfactory.ConstData;
 import sketchobj.core.Context;
+import sketchobj.core.SketchNode;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 
-public abstract class Statement extends SketchObject{
+public abstract class Statement extends SketchNode{
 
 	private int lineNumber;
 	private boolean sorceCode;
 	private Context postctx;
 	private Context prectx;
+	
+	
+	public abstract boolean isBasic();
 	
 	public int size() {
 		// TODO Auto-generated method stub
@@ -33,6 +37,8 @@ public abstract class Statement extends SketchObject{
 	}
 	
 	public abstract ConstData replaceConst(int index);
+	
+	public abstract void replaceLinearCombination();
 
 	public Context getPostctx() {
 		return postctx;

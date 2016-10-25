@@ -4,7 +4,7 @@ import java.util.*;
 
 import sketchobj.stmts.Statement;
 
-public class Function extends SketchObject {
+public class Function extends SketchNode {
 	public static enum FcnType {
 		// Uninterpreted Function
 		Uninterp("uninterp"),
@@ -49,6 +49,8 @@ public class Function extends SketchObject {
 		this.params = params;
 		this.body = body;
 		this.fcnType = fcnType;
+		body.setParent(this);
+		this.setParent(null);
 	}
 
 	public Function(FcnHeader head, Statement body) {
@@ -57,6 +59,8 @@ public class Function extends SketchObject {
 		this.params = head.params;
 		this.body = body;
 		this.fcnType = FcnType.Static;
+		body.setParent(this);
+		this.setParent(null);
 	}
 	
 	public Function(FcnHeader head, Statement body, FcnType ft) {
@@ -64,6 +68,8 @@ public class Function extends SketchObject {
 		this.returnType = head.returnType;
 		this.params = head.params;
 		this.body = body;
+		body.setParent(this);
+		this.setParent(null);
 		this.fcnType = ft;
 	}
 	

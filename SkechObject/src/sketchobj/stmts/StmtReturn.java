@@ -35,6 +35,7 @@ public class StmtReturn extends Statement
 //            value = null;
 //        }
         this.value = value;
+        value.setParent(this);
         this.line = line;
     }
 
@@ -100,5 +101,19 @@ public class StmtReturn extends Statement
 
 	public void setLine(int line) {
 		this.line = line;
+	}
+
+
+
+	@Override
+	public void replaceLinearCombination() {
+		value.replaceLinearCombination();
+	}
+
+
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 }

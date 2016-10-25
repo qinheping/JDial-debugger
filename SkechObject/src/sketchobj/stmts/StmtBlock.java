@@ -15,6 +15,8 @@ public class StmtBlock extends Statement {
 	public List<Statement> stmts;
 
 	public StmtBlock(List<? extends Statement> stmts) {
+		for(Statement s:stmts)
+			s.setParent(this);
 		this.stmts = Collections.unmodifiableList(stmts);
 	}
 
@@ -27,6 +29,8 @@ public class StmtBlock extends Statement {
 		List<Statement> lst = new ArrayList<Statement>(2);
 		lst.add(stmt1);
 		lst.add(stmt2);
+		stmt1.setParent(this);
+		stmt2.setParent(this);
 		this.stmts = Collections.unmodifiableList(lst);
 	}
 
@@ -88,5 +92,17 @@ public class StmtBlock extends Statement {
 			m.putAll(stmts.get(i).addRecordStmt(this, i, m));
 		}
 		return m;
+	}
+
+	@Override
+	public void replaceLinearCombination() {
+		for (int i = 0; i < stmts.size(); i++) {
+			stmts.get(i).replaceLinearCombination();
+		}
+	}
+
+	@Override
+	public boolean isBasic() {
+		return false;
 	}
 }

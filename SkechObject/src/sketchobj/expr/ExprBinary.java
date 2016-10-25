@@ -54,7 +54,9 @@ public class ExprBinary extends Expression {
 	public ExprBinary(int op, Expression left, Expression right) {
 		this.op = op;
 		this.left = left;
+		left.setParent(this);
 		this.right = right;
+		right.setParent(this);
 		alias = this;
 	}
 
@@ -73,7 +75,9 @@ public class ExprBinary extends Expression {
 
 	public ExprBinary(Expression left, String sop, Expression right, int line) {
 		this.left = left;
+		left.setParent(this);
 		this.right = right;
+		right.setParent(this);
 		int lop = -1;
 		this.line = line;
 

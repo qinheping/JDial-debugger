@@ -17,12 +17,14 @@ public class ExprField extends Expression
      * named field of the specified expression. */
     public ExprField( Expression left, String name, boolean hole)
     {
+    	left.setParent(this);
         this.left = left;
         this.name = name;
         this.hole = hole;
     }
 
     public ExprField( Expression left, String name) {
+    	left.setParent(this);
         this.left = left;
         this.name = name;
         this.hole = false;

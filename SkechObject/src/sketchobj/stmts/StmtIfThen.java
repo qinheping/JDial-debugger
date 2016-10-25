@@ -28,8 +28,11 @@ public class StmtIfThen extends Statement {
 	 */
 	public StmtIfThen(Expression cond, Statement cons, Statement alt, int i) {
 		this.cond = cond;
+		cond.setParent(this);
 		this.cons = cons;
+		cons.setParent(this);
 		this.alt = alt;
+		alt.setParent(this);
 		this.line = i;
 	}
 
@@ -136,6 +139,18 @@ public class StmtIfThen extends Statement {
 			m.putAll(((StmtBlock) alt).stmts.get(0).addRecordStmt((StmtBlock) alt, 0, m));
 		}
 		return m;
+	}
+
+	@Override
+	public void replaceLinearCombination() {
+		cons.replaceLinearCombination();
+		if(alt!= null)
+			alt.replaceLinearCombination();
+	}
+
+	@Override
+	public boolean isBasic() {
+		return true;
 	}
 
 }
