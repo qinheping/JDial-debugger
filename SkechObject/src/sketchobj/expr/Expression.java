@@ -17,5 +17,7 @@ public abstract class Expression extends SketchNode{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public abstract boolean equals(Expression other);
 
 }

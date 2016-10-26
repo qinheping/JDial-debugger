@@ -32,8 +32,12 @@ public class StmtIfThen extends Statement {
 		this.cons = cons;
 		cons.setParent(this);
 		this.alt = alt;
+		if(alt!=null)
 		alt.setParent(this);
 		this.line = i;
+	}
+	public StmtIfThen(Expression cond, Statement cons, Statement alt) {
+		this(cond,cons,alt,0);
 	}
 
 	// @Override

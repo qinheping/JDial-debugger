@@ -77,4 +77,10 @@ public class ExprConstInt extends ExprConstant
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean equals(Expression other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

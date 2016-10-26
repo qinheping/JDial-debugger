@@ -127,6 +127,10 @@ public class ExprBinary extends Expression {
 		alias = this;
 	}
 
+	public ExprBinary(Expression left, String sop, Expression right) {
+		this(left,sop,right,0);
+	}
+
 	/** */
 	public ExprBinary getAlias() {
 		return alias;
@@ -409,5 +413,11 @@ public class ExprBinary extends Expression {
 		toAdd.add(left);
 		toAdd.add(right);
 		return new ConstData(null, toAdd, index, 0, string,this.line);
+	}
+
+	@Override
+	public boolean equals(Expression other) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

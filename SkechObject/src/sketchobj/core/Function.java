@@ -52,6 +52,9 @@ public class Function extends SketchNode {
 		body.setParent(this);
 		this.setParent(null);
 	}
+	public Function(String name, Type returnType, List<Parameter> params, Statement body) {
+		this(name, returnType,params,body,FcnType.Static);
+	}
 
 	public Function(FcnHeader head, Statement body) {
 		this.name = head.name;

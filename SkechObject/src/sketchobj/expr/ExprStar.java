@@ -20,4 +20,9 @@ public ConstData replaceConst(int index, String string) {
 	// TODO Auto-generated method stub
 	return null;
 }
+@Override
+public boolean equals(Expression other) {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

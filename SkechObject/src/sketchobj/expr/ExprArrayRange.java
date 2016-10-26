@@ -231,4 +231,10 @@ public class ExprArrayRange extends Expression
 		// TODO Auto-generated method stub
 		return this.replaceConst(index, null);
 	}
+
+	@Override
+	public boolean equals(Expression other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -68,4 +68,12 @@ public class ExprVar extends Expression
 	public ConstData replaceConst(int index, String string) {
 		return new ConstData(index,string,this.line);
 	}
+
+
+
+	@Override
+	public boolean equals(Expression other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

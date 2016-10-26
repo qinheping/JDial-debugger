@@ -154,4 +154,10 @@ public class ExprUnary extends Expression
 		}
 		return new ConstData(null, toAdd, index, 0,string,this.line);
 	}
+
+	@Override
+	public boolean equals(Expression other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

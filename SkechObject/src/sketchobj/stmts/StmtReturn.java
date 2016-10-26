@@ -38,7 +38,10 @@ public class StmtReturn extends Statement
         value.setParent(this);
         this.line = line;
     }
-
+    public StmtReturn(Expression value)
+    {
+    	this(value, 0);
+    }
 
 
     /** Returns the return value of this, or null if there is no return

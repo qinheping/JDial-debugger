@@ -96,4 +96,10 @@ public class ExprFunCall extends Expression
 		// TODO Auto-generated method stub
 		return new ConstData(index,string,this.line);
 	}
+
+	@Override
+	public boolean equals(Expression other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

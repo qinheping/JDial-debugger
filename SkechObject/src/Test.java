@@ -12,15 +12,18 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import constraintfactory.ConstraintFactory;
+import constraintfactory.ExternalFunction;
 import javaparser.simpleJavaLexer;
 import javaparser.simpleJavaParser;
 import jsonast.JsonNode;
 import jsonast.Root;
 import jsonparser.jsonLexer;
 import jsonparser.jsonParser;
+import sketchobj.core.ExpressionTuple;
 import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
 import sketchobj.core.TypePrimitive;
+import sketchobj.expr.ExprConstInt;
 import sketchobj.stmts.Statement;
 import sketchobj.stmts.StmtBlock;
 import visitor.JavaVisitor;
@@ -43,6 +46,15 @@ public class Test {
 		i.eval("bar = Math.pow(2,2)");             
 		System.out.println( i.get("bar") );
 
+	}
+	
+	@org.junit.Test
+	public void testExternalFunction(){
+		ExternalFunction ef = new ExternalFunction("Math.power");
+		ef.put(new ExpressionTuple(2,2), new ExprConstInt(4));
+
+		ef.put(new ExpressionTuple(2,3), new ExprConstInt(8));
+		System.out.println(ef.getFunction());
 	}
 	
 	@org.junit.Test
