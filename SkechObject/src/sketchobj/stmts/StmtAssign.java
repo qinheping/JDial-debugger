@@ -8,6 +8,7 @@ import constraintfactory.ConstraintFactory;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 import sketchobj.expr.ExprBinary;
+import sketchobj.expr.ExprConstInt;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.Expression;
@@ -119,6 +120,7 @@ public class StmtAssign extends Statement {
 	@Override
 	public void replaceLinearCombination() {
 		rhs.replaceLinearCombination();
+		rhs = new ExprBinary(new ExprBinary(new ExprConstInt(1),"*", rhs), "+", new ExprConstInt(0));
 		
 	}
 

@@ -51,6 +51,11 @@ public class MainEntrance {
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()));
 		String script = cf.getScript(function.getBody());
+		
+		
+		System.out.println(script);
+		
+		
 		Map<Integer, Integer> result = CallSketch.CallByString(script);
 		List<Integer> indexset = new ArrayList<Integer>();
 		indexset.addAll(result.keySet());

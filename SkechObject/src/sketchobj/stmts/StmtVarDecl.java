@@ -13,6 +13,8 @@ import constraintfactory.ConstraintFactory;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
+import sketchobj.expr.ExprBinary;
+import sketchobj.expr.ExprConstInt;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.ExprVar;
@@ -52,6 +54,7 @@ public class StmtVarDecl extends Statement {
 		this.names = new java.util.ArrayList<String>(names);
 		this.inits = new java.util.ArrayList<Expression>(inits);
 		for(Expression e: inits){
+			if(e!=null)
 			e.setParent(this);
 		}
 		this.line = i;
@@ -363,10 +366,13 @@ public class StmtVarDecl extends Statement {
 	@Override
 	public void replaceLinearCombination() {if (this.inits.size() != 0) {
 		for (int i = 0; i < inits.size(); i++) {
+			if(inits.get(i) == null)
+				continue;
 			if (inits.get(i) instanceof ExprConstant) {
 				continue;
 			} else {
 				inits.get(i).replaceLinearCombination();
+				inits.set(i, new ExprBinary(new ExprBinary(new ExprConstInt(1),"*", inits.get(i)), "+", new ExprConstInt(0)));
 			}
 		}
 	}

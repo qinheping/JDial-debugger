@@ -13,10 +13,7 @@ public abstract class Expression extends SketchNode{
 	
 	public abstract ConstData replaceConst(int index, String string);
 
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void  replaceLinearCombination();
 	
 	public abstract boolean equals(Expression other);
 

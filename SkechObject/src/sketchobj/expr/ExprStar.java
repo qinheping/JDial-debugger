@@ -25,4 +25,9 @@ public boolean equals(Expression other) {
 	// TODO Auto-generated method stub
 	return false;
 }
+@Override
+public void replaceLinearCombination() {
+	// TODO Auto-generated method stub
+	
+}
 }

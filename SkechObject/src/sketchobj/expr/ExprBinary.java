@@ -420,4 +420,10 @@ public class ExprBinary extends Expression {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void replaceLinearCombination() {
+		this.left.replaceLinearCombination();
+		this.right.replaceLinearCombination();
+	}
 }

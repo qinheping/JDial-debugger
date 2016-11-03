@@ -160,4 +160,10 @@ public class ExprUnary extends Expression
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void replaceLinearCombination() {
+		// TODO Auto-generated method stub
+		
+	}
 }

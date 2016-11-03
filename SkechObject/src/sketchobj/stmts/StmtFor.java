@@ -7,6 +7,7 @@ import java.util.Map;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import sketchobj.core.*;
+import sketchobj.expr.ExprBinary;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.Expression;
