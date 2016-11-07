@@ -35,6 +35,15 @@ public class Test {
 
 
 	@org.junit.Test
+	public void testSumUp() throws FileNotFoundException, InterruptedException{
+		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/sumup/correction")).useDelimiter("\\Z").next();
+		
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,12);
+		me.Synthesize();
+	}
+	
+	@org.junit.Test
 	public void testbsh() throws EvalError, FileNotFoundException, IOException{
 		Interpreter i = new Interpreter();  // Construct an interpreter
 		i.set("foo", 5);                    // Set variables

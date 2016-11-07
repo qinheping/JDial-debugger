@@ -87,7 +87,7 @@ public class StmtFor extends Statement {
 				new ArrayList<String>(init.getPostctx().getAllVars().keySet())), body);
 		body =  new StmtBlock(body,ConstraintFactory.recordState(this.getPostctx().getLinenumber(),
 				new ArrayList<String>(init.getPostctx().getAllVars().keySet())));
-		return ((StmtBlock) body).stmts.get(1).addRecordStmt((StmtBlock) body, 1, m);
+		return ((StmtBlock)((StmtBlock) body).stmts.get(0)).stmts.get(((StmtBlock)((StmtBlock) body).stmts.get(0)).stmts.size()-1).addRecordStmt((StmtBlock) body, 1, m);
 	}
 
 	@Override
