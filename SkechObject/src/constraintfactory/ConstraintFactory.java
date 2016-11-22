@@ -31,9 +31,13 @@ public class ConstraintFactory {
 	static int hitline = 0;
 	static int hitnumber = 0;
 	static int length = 5;
-	static int originalLength = 5;
-
+	static int originalLength = 5;	
 	static List<Expression> parameters = new ArrayList<>();
+	
+	// configurations
+	static boolean is_linearcombination = false; 
+	static int distance_type = 0;
+	static List<Integer> repair_range = new ArrayList<Integer> ();
 	static int numberOfChange = 1;
 
 	// ------------ Construct method
@@ -74,6 +78,8 @@ public class ConstraintFactory {
 		Statement s = source;
 		
 		// replace all constants in source code
+		s.replaceLinearCombination();
+		System.out.println(s);
 		Statement temp = ConstraintFactory.repalceConst(s);
 		
 		// add record stmts to source code and collect vars info
@@ -102,7 +108,7 @@ public class ConstraintFactory {
 				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
 
 		// add final state
-		System.out.println(finalState);
+		//System.out.println(finalState.getOrdered_locals().size());
 		for (String v : finalState.getOrdered_locals()) {
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), v + "final", new ExprConstInt(0), 0));
 		}
@@ -116,6 +122,11 @@ public class ConstraintFactory {
 	}
 
 	// ------------ Auxiliary functions
+	static public void replace_linearcombination(StmtBlock sb){
+		sb.replaceLinearCombination();
+		
+	}
+	
 	static public Statement constChangeDecl(int index, Type t) {
 		return new StmtVarDecl(t, "const" + index + "change", new ExprStar(), 0);
 	}

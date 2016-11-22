@@ -58,6 +58,10 @@ public class Var extends JsonNode {
 	}
 
 	public String toString() {
+		/*
+		System.out.println(this.type);
+		System.out.println(this.name + ": " +this.value);
+		*/
 		if (this.type == 0)
 			return this.name + ": " + this.value + "\n";
 		return this.name + "[REF: " + this.value + "\n";
