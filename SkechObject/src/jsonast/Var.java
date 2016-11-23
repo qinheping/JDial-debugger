@@ -22,6 +22,8 @@ public class Var extends JsonNode {
 	}
 
 	public Var(String text, List<?> visit) {
+		this.name = text;
+		this.type =1;
 		this.setList(visit);
 	}
 
@@ -57,11 +59,23 @@ public class Var extends JsonNode {
 		this.list = list;
 	}
 
+	
+	public String getListasString(){
+		String result = "{" +list.get(0).toString();
+		for(int i = 1; i < list.size(); i++){
+			result += "," + list.get(i).toString(); 
+		}
+		return result+"}";
+	}
+	
 	public String toString() {
 		/*
 		System.out.println(this.type);
 		System.out.println(this.name + ": " +this.value);
 		*/
+		if (this.type == 3)
+			System.out.println(this.name + " "+this.value + " "+ "error");
+		
 		if (this.type == 0)
 			return this.name + ": " + this.value + "\n";
 		return this.name + "[REF: " + this.value + "\n";

@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
+import constraintfactory.AuxMethods;
 import constraintfactory.ConstraintFactory;
 import javaparser.simpleJavaLexer;
 import javaparser.simpleJavaParser;
@@ -18,6 +19,8 @@ import jsonparser.jsonParser;
 import sketchobj.core.FcnHeader;
 import sketchobj.core.Function;
 import sketchobj.core.SketchObject;
+import sketchobj.expr.ExprString;
+import sketchobj.expr.Expression;
 import visitor.JavaVisitor;
 import visitor.JsonVisitor;
 
@@ -41,15 +44,20 @@ public class MainEntrance {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
+		
+		List<Expression> args = AuxMethods.extractArguments(root.getTraces(),indexOfCorrectTrace);
+		
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
+		
 
+		
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
 
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()));
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()),args);
 		String script = cf.getScript(function.getBody());
 		
 		

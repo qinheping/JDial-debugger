@@ -32,7 +32,7 @@ public class ConstraintFactory {
 	static int hitnumber = 0;
 	static int length = 5;
 	static int originalLength = 5;	
-	static List<Expression> parameters = new ArrayList<>();
+	static List<Expression> args = new ArrayList<>();
 	
 	// configurations
 	static boolean is_linearcombination = false; 
@@ -41,7 +41,7 @@ public class ConstraintFactory {
 	static int numberOfChange = 1;
 
 	// ------------ Construct method
-	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args) {
 		ConstraintFactory.fh = fh;
 		ConstraintFactory.oriTrace = oriTrace;
 		ConstraintFactory.finalState = finalState;
@@ -57,19 +57,21 @@ public class ConstraintFactory {
 
 		constMap = new HashMap<String, Set<Integer>>();
 		varList = new ArrayList<String>();
-		parameters = new ArrayList<>();
+		
+		this.args = args;
+		
 	}
 
-	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> parameters) {
-		this(oriTrace, finalState, fh);
-		// this.parameters = parameters;
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
+		this(oriTrace, finalState, fh, new ArrayList<>());
+		// this.args = args;
 	}
 
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, Expression parameter) {
 		this(oriTrace, finalState, fh);
 		List<Expression> l = new ArrayList<Expression>();
 		l.add(parameter);
-		// this.parameters = l;
+		// this.args = l;
 	}
 
 	// ------------ main function, generate Sketch script for code <source>
@@ -168,8 +170,8 @@ public class ConstraintFactory {
 					new ExprConstInt(finalState.getLocals().find(v).getValue()), 0));
 		}
 
-		// f(parameters)
-		stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), parameters), 0));
+		// f(args)
+		stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args), 0));
 
 		// TODO int distance = |finalcount-originalLength|;
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "HammingDistance", new ExprConstInt(0), 0));

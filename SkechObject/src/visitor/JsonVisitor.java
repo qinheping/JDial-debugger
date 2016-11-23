@@ -59,8 +59,8 @@ public class JsonVisitor extends jsonBaseVisitor<JsonNode> {
 	public Var visitVar(jsonParser.VarContext ctx) {
 		if (ctx.value().children.size() == 1)
 			return new Var(ctx.STRING().getText().replace("\"", ""), Integer.parseInt(ctx.value().NUMBER().getText()));
-		if (ctx.value().getChild(1).getText().equals("REF"))
-			return new Var(ctx.STRING().getText().replace("\"", ""), Integer.parseInt(ctx.value().NUMBER().getText()), 2);
+		if (ctx.value().getChild(1).getText().equals("\"REF\""))
+			return new Var(ctx.STRING().getText().replace("\"", ""), Integer.parseInt(ctx.value().NUMBER().getText()), 1);
 
 		return new Var(ctx.STRING().getText().replace("\"", ""), 0, 3);
 	}
