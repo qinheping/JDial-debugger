@@ -63,7 +63,7 @@ public class ConstraintFactory {
 	}
 
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
-		this(oriTrace, finalState, fh, new ArrayList<>());
+		this(oriTrace, finalState, fh, new ArrayList<Expression>());
 		// this.args = args;
 	}
 
