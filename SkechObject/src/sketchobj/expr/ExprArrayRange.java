@@ -229,7 +229,7 @@ public class ExprArrayRange extends Expression
 	@Override
 	public ConstData replaceConst(int index) {
 		// TODO Auto-generated method stub
-		return this.replaceConst(index, null);
+		return this.replaceConst(index, "");
 	}
 
 	@Override

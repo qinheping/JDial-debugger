@@ -32,8 +32,18 @@ import bsh.EvalError;
 import bsh.Interpreter;
 
 public class Test {
+	@org.junit.Test
+	public void testRange() throws FileNotFoundException, InterruptedException{
+		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/sumup/correction")).useDelimiter("\\Z").next();
+		List<Integer> range = new ArrayList<Integer>();
+		range.add(7);
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,12);
+		me.setRepairRange(range);
+		me.Synthesize();
+	}
 
-
+	
 	@org.junit.Test
 	public void testSumUp() throws FileNotFoundException, InterruptedException{
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
@@ -121,7 +131,7 @@ public class Test {
 				"int largestGap(int[] a){ int max = 1; a[1] = 10; c = max++; int min = 100;  for(int i=0; i < a.Length; i++){ if(max < a[i]) max = a[i]; }return max-min;}");
 		Function f = (Function) compile(input,"main");
 		Statement s = f.getBody();
-		ConstraintFactory.repalceConst(s);
+		ConstraintFactory.replaceConst(s);
 		ConstraintFactory.addRecordStmt((StmtBlock) s);
 		// System.out.println(s);
 	}

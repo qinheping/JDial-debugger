@@ -34,10 +34,13 @@ public class MainEntrance {
 	private String targetFunc;
 	private Traces traces;
 
+	private List<Integer> repair_range;
+	
 	public MainEntrance(String json, String correctTrace, int indexOfCorrectTrace) {
 		this.json = json;
 		this.correctTrace = correctTrace;
 		this.indexOfCorrectTrace = indexOfCorrectTrace;
+		this.repair_range = null;
 	}
 
 	public Feedback Synthesize() throws InterruptedException {
@@ -50,7 +53,7 @@ public class MainEntrance {
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
-		
+		System.out.println(code);
 
 		
 		ANTLRInputStream input = new ANTLRInputStream(code);
@@ -58,6 +61,7 @@ public class MainEntrance {
 
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()),args);
+		if(this.repair_range!=null) cf.setRange(this.repair_range);
 		String script = cf.getScript(function.getBody());
 		
 		
@@ -73,6 +77,10 @@ public class MainEntrance {
 		}
 		System.out.println(repair);
 		return null;
+	}
+	
+	public void setRepairRange(List<Integer> l){
+		this.repair_range = l;
 	}
 
 	public String extractFuncName(String trace) {
