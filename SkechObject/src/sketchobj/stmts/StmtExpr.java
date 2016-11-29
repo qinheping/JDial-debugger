@@ -15,12 +15,11 @@ import sketchobj.expr.Expression;
 
 public class StmtExpr extends Statement {
 	private Expression expr;
-	private int line;
 
 	public StmtExpr(Expression expr, int i) {
 		this.expr = expr;
 		expr.setParent(this);
-		this.line = i;
+		this.setLineNumber(i);;
 	}
 
 	public String toString() {
@@ -34,17 +33,22 @@ public class StmtExpr extends Statement {
 			int value = ((ExprConstant) expr).getVal();
 			Type t = ((ExprConstant) expr).getType();
 			expr = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,null,this.line);
+			return new ConstData(t, toAdd, index + 1, value,null,this.getLineNumber());
 		}
 		return expr.replaceConst(index);
 	}
 
 	@Override
+	public ConstData replaceConst_Exclude_This(int index,List<Integer> repair_range) {
+		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+	}
+	
+	@Override
 	public Context buildContext(Context prectx) {
 		Context postctx = new Context(prectx);
 		prectx = new Context(prectx);
-		postctx.setLinenumber(this.line);
-		prectx.setLinenumber(this.line);
+		postctx.setLinenumber(this.getLineNumber());
+		prectx.setLinenumber(this.getLineNumber());
 		
 		this.setPostctx(new Context(postctx));
 		this.setPrectx(new Context(prectx));
@@ -68,4 +72,5 @@ public class StmtExpr extends Statement {
 	public boolean isBasic() {
 		return true;
 	}
+
 }

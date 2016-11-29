@@ -71,6 +71,11 @@ public class StmtBlock extends Statement {
 	public ConstData replaceConst(int index) {
 		return new ConstData(null, stmts, index, 0,null, this.getLineNumber());
 	}
+	
+	@Override
+	public ConstData replaceConst_Exclude_This(int index,List<Integer> repair_range) {
+		return new ConstData(null, stmts, index, 0,null, this.getLineNumber());
+	}
 
 	@Override
 	public Context buildContext(Context prectx) {
@@ -105,4 +110,5 @@ public class StmtBlock extends Statement {
 	public boolean isBasic() {
 		return false;
 	}
+
 }

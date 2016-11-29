@@ -67,11 +67,14 @@ public abstract class Statement extends SketchNode {
 
 	@Override
 	public ConstData replaceConst(int index, List<Integer> repair_range) {
+		System.out.println(this.lineNumber + "  " + this );
 		if (repair_range.contains(this.lineNumber)){
 			return this.replaceConst(index);
 
 			}
 		else
-			return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+			return this.replaceConst_Exclude_This(index, repair_range);
 	}
+
+	public abstract ConstData replaceConst_Exclude_This(int index,List<Integer> repair_range);
 }

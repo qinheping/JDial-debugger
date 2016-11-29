@@ -27,7 +27,6 @@ import sketchobj.expr.Expression;
 public class StmtReturn extends Statement
 {
     Expression value;
-	private int line;
 
     /** Creates a new return statement, with the specified return value
      * (or null). */
@@ -38,7 +37,7 @@ public class StmtReturn extends Statement
 //        }
         this.value = value;
         value.setParent(this);
-        this.line = line;
+        this.setLineNumber(line);
     }
     public StmtReturn(Expression value)
     {
@@ -77,11 +76,15 @@ public class StmtReturn extends Statement
 	}
 
 
+	@Override
+	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
+		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+	}
 
 	@Override
 	public Context buildContext(Context prectx) {
 		prectx = new Context(prectx);
-		prectx.setLinenumber(this.line);
+		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(new Context(prectx));
 		this.setPostctx(new Context(prectx));
 		return prectx;
@@ -97,16 +100,6 @@ public class StmtReturn extends Statement
 	}
 
 
-
-	public int getLine() {
-		return line;
-	}
-
-
-
-	public void setLine(int line) {
-		this.line = line;
-	}
 
 
 

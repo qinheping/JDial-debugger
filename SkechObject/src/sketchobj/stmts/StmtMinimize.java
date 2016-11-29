@@ -1,5 +1,6 @@
 package sketchobj.stmts;
 
+import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
@@ -56,5 +57,11 @@ public class StmtMinimize extends Statement {
 	public boolean isBasic() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

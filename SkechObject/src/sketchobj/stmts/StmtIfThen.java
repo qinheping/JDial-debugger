@@ -19,7 +19,6 @@ public class StmtIfThen extends Statement {
 	private Statement cons, alt;
 	private boolean isSingleFunCall = false;
 	private boolean isSingleVarAssign = false;
-	private int line;
 
 	/**
 	 * Create a new conditional statement, with the specified condition,
@@ -34,7 +33,7 @@ public class StmtIfThen extends Statement {
 		this.alt = alt;
 		if(alt!=null)
 		alt.setParent(this);
-		this.line = i;
+		this.setLineNumber(i);
 	}
 	public StmtIfThen(Expression cond, Statement cons, Statement alt) {
 		this(cond,cons,alt,0);
@@ -107,15 +106,25 @@ public class StmtIfThen extends Statement {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value,null,this.line);
+			return new ConstData(t, toAdd, index + 1, value,null,this.getLineNumber());
 		}
-		return new ConstData(null, toAdd, index, 0,null,this.line);
+		return new ConstData(null, toAdd, index, 0,null,this.getLineNumber());
 	}
 
 	@Override
+	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
+
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(cons);
+		if (alt != null)
+			toAdd.add(alt);
+		return new ConstData(null, toAdd, index, 0,null,this.getLineNumber());
+	}
+	
+	@Override
 	public Context buildContext(Context prectx) {
 		prectx = new Context(prectx);
-		prectx.setLinenumber(this.line);
+		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);
 		this.setPostctx(prectx);
 		Context postctx = new Context(prectx);
@@ -156,5 +165,6 @@ public class StmtIfThen extends Statement {
 	public boolean isBasic() {
 		return true;
 	}
+
 
 }

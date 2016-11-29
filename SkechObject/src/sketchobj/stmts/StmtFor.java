@@ -15,7 +15,6 @@ import sketchobj.expr.Expression;
 public class StmtFor extends Statement {
 	private Expression cond;
 	private Statement init, incr, body;
-	private int line;
 
 	public StmtFor(Statement init, Expression cond, Statement incr, Statement body, boolean isCanonical, int i) {
 		this.init = init;
@@ -26,7 +25,7 @@ public class StmtFor extends Statement {
 		incr.setParent(this);
 		this.body = body;
 		body.setParent(this);
-		this.line = i;
+		this.setLineNumber(i);
 	}
 
 	public String toString() {
@@ -52,15 +51,25 @@ public class StmtFor extends Statement {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, null, this.line);
+			return new ConstData(t, toAdd, index + 1, value, null, this.getLineNumber());
 		}else
 			toAdd.add(cond);
-		return new ConstData(null, toAdd, index, 0, null,this.line);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
+	}
+	
+
+	@Override
+	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(init);
+		toAdd.add(incr);
+		toAdd.add(body);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
 	@Override
 	public Context buildContext(Context prectx) {
-		prectx.setLinenumber(this.line);
+		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);
 		this.setPostctx(new Context(prectx));
 		Context postctx = new Context(prectx);
@@ -102,4 +111,5 @@ public class StmtFor extends Statement {
 	public boolean isBasic() {
 		return true;
 	}
+
 }

@@ -17,14 +17,13 @@ import sketchobj.expr.Expression;
 public class StmtWhile extends Statement {
 	Expression cond;
 	Statement body;
-	int line;
 	
 	public StmtWhile(Expression cond, Statement body, int i) {
 		this.cond = cond;
 		cond.setParent(this);
 		this.body = body;
 		body.setParent(this);
-		this.line = i;
+		this.setLineNumber(i);
 	}
 
 	/** Returns the loop condition. */
@@ -49,17 +48,24 @@ public class StmtWhile extends Statement {
 			Type t = ((ExprConstant) cond).getType();
 			cond = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(body);
-			return new ConstData(t, toAdd, index + 1, value, null,this.line);
+			return new ConstData(t, toAdd, index + 1, value, null,this.getLineNumber());
 		}
 		toAdd.add(cond);
 		toAdd.add(body);
-		return new ConstData(null, toAdd, index, 0, null,this.line);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
+	}
+	@Override
+	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(cond);
+		toAdd.add(body);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
 	@Override
 	public Context buildContext(Context prectx) {
 		prectx = new Context(prectx);
-		prectx.setLinenumber(this.line);
+		prectx.setLinenumber(this.getLineNumber());
 		Context postctx  = new Context(prectx);
 		this.setPostctx(new Context(postctx));
 		postctx.pushVars(new HashMap<String, Type>());
@@ -87,4 +93,5 @@ public class StmtWhile extends Statement {
 	public boolean isBasic() {
 		return true;
 	}
+
 }

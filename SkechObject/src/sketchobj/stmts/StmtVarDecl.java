@@ -24,7 +24,6 @@ public class StmtVarDecl extends Statement {
 	private List<Type> types;
 	private List<String> names;
 	private List<Expression> inits;
-	private int line;
 
 	/**
 	 * Create a new variable declaration with corresponding lists of types,
@@ -57,7 +56,7 @@ public class StmtVarDecl extends Statement {
 			if(e!=null)
 			e.setParent(this);
 		}
-		this.line = i;
+		this.setLineNumber(i);
 	}
 
 	/**
@@ -330,25 +329,32 @@ public class StmtVarDecl extends Statement {
 					Type t = ((ExprConstant) inits.get(i)).getType();
 					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>()));
 
-					return new ConstData(t, toAdd, index + 1, value, names.get(i),this.line);
+					return new ConstData(t, toAdd, index + 1, value, names.get(i),this.getLineNumber());
 				} else {
 					toAdd.add(inits.get(i));
 				}
 			}
 		}
-		return new ConstData(null, toAdd, index, 0, null,this.line);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
+	}
+	
+
+	@Override
+	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
 	@Override
 	public Context buildContext(Context prectx) {
 		prectx = new Context(prectx);
-		prectx.setLinenumber(this.line);
+		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);
 		Context postctx = new Context(prectx);
 		for (int i = 0; i < names.size(); i++) {
 			postctx.addVar(names.get(i), types.get(i));
 		}
-		postctx.setLinenumber(this.line);
+		postctx.setLinenumber(this.getLineNumber());
 		this.setPostctx(new Context(postctx));
 		return postctx;
 	}
@@ -383,4 +389,5 @@ public class StmtVarDecl extends Statement {
 	public boolean isBasic() {
 		return true;
 	}
+
 }

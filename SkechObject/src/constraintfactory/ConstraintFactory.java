@@ -91,11 +91,9 @@ public class ConstraintFactory {
 		// replace all constants in source code
 		if (!this.limited_range) {
 			s.replaceLinearCombination();
-			System.out.println(s);
 			constFunDecls = ConstraintFactory.replaceConst(s);
 		} else {
 			s.replaceLinearCombination(this.repair_range);
-			System.out.println(s);
 			constFunDecls = ConstraintFactory.replaceConst(s);
 		}
 
