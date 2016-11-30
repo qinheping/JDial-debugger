@@ -37,10 +37,11 @@ public class Test {
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/sumup/correction")).useDelimiter("\\Z").next();
 		List<Integer> range = new ArrayList<Integer>();
-		range.add(8);
+		range.add(7);
 		MainEntrance me = new MainEntrance(oriTraces,correctTrace,12);
 		me.setRepairRange(range);
-		me.Synthesize();
+		String s = me.Synthesize().toString();
+		assert s.toString().equals("{7=2}") ;
 	}
 
 	
@@ -63,7 +64,7 @@ public class Test {
 
 		// Eval a statement and get the result
 		i.eval("bar = Math.pow(2,2)");             
-		System.out.println( i.get("bar") );
+		assert i.get("bar").equals("4");
 
 	}
 	

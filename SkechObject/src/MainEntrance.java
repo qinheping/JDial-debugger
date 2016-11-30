@@ -43,7 +43,7 @@ public class MainEntrance {
 		this.repair_range = null;
 	}
 
-	public Feedback Synthesize() throws InterruptedException {
+	public Map<Integer, Integer> Synthesize() throws InterruptedException {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
@@ -53,7 +53,7 @@ public class MainEntrance {
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
-		System.out.println(code);
+		//System.out.println(code);
 
 		
 		ANTLRInputStream input = new ANTLRInputStream(code);
@@ -65,7 +65,7 @@ public class MainEntrance {
 		String script = cf.getScript(function.getBody());
 		
 		
-		System.out.println(script);
+		//System.out.println(script);
 		
 		
 		Map<Integer, Integer> result = CallSketch.CallByString(script);
@@ -76,7 +76,7 @@ public class MainEntrance {
 			repair.put(ConstraintFactory.getconstMapLine().get(ke), result.get(ke));
 		}
 		System.out.println(repair);
-		return null;
+		return repair;
 	}
 	
 	public void setRepairRange(List<Integer> l){
