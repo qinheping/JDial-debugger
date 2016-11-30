@@ -6,7 +6,7 @@
     {
       "func_name": "SumUp:9",
       "encoded_locals": {
-        "sum": 2
+        "sum": 3
       },
       "ordered_varnames": [
         "sum"
