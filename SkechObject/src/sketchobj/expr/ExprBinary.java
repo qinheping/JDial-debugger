@@ -35,7 +35,6 @@ public class ExprBinary extends Expression {
 	private Expression left, right;
 	private ExprBinary alias;
 
-	private int line;
 	
 	/**
 	 * Create a new binary expression given the operation and the left and right
@@ -50,14 +49,16 @@ public class ExprBinary extends Expression {
 	 *            expression on the left of the operator
 	 * @param right
 	 *            expression on the right of the operator
+	 * @param i 
 	 */
-	public ExprBinary(int op, Expression left, Expression right) {
+	public ExprBinary(int op, Expression left, Expression right, int i) {
 		this.op = op;
 		this.left = left;
 		left.setParent(this);
 		this.right = right;
 		right.setParent(this);
 		alias = this;
+		this.lineNumber = i;
 	}
 
 	/**
@@ -79,7 +80,7 @@ public class ExprBinary extends Expression {
 		this.right = right;
 		right.setParent(this);
 		int lop = -1;
-		this.line = line;
+		this.lineNumber = line;
 
 		if (sop.equals("+")) {
 			lop = BINOP_ADD;
@@ -381,17 +382,17 @@ public class ExprBinary extends Expression {
 			Type t = ((ExprConstant) left).getType();
 			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(this);
-			return new ConstData(t, toAdd, index + 1, value, null,this.line);
+			return new ConstData(t, toAdd, index + 1, value, null,this.lineNumber);
 		}
 		if (right instanceof ExprConstant) {
 			int value = ((ExprConstant) right).getVal();
 			Type t = ((ExprConstant) right).getType();
 			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, null,this.line);
+			return new ConstData(t, toAdd, index + 1, value, null,this.lineNumber);
 		}
 		toAdd.add(left);
 		toAdd.add(right);
-		return new ConstData(null, toAdd, index, 0, null,this.line);
+		return new ConstData(null, toAdd, index, 0, null,this.lineNumber);
 	}
 
 	@Override
@@ -402,19 +403,19 @@ public class ExprBinary extends Expression {
 			Type t = ((ExprConstant) left).getType();
 			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(this);
-			return new ConstData(t, toAdd, index + 1, value, string,this.line);
+			return new ConstData(t, toAdd, index + 1, value, string,this.lineNumber);
 		}
 		if (right instanceof ExprConstant) {
 			int value = ((ExprConstant) right).getVal();
 			Type t = ((ExprConstant) right).getType();
 			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, string,this.line);
+			return new ConstData(t, toAdd, index + 1, value, string,this.lineNumber);
 		}
 		toAdd.add(left);
 		toAdd.add(right);
-		return new ConstData(null, toAdd, index, 0, string,this.line);
+		return new ConstData(null, toAdd, index, 0, string,this.lineNumber);
 	}
-
+	
 	@Override
 	public boolean equals(Expression other) {
 		// TODO Auto-generated method stub
@@ -426,4 +427,5 @@ public class ExprBinary extends Expression {
 		this.left.replaceLinearCombination();
 		this.right.replaceLinearCombination();
 	}
+
 }

@@ -37,7 +37,7 @@ public class Test {
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/sumup/correction")).useDelimiter("\\Z").next();
 		List<Integer> range = new ArrayList<Integer>();
-		range.add(7);
+		range.add(8);
 		MainEntrance me = new MainEntrance(oriTraces,correctTrace,12);
 		me.setRepairRange(range);
 		me.Synthesize();

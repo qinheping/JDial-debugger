@@ -316,7 +316,6 @@ public class ConstraintFactory {
 			}else{
 				data = target.replaceConst(index);
 			}
-			
 			if (data.getType() != null) {
 				addToConstMap(data);
 				addToConstMapLine(data);

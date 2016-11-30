@@ -520,35 +520,35 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Expression visitExpandConditionalOrExpr(simpleJavaParser.ExpandConditionalOrExprContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_OR, (Expression) visit(ctx.conditionalOrExpression()),
-				(Expression) visit(ctx.conditionalAndExpression()));
+				(Expression) visit(ctx.conditionalAndExpression()),ctx.start.getLine());
 	}
 
 	/** conditionalAndExpression '&&' inclusiveOrExpression **/
 	@Override
 	public Expression visitExpandConditionalAndExpr(simpleJavaParser.ExpandConditionalAndExprContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_AND, (Expression) visit(ctx.conditionalAndExpression()),
-				(Expression) visit(ctx.inclusiveOrExpression()));
+				(Expression) visit(ctx.inclusiveOrExpression()), ctx.start.getLine());
 	}
 
 	/** inclusiveOrExpression '|' exclusiveOrExpression **/
 	@Override
 	public Expression visitExpandInclusiveOrExpr(simpleJavaParser.ExpandInclusiveOrExprContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_BOR, (Expression) visit(ctx.inclusiveOrExpression()),
-				(Expression) visit(ctx.exclusiveOrExpression()));
+				(Expression) visit(ctx.exclusiveOrExpression()), ctx.start.getLine());
 	}
 
 	/** exclusiveOrExpression '^' andExpression **/
 	@Override
 	public Expression visitExpandExclusiveOrExpr(simpleJavaParser.ExpandExclusiveOrExprContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_BXOR, (Expression) visit(ctx.exclusiveOrExpression()),
-				(Expression) visit(ctx.andExpression()));
+				(Expression) visit(ctx.andExpression()), ctx.start.getLine());
 	}
 
 	/** andExpression '&' equalityExpression **/
 	@Override
 	public Expression visitExpandAndExpr(simpleJavaParser.ExpandAndExprContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_BAND, (Expression) visit(ctx.andExpression()),
-				(Expression) visit(ctx.equalityExpression()));
+				(Expression) visit(ctx.equalityExpression()), ctx.start.getLine());
 	}
 
 	/** relationalExpression '<' shiftExpression **/
@@ -561,13 +561,13 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Expression visitExpandShiftLeft(simpleJavaParser.ExpandShiftLeftContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_LSHIFT, (Expression) visit(ctx.shiftExpression()),
-				(Expression) visit(ctx.additiveExpression()));
+				(Expression) visit(ctx.additiveExpression()), ctx.start.getLine());
 	}
 
 	@Override
 	public Expression visitExpandShiftRight(simpleJavaParser.ExpandShiftRightContext ctx) {
 		return new ExprBinary(ExprBinary.BINOP_RSHIFT, (Expression) visit(ctx.shiftExpression()),
-				(Expression) visit(ctx.additiveExpression()));
+				(Expression) visit(ctx.additiveExpression()), ctx.start.getLine());
 	}
 
 	@Override
