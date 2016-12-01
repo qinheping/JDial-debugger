@@ -76,4 +76,6 @@ public abstract class Statement extends SketchNode {
 	}
 
 	public abstract ConstData replaceConst_Exclude_This(int index,List<Integer> repair_range);
+
+	public abstract List<String> extractExternalFuncs(List<String> externalFuncNames);
 }
