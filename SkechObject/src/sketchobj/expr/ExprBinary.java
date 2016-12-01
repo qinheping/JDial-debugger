@@ -428,4 +428,11 @@ public class ExprBinary extends Expression {
 		this.right.replaceLinearCombination();
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		externalFuncNames = left.extractExternalFuncs(externalFuncNames);
+		externalFuncNames = right.extractExternalFuncs(externalFuncNames);
+		return externalFuncNames;
+	}
+
 }

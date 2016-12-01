@@ -66,4 +66,7 @@ public class ExternalFunction {
 		
 		return new Function(this.name,new TypePrimitive(4), intpars, new StmtBlock(stmts));
 	}
+	public String toString(){
+		return this.getFunction().toString();
+	}
 }

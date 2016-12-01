@@ -130,4 +130,10 @@ public class ExprArrayInit extends Expression
 		
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		// TODO Auto-generated method stub
+		return externalFuncNames;
+	}
+
 }

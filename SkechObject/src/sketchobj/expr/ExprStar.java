@@ -1,6 +1,8 @@
 package sketchobj.expr;
 
 
+import java.util.List;
+
 import constraintfactory.ConstData;
 
 public class ExprStar extends Expression
@@ -29,5 +31,10 @@ public boolean equals(Expression other) {
 public void replaceLinearCombination() {
 	// TODO Auto-generated method stub
 	
+}
+@Override
+public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	// TODO Auto-generated method stub
+	return null;
 }
 }

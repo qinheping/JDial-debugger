@@ -23,13 +23,8 @@ public class AuxMethods {
 			}
 		}
 		
-		
-		
-		
 		List<Var> args = callTrace.getLocals().getVar();
 		List<Var> heapObjs = callTrace.getHeap().getVar();
-		
-
 		
 		for(Var v: args){
 			if(v.getType() == 0){

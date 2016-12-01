@@ -581,6 +581,29 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return new ExprBinary((Expression) visit(ctx.getChild(0)), ctx.getChild(1).getText(),
 				(Expression) visit(ctx.getChild(2)), ctx.getStart().getLine());
 	}
+	
+	
+	@Override
+	public Expression visitMethodInvocation_lfno_primary(simpleJavaParser.MethodInvocation_lfno_primaryContext ctx){
+		String methodName = "";
+		for(int i = 0; i < ctx.getChildCount(); i++){
+			String tmp = ctx.getChild(i).getText();
+			if(tmp.equals(".")) continue;
+			if(tmp.equals("(")) break;
+			methodName += tmp;
+		}
+		return new ExprFunCall(methodName, (ExpressionList) visit(ctx.argumentList()));
+	}
+	
+	@Override
+	public ExpressionList visitArgumentList(simpleJavaParser.ArgumentListContext ctx){
+		List<Expression> l = new ArrayList<Expression>();
+		for(int i = 0; i < ctx.expression().size(); i++){
+			l.add((Expression) visit(ctx.expression(i)));
+		}
+		return new ExpressionList(l);
+	}
+	
 
 	// //TODO :
 	//

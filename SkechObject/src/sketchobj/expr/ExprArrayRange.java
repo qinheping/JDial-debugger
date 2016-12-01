@@ -243,4 +243,10 @@ public class ExprArrayRange extends Expression
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		// TODO Auto-generated method stub
+		return externalFuncNames;
+	}
 }

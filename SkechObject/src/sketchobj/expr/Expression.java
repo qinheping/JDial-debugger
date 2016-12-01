@@ -32,4 +32,6 @@ public abstract class Expression extends SketchNode{
 	
 	public abstract boolean equals(Expression other);
 
+	public abstract List<String> extractExternalFuncs(List<String> externalFuncNames);
+
 }

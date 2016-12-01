@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import sketchobj.core.ExpressionList;
+import sketchobj.core.ExpressionTuple;
 
 public class ExprFunCall extends Expression
 {
@@ -30,6 +32,11 @@ public class ExprFunCall extends Expression
     {
         this.name = name;
         this.params = Collections.unmodifiableList(params);}
+    
+    public ExprFunCall(String name, ExpressionList l){
+    	this.name = name;
+    	this.params = l.getList();
+    }
 
 
     /** Creates a new function call with the specified name and
@@ -107,5 +114,10 @@ public class ExprFunCall extends Expression
 	public void replaceLinearCombination() {
 		// TODO Auto-generated method stub
 		
+	}	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		if(!externalFuncNames.contains(this.name)){
+			externalFuncNames.add(this.name);}
+		return externalFuncNames;
 	}
 }

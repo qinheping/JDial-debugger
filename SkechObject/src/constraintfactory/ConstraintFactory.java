@@ -42,6 +42,9 @@ public class ConstraintFactory {
 	// specified range
 	static boolean limited_range = false;
 	static List<Integer> repair_range = null;
+	
+
+	public static List<String> externalFuncNames = new ArrayList<String>();
 
 	// ------------ Construct method
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args) {
@@ -79,8 +82,8 @@ public class ConstraintFactory {
 
 	// set allowed ranges
 	public void setRange(List<Integer> l) {
-		this.limited_range = true;
-		this.repair_range = l;
+		ConstraintFactory.limited_range = true;
+		ConstraintFactory.repair_range = l;
 	}
 
 	// ------------ main function, generate Sketch script for code <source>
@@ -88,12 +91,17 @@ public class ConstraintFactory {
 
 		Statement s = source;
 		Statement constFunDecls = null;
+		
+		// extract info of external functions
+		externalFuncNames = s.extractExternalFuncs(externalFuncNames);
+		System.out.println(externalFuncNames.get(0));
+		
 		// replace all constants in source code
-		if (!this.limited_range) {
+		if (!ConstraintFactory.limited_range) {
 			s.replaceLinearCombination();
 			constFunDecls = ConstraintFactory.replaceConst(s);
 		} else {
-			s.replaceLinearCombination(this.repair_range);
+			s.replaceLinearCombination(ConstraintFactory.repair_range);
 			constFunDecls = ConstraintFactory.replaceConst(s);
 		}
 

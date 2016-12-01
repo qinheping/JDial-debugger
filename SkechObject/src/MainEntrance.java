@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 
 import constraintfactory.AuxMethods;
 import constraintfactory.ConstraintFactory;
+import constraintfactory.ExternalFunction;
 import javaparser.simpleJavaLexer;
 import javaparser.simpleJavaParser;
 import jsonast.Root;
@@ -35,7 +36,7 @@ public class MainEntrance {
 	private Traces traces;
 
 	private List<Integer> repair_range;
-	
+
 	public MainEntrance(String json, String correctTrace, int indexOfCorrectTrace) {
 		this.json = json;
 		this.correctTrace = correctTrace;
@@ -47,39 +48,59 @@ public class MainEntrance {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
-		
-		List<Expression> args = AuxMethods.extractArguments(root.getTraces(),indexOfCorrectTrace);
-		
+
+		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace);
+
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
-		//System.out.println(code);
+		System.out.println(code);
 
-		
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
 
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()),args);
-		if(this.repair_range!=null) cf.setRange(this.repair_range);
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args);
+		if (this.repair_range != null)
+			cf.setRange(this.repair_range);
 		String script = cf.getScript(function.getBody());
+
+		// System.out.println(script);
+
+		List<String> externalFuncs = ConstraintFactory.externalFuncNames;
 		
-		
-		//System.out.println(script);
-		
-		
-		Map<Integer, Integer> result = CallSketch.CallByString(script);
-		List<Integer> indexset = new ArrayList<Integer>();
-		indexset.addAll(result.keySet());
-		Map<Integer, Integer> repair = new HashMap<Integer,Integer>();
-		for(Integer ke: indexset){
-			repair.put(ConstraintFactory.getconstMapLine().get(ke), result.get(ke));
+		// no external Functions
+		if (externalFuncs.size() == 0) {
+
+			Map<Integer, Integer> result = CallSketch.CallByString(script);
+			List<Integer> indexset = new ArrayList<Integer>();
+			indexset.addAll(result.keySet());
+			Map<Integer, Integer> repair = new HashMap<Integer, Integer>();
+			for (Integer ke : indexset) {
+				repair.put(ConstraintFactory.getconstMapLine().get(ke), result.get(ke));
+			}
+			System.out.println(repair);
+			return repair;
+		} else{
+			boolean consistancy = false;
+			List<ExternalFunction> efs = new ArrayList<ExternalFunction>();
+			for(String s: externalFuncs){
+				efs.add(new ExternalFunction(s));
+			}
+			while(!consistancy){
+				String script_ex = script;
+				for(ExternalFunction ef: efs){
+					script_ex = ef.toString()+script_ex;
+				}
+				System.out.println(script_ex);
+				Map<Integer, Integer> result = CallSketch.CallByString(script_ex);
+				consistancy= true;
+			}
+			return null;
 		}
-		System.out.println(repair);
-		return repair;
 	}
-	
-	public void setRepairRange(List<Integer> l){
+
+	public void setRepairRange(List<Integer> l) {
 		this.repair_range = l;
 	}
 

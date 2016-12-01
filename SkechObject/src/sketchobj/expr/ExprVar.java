@@ -1,5 +1,7 @@
 package sketchobj.expr;
 
+import java.util.List;
+
 import constraintfactory.ConstData;
 
 public class ExprVar extends Expression
@@ -13,8 +15,6 @@ public class ExprVar extends Expression
     {
         this.name = name;
     }
-
-
 
     /** Return the name of the variable referenced. */
     public String getName() { return name; }
@@ -55,21 +55,15 @@ public class ExprVar extends Expression
         return name.equals(((ExprVar)o).name);
     }
 
-
-
 	@Override
 	public ConstData replaceConst(int index) {
 		return new ConstData(index,this.line);
 	}
 
-
-
 	@Override
 	public ConstData replaceConst(int index, String string) {
 		return new ConstData(index,string,this.line);
 	}
-
-
 
 	@Override
 	public boolean equals(Expression other) {
@@ -77,11 +71,13 @@ public class ExprVar extends Expression
 		return false;
 	}
 
-
-
 	@Override
 	public void replaceLinearCombination() {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		return externalFuncNames;
 	}
 }

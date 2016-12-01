@@ -166,4 +166,10 @@ public class ExprUnary extends Expression
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		externalFuncNames = expr.extractExternalFuncs(externalFuncNames);
+		return externalFuncNames;
+	}
 }

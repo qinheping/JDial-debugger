@@ -1,5 +1,7 @@
 package sketchobj.expr;
 
+import java.util.List;
+
 import constraintfactory.ConstData;
 import sketchobj.core.Type;
 import sketchobj.core.TypePrimitive;
@@ -88,5 +90,11 @@ public class ExprConstInt extends ExprConstant
 	public void replaceLinearCombination() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		// TODO Auto-generated method stub
+		return externalFuncNames;
 	}
 }

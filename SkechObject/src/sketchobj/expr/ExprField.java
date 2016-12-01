@@ -1,5 +1,7 @@
 package sketchobj.expr;
 
+import java.util.List;
+
 import constraintfactory.ConstData;
 import sketchobj.core.Type;
 
@@ -110,5 +112,10 @@ public class ExprField extends Expression
 	public void replaceLinearCombination() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		return externalFuncNames;
 	}
 }

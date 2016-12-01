@@ -1,5 +1,7 @@
 package sketchobj.expr;
 
+import java.util.List;
+
 import constraintfactory.ConstData;
 
 public class ExprString extends Expression{
@@ -29,5 +31,11 @@ public class ExprString extends Expression{
 	public boolean equals(Expression other) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
