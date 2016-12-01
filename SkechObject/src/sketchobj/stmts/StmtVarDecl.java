@@ -390,4 +390,14 @@ public class StmtVarDecl extends Statement {
 		return true;
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		for(int i = 0; i < inits.size(); i++){
+			if(inits.get(i)==null)
+				continue;
+			externalFuncNames = inits.get(i).extractExternalFuncs(externalFuncNames);
+		}
+		return externalFuncNames;
+	}
+
 }

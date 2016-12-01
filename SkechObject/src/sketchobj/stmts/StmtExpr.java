@@ -73,4 +73,9 @@ public class StmtExpr extends Statement {
 		return true;
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		return expr.extractExternalFuncs(externalFuncNames);
+	}
+
 }

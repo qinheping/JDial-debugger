@@ -116,4 +116,8 @@ public class StmtReturn extends Statement
 	public boolean isBasic() {
 		return true;
 	}
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		return value.extractExternalFuncs(externalFuncNames);
+	}
 }

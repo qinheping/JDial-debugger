@@ -136,4 +136,9 @@ public class StmtAssign extends Statement {
 		return true;
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		return rhs.extractExternalFuncs(externalFuncNames);
+	}
+
 }

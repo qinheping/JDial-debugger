@@ -1,24 +1,16 @@
-import java.util.Scanner;
+import java.math.*;
+public class Main {
+    static int SimpleJava(int n) {
+        int sum = 0;
+		for(int i = 0; i < n; i++){
+			sum += Math.pow(n,i);
+		}
+        return sum;
+    }
 
-public class Main
-{
-	public static int largestGap(int[] a)
-	{
-	    int max = 1; 
-	    a[1] = 10; 
-	    int c = max++; 
-	    int min = 100;  
-	    for(int i=0; i < 4; i++)
-	    { 
-	        if(max < a[i]) 
-	        max = a[i]; 
-	    }
-        return max-min;
-	}
-
-	public static void main(String[] args)
-	{
-	    int x = largestGap( new int[]{ 2, 3, 7, 1 } ); 
-	    System.out.println(x);
-	}		
+    public static void main(String[] args) {
+        int x = SimpleJava(5);
+        System.out.println(x);
+    }
 }
+

@@ -165,6 +165,14 @@ public class StmtIfThen extends Statement {
 	public boolean isBasic() {
 		return true;
 	}
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		externalFuncNames = cond.extractExternalFuncs(externalFuncNames);
+		externalFuncNames = cons.extractExternalFuncs(externalFuncNames);
+		if(alt!=null)
+			externalFuncNames = alt.extractExternalFuncs(externalFuncNames);
+		return externalFuncNames ;
+	}
 
 
 }

@@ -60,4 +60,10 @@ public class StmtFunDecl extends Statement {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

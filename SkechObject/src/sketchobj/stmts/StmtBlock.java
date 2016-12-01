@@ -111,4 +111,12 @@ public class StmtBlock extends Statement {
 		return false;
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		for(Statement s: stmts){
+			externalFuncNames = s.extractExternalFuncs(externalFuncNames);
+		}
+		return externalFuncNames;
+	}
+
 }

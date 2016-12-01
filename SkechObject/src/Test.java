@@ -30,8 +30,20 @@ import visitor.JavaVisitor;
 import visitor.JsonVisitor;
 import bsh.EvalError;
 import bsh.Interpreter;
+import java.math.*;
 
 public class Test {
+	
+	@org.junit.Test
+	public void testSumupExternal() throws FileNotFoundException, InterruptedException{
+		String oriTraces = new Scanner(new File("benchmarks/sumup_external/errortrace")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/sumup_external/correction")).useDelimiter("\\Z").next();
+
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,15);
+		String s = me.Synthesize().toString();
+		//assert s.toString().equals("{7=2}") ;
+	}
+	
 	@org.junit.Test
 	public void testRange() throws FileNotFoundException, InterruptedException{
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();

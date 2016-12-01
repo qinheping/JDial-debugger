@@ -112,4 +112,13 @@ public class StmtFor extends Statement {
 		return true;
 	}
 
+	@Override
+	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		externalFuncNames = cond.extractExternalFuncs(externalFuncNames);
+		externalFuncNames = init.extractExternalFuncs(externalFuncNames);
+		externalFuncNames = incr.extractExternalFuncs(externalFuncNames);
+		externalFuncNames = body.extractExternalFuncs(externalFuncNames);
+		return externalFuncNames ;
+	}
+
 }
