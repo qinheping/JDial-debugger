@@ -67,7 +67,7 @@ public class MainEntrance {
 
 		// System.out.println(script);
 
-		List<String> externalFuncs = ConstraintFactory.externalFuncNames;
+		List<ExternalFunction> externalFuncs = ConstraintFactory.externalFuncs;
 		
 		// no external Functions
 		if (externalFuncs.size() == 0) {
@@ -84,15 +84,15 @@ public class MainEntrance {
 		} else{
 			boolean consistancy = false;
 			List<ExternalFunction> efs = new ArrayList<ExternalFunction>();
-			for(String s: externalFuncs){
-				efs.add(new ExternalFunction(s));
+			for(ExternalFunction s: externalFuncs){
+				efs.add(s);
 			}
 			while(!consistancy){
 				String script_ex = script;
 				for(ExternalFunction ef: efs){
 					script_ex = ef.toString()+script_ex;
 				}
-				System.out.println(script_ex);
+				//System.out.println(script_ex);
 				Map<Integer, Integer> result = CallSketch.CallByString(script_ex);
 				consistancy= true;
 			}

@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 import sketchobj.expr.Expression;
@@ -214,7 +215,7 @@ public class StmtAssert extends Statement {
 		}
 
 		@Override
-		public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+		public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 			// TODO Auto-generated method stub
 			return null;
 		}

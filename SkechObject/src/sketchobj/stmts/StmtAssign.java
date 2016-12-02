@@ -6,6 +6,7 @@ import java.util.Map;
 
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -137,7 +138,7 @@ public class StmtAssign extends Statement {
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		return rhs.extractExternalFuncs(externalFuncNames);
 	}
 

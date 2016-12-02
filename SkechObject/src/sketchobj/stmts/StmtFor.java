@@ -6,6 +6,7 @@ import java.util.Map;
 
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.*;
 import sketchobj.expr.ExprBinary;
 import sketchobj.expr.ExprConstant;
@@ -113,7 +114,7 @@ public class StmtFor extends Statement {
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		externalFuncNames = cond.extractExternalFuncs(externalFuncNames);
 		externalFuncNames = init.extractExternalFuncs(externalFuncNames);
 		externalFuncNames = incr.extractExternalFuncs(externalFuncNames);

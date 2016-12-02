@@ -3,6 +3,7 @@ package sketchobj.expr;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 
 public class ExprString extends Expression{
 	private String content;
@@ -34,7 +35,7 @@ public class ExprString extends Expression{
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return null;
 	}

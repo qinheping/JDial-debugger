@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 
@@ -429,7 +430,7 @@ public class ExprBinary extends Expression {
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		externalFuncNames = left.extractExternalFuncs(externalFuncNames);
 		externalFuncNames = right.extractExternalFuncs(externalFuncNames);
 		return externalFuncNames;

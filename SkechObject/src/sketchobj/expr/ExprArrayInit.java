@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 
 /**
  * An array initializer.  This is an expression like the right hand
@@ -131,7 +132,7 @@ public class ExprArrayInit extends Expression
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return externalFuncNames;
 	}

@@ -3,6 +3,7 @@ package sketchobj.expr;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 
 public class ExprVar extends Expression
 {
@@ -77,7 +78,7 @@ public class ExprVar extends Expression
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		return externalFuncNames;
 	}
 }

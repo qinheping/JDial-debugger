@@ -11,11 +11,15 @@ import sketchobj.stmts.*;
 
 public class ExternalFunction {
 	private String name;
+	private String name_Java;
 	private Map<ExpressionTuple, Expression> safeTable;
+	private Integer num_Args;
 
-	public ExternalFunction(String name){
+	public ExternalFunction(String name, String nameJ, Integer n){
 		setSafeTable(new HashMap<ExpressionTuple, Expression>());
 		this.setName(name);
+		this.setName_Java(nameJ);
+		this.num_Args = n;
 	}
 	
 	public void put(ExpressionTuple arg0, Expression arg1){
@@ -66,7 +70,31 @@ public class ExternalFunction {
 		
 		return new Function(this.name,new TypePrimitive(4), intpars, new StmtBlock(stmts));
 	}
+	
+	@Override
+	public boolean equals(Object other){
+		if(this.name.equals(((ExternalFunction)other).name))
+				return true;
+		return false;
+	}
+	
 	public String toString(){
 		return this.getFunction().toString();
+	}
+
+	public String getName_Java() {
+		return name_Java;
+	}
+
+	public void setName_Java(String name_Java) {
+		this.name_Java = name_Java;
+	}
+
+	public Integer getNum_Args() {
+		return num_Args;
+	}
+
+	public void setNum_Args(Integer num_Args) {
+		this.num_Args = num_Args;
 	}
 }

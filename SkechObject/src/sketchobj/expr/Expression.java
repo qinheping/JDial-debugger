@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.SketchNode;
 import sketchobj.core.SketchObject;
 
@@ -32,6 +33,6 @@ public abstract class Expression extends SketchNode{
 	
 	public abstract boolean equals(Expression other);
 
-	public abstract List<String> extractExternalFuncs(List<String> externalFuncNames);
+	public abstract List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames);
 
 }

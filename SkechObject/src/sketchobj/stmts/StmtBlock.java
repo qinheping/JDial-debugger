@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 
@@ -112,7 +113,7 @@ public class StmtBlock extends Statement {
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		for(Statement s: stmts){
 			externalFuncNames = s.extractExternalFuncs(externalFuncNames);
 		}

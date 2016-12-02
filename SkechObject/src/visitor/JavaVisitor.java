@@ -586,13 +586,15 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Expression visitMethodInvocation_lfno_primary(simpleJavaParser.MethodInvocation_lfno_primaryContext ctx){
 		String methodName = "";
+		String methodNameJ = "";
 		for(int i = 0; i < ctx.getChildCount(); i++){
 			String tmp = ctx.getChild(i).getText();
-			if(tmp.equals(".")) continue;
 			if(tmp.equals("(")) break;
+			methodNameJ += tmp;
+			if(tmp.equals(".")) continue;
 			methodName += tmp;
 		}
-		return new ExprFunCall(methodName, (ExpressionList) visit(ctx.argumentList()));
+		return new ExprFunCall(methodName, (ExpressionList) visit(ctx.argumentList()), methodNameJ);
 	}
 	
 	@Override

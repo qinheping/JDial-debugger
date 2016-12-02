@@ -44,7 +44,7 @@ public class ConstraintFactory {
 	static List<Integer> repair_range = null;
 	
 
-	public static List<String> externalFuncNames = new ArrayList<String>();
+	public static List<ExternalFunction> externalFuncs = new ArrayList<ExternalFunction>();
 
 	// ------------ Construct method
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args) {
@@ -93,8 +93,8 @@ public class ConstraintFactory {
 		Statement constFunDecls = null;
 		
 		// extract info of external functions
-		externalFuncNames = s.extractExternalFuncs(externalFuncNames);
-		System.out.println(externalFuncNames.get(0));
+		externalFuncs = s.extractExternalFuncs(externalFuncs);
+		System.out.println(externalFuncs.get(0).getName_Java());
 		
 		// replace all constants in source code
 		if (!ConstraintFactory.limited_range) {
@@ -191,7 +191,7 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args), 0));
+		stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
 
 		// TODO int distance = |finalcount-originalLength|;
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "HammingDistance", new ExprConstInt(0), 0));

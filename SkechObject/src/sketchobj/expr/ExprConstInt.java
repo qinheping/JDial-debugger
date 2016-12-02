@@ -3,6 +3,7 @@ package sketchobj.expr;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Type;
 import sketchobj.core.TypePrimitive;
 
@@ -93,7 +94,7 @@ public class ExprConstInt extends ExprConstant
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return externalFuncNames;
 	}

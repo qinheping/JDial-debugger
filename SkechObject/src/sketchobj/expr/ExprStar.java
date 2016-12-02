@@ -4,6 +4,7 @@ package sketchobj.expr;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 
 public class ExprStar extends Expression
 {
@@ -33,7 +34,7 @@ public void replaceLinearCombination() {
 	
 }
 @Override
-public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 	// TODO Auto-generated method stub
 	return null;
 }

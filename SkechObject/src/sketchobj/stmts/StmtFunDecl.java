@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.Function;
 import sketchobj.core.Type;
@@ -62,7 +63,7 @@ public class StmtFunDecl extends Statement {
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return null;
 	}

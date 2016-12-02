@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 
@@ -245,7 +246,7 @@ public class ExprArrayRange extends Expression
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return externalFuncNames;
 	}

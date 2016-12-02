@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -327,7 +328,7 @@ public class StmtVarDecl extends Statement {
 				if (inits.get(i) instanceof ExprConstant) {
 					int value = ((ExprConstant) inits.get(i)).getVal();
 					Type t = ((ExprConstant) inits.get(i)).getType();
-					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>()));
+					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>(), null));
 
 					return new ConstData(t, toAdd, index + 1, value, names.get(i),this.getLineNumber());
 				} else {
@@ -391,7 +392,7 @@ public class StmtVarDecl extends Statement {
 	}
 
 	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		for(int i = 0; i < inits.size(); i++){
 			if(inits.get(i)==null)
 				continue;

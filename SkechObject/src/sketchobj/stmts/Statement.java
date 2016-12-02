@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.SketchNode;
 import sketchobj.core.SketchObject;
@@ -77,5 +78,5 @@ public abstract class Statement extends SketchNode {
 
 	public abstract ConstData replaceConst_Exclude_This(int index,List<Integer> repair_range);
 
-	public abstract List<String> extractExternalFuncs(List<String> externalFuncNames);
+	public abstract List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames);
 }

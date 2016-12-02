@@ -5,12 +5,14 @@ import java.util.Collections;
 import java.util.List;
 
 import constraintfactory.ConstData;
+import constraintfactory.ExternalFunction;
 import sketchobj.core.ExpressionList;
 import sketchobj.core.ExpressionTuple;
 
 public class ExprFunCall extends Expression
 {
     private final String name;
+    private String name_Java;
     private static int NEXT_UID=0;
 
 	private int line;
@@ -28,29 +30,36 @@ public class ExprFunCall extends Expression
     
     /** Creates a new function call with the specified name and
      * parameter list. */
+    public ExprFunCall(String name, List<Expression> params, String nameJ)
+    {
+        this.name = name;
+        this.params = Collections.unmodifiableList(params);
+        this.name_Java = nameJ;}
     public ExprFunCall(String name, List<Expression> params)
     {
         this.name = name;
-        this.params = Collections.unmodifiableList(params);}
+        this.params = Collections.unmodifiableList(params);
+        this.name_Java = name;}
     
-    public ExprFunCall(String name, ExpressionList l){
+    public ExprFunCall(String name, ExpressionList l, String nameJ){
     	this.name = name;
     	this.params = l.getList();
+    	this.name_Java = nameJ;
     }
 
 
     /** Creates a new function call with the specified name and
      * specified single parameter. */
-    public ExprFunCall( String name, Expression param)
+    public ExprFunCall( String name, Expression param, String nameJ)
     {
-    	this ( name, Collections.singletonList (param));
+    	this ( name, Collections.singletonList (param), nameJ);
     }
 
     /**
      * Creates a new function call with the specified name and two specified parameters.
      */
-    public ExprFunCall( String name, Expression... params) {
-        this(name, Arrays.asList(params));
+    public ExprFunCall( String name, String nameJ, Expression... params) {
+        this(name, Arrays.asList(params), nameJ);
     }
 
 
@@ -106,7 +115,8 @@ public class ExprFunCall extends Expression
 
 	@Override
 	public boolean equals(Expression other) {
-		// TODO Auto-generated method stub
+		if(this.name.equals(((ExprFunCall)other).name))
+		return true;
 		return false;
 	}
 
@@ -115,9 +125,12 @@ public class ExprFunCall extends Expression
 		// TODO Auto-generated method stub
 		
 	}	@Override
-	public List<String> extractExternalFuncs(List<String> externalFuncNames) {
-		if(!externalFuncNames.contains(this.name)){
-			externalFuncNames.add(this.name);}
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
+		for(ExternalFunction ef: externalFuncNames){
+			if(ef.getName().equals(this.name))
+				return externalFuncNames;
+		}
+		externalFuncNames.add(new ExternalFunction(this.name,this.name_Java));
 		return externalFuncNames;
 	}
 }
