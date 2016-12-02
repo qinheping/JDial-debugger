@@ -1,70 +1,74 @@
-bit const0change = ??;
+ int Mathpow(){
+return ??;
+}bit const0change = ??;
  int Const0(){
 if(const0change == 1){
 return ??;}else{
 return 1;}
 }
-bit const1change = ??;
- int Const1(){
-if(const1change == 1){
-return ??;}else{
-return 0;}
-}
 
-int[12] lineArray;
-int[12] tArray = {0,0,0,0,0,0,0,0,0,0,0,0};
-int[12] iArray = {0,0,0,0,0,0,0,0,0,0,0,0};
+int[8] lineArray;
+int[8] aArray = {0,0,0,0,0,0,0,0};
+int[8] bArray = {0,0,0,0,0,0,0,0};
+int[8] cArray = {0,0,0,0,0,0,0,0};
 
 
-int tfinal = 0;
-int ifinal = 0;
+int cfinal = 0;
 int finalcount = 0;
 
- int orig(int x){
-int count = 0;
+ int SimpleJava(){
+int count = -1;
 int linehit = 0;
-int t = Const0();
 (count)++;
-lineArray[count] = 1;
-tArray[count] = t;
+lineArray[count] = 6;
 
+int a = 2;
 
-for(int i = x; i > (Const1()); (i)--){
 (count)++;
-lineArray[count] = 1;
-tArray[count] = t;
-iArray[count] = i;
+lineArray[count] = 7;
+aArray[count] = a;
 
-t = t + i;
+int b = a + (Const0());
+
 (count)++;
-lineArray[count] = 1;
-tArray[count] = t;
-iArray[count] = i;
+lineArray[count] = 8;
+aArray[count] = a;
+bArray[count] = b;
 
+int c = a + b;
 
-
+(count)++;
+lineArray[count] = 9;
+(linehit)++;
+if(linehit == 1){
+cfinal = c;
+finalcount = count;
+return 0;
 }
 
-return t;
+aArray[count] = a;
+bArray[count] = b;
+cArray[count] = c;
+
+return c;
+
 
 
 }
 harness void HammingTest(){
-int[6] oringianltArray = {1,1,4,4,4,6};
-int[6] oringianliArray = {0,3,3,3,2,1};
-int correctFinal_t = 5;
-int correctFinal_i = 1;
-orig(3);
+int[4] oringianlaArray = {0,2,2,2};
+int[4] oringianlbArray = {0,0,3,3};
+int[4] oringianlcArray = {0,0,0,5};
+int correctFinal_c = 6;
+SimpleJava();
 int HammingDistance = 0;
-for(int i = 0; i < 6; (i)++){
-if(const0change == 0){
-HammingDistance = (tArray[i]) != (oringianltArray[i]);}
-
-HammingDistance = (iArray[i]) != (oringianliArray[i]);
+for(int i = 0; i < 4; (i)++){
+HammingDistance += (aArray[i]) != (oringianlaArray[i]);
+HammingDistance += (bArray[i]) != (oringianlbArray[i]);
+HammingDistance += (cArray[i]) != (oringianlcArray[i]);
 }
 
-assert (tfinal == correctFinal_t);
-assert (ifinal == correctFinal_i);
-assert ((const0change + const1change) == 1);
+assert (cfinal == correctFinal_c);
+assert (const0change == 1);
 minimize(HammingDistance);
 }
