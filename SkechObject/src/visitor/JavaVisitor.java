@@ -594,7 +594,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 			if(tmp.equals(".")) continue;
 			methodName += tmp;
 		}
-		return new ExprFunCall(methodName, (ExpressionList) visit(ctx.argumentList()), methodNameJ);
+		return new ExprFunCall("External_"+methodName, (ExpressionList) visit(ctx.argumentList()), methodNameJ);
 	}
 	
 	@Override

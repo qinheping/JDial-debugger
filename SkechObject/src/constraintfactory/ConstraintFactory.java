@@ -94,6 +94,7 @@ public class ConstraintFactory {
 		
 		// extract info of external functions
 		externalFuncs = s.extractExternalFuncs(externalFuncs);
+		if(externalFuncs.size()>0)
 		System.out.println(externalFuncs.get(0).getName_Java());
 		
 		// replace all constants in source code

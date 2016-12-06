@@ -82,7 +82,7 @@ public class Test {
 	
 	@org.junit.Test
 	public void testExternalFunction(){
-		ExternalFunction ef = new ExternalFunction("Math.power","Math.power");
+		ExternalFunction ef = new ExternalFunction("Math.power","Math.power",2);
 		ef.put(new ExpressionTuple(2,2), new ExprConstInt(4));
 
 		ef.put(new ExpressionTuple(2,3), new ExprConstInt(8));

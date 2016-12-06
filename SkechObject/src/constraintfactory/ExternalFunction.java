@@ -45,7 +45,7 @@ public class ExternalFunction {
 	public Function getFunction(){
 		List<Statement> stmts = new ArrayList<Statement>();
 		List<ExprVar> vars = new ArrayList<ExprVar>();
-		Integer length = 0;
+		Integer length = this.num_Args;
 		for(ExpressionTuple t: safeTable.keySet()){
 			length = t.l.size();
 		}

@@ -130,7 +130,8 @@ public class ExprFunCall extends Expression
 			if(ef.getName().equals(this.name))
 				return externalFuncNames;
 		}
-		externalFuncNames.add(new ExternalFunction(this.name,this.name_Java));
+		Integer ary = this.params.size();
+		externalFuncNames.add(new ExternalFunction(this.name,this.name_Java, ary));
 		return externalFuncNames;
 	}
 }
