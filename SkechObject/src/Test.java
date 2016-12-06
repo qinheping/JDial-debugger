@@ -40,7 +40,7 @@ public class Test {
 		String correctTrace = new Scanner(new File("benchmarks/sumup_external/correction")).useDelimiter("\\Z").next();
 
 		MainEntrance me = new MainEntrance(oriTraces,correctTrace,15);
-		String s = me.Synthesize().toString();
+		//String s = me.Synthesize().toString();
 		//assert s.toString().equals("{7=2}") ;
 	}
 	
@@ -131,9 +131,9 @@ public class Test {
 	public void testReplaceConst() {
 		ANTLRInputStream input = new ANTLRInputStream(
 				"import java.util.Scanner;public class Main{	public static int largestGap(int[] a)	{	    int max = 1;	    a[1] = 10;	    int c = max++;	    int min = 100; 	    for(int i=0; i < 4; i++)	    {	        if(max < a[i])	        max = a[i];	    }        return max-min;	}	public static void main(String[] args)	{	    int x = largestGap( new int[]{ 2, 3, 7, 1 } );	    System.out.println(x);	}	}");
-		Function f = (Function) compile(input,"largestGap");
-		Statement s = f.getBody();
-		System.out.println(s);
+		//Function f = (Function) compile(input,"largestGap");
+		//Statement s = f.getBody();
+		//System.out.println(s);
 		// System.out.println(ConstraintFactory.repalceConst(s));
 		// System.out.println(s);
 	}
@@ -145,7 +145,7 @@ public class Test {
 		Function f = (Function) compile(input,"main");
 		Statement s = f.getBody();
 		ConstraintFactory.replaceConst(s);
-		ConstraintFactory.addRecordStmt((StmtBlock) s);
+		//ConstraintFactory.addRecordStmt((StmtBlock) s);
 		// System.out.println(s);
 	}
 
