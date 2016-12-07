@@ -40,7 +40,7 @@ public class Test {
 		String correctTrace = new Scanner(new File("benchmarks/sumup_external/correction")).useDelimiter("\\Z").next();
 
 		MainEntrance me = new MainEntrance(oriTraces,correctTrace,15);
-		//String s = me.Synthesize().toString();
+		String s = me.Synthesize().toString();
 		//assert s.toString().equals("{7=2}") ;
 	}
 	
@@ -73,7 +73,7 @@ public class Test {
 		i.set("date", new Date() ); 
 
 		Date date = (Date)i.get("date");    // retrieve a variable
-
+		
 		// Eval a statement and get the result
 		i.eval("bar = Math.pow(2,2)");             
 		assert i.get("bar").equals("4");
@@ -136,6 +136,7 @@ public class Test {
 		//System.out.println(s);
 		// System.out.println(ConstraintFactory.repalceConst(s));
 		// System.out.println(s);
+	
 	}
 
 	@org.junit.Test

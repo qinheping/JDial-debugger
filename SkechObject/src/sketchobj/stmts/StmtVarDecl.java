@@ -381,9 +381,7 @@ public class StmtVarDecl extends Statement {
 				inits.get(i).replaceLinearCombination();
 				inits.set(i, new ExprBinary(new ExprBinary(new ExprConstInt(1),"*", inits.get(i)), "+", new ExprConstInt(0)));
 			}
-		}
-	}
-		
+		}}
 	}
 
 	@Override
