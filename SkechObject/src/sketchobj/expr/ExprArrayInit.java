@@ -38,7 +38,12 @@ public class ExprArrayInit extends Expression
      * "elem" is one of the children.
      */
     private int dims;
-
+    public Expression length;
+    
+    public ExprArrayInit(Expression length, int k){
+    	this.length = length;
+    }
+    
     public ExprArrayInit( Expression singleElem) {
         this.elements = new ArrayList<Expression>(1);
         singleElem.setParent(this);

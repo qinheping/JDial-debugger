@@ -35,6 +35,21 @@ import java.math.*;
 public class Test {
 	
 	@org.junit.Test
+	public void testSimpleCal() throws FileNotFoundException, InterruptedException{
+		String oriTraces = new Scanner(new File("benchmarks/simpleCal/errortrace")).useDelimiter("\\Z").next();
+		Root root = MainEntrance.jsonRootCompile(oriTraces);
+		String code = root.getCode().getCode();
+		code = code.replace("\\n", "\n");
+		code = code.replace("\\t", "\t");
+
+		ANTLRInputStream input = new ANTLRInputStream(code);
+		Function function = (Function) MainEntrance.javaCompile(input, "main");
+		System.out.println(function);
+		//assert s.toString().equals("{7=2}") ;
+	}
+	
+	
+	@org.junit.Test
 	public void testSumupExternal() throws FileNotFoundException, InterruptedException{
 		String oriTraces = new Scanner(new File("benchmarks/sumup_external/errortrace")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/sumup_external/correction")).useDelimiter("\\Z").next();

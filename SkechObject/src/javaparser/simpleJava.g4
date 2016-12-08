@@ -1150,10 +1150,10 @@ methodReference_lfno_primary
 	;
 
 arrayCreationExpression
-	:	'new' primitiveType dimExprs dims?
-	|	'new' classOrInterfaceType dimExprs dims?
-	|	'new' primitiveType dims arrayInitializer
-	|	'new' classOrInterfaceType dims arrayInitializer
+	:	'new' primitiveType	 	dimExprs dims?
+	|	'new' classOrInterfaceType 	dimExprs dims?
+	|	'new' primitiveType 		dims 	arrayInitializer
+	|	'new' classOrInterfaceType 	dims 	arrayInitializer
 	;
 
 dimExprs
