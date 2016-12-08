@@ -42,6 +42,7 @@ public class ExprArrayInit extends Expression
     
     public ExprArrayInit(Expression length, int k){
     	this.length = length;
+    	this.elements = new ArrayList<Expression>();
     }
     
     public ExprArrayInit( Expression singleElem) {
@@ -89,6 +90,9 @@ public class ExprArrayInit extends Expression
     {
 	StringBuffer sb = new StringBuffer();
 	sb.append("{");
+	if(elements.size() == 0){
+		return "";
+	}
 	for (int i=0; i<elements.size(); i++) {
 	    sb.append(elements.get(i));
 	    if (i!=elements.size()-1) {

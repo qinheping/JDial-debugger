@@ -4,13 +4,17 @@ import sketchobj.expr.Expression;
 
 public class TypeArray extends Type {
     private final Type base;
-    private final Expression length;
+    private Expression length;
     //private final List<SketchExpr> dims;
 	public TypeArray(Type base, Expression length){
 		this.base = base;
 		this.length = length;
 	}
 
+	public void setLenghth(Expression length){
+		this.length = length;
+	}
+	
     public String toString()
     {
         String s = "";

@@ -244,9 +244,18 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 				inits.add(null);
 				return new StmtVarDecl(types, names, inits, ctx.start.getLine());
 			}
-			Expression ei = (Expression)visit(ctx.localVariableDeclarationStatement().localVariableDeclaration().variableDeclaratorList()
+			ExprArrayInit ei = (ExprArrayInit)visit(ctx.localVariableDeclarationStatement().localVariableDeclaration().variableDeclaratorList()
 					.variableDeclarator().get(0).variableInitializer());
-			System.out.println(ei);
+			if(ei.length == null){
+				types.add(t);
+				inits.add(ei);
+				return new StmtVarDecl(types, names, inits, ctx.start.getLine());
+			}else{
+				((TypeArray)t).setLenghth(ei.length);
+				inits.add(null);
+				types.add(t);
+				return new StmtVarDecl(types, names, inits, ctx.start.getLine());
+			}
 		}
 
 		return new StmtVarDecl(types, names, inits, ctx.start.getLine());
@@ -650,10 +659,14 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 			return new ExprArrayInit(el);
 		}
 		if(ctx.getText().substring(ctx.getText().length()-1).equals("]")){
-			System.out.println(ctx.getText());
-			return new ExprArrayInit((Expression) visit(ctx.dimExprs()));
+			return new ExprArrayInit((Expression) visit(ctx.dimExprs()),0);
 		}
 		return null;
+	}
+	
+	@Override
+	public Expression visitDimExpr(simpleJavaParser.DimExprContext ctx){
+		return (Expression) visit(ctx.expression());
 	}
 
 	// //TODO :
