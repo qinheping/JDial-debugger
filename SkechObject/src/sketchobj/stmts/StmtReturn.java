@@ -44,7 +44,14 @@ public class StmtReturn extends Statement
     {
     	this(value, 0);
     }
-
+    public StmtReturn( int line)
+    {
+//        if (value instanceof ExprConstUnit) {
+//            value = null;
+//        }
+    	this.value = null;
+        this.setLineNumber(line);
+    }
 
     /** Returns the return value of this, or null if there is no return
      * value. */
@@ -75,7 +82,6 @@ public class StmtReturn extends Statement
 		}
 		return value.replaceConst(index);
 	}
-
 
 	@Override
 	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {

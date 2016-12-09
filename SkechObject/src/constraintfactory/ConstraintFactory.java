@@ -298,6 +298,9 @@ public class ConstraintFactory {
 				consStmts.add(new StmtAssign(new ExprVar(v + "final"), new ExprVar(v), 0));
 			}
 			consStmts.add(new StmtAssign(new ExprVar("finalcount"), new ExprVar("count"), 0));
+			if(ConstraintFactory.fh.getReturnType() instanceof TypeVoid){
+				consStmts.add(new StmtReturn(0));
+			}
 			consStmts.add(new StmtReturn(new ExprConstInt(0), 0));
 			Statement cons = new StmtBlock(consStmts);
 			Statement iflinehit = new StmtIfThen(

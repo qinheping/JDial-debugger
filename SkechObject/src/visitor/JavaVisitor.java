@@ -492,6 +492,8 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public SketchObject visitPrimaryNoNewArray_lfno_primary(
 			simpleJavaParser.PrimaryNoNewArray_lfno_primaryContext ctx) {
+		if(ctx.getChild(0).getText().equals("("))
+			return visit(ctx.getChild(1));
 		return visit(ctx.getChild(0));
 	}
 
@@ -532,7 +534,7 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Statement visitIfThenElseStatement(simpleJavaParser.IfThenElseStatementContext ctx) {
 		return new StmtIfThen((Expression) visit(ctx.expression()), (Statement) visit(ctx.statementNoShortIf()),
-				(Statement) visit(ctx.statementNoShortIf()), ctx.start.getLine());
+				(Statement) visit(ctx.statement()), ctx.start.getLine());
 	}
 
 	/** 'if' '(' expression ')' statement **/

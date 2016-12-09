@@ -1,6 +1,7 @@
 package sketchobj.stmts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,7 +143,8 @@ public class StmtIfThen extends Statement {
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-
+		List stmts = new ArrayList(parent.stmts);
+		parent.stmts = stmts;
 		parent.stmts.set(index,
 				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
 		

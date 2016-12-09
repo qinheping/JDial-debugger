@@ -58,6 +58,7 @@ public class MainEntrance {
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
+		System.out.println(function);
 
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args);

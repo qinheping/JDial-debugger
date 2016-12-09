@@ -102,6 +102,7 @@ public class Function extends SketchNode {
 			if (p.isParameterOutput()) {
 				s += "ref ";
 			}
+			if(p.getType()==null) continue;
 			s += p.getType() + " " + p.getName();
 			notf = true;
 		}
