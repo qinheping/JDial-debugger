@@ -1,0 +1,6 @@
+de.unisb.cs.st.javaslicer.tracer
+de.unisb.cs.st.javaslicer.tracer.instrumentation
+de.unisb.cs.st.javaslicer.tracer.traceSequences
+de.unisb.cs.st.javaslicer.tracer.traceSequences.gzip
+de.unisb.cs.st.javaslicer.tracer.traceSequences.sequitur
+de.unisb.cs.st.javaslicer.tracer.traceSequences.uncompressed

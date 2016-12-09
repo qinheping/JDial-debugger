@@ -1,11 +1,13 @@
- int Mathpow(){
+ int External_Mathpow(int p0, int p1){
 return ??;
-}bit const0change = ??;
+}
+bit const0change = ??;
  int Const0(){
 if(const0change == 1){
 return ??;}else{
 return 1;}
 }
+
 
 int[8] lineArray;
 int[8] aArray = {0,0,0,0,0,0,0,0};
@@ -55,6 +57,7 @@ return c;
 
 
 }
+
 harness void HammingTest(){
 int[4] oringianlaArray = {0,2,2,2};
 int[4] oringianlbArray = {0,0,3,3};

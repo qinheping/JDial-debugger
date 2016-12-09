@@ -164,6 +164,16 @@ public class Test {
 		//ConstraintFactory.addRecordStmt((StmtBlock) s);
 		// System.out.println(s);
 	}
+	
+	@org.junit.Test
+	public void testFileIO(){
+		
+		SliceUtil su = SliceUtil.makeSliceUtilFromFilename("experimentsrc/CalcStatic.java");
+		ArrayList<Integer> l = su.get_slice_line_nums("CalcStatic", "main", 54, "top");
+		for(int n : l){
+			System.out.println(n);
+		}
+	}
 
 /*	@org.junit.Test
 	public void testSimpleExample() throws InterruptedException {
@@ -391,5 +401,14 @@ public class Test {
 		jsonParser parser = new jsonParser(tokens);
 		ParseTree tree = parser.json();
 		return new JsonVisitor().visit(tree);
+	}
+	
+	@org.junit.Test
+	public void testMedian1() throws FileNotFoundException, InterruptedException{
+		String oriTraces = new Scanner(new File("benchmarks/median1/median-test1")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/median1/median-target1")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,8);
+		String res = me.Synthesize().toString();
+		System.out.println(res);
 	}
 }

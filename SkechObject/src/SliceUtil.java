@@ -3,6 +3,30 @@ import java.util.ArrayList;
 
 public class SliceUtil {
 	String class_name;
+	public static SliceUtil makeSliceUtilFromFilename(String filename){
+		InputStreamReader ir = null;
+		try {
+			ir = new InputStreamReader(new FileInputStream(filename));
+		} catch (FileNotFoundException e1) {
+			System.out.println("Failed to open line number file");
+			System.exit(1);
+		}
+		BufferedReader fr = new BufferedReader(ir);
+		String line = null;
+		StringBuilder sb = new StringBuilder();
+		try {
+			while((line = fr.readLine()) != null){
+				sb.append(line);
+			}
+			
+		} catch(IOException ioe){
+			System.out.println("Error reading file: " + filename);
+			System.exit(1);
+		}
+		return new SliceUtil(sb.toString(), filename.replace(".java", ""));
+			
+	}
+	
 	public SliceUtil(String prog_text, String class_name){
 		this.class_name = class_name;
 		File tmp = new File(this.class_name + ".java");
@@ -18,7 +42,7 @@ public class SliceUtil {
 		}
 		Runtime rt = Runtime.getRuntime();
 		try{
-			Process mk_file = rt.exec(new String[]{"make_jar.sh", this.class_name});
+			Process mk_file = rt.exec(new String[]{"SliceProgs/make_jar.sh", this.class_name});
 			mk_file.waitFor();
 		}catch(IOException e){
 			System.err.println("Failed to make jar file for " + this.class_name);
@@ -34,7 +58,7 @@ public class SliceUtil {
 		Runtime rt = Runtime.getRuntime();
 		Process slicer = null;
 		try{
-			slicer = rt.exec(new String[]{"get_text_slice.sh", class_name, method_name, Integer.toString(line_num), var});
+			slicer = rt.exec(new String[]{"SliceProgs/get_text_slice.sh", class_name, method_name, Integer.toString(line_num), var});
 		}catch(IOException e){
 			System.err.println("Failed to create slicer proc");
 			System.exit(1);
@@ -56,7 +80,7 @@ public class SliceUtil {
 		try {
 			ir = new InputStreamReader(new FileInputStream(class_name +".nums"));
 		} catch (FileNotFoundException e1) {
-			System.out.println("Failed to open file");
+			System.out.println("Failed to open line number file");
 		}
 		InputStreamReader or = new InputStreamReader(slicer.getErrorStream());
 		BufferedReader ebr = new BufferedReader(or);

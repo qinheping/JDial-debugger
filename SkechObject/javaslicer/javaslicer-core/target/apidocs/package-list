@@ -1,0 +1,5 @@
+de.unisb.cs.st.javaslicer.controlflowanalysis
+de.unisb.cs.st.javaslicer.dependenceAnalysis
+de.unisb.cs.st.javaslicer.instructionSimulation
+de.unisb.cs.st.javaslicer.slicing
+de.unisb.cs.st.javaslicer.variables
