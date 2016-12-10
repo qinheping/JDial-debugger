@@ -11,6 +11,7 @@ import sketchobj.core.SketchObject;
 public abstract class Expression extends SketchNode{
 
 	public int lineNumber;
+	public boolean isBoolean;
 	
 	public Integer getIValue() {
 		// TODO Auto-generated method stub
