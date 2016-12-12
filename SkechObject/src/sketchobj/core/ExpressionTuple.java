@@ -3,6 +3,7 @@ package sketchobj.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import constraintfactory.ConstData;
 import sketchobj.expr.Expression;
 
 public class ExpressionTuple extends SketchObject{
@@ -54,6 +55,11 @@ public class ExpressionTuple extends SketchObject{
 			}
 		}
 		return true;
+	}
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

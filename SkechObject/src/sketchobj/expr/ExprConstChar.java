@@ -37,12 +37,6 @@ public class ExprConstChar extends ExprConstant{
 	}
 
 	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean equals(Expression other) {
 		// TODO Auto-generated method stub
 		return false;
@@ -56,6 +50,18 @@ public class ExprConstChar extends ExprConstant{
 
 	public void setVal(String val) {
 		this.val = val;
+	}
+
+	@Override
+	public void checkAtom() {
+		this.setAtom(false);
+		
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

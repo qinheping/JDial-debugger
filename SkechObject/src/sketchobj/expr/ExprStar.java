@@ -29,12 +29,17 @@ public boolean equals(Expression other) {
 	return false;
 }
 @Override
-public void replaceLinearCombination() {
+public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public void checkAtom() {
 	// TODO Auto-generated method stub
 	
 }
 @Override
-public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
+public ConstData replaceLinearCombination(int index) {
 	// TODO Auto-generated method stub
 	return null;
 }

@@ -65,8 +65,8 @@ public class StmtExpr extends Statement {
 	}
 
 	@Override
-	public void replaceLinearCombination() {
-		return;
+	public  ConstData replaceLinearCombination(int index){
+		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
 	}
 
 	@Override

@@ -39,7 +39,8 @@ public abstract class Statement extends SketchNode {
 
 	public abstract ConstData replaceConst(int index);
 
-	public abstract void replaceLinearCombination();
+	@Override
+	public abstract ConstData replaceLinearCombination(int index);
 
 	public Context getPostctx() {
 		return postctx;
@@ -61,9 +62,11 @@ public abstract class Statement extends SketchNode {
 		this.prectx = prectx;
 	}
 
-	public void replaceLinearCombination(List<Integer> allowRange) {
+	@Override
+	public ConstData replaceLinearCombination(int index,List<Integer> allowRange) {
 		if (allowRange.contains(this.getLineNumber()))
-			this.replaceLinearCombination();
+			return this.replaceLinearCombination(index);
+		return new ConstData(null, new ArrayList(), index, 0, null,this.lineNumber);
 	}
 
 	@Override

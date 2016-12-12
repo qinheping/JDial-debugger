@@ -12,25 +12,45 @@ public class ConstData {
 	private int index;
 	private int value;
 	private String name;
+	public boolean isCoeff;
 	private int oriline;
-
+	private List<Integer> liveVarsIndexSet;
+	private List<String> liveVarsNameSet;
+	private Integer primaryCoeffIndex;
+	
 	@SuppressWarnings("unchecked")
-	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name, int line){
+	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name, int line, boolean isc){
 		this.setType(type);
 		this.setChildren(children);
 		this.setIndex(index);
 		this.setValue(value);
 		this.setName(name);
 		this.oriline = line;
+		this.isCoeff = isc;
 	}
-
+	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name, int line){
+		this(type,children,index,value,name,line,false);
+	}
 	public ConstData(int index2,int line) {
-		this(null,new ArrayList<SketchObject>(),index2,0,null,line);}
+		this(null,new ArrayList<SketchObject>(),index2,0,null,line,false);}
 
 	public ConstData(int index2, String string, int line) {
-		this(null,new ArrayList<SketchObject>(),index2,0,string,line);
+		this(null,new ArrayList<SketchObject>(),index2,0,string,line,false);
 	}
 
+	public ConstData(Type t, List<SketchObject> toAdd, int index2, int i, String name, int lineNumber,
+			List<Integer> liveVarsIndexSet2, List<String> liveVarsNameSet2, Integer primaryCoeffIndex) {
+		this.setType(t);
+		this.setChildren(toAdd);
+		this.setIndex(index2);
+		this.setValue(i);
+		this.setName(name);
+		this.oriline=lineNumber;
+		this.isCoeff = true;
+		this.liveVarsIndexSet = liveVarsIndexSet2;
+		this.liveVarsNameSet = liveVarsNameSet2;
+		this.primaryCoeffIndex = primaryCoeffIndex;
+	}
 	public List<SketchObject> getChildren() {
 		return children;
 	}
@@ -77,5 +97,23 @@ public class ConstData {
 
 	public void setOriline(int oriline) {
 		this.oriline = oriline;
+	}
+	public List<Integer> getLiveVarsIndexSet() {
+		return liveVarsIndexSet;
+	}
+	public void setLiveVarsIndexSet(List<Integer> liveVarsIndexSet) {
+		this.liveVarsIndexSet = liveVarsIndexSet;
+	}
+	public List<String> getLiveVarsNameSet() {
+		return liveVarsNameSet;
+	}
+	public void setLiveVarsNameSet(List<String> liveVarsNameSet) {
+		this.liveVarsNameSet = liveVarsNameSet;
+	}
+	public Integer getPrimaryCoeffIndex() {
+		return primaryCoeffIndex;
+	}
+	public void setPrimaryCoeffIndex(Integer primaryCoeffIndex) {
+		this.primaryCoeffIndex = primaryCoeffIndex;
 	}
 }

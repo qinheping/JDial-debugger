@@ -111,10 +111,8 @@ public class StmtReturn extends Statement
 
 
 	@Override
-	public void replaceLinearCombination() {
-		value.replaceLinearCombination();
-
-		value = new ExprBinary(new ExprBinary(new ExprConstInt(1),"*", value), "+", new ExprConstInt(0));
+	public ConstData replaceLinearCombination(int index){
+		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
 	}
 
 

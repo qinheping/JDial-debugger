@@ -196,11 +196,6 @@ public class StmtAssert extends Statement {
 			return null;
 		}
 
-		@Override
-		public void replaceLinearCombination() {
-			// TODO Auto-generated method stub
-			
-		}
 
 		@Override
 		public boolean isBasic() {
@@ -216,6 +211,12 @@ public class StmtAssert extends Statement {
 
 		@Override
 		public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public ConstData replaceLinearCombination(int index) {
 			// TODO Auto-generated method stub
 			return null;
 		}

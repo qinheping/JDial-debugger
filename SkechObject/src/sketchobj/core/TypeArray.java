@@ -1,5 +1,6 @@
 package sketchobj.core;
 
+import constraintfactory.ConstData;
 import sketchobj.expr.Expression;
 
 public class TypeArray extends Type {
@@ -26,5 +27,11 @@ public class TypeArray extends Type {
 
 	private Type getBase() {
 		return base;
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

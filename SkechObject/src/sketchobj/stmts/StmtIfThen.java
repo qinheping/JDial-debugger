@@ -157,12 +157,7 @@ public class StmtIfThen extends Statement {
 		return m;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		cons.replaceLinearCombination();
-		if(alt!= null)
-			alt.replaceLinearCombination();
-	}
+
 
 	@Override
 	public boolean isBasic() {
@@ -175,6 +170,15 @@ public class StmtIfThen extends Statement {
 		if(alt!=null)
 			externalFuncNames = alt.extractExternalFuncs(externalFuncNames);
 		return externalFuncNames ;
+	}
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(cons);
+		if (alt != null)
+			toAdd.add(alt);
+		toAdd.add(cons);
+		return new ConstData(null, toAdd, index, 0,null,this.getLineNumber());
 	}
 
 

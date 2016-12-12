@@ -163,14 +163,20 @@ public class ExprUnary extends Expression
 	}
 
 	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
+	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
+		externalFuncNames = expr.extractExternalFuncs(externalFuncNames);
+		return externalFuncNames;
+	}
+
+	@Override
+	public void checkAtom() {
+		this.setAtom(this.expr.isAtom());
 		
 	}
 
 	@Override
-	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
-		externalFuncNames = expr.extractExternalFuncs(externalFuncNames);
-		return externalFuncNames;
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -109,14 +109,21 @@ public class ExprField extends Expression
 		return false;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		return externalFuncNames;
+	}
+
+	@Override
+	public void checkAtom() {
+		this.setAtom(true);
+		
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

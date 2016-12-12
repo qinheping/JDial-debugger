@@ -87,15 +87,21 @@ public class ExprConstInt extends ExprConstant
 		return false;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return externalFuncNames;
+	}
+
+	@Override
+	public void checkAtom() {
+		this.setAtom(false);
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

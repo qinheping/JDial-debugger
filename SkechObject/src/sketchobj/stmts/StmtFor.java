@@ -100,13 +100,7 @@ public class StmtFor extends Statement {
 		return ((StmtBlock)((StmtBlock) body).stmts.get(0)).stmts.get(((StmtBlock)((StmtBlock) body).stmts.get(0)).stmts.size()-1).addRecordStmt((StmtBlock) body, 1, m);
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		init.replaceLinearCombination();
-		incr.replaceLinearCombination();
-		body.replaceLinearCombination();
-		
-	}
+
 
 	@Override
 	public boolean isBasic() {
@@ -120,6 +114,17 @@ public class StmtFor extends Statement {
 		externalFuncNames = incr.extractExternalFuncs(externalFuncNames);
 		externalFuncNames = body.extractExternalFuncs(externalFuncNames);
 		return externalFuncNames ;
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		this.cond.setBoolean(true);
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(init);
+		toAdd.add(incr);
+		toAdd.add(body);
+		toAdd.add(cond);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
 }

@@ -85,12 +85,6 @@ public class StmtWhile extends Statement {
 	}
 
 	@Override
-	public void replaceLinearCombination() {
-		cond.replaceLinearCombination();
-		body.replaceLinearCombination();
-	}
-
-	@Override
 	public boolean isBasic() {
 		return true;
 	}
@@ -100,6 +94,14 @@ public class StmtWhile extends Statement {
 		externalFuncNames = cond.extractExternalFuncs(externalFuncNames);
 		externalFuncNames = body.extractExternalFuncs(externalFuncNames);
 		return externalFuncNames;
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(cond);
+		toAdd.add(body);
+		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
 }

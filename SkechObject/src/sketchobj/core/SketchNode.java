@@ -17,5 +17,11 @@ public class SketchNode extends SketchObject{
 	public void setParent(SketchNode parent) {
 		this.parent = parent;
 	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

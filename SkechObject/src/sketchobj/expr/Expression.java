@@ -11,7 +11,9 @@ import sketchobj.core.SketchObject;
 public abstract class Expression extends SketchNode{
 
 	public int lineNumber;
-	public boolean isBoolean;
+	private boolean isBoolean;
+	private boolean isAtom;
+	
 	
 	public Integer getIValue() {
 		// TODO Auto-generated method stub
@@ -19,6 +21,7 @@ public abstract class Expression extends SketchNode{
 	}
 	
 	public abstract ConstData replaceConst(int index, String string);
+	public abstract void checkAtom();
 	
 	@Override
 	public ConstData replaceConst(int index, List<Integer> repair_range) {
@@ -29,11 +32,31 @@ public abstract class Expression extends SketchNode{
 			List<SketchObject> toAdd = new ArrayList<SketchObject>();
 			return new ConstData(null, toAdd, index, 0, null,this.lineNumber);
 	}
+	@Override
+	public abstract ConstData  replaceLinearCombination(int index);
 	
-	public abstract void  replaceLinearCombination();
-	
+	@Override
+	public ConstData replaceLinearCombination(int index, List<Integer> allowRange){
+		return this.replaceConst(index);
+	}
 	public abstract boolean equals(Expression other);
 
 	public abstract List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames);
+
+	public boolean isBoolean() {
+		return isBoolean;
+	}
+
+	public void setBoolean(boolean isBoolean) {
+		this.isBoolean = isBoolean;
+	}
+
+	public boolean isAtom() {
+		return isAtom;
+	}
+
+	public void setAtom(boolean isAtom) {
+		this.isAtom = isAtom;
+	}
 
 }

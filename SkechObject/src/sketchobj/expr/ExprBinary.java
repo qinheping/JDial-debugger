@@ -424,16 +424,29 @@ public class ExprBinary extends Expression {
 	}
 
 	@Override
-	public void replaceLinearCombination() {
-		this.left.replaceLinearCombination();
-		this.right.replaceLinearCombination();
-	}
-
-	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		externalFuncNames = left.extractExternalFuncs(externalFuncNames);
 		externalFuncNames = right.extractExternalFuncs(externalFuncNames);
 		return externalFuncNames;
+	}
+
+	@Override
+	public void checkAtom() {
+		if(this.op != 3){
+			this.setAtom(false);
+			return;
+		}
+		if(this.left.isAtom()||this.right.isAtom()){
+			this.setAtom(true);
+		}else
+			this.setAtom(false);
+		
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

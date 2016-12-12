@@ -120,11 +120,8 @@ public class ExprFunCall extends Expression
 		return false;
 	}
 
+
 	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		for(ExternalFunction ef: externalFuncNames){
 			if(ef.getName().equals(this.name))
@@ -133,5 +130,17 @@ public class ExprFunCall extends Expression
 		Integer ary = this.params.size();
 		externalFuncNames.add(new ExternalFunction(this.name,this.name_Java, ary));
 		return externalFuncNames;
+	}
+
+	@Override
+	public void checkAtom() {
+		this.setAtom(true);
+		
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -2,6 +2,7 @@ package sketchobj.core;
 
 import java.util.List;
 
+import constraintfactory.ConstData;
 import sketchobj.expr.Expression;
 
 public class ExpressionList extends SketchObject{
@@ -17,5 +18,11 @@ public class ExpressionList extends SketchObject{
 
 	public void setList(List<Expression> list) {
 		this.list = list;
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

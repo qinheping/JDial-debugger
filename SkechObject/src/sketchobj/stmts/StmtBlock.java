@@ -101,10 +101,8 @@ public class StmtBlock extends Statement {
 	}
 
 	@Override
-	public void replaceLinearCombination() {
-		for (int i = 0; i < stmts.size(); i++) {
-			stmts.get(i).replaceLinearCombination();
-		}
+	public ConstData replaceLinearCombination(int index){
+		return new ConstData(null,stmts,index,0,null,this.getLineNumber());
 	}
 
 	@Override

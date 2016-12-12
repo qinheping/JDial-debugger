@@ -134,16 +134,23 @@ public class ExprArrayInit extends Expression
 		return false;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		// TODO Auto-generated method stub
 		return externalFuncNames;
+	}
+
+	@Override
+	public void checkAtom() {
+		this.setAtom(false);
+		
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
 
 }

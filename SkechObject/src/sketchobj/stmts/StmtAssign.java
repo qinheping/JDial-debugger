@@ -10,10 +10,13 @@ import constraintfactory.ExternalFunction;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
+import sketchobj.core.TypeArray;
+import sketchobj.core.TypePrimitive;
 import sketchobj.expr.ExprBinary;
 import sketchobj.expr.ExprConstInt;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
+import sketchobj.expr.ExprVar;
 import sketchobj.expr.Expression;
 
 public class StmtAssign extends Statement {
@@ -125,12 +128,7 @@ public class StmtAssign extends Statement {
 		return m;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		rhs.replaceLinearCombination();
-		rhs = new ExprBinary(new ExprBinary(new ExprConstInt(1), "*", rhs), "+", new ExprConstInt(0));
 
-	}
 
 	@Override
 	public boolean isBasic() {
@@ -140,6 +138,41 @@ public class StmtAssign extends Statement {
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		return rhs.extractExternalFuncs(externalFuncNames);
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		Integer primaryIndex = -1;
+		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		toAdd.add(rhs);
+		rhs.checkAtom();
+		if(rhs.isAtom()){
+			this.rhs = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",this.rhs);
+			primaryIndex = index;
+			index++;
+		}
+		Type t = this.getPrectx().getAllVars().get(lhs.toString());
+		List<Integer> liveVarsIndexSet = new ArrayList<Integer>();
+		List<String> liveVarsNameSet = new ArrayList<String>();
+		if((t instanceof TypePrimitive) && ((TypePrimitive)t).getType() == 1){
+			rhs.setBoolean(true);;
+			return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+		}
+		if(t instanceof TypeArray){
+					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+		}
+		List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
+		for(String v: vars){
+			if(((TypePrimitive)this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive)t).getType())
+				continue;
+			Expression newTerm = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",new ExprVar(v,t));
+			this.rhs= new ExprBinary(rhs,"+",newTerm);
+			liveVarsIndexSet.add(index);
+			index++;
+			liveVarsNameSet.add(v);
+		}
+		this.rhs = new ExprBinary(this.rhs, "+", new ExprFunCall("Const" + index, new ArrayList<Expression>()));
+		return new ConstData(t, toAdd,index++,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
 	}
 
 }

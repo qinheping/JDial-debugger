@@ -3,6 +3,8 @@ package sketchobj.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import constraintfactory.ConstData;
+
 public class ParametersList extends SketchObject{
 	List<Parameter> list;
 	public ParametersList(){
@@ -15,6 +17,12 @@ public class ParametersList extends SketchObject{
 	
 	public List<Parameter> getList() {
 		return list;
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

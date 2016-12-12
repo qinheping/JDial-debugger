@@ -22,11 +22,6 @@ public class ExprString extends Expression{
 		return null;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean equals(Expression other) {
@@ -36,6 +31,18 @@ public class ExprString extends Expression{
 
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void checkAtom() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
 		// TODO Auto-generated method stub
 		return null;
 	}

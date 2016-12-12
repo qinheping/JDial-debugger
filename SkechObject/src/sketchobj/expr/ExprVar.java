@@ -4,17 +4,23 @@ import java.util.List;
 
 import constraintfactory.ConstData;
 import constraintfactory.ExternalFunction;
+import sketchobj.core.Type;
 
 public class ExprVar extends Expression
 {
     private String name;
 
 	private int line;
+	private Type t;
 
     /** Create a new ExprVar for a particular named variable. */
     public ExprVar( String name)
     {
         this.name = name;
+    }
+    public ExprVar(String name, Type t){
+    	this.name = name;
+    	this.t = t;
     }
 
     /** Return the name of the variable referenced. */
@@ -72,13 +78,18 @@ public class ExprVar extends Expression
 		return false;
 	}
 
-	@Override
-	public void replaceLinearCombination() {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		return externalFuncNames;
+	}
+	@Override
+	public void checkAtom() {
+		this.setAtom(true);
+	}
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -1,5 +1,7 @@
 package sketchobj.core;
 
+import constraintfactory.ConstData;
+
 public class TypePrimitive extends Type {
 	/** Type constant for bit types. */
 	public static final int TYPE_BIT = 1;
@@ -105,6 +107,12 @@ public class TypePrimitive extends Type {
 		default:
 			return "<primitive type " + type + ">";
 		}
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

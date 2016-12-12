@@ -2,6 +2,8 @@ package sketchobj.core;
 import java.util.Collection;
 import java.util.Collections;
 
+import constraintfactory.ConstData;
+
 public class TypeStructRef extends Type{
     private String name;
     private final boolean isUnboxed;
@@ -20,5 +22,10 @@ public class TypeStructRef extends Type{
     }
 	public boolean isUnboxed() {
 		return isUnboxed;
+	}
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

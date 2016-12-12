@@ -1,5 +1,7 @@
 package sketchobj.core;
 
+import constraintfactory.ConstData;
+
 public class Parameter extends SketchObject{
 	 // NOTE -- don't change these, or modify ScAstModel.gm in Skalch project
 		public final static int IN = 0;
@@ -83,4 +85,10 @@ public class Parameter extends SketchObject{
 	    public int compareTo(Parameter p) {
 	        return name.compareTo(p.name);
 	    }
+
+		@Override
+		public ConstData replaceLinearCombination(int index) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

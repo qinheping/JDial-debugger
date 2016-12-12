@@ -1,5 +1,6 @@
 package sketchobj.core;
 
+import constraintfactory.ConstData;
 
 public class TypeStruct extends Type {
 	private String name;
@@ -148,6 +149,12 @@ public class TypeStruct extends Type {
 
 	public boolean isUnboxed() {
 		return isUnboxed;
+	}
+
+	@Override
+	public ConstData replaceLinearCombination(int index) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

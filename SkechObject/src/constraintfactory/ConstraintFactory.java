@@ -99,10 +99,10 @@ public class ConstraintFactory {
 		
 		// replace all constants in source code
 		if (!ConstraintFactory.limited_range) {
-			s.replaceLinearCombination();
+			//s.replaceLinearCombination();
 			constFunDecls = ConstraintFactory.replaceConst(s);
 		} else {
-			s.replaceLinearCombination(ConstraintFactory.repair_range);
+			//s.replaceLinearCombination(ConstraintFactory.repair_range);
 			constFunDecls = ConstraintFactory.replaceConst(s);
 		}
 
@@ -144,11 +144,97 @@ public class ConstraintFactory {
 		return block.toString() + "\n" + f.toString() + "\n" + constraintFunction().toString();
 	}
 
-	// ------------ Auxiliary functions
-	static public void replace_linearcombination(StmtBlock sb) {
-		sb.replaceLinearCombination();
+	// ------------ main function, generate Sketch script for code <source>
+	public String getScript_linearCombination(Statement source) {
 
+		Statement s = source;
+		Statement constFunDecls = null;
+		Statement coeffFunDecls = null;
+		
+		// extract info of external functions
+		externalFuncs = s.extractExternalFuncs(externalFuncs);
+		if(externalFuncs.size()>0)
+		System.out.println(externalFuncs.get(0).getName_Java());
+		
+		// replace all constants in source code
+		if (!ConstraintFactory.limited_range) {
+			coeffFunDecls = ConstraintFactory.replaceLinearCombination(s);
+			//constFunDecls = ConstraintFactory.replaceConst(s);
+		} else {
+			coeffFunDecls = ConstraintFactory.replaceLinearCombination(s,ConstraintFactory.repair_range);
+			//constFunDecls = ConstraintFactory.replaceConst(s);
+		}
+
+		// add record stmts to source code and collect vars info
+		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
+		List<String> varsNames = new ArrayList<String>(vars.keySet());
+		varList = varsNames;
+		List<Type> varsTypes = new ArrayList<Type>();
+		for (int i = 0; i < varsNames.size(); i++) {
+			varsTypes.add(vars.get(varsNames.get(i)));
+		}
+
+		// add declare of <linehit> and <count>
+		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
+		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0), s);
+
+		Function f = new Function(ConstraintFactory.fh, s);
+
+		List<Statement> stmts = new ArrayList<>();
+
+		// add declare of const functions
+		stmts.add(constFunDecls);
+
+		// add line array
+		stmts.add(
+				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
+
+		// add final state
+		// System.out.println(finalState.getOrdered_locals().size());
+		for (String v : finalState.getOrdered_locals()) {
+			stmts.add(new StmtVarDecl(new TypePrimitive(4), v + "final", new ExprConstInt(0), 0));
+		}
+
+		// add final count
+		stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
+
+		Statement block = new StmtBlock(stmts);
+
+		return block.toString() + "\n" + f.toString() + "\n" + constraintFunction().toString();
 	}
+	
+	
+	private static Statement replaceLinearCombination(Statement s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static Statement replaceLinearCombination(Statement s, List<Integer> repair_range2) {
+		List<Statement> list = new ArrayList<Statement>();
+		Stack<SketchObject> stmtStack = new Stack<SketchObject>();
+		int index = 0;
+		stmtStack.push(s);
+		while (!stmtStack.empty()) {
+			SketchObject target = stmtStack.pop();
+			ConstData data = null;
+			if(ConstraintFactory.limited_range){
+				data = target.replaceConst(index, ConstraintFactory.repair_range);
+			}else{
+				data = target.replaceConst(index);
+			}
+			if (data.getType() != null) {
+				addToConstMap(data);
+				addToConstMapLine(data);
+				list.add(constChangeDecl(index, new TypePrimitive(1)));
+				list.add(new StmtFunDecl(addConstFun(index, data.getValue(), data.getType())));
+			}
+			index = data.getIndex();
+			pushAll(stmtStack, data.getChildren());
+		}
+		return new StmtBlock(list);
+	}
+
+	// ------------ Auxiliary functions
 
 	static public Statement constChangeDecl(int index, Type t) {
 		return new StmtVarDecl(t, "const" + index + "change", new ExprStar(), 0);
