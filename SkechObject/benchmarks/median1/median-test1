@@ -1,5 +1,5 @@
 {
-  "code": "public class Main {\n    public static void main(String[] args) {\n        int a = 6;\n\t\tint b = 2;\n\t\tint c = 8;\n\t\tint m = 0;\n\t\tif ((a >= b && a <= c) || (a >= c && a <= b)){\n\t\t\tm = b;\n\t\t}else if ((b >= a && b <= c) || (b >= c && b <= a)){\n\t\t\tm = b;\n\t\t}else{\n\t\t\tm = c;\n\t\t}\n\t\tint z = m + 1 + 2 + 3;\n    }\n}\n",
+  "code": "public class Main {\n    public static void main(String[] args) {\n        int a = 6;\n\t\tint b = 2;\n\t\tint c = 9;\n\t\tint m = 0;\n\t\tif ((a >= b && a <= c) || (a >= c && a <= b)){\n\t\t\tm = b;\n\t\t}else if ((b >= a && b <= c) || (b >= c && b <= a)){\n\t\t\tm = b;\n\t\t}else{\n\t\t\tm = c;\n\t\t}\n\t\tint z = m + 1 + 2 + 3;\n    }\n}\n",
   "stdin": "3 4\n5\n  \n",
   "trace": [
     {
@@ -110,7 +110,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8
+            "c": 9
           },
           "ordered_varnames": [
             "a",
@@ -140,7 +140,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8,
+            "c": 9,
             "m": 0
           },
           "ordered_varnames": [
@@ -172,7 +172,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8,
+            "c": 9,
             "m": 0
           },
           "ordered_varnames": [
@@ -204,7 +204,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8,
+            "c": 9,
             "m": 2
           },
           "ordered_varnames": [
@@ -236,7 +236,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8,
+            "c": 9,
             "m": 2
           },
           "ordered_varnames": [
@@ -268,7 +268,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8,
+            "c": 9,
             "m": 2,
             "z": 8
           },
@@ -302,7 +302,7 @@
           "encoded_locals": {
             "a": 6,
             "b": 2,
-            "c": 8,
+            "c": 9,
             "m": 2,
             "z": 8,
             "__return__": [

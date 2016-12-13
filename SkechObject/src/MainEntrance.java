@@ -137,4 +137,8 @@ public class MainEntrance {
 		ParseTree tree = parser.compilationUnit();
 		return new JavaVisitor(target).visit(tree);
 	}
+
+	public Map<Integer, Integer> Synthesize () throws InterruptedException {
+		return this.Synthesize(false);
+	}
 }

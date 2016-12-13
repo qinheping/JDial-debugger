@@ -204,7 +204,6 @@ public class ConstraintFactory {
 		return block.toString() + "\n" + f.toString() + "\n" + constraintFunction_linearCombination().toString();
 	}
 
-
 	private static Statement replaceLinearCombination(Statement s) {
 		List<Statement> list = new ArrayList<Statement>();
 		Stack<SketchObject> stmtStack = new Stack<SketchObject>();
@@ -219,7 +218,7 @@ public class ConstraintFactory {
 				data = target.replaceLinearCombination(index);
 			}
 			if (data.getType() != null) {
-				while(index <= data.getPrimaryCoeffIndex()){
+				while (index <= data.getPrimaryCoeffIndex()) {
 					list.add(coeffChangeDecl(index, new TypePrimitive(1)));
 					list.add(new StmtFunDecl(addCoeffFun(index, 1, data.getType())));
 					index++;
@@ -229,11 +228,11 @@ public class ConstraintFactory {
 						list.add(coeffChangeDecl(ii, new TypePrimitive(1)));
 						list.add(new StmtFunDecl(addCoeffFun(ii, 0, data.getType())));
 					}
-					
+
 				}
 				index = data.getIndex();
-				list.add(coeffChangeDecl(index-1,new TypePrimitive(4)));
-				list.add(new StmtFunDecl(addLCConstFun(index-1, data.getType())));
+				list.add(coeffChangeDecl(index - 1, new TypePrimitive(4)));
+				list.add(new StmtFunDecl(addLCConstFun(index - 1, data.getType())));
 			}
 			index = data.getIndex();
 			pushAll(stmtStack, data.getChildren());
@@ -246,10 +245,10 @@ public class ConstraintFactory {
 	private static Function addLCConstFun(int i, Type type) {
 		Expression condition_2 = new ExprStar();
 		StmtReturn return_2 = new StmtReturn(new ExprConstInt(0), 0);
-		StmtReturn return_3 = new StmtReturn(new ExprVar("coeff"+i+"change"),0);
+		StmtReturn return_3 = new StmtReturn(new ExprVar("coeff" + i + "change"), 0);
 
-		Statement ifst_2 = new StmtIfThen(condition_2,return_2,null,0);
-		StmtBlock sb =new StmtBlock();
+		Statement ifst_2 = new StmtIfThen(condition_2, return_2, null, 0);
+		StmtBlock sb = new StmtBlock();
 		sb.addStmt(ifst_2);
 		sb.addStmt(return_3);
 		return new Function("Coeff" + i, type, new ArrayList<Parameter>(), sb, FcnType.Static);
@@ -259,11 +258,11 @@ public class ConstraintFactory {
 		Expression condition = new ExprBinary(new ExprVar("coeff" + index + "change"), "==", new ExprConstInt(0), 0);
 		StmtReturn return_1 = new StmtReturn(new ExprConstInt(value), 0);
 		Expression condition_2 = new ExprStar();
-		StmtReturn return_2 = new StmtReturn(new ExprConstInt(1-value), 0);
+		StmtReturn return_2 = new StmtReturn(new ExprConstInt(1 - value), 0);
 		Statement ifst = new StmtIfThen(condition, return_1, null, 0);
-		Statement ifst_2 = new StmtIfThen(condition_2,return_2,null,0);
-		StmtReturn return_3 = new StmtReturn(new ExprConstInt(-1),0);
-		StmtBlock sb =new StmtBlock();
+		Statement ifst_2 = new StmtIfThen(condition_2, return_2, null, 0);
+		StmtReturn return_3 = new StmtReturn(new ExprConstInt(-1), 0);
+		StmtBlock sb = new StmtBlock();
 		sb.addStmt(ifst);
 		sb.addStmt(ifst_2);
 		sb.addStmt(return_3);
@@ -293,7 +292,7 @@ public class ConstraintFactory {
 						list.add(constChangeDecl(ii, new TypePrimitive(1)));
 						list.add(new StmtFunDecl(addConstFun(ii, data.getValue(), data.getType())));
 					}
-					
+
 				}
 			}
 			index = data.getIndex();
@@ -315,6 +314,7 @@ public class ConstraintFactory {
 		}
 		return result;
 	}
+
 	private Function constraintFunction_linearCombination() {
 		List<Statement> stmts = new ArrayList<Statement>();
 
@@ -338,7 +338,17 @@ public class ConstraintFactory {
 			stmts.add(new StmtVarDecl(new TypeArray(new TypePrimitive(4), new ExprConstInt(originalLength)),
 					"oringianl" + v + "Array", new ExprArrayInit(arrayInit), 0));
 		}
-
+		List<Expression> arrayInit = new ArrayList<>();
+		for (int i = 0; i < bound; i++) {
+			arrayInit.add(
+					new ExprConstInt((int) oriTrace.getTraces().get(i).getLine()));
+		}			
+		for (int i = bound; i < originalLength; i++) {
+			arrayInit.add(new ExprConstInt(0));
+		}
+		stmts.add(new StmtVarDecl(new TypeArray(new TypePrimitive(4), new ExprConstInt(originalLength)),
+				"oringianllineArray", new ExprArrayInit(arrayInit), 0));
+		
 		for (String v : finalState.getOrdered_locals()) {
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), "correctFinal_" + v,
 					new ExprConstInt(finalState.getLocals().find(v).getValue()), 0));
@@ -351,7 +361,7 @@ public class ConstraintFactory {
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "HammingDistance", new ExprConstInt(0), 0));
 
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "EditDistance", new ExprConstInt(0), 0));
-		
+
 		List<Statement> forBody = new ArrayList<Statement>();
 		for (String v : varList) {
 			if (constMap.containsKey(v)) {
@@ -384,9 +394,14 @@ public class ConstraintFactory {
 
 		}
 		
+		forBody.add(new StmtAssign(new ExprVar("HammingDistance"),
+				new ExprBinary(new ExprArrayRange( "lineArray", "i", 0), "!=",
+						new ExprArrayRange("oringianllineArray", "i", 0), 0),
+				1, 1));
+
 		StmtBlock editsb = new StmtBlock();
-		for(int i = 0; i < constNumber;i++){
-			editsb.addStmt(new StmtAssign(new ExprVar("EditDistance"), new ExprVar("coeff"+i+"change"),1,1));
+		for (int i = 0; i < constNumber; i++) {
+			editsb.addStmt(new StmtAssign(new ExprVar("EditDistance"), new ExprVar("coeff" + i + "change"), 1, 1));
 		}
 		stmts.add(editsb);
 		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
@@ -399,9 +414,7 @@ public class ConstraintFactory {
 		}
 
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
-		stmts.add(new StmtMinimize(new ExprVar("EditDistance"),true));
-		
-		
+		stmts.add(new StmtMinimize(new ExprVar("EditDistance"), true));
 
 		stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 
