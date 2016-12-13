@@ -5,14 +5,19 @@ import java.util.List;
 
 import constraintfactory.ConstData;
 import constraintfactory.ExternalFunction;
+import sketchobj.core.Context;
 import sketchobj.core.SketchNode;
 import sketchobj.core.SketchObject;
+import sketchobj.core.Type;
 
 public abstract class Expression extends SketchNode{
 
 	public int lineNumber;
 	private boolean isBoolean;
 	private boolean isAtom;
+	private Context ctx;
+	private Type t;
+	private boolean LCadded;
 	
 	
 	public Integer getIValue() {
@@ -27,7 +32,6 @@ public abstract class Expression extends SketchNode{
 	public ConstData replaceConst(int index, List<Integer> repair_range) {
 		if (repair_range.contains(this.lineNumber)){
 			return this.replaceConst(index);
-
 			}
 			List<SketchObject> toAdd = new ArrayList<SketchObject>();
 			return new ConstData(null, toAdd, index, 0, null,this.lineNumber);
@@ -57,6 +61,30 @@ public abstract class Expression extends SketchNode{
 
 	public void setAtom(boolean isAtom) {
 		this.isAtom = isAtom;
+	}
+
+	public Context getCtx() {
+		return ctx;
+	}
+
+	public void setCtx(Context ctx) {
+		this.ctx = ctx;
+	}
+
+	public Type getT() {
+		return t;
+	}
+
+	public void setT(Type t) {
+		this.t = t;
+	}
+
+	public boolean isLCadded() {
+		return LCadded;
+	}
+
+	public void setLCadded(boolean lCadded) {
+		LCadded = lCadded;
 	}
 
 }

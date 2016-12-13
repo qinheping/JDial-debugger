@@ -44,7 +44,7 @@ public class MainEntrance {
 		this.repair_range = null;
 	}
 
-	public Map<Integer, Integer> Synthesize() throws InterruptedException {
+	public Map<Integer, Integer> Synthesize(boolean useLC) throws InterruptedException {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
@@ -64,9 +64,11 @@ public class MainEntrance {
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args);
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
-		String script = cf.getScript(function.getBody());
-
-		// System.out.println(script);
+		String script;
+		if(useLC)
+			script = cf.getScript_linearCombination(function.getBody());
+		else
+			script= cf.getScript(function.getBody());
 
 		List<ExternalFunction> externalFuncs = ConstraintFactory.externalFuncs;
 		

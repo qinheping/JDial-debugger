@@ -1,5 +1,6 @@
 package sketchobj.expr;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -140,7 +141,6 @@ public class ExprFunCall extends Expression
 
 	@Override
 	public ConstData replaceLinearCombination(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
 }

@@ -7,6 +7,8 @@ import constraintfactory.ConstData;
 import constraintfactory.ExternalFunction;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
+import sketchobj.core.TypeArray;
+import sketchobj.core.TypePrimitive;
 
 public class ExprBinary extends Expression {
 	public static final int BINOP_ADD = 1;
@@ -36,7 +38,6 @@ public class ExprBinary extends Expression {
 	private Expression left, right;
 	private ExprBinary alias;
 
-	
 	/**
 	 * Create a new binary expression given the operation and the left and right
 	 * child nodes. Requires that op is a valid operator code and that left and
@@ -50,7 +51,7 @@ public class ExprBinary extends Expression {
 	 *            expression on the left of the operator
 	 * @param right
 	 *            expression on the right of the operator
-	 * @param i 
+	 * @param i
 	 */
 	public ExprBinary(int op, Expression left, Expression right, int i) {
 		this.op = op;
@@ -130,7 +131,7 @@ public class ExprBinary extends Expression {
 	}
 
 	public ExprBinary(Expression left, String sop, Expression right) {
-		this(left,sop,right,0);
+		this(left, sop, right, 0);
 	}
 
 	/** */
@@ -383,17 +384,17 @@ public class ExprBinary extends Expression {
 			Type t = ((ExprConstant) left).getType();
 			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(this);
-			return new ConstData(t, toAdd, index + 1, value, null,this.lineNumber);
+			return new ConstData(t, toAdd, index + 1, value, null, this.lineNumber);
 		}
 		if (right instanceof ExprConstant) {
 			int value = ((ExprConstant) right).getVal();
 			Type t = ((ExprConstant) right).getType();
 			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, null,this.lineNumber);
+			return new ConstData(t, toAdd, index + 1, value, null, this.lineNumber);
 		}
 		toAdd.add(left);
 		toAdd.add(right);
-		return new ConstData(null, toAdd, index, 0, null,this.lineNumber);
+		return new ConstData(null, toAdd, index, 0, null, this.lineNumber);
 	}
 
 	@Override
@@ -404,19 +405,19 @@ public class ExprBinary extends Expression {
 			Type t = ((ExprConstant) left).getType();
 			left = new ExprFunCall("Const" + index, new ArrayList<Expression>());
 			toAdd.add(this);
-			return new ConstData(t, toAdd, index + 1, value, string,this.lineNumber);
+			return new ConstData(t, toAdd, index + 1, value, string, this.lineNumber);
 		}
 		if (right instanceof ExprConstant) {
 			int value = ((ExprConstant) right).getVal();
 			Type t = ((ExprConstant) right).getType();
 			right = new ExprFunCall("Const" + index, new ArrayList<Expression>());
-			return new ConstData(t, toAdd, index + 1, value, string,this.lineNumber);
+			return new ConstData(t, toAdd, index + 1, value, string, this.lineNumber);
 		}
 		toAdd.add(left);
 		toAdd.add(right);
-		return new ConstData(null, toAdd, index, 0, string,this.lineNumber);
+		return new ConstData(null, toAdd, index, 0, string, this.lineNumber);
 	}
-	
+
 	@Override
 	public boolean equals(Expression other) {
 		// TODO Auto-generated method stub
@@ -432,21 +433,91 @@ public class ExprBinary extends Expression {
 
 	@Override
 	public void checkAtom() {
-		if(this.op != 3){
+		if (this.op != 3) {
 			this.setAtom(false);
 			return;
 		}
-		if(this.left.isAtom()||this.right.isAtom()){
+		if (this.left.isAtom() || this.right.isAtom()) {
 			this.setAtom(true);
-		}else
+		} else
 			this.setAtom(false);
-		
+
 	}
 
 	@Override
 	public ConstData replaceLinearCombination(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.isBoolean()) {
+			if (this.op == 8 || this.op == 9 || this.op == 10 || this.op == 11 || this.op == 12 || this.op == 13) {
+				this.left = new ExprBinary(this.left, "-", this.right);
+				this.right = new ExprConstInt(0);
+				this.left.setCtx(this.getCtx());
+				this.left.setT(new TypePrimitive(4));
+				List<SketchObject> toAdd = new ArrayList<SketchObject>();
+				toAdd.add(this.left);
+				return new ConstData(null, toAdd, index, 0, null, 0);
+			} else {
+				this.left.setBoolean(true);
+				this.right.setBoolean(true);
+				List<SketchObject> toAdd = new ArrayList<SketchObject>();
+				left.setCtx(this.getCtx());
+				toAdd.add(this.left);
+				right.setCtx(this.getCtx());
+				toAdd.add(this.right);
+				return new ConstData(null, toAdd, index, 0, null, 0);
+			}
+		}
+		if (this.op == 1 || this.op == 2) {
+			Integer primaryIndex = -1;
+			List<SketchObject> toAdd = new ArrayList<SketchObject>();
+			left.checkAtom();
+			right.checkAtom();
+			if (right.isAtom()) {
+				this.right = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*",
+						this.right);
+				primaryIndex = index;
+				index++;
+			} else {
+				right.setCtx(this.getCtx());
+				right.setT(this.getT());
+				toAdd.add(right);
+			}
+			if (left.isAtom()) {
+				this.left = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*",
+						this.left);
+				primaryIndex = index;
+				index++;
+			} else {
+				left.setCtx(this.getCtx());
+				left.setT(this.getT());
+				toAdd.add(left);
+			}
+			Type t = this.getT();
+			List<Integer> liveVarsIndexSet = new ArrayList<Integer>();
+			List<String> liveVarsNameSet = new ArrayList<String>();
+			if (t instanceof TypeArray) {
+				return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, 0);
+			}
+			if (this.isLCadded()) {
+				left.setLCadded(true);
+				right.setLCadded(true);
+			} else {
+				List<String> vars = new ArrayList<String>(this.getCtx().getAllVars().keySet());
+				for (String v : vars) {
+					if (((TypePrimitive) this.getCtx().getAllVars().get(v)).getType() != ((TypePrimitive) t).getType())
+						continue;
+					Expression newTerm = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()),
+							"*", new ExprVar(v, t));
+					this.right = new ExprBinary(right, "+", newTerm);
+					liveVarsIndexSet.add(index);
+					index++;
+					liveVarsNameSet.add(v);
+				}
+				this.right = new ExprBinary(this.right, "+",
+						new ExprFunCall("Coeff" + index, new ArrayList<Expression>()));
+			}
+			return new ConstData(t, toAdd, index+1, 0, null, 0, liveVarsIndexSet, liveVarsNameSet, primaryIndex);
+		}
+		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, 0);
 	}
 
 }

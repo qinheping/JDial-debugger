@@ -176,7 +176,6 @@ public class ExprUnary extends Expression
 
 	@Override
 	public ConstData replaceLinearCombination(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
 }

@@ -20,7 +20,7 @@ public class CallSketch {
 		try {
 			tmp.createNewFile();
 			WriteStringToFile(tmp, s);
-			Process proc = rt.exec(new String[] { "sketch", "tmp/tmp.txt" });
+			Process proc = rt.exec(new String[] { "lib/sketch", "tmp/tmp.txt" });
 			//InputStream stderr = proc.getErrorStream();
 			//InputStreamReader isr = new InputStreamReader(stderr);
 			//BufferedReader br = new BufferedReader(isr);

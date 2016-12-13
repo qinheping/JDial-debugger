@@ -130,11 +130,11 @@ public class StmtIfThen extends Statement {
 		this.setPrectx(prectx);
 		this.setPostctx(prectx);
 		Context postctx = new Context(prectx);
-		postctx.pushVars(new HashMap<String, Type>());
+		postctx.pushNewVars();;
 		postctx = cons.buildContext(postctx);
 		postctx.popVars();
 		if (alt != null) {
-			postctx.pushNewVars();
+			postctx.pushNewVars();;
 			postctx = alt.buildContext(postctx);
 			postctx.popVars();
 		}
@@ -174,10 +174,14 @@ public class StmtIfThen extends Statement {
 	@Override
 	public ConstData replaceLinearCombination(int index) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();
+		cond.setCtx(this.getPostctx());
+		cond.setBoolean(true);
+		toAdd.add(cond);
+		
 		toAdd.add(cons);
-		if (alt != null)
+		if (alt != null){
 			toAdd.add(alt);
-		toAdd.add(cons);
+		}
 		return new ConstData(null, toAdd, index, 0,null,this.getLineNumber());
 	}
 

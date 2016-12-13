@@ -1,5 +1,6 @@
 package sketchobj.expr;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import constraintfactory.ConstData;
@@ -60,8 +61,7 @@ public class ExprConstChar extends ExprConstant{
 
 	@Override
 	public ConstData replaceLinearCombination(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
 
 }

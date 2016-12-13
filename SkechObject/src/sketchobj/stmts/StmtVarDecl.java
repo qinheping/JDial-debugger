@@ -395,19 +395,23 @@ public class StmtVarDecl extends Statement {
 		if (this.inits.size() != 0) {
 			for (int i = 0; i < inits.size(); i++) {
 				Integer primaryIndex = -1;
-				Expression rhs = inits.get(i);
-				toAdd.add(inits.get(i));
-				rhs.checkAtom();
-				if(rhs.isAtom()){
-					rhs = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",rhs);
+				inits.get(i).checkAtom();
+				inits.get(i).setLCadded(true);
+				Type t = this.getPostctx().getAllVars().get(this.names.get(i).toString());
+				if(inits.get(i).isAtom()){
+					inits.set(i,new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",inits.get(i)));
 					primaryIndex = index;
 					index++;
 				}
-				Type t = this.getPrectx().getAllVars().get(this.names.get(i).toString());
+				else{
+					inits.get(i).setT(t);
+					inits.get(i).setCtx(this.getPrectx());
+					toAdd.add(inits.get(i));
+				}
 				List<Integer> liveVarsIndexSet = new ArrayList<Integer>();
 				List<String> liveVarsNameSet = new ArrayList<String>();
 				if((t instanceof TypePrimitive) && ((TypePrimitive)t).getType() == 1){
-					rhs.setBoolean(true);;
+					inits.get(i).setBoolean(true);;
 					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
 				}
 				if(t instanceof TypeArray){
@@ -418,13 +422,14 @@ public class StmtVarDecl extends Statement {
 					if(((TypePrimitive)this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive)t).getType())
 						continue;
 					Expression newTerm = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",new ExprVar(v,t));
-					rhs= new ExprBinary(rhs,"+",newTerm);
+					inits.set(i,new ExprBinary(inits.get(i),"+",newTerm));
 					liveVarsIndexSet.add(index);
-					index++;
 					liveVarsNameSet.add(v);
+					index++;
 				}
-				rhs = new ExprBinary(rhs, "+", new ExprFunCall("Const" + index, new ArrayList<Expression>()));
-				return new ConstData(t, toAdd,index++,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
+				inits.set(i,new ExprBinary(inits.get(i), "+", new ExprFunCall("Coeff" + index, new ArrayList<Expression>())));
+				index++;
+				return new ConstData(t, toAdd,index,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
 			}
 		}
 		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());

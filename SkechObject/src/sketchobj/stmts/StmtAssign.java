@@ -144,14 +144,18 @@ public class StmtAssign extends Statement {
 	public ConstData replaceLinearCombination(int index) {
 		Integer primaryIndex = -1;
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();
-		toAdd.add(rhs);
 		rhs.checkAtom();
+		rhs.setLCadded(true);
+		Type t = this.getPrectx().getAllVars().get(lhs.toString());
 		if(rhs.isAtom()){
 			this.rhs = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",this.rhs);
 			primaryIndex = index;
 			index++;
+		}else{
+			rhs.setT(t);
+			rhs.setCtx(this.getPrectx());
+			toAdd.add(rhs);
 		}
-		Type t = this.getPrectx().getAllVars().get(lhs.toString());
 		List<Integer> liveVarsIndexSet = new ArrayList<Integer>();
 		List<String> liveVarsNameSet = new ArrayList<String>();
 		if((t instanceof TypePrimitive) && ((TypePrimitive)t).getType() == 1){
@@ -171,8 +175,8 @@ public class StmtAssign extends Statement {
 			index++;
 			liveVarsNameSet.add(v);
 		}
-		this.rhs = new ExprBinary(this.rhs, "+", new ExprFunCall("Const" + index, new ArrayList<Expression>()));
-		return new ConstData(t, toAdd,index++,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
+		this.rhs = new ExprBinary(this.rhs, "+", new ExprFunCall("Coeff" + index, new ArrayList<Expression>()));
+		return new ConstData(t, toAdd,index+1,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
 	}
 
 }
