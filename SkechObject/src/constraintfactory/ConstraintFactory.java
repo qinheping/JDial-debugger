@@ -282,22 +282,32 @@ public class ConstraintFactory {
 			SketchObject target = stmtStack.pop();
 			ConstData data = null;
 			if (ConstraintFactory.limited_range) {
-				data = target.replaceConst(index, ConstraintFactory.repair_range);
+				data = target.replaceLinearCombination(index, ConstraintFactory.repair_range);
 			} else {
-				data = target.replaceConst(index);
+				data = target.replaceLinearCombination(index);
 			}
 			if (data.getType() != null) {
+				while (index <= data.getPrimaryCoeffIndex()) {
+					list.add(coeffChangeDecl(index, new TypePrimitive(1)));
+					list.add(new StmtFunDecl(addCoeffFun(index, 1, data.getType())));
+					index++;
+				}
 				if (data.getLiveVarsIndexSet() != null) {
 					for (int ii : data.getLiveVarsIndexSet()) {
-						list.add(constChangeDecl(ii, new TypePrimitive(1)));
-						list.add(new StmtFunDecl(addConstFun(ii, data.getValue(), data.getType())));
+						list.add(coeffChangeDecl(ii, new TypePrimitive(1)));
+						list.add(new StmtFunDecl(addCoeffFun(ii, 0, data.getType())));
 					}
 
 				}
+				index = data.getIndex();
+				list.add(coeffChangeDecl(index - 1, new TypePrimitive(4)));
+				list.add(new StmtFunDecl(addLCConstFun(index - 1, data.getType())));
 			}
 			index = data.getIndex();
 			pushAll(stmtStack, data.getChildren());
 		}
+		constNumber = index;
+		System.out.println(s);
 		return new StmtBlock(list);
 	}
 
