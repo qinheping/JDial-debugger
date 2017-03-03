@@ -1,0 +1,748 @@
+bit f1nochange = ??, f2nochange = ??, f3nochange = ??, f4nochange = ??,
+  f5nochange = ??, f6nochange = ??, f7nochange = ??, f8nochange = ??, f9nochange = ??;
+
+bit c1 = ??, c2=??, c3 = ??, c4=??, c5=??, c6=??, c7=??, c8=??, c9=??, c10=??;
+bit c11 = ??, c12=??, c13 = ??, c14=??, c15=??, c16=??, c17=??, c18=??, c19=??, c20=??;
+bit c21 = ??, c22=??, c23 = ??, c24=??, c25=??, c26=??, c27=??, c28=??, c29=??, c30=??;
+bit c31 = ??, c32=??, c33 = ??, c34=??, c35=??, c36=??, c37=??, c38 = ??;
+
+int UNDEFINED = -100;
+
+int size =0;
+
+int f1(int N, int[N] a){
+  if(f1nochange == 0){
+    return -100;
+  }
+  else{
+    return coeff1()*??;
+  }
+}
+
+int f2(int N, int[N] a){
+  if(f2nochange == 0){
+    return 100;
+  }
+  else{
+    return coeff38()*a[0] + coeff2()*??;
+  }
+}
+
+
+int f3(int N, int[N] a, int min, int max){
+  if(f3nochange == 0){
+    return 1;
+  }
+  else{
+    return coeff3()*N + coeff4()*a[??] + coeff5()*min + coeff6()*max + coeff7()*??;
+  }
+}
+
+bit f4(int N, int[N] a, int min, int max, int i){
+  if(f4nochange == 0){
+    return i < N;
+  }
+  else{
+    return coeff8()*N + coeff9()*a[??] + coeff10()*min + coeff11()*max + coeff12()*i + coeff13()*?? > 0;
+  }
+}
+
+
+bit f5(int N, int[N] a, int min, int max, int i){
+  if(f5nochange == 0){
+    return max < a[i];
+  }
+  else{
+    return coeff14()*N + coeff15()*a[i+??] + coeff16()*min + coeff17()*max + coeff18()*i + coeff19()*?? > 0;
+  }
+}
+
+int f6(int N, int[N] a, int min, int max, int i){
+  if(f6nochange == 0){
+    return a[i];
+  }
+  else{
+    return coeff20()*N + coeff21()*a[i+??] + coeff22()*min + coeff23()*max + coeff24()*i + coeff25()*??;
+  }
+}
+
+
+bit f7(int N, int[N] a, int min, int max, int i){
+  if(f7nochange == 0){
+    return min > a[i];
+  }
+  else{
+    return coeff26()*N + coeff27()*a[i+??] + coeff28()*min + coeff29()*max + coeff36()*i + coeff37()*?? > 0;
+  }
+}
+
+int f8(int N, int[N] a, int min, int max, int i){
+  if(f8nochange == 0){
+    return a[i];
+  }
+  else{
+    return coeff30()*N + coeff31()*a[i+??] + coeff32()*min + coeff33()*max + coeff34()*i + coeff35()*??;
+  }
+}
+
+
+
+int coeff1(){
+  if(c1==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff2(){
+  if(c2==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff3(){
+  if(c3==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff4(){
+  if(c4==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff5(){
+  if(c5==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff6(){
+  if(c6==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff7(){
+  if(c7==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff8(){
+  if(c8==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff9(){
+  if(c9==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff10(){
+  if(c10==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+
+int coeff11(){
+  if(c11==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff12(){
+  if(c12==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff13(){
+  if(c13==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff14(){
+  if(c14==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff15(){
+  if(c15==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff16(){
+  if(c16==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff17(){
+  if(c17==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff18(){
+  if(c18==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff19(){
+  if(c19==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff20(){
+  if(c20==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff21(){
+  if(c21==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff22(){
+  if(c22==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff23(){
+  if(c23==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff24(){
+  if(c24==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff25(){
+  if(c25==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff26(){
+  if(c26==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff27(){
+  if(c27==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff28(){
+  if(c28==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff29(){
+  if(c29==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff30(){
+  if(c30==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+
+int coeff31(){
+  if(c31==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff32(){
+  if(c32==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff33(){
+  if(c33==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff34(){
+  if(c34==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff35(){
+  if(c35==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff36(){
+  if(c36==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff37(){
+  if(c37==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+int coeff38(){
+  if(c38==0) return 0;
+  if(??) return 1;
+  return -1;
+}
+
+
+
+
+
+int max0(int N, int[N] a){
+  return 0;
+}
+
+int min0(int N, int[N] a){
+  return 100;
+}
+
+int i0(int N, int[N] a){
+  return 0; 
+}
+
+
+
+int max1(int N, int[N] a){
+  if(i0(N,a)<N && max0(N,a) != UNDEFINED){
+    if(a[i0(N,a)]>max0(N,a)) return a[i0(N,a)];
+    else return max0(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min1(int N, int[N] a){
+  if(i0(N,a)<N && min0(N,a) != UNDEFINED){
+    if(a[i0(N,a)]<min0(N,a)) return a[i0(N,a)];
+    else return min0(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i1(int N, int[N] a){
+  if(i0(N,a)!=UNDEFINED && i0(N,a)<N){
+    return i0(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int max2(int N, int[N] a){
+  if(i1(N,a)<N && max1(N,a) != UNDEFINED){
+    if(a[i1(N,a)]>max1(N,a)) return a[i1(N,a)];
+    else return max1(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min2(int N, int[N] a){
+  if(i1(N,a)<N && min1(N,a) != UNDEFINED){
+    if(a[i1(N,a)]<min1(N,a)) return a[i1(N,a)];
+    else return min1(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i2(int N, int[N] a){
+  if(i1(N,a)!=UNDEFINED && i1(N,a)<N){
+    return i1(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+
+int max3(int N, int[N] a){
+  if(i2(N,a)<N && max2(N,a) != UNDEFINED){
+    if(a[i2(N,a)]>max2(N,a)) return a[i2(N,a)];
+    else return max2(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min3(int N, int[N] a){
+  if(i2(N,a)<N && min2(N,a) != UNDEFINED){
+    if(a[i2(N,a)]<min2(N,a)) return a[i2(N,a)];
+    else return min2(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i3(int N, int[N] a){
+  if(i2(N,a)!=UNDEFINED && i2(N,a)<N){
+    return i2(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int max4(int N, int[N] a){
+  if(i3(N,a)<N && max3(N,a) != UNDEFINED){
+    if(a[i3(N,a)]>max3(N,a)) return a[i3(N,a)];
+    else return max3(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min4(int N, int[N] a){
+  if(i3(N,a)<N && min3(N,a) != UNDEFINED){
+    if(a[i3(N,a)]<min3(N,a)) return a[i3(N,a)];
+    else return min3(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i4(int N, int[N] a){
+  if(i3(N,a)!=UNDEFINED && i3(N,a)<N){
+    return i3(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int max5(int N, int[N] a){
+  if(i4(N,a)<N && max4(N,a) != UNDEFINED){
+    if(a[i4(N,a)]>max4(N,a)) return a[i4(N,a)];
+    else return max4(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min5(int N, int[N] a){
+  if(i4(N,a)<N && min4(N,a) != UNDEFINED){
+    if(a[i4(N,a)]<min4(N,a)) return a[i4(N,a)];
+    else return min4(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i5(int N, int[N] a){
+  if(i4(N,a)!=UNDEFINED && i4(N,a)<N){
+    return i4(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+
+int min0p(int N, int[N] a){
+  return f1(N,a);
+}
+
+int max0p(int N, int[N] a){
+  return f2(N,a);
+}
+
+int i0p(int N, int[N] a){
+  return f3(N,a,min0p(N,a),max0p(N,a)); 
+}
+
+
+
+int max1p(int N, int[N] a){
+  if(f4(N,a,min0p(N,a),max0p(N,a),i0p(N,a)) && max0p(N,a) != UNDEFINED){
+    if(f5(N,a,min0p(N,a),max0p(N,a),i0p(N,a))) return f6(N,a,min0p(N,a),max0p(N,a),i0p(N,a));
+    else return max0p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min1p(int N, int[N] a){
+  if(f4(N,a,min0p(N,a),max0p(N,a),i0p(N,a)) && min0p(N,a) != UNDEFINED){
+    if(f7(N,a,min0p(N,a),max0p(N,a),i0p(N,a))) return f8(N,a,min0p(N,a),max0p(N,a),i0p(N,a));
+    else return min0p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i1p(int N, int[N] a){
+  if(i0p(N,a)!=UNDEFINED && f4(N,a,min0p(N,a),max0p(N,a),i0p(N,a))){
+    return i0p(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int max2p(int N, int[N] a){
+  if(f4(N,a,min1p(N,a),max1p(N,a),i1p(N,a)) && max1p(N,a) != UNDEFINED){
+    if(f5(N,a,min1p(N,a),max1p(N,a),i1p(N,a))) return f6(N,a,min1p(N,a),max1p(N,a),i1p(N,a));
+    else return max1p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min2p(int N, int[N] a){
+  if(f4(N,a,min1p(N,a),max1p(N,a),i1p(N,a)) && min1p(N,a) != UNDEFINED){
+    if(f7(N,a,min1p(N,a),max1p(N,a),i1p(N,a))) return f8(N,a,min1p(N,a),max1p(N,a),i1p(N,a));
+    else return min1p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i2p(int N, int[N] a){
+  if(i1p(N,a)!=UNDEFINED && f4(N,a,min1p(N,a),max1p(N,a),i1p(N,a))){
+    return i1p(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+int max3p(int N, int[N] a){
+  if(f4(N,a,min2p(N,a),max2p(N,a),i2p(N,a)) && max2p(N,a) != UNDEFINED){
+    if(f5(N,a,min2p(N,a),max2p(N,a),i2p(N,a))) return f6(N,a,min2p(N,a),max2p(N,a),i2p(N,a));
+    else return max2p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min3p(int N, int[N] a){
+  if(f4(N,a,min2p(N,a),max2p(N,a),i2p(N,a)) && min2p(N,a) != UNDEFINED){
+    if(f7(N,a,min2p(N,a),max2p(N,a),i2p(N,a))) return f8(N,a,min2p(N,a),max2p(N,a),i2p(N,a));
+    else return min2p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i3p(int N, int[N] a){
+  if(i2p(N,a)!=UNDEFINED && f4(N,a,min2p(N,a),max2p(N,a),i2p(N,a))){
+    return i2p(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+int max4p(int N, int[N] a){
+  if(f4(N,a,min3p(N,a),max3p(N,a),i3p(N,a)) && max3p(N,a) != UNDEFINED){
+    if(f5(N,a,min3p(N,a),max3p(N,a),i3p(N,a))) return f6(N,a,min3p(N,a),max3p(N,a),i3p(N,a));
+    else return max3p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min4p(int N, int[N] a){
+  if(f4(N,a,min3p(N,a),max3p(N,a),i3p(N,a)) && min3p(N,a) != UNDEFINED){
+    if(f7(N,a,min3p(N,a),max3p(N,a),i3p(N,a))) return f8(N,a,min3p(N,a),max3p(N,a),i3p(N,a));
+    else return min3p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i4p(int N, int[N] a){
+  if(i3p(N,a)!=UNDEFINED && f4(N,a,min3p(N,a),max3p(N,a),i3p(N,a))){
+    return i3p(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int max5p(int N, int[N] a){
+  if(f4(N,a,min4p(N,a),max4p(N,a),i4p(N,a)) && max4p(N,a) != UNDEFINED){
+    if(f5(N,a,min4p(N,a),max4p(N,a),i4p(N,a))) return f6(N,a,min4p(N,a),max4p(N,a),i4p(N,a));
+    else return max4p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+int min5p(int N, int[N] a){
+  if(f4(N,a,min4p(N,a),max4p(N,a),i4p(N,a)) && min4p(N,a) != UNDEFINED){
+    if(f7(N,a,min4p(N,a),max4p(N,a),i4p(N,a))) return f8(N,a,min4p(N,a),max4p(N,a),i4p(N,a));
+    else return min4p(N,a);
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int i5p(int N, int[N] a){
+  if(i4p(N,a)!=UNDEFINED && f4(N,a,min4p(N,a),max4p(N,a),i4p(N,a))){
+    return i4p(N,a)+1; 
+  }
+  else 
+    return UNDEFINED;
+}
+
+
+int[7] minArray = {0,0,0,0,0,0,0};
+int[7] maxArray = {0,0,0,0,0,0,0};
+int[7] iArray = {0,0,0,0,0,0,0};
+
+int buggy(int N, int[N] a){
+  int max = f1(N,a); //a[0]
+  int min = f2(N,a); //100
+  int count = 0;
+  maxArray[count] = max;
+  minArray[count] = min;
+ 
+  for(int i=f3(N,a,min,max); f4(N,a,min,max,i); i++){
+    assert count < 7;
+    iArray[count] = i;
+    count++;
+   if(f5(N,a,min,max,i)) max = f6(N,a,min,max,i);
+   if(f7(N,a,min,max,i)) min = f8(N,a,min,max,i);
+   maxArray[count] = max;
+   minArray[count] = min;
+ }
+
+  return max-min;
+
+}
+
+
+harness void testHarness(){
+  int[6] a1 = {-8,-1,-3,-4,-5,-4};
+  int[3] a2 = {3,20,2};
+  int[2] a3 = {0,-5};
+  int[5] a4 = {2,-2,-4,19,-3};
+
+  
+  assert buggy(6,a1) == 7;
+  assert buggy(3,a2) == 18;
+  assert buggy(2,a3) == 5;
+  assert buggy(5,a4) == 23;
+
+
+  assert f1nochange + f2nochange+ f3nochange + f4nochange + f5nochange+ f6nochange + f7nochange + f8nochange + f9nochange < 2;
+}
+
+
+harness void semanticDistance(){
+
+  
+
+  int[3] a2 = {3,20,2};
+  buggy(3,a2);
+  bit i0Same2 = 1 != iArray[0];
+  bit i1Same2 = 2 != iArray[1];
+  bit i2Same2 = 3 != iArray[2];
+
+
+  bit min0Same2 = 100 != minArray[0];
+  bit min1Same2 = 20 != minArray[1];
+  bit min2Same2 = 2 != minArray[2];
+  bit min3Same2 = 0;
+
+
+  bit max0Same2 = -100 != maxArray[0];
+  bit max1Same2 = 20 != maxArray[1];
+  bit max2Same2 = 20 != maxArray[2];
+  bit max3Same2 = 0;
+
+
+  minArray = {0,0,0,0,0,0};
+  maxArray = {0,0,0,0,0,0};
+  iArray = {0,0,0,0,0,0};
+
+  int[5] a3 = {2,-2,4,20,-3};
+
+  buggy(5,a3);
+  bit i0Same3 = 1 != iArray[0];
+  bit i1Same3 = 2 != iArray[1];
+  bit i2Same3 = 3 != iArray[2];
+  bit i3Same3 = 4 != iArray[3];
+  bit i4Same3 = 0;
+
+
+
+  bit min0Same3 = 100 != minArray[0];
+  bit min1Same3 = -2 != minArray[1];
+  bit min2Same3 = -2 != minArray[2];
+ bit min3Same3 = -2 != minArray[3];
+ bit min4Same3 = -3 != minArray[4];
+ bit min5Same3 = 0;
+
+
+  bit max0Same3 = -100 != maxArray[0];
+  bit max1Same3 = -2 != maxArray[1];
+  bit max2Same3 = 4 != maxArray[2];
+ bit max3Same3 = 20 != maxArray[3];
+ bit max4Same3 = 20 != maxArray[4];
+ bit max5Same3 = 0;
+
+
+
+ int exprsize = c1+c2+c3+c4+c5+c6+c7+c8+c9+c10+
+ c11+c12+c13+c14+c15+c16+c17+c18+c19+c20+
+ c21+c22+c23+c24+c25+c26+c27+c28+c29+c30+
+ c31+c32+c33+c34+c35+c36+c37+c38;
+ 
+ //minimize(exprsize);
+
+ 
+  minimize(exprsize + i0Same2 + i1Same2 + i2Same2
++ min0Same2 + min1Same2 + min2Same2 + min3Same2
++ max0Same2 + max1Same2 + max2Same2 + max3Same2
++ i0Same3 + i1Same3 + i2Same3 + i3Same3 + i4Same3
+
++ min0Same3 + min1Same3 + min2Same3 + min3Same3 + min4Same3 + min5Same3 
+
+	   + max0Same3 + max1Same3 + max2Same3	   + max3Same3 + max4Same3 + max5Same3);
+ 
+}
+

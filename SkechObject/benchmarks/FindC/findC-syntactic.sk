@@ -1,0 +1,86 @@
+
+int N=7;
+
+bit f1change=??, f2change=??, f3change=??;
+
+int f1(char[N]s, char c, int k){
+if(f1change==0){
+ return 0;
+}
+else{
+  return coeff()*k + ??;
+ }
+}
+
+bit f2(char[N]s, char c, int k, int i){
+ if(f2change == 0) {
+   return i < k;
+ }
+else{
+  char cChar = ??;
+  if(??) return {| s[i] | c |} == {| s[i] | c | cChar |};
+  if(??) return {| s[i] | c |} != {| s[i] | c | cChar |};
+  if(??) return coeff()*k + coeff()*i + coeff() > 0;
+
+}
+}
+
+bit f3(char[N]s, char c, int k, int i){
+ if(f3change == 0) {
+   return s[i]==c;
+ }
+else{
+  char cChar = ??;
+  if(??) return {| s[i] | c |} == {| s[i] | c | cChar |};
+  if(??) return {| s[i] | c |} != {| s[i] | c | cChar |};
+  if(??) return coeff()*k + coeff()*i + coeff() > 0;
+
+}
+}
+
+
+generator int coeff(){
+if(??) return 1;
+if(??) return -1;
+return 0;
+}
+
+
+
+bit buggy(char[N] s, char c, int k){
+  for(int i=f1(s,c,k); f2(s,c,k,i); i++){
+    if(f3(s,c,k,i)){
+       return 1;
+    }
+  }
+ return 0;
+}
+
+
+harness void testHarness(){
+ char[N] s1 = "adb?";
+ char c1 = '?';
+ int k1 = 3;
+ char[N] s2 = "bgc?cg";
+ char c2 = '?';
+ int k2 = 5;
+ char[N] s3 = "gaba";
+ char c3 = 'g';
+ int k3 = 3;
+ char[N] s4 = "abcdd?";
+ char c4 = 'g';
+ int k4 = 4;
+
+
+ assert buggy(s1,c1,k1);
+ assert buggy(s2,c2,k2);
+ assert buggy(s3,c3,k3);
+ assert !buggy(s4,c4,k4); 
+
+ minimize(f1change+f2change+f3change);
+ 
+}
+
+
+
+

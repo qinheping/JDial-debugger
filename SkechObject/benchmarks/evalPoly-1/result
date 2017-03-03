@@ -1,0 +1,952 @@
+SKETCH version 1.7.2
+Benchmark = evalpoly-combined.sk
+/* BEGIN PACKAGE ANONYMOUS*/
+/*evalpol..mbined.sk:222*/
+
+void buggy (int N, int[N] p, int x, ref int _out, ref global bit c10__ANONYMOUS_s292, ref global bit c11__ANONYMOUS_s303, ref global bit c12__ANONYMOUS_s253, ref global bit c13__ANONYMOUS_s234, ref global bit c14__ANONYMOUS_s190, ref global bit c15__ANONYMOUS_s170, ref global bit c16__ANONYMOUS_s205, ref global bit c17__ANONYMOUS_s178, ref global bit c18__ANONYMOUS_s258, ref global bit c19__ANONYMOUS_s261, ref global bit c1__ANONYMOUS_s200, ref global bit c20__ANONYMOUS_s251, ref global bit c21__ANONYMOUS_s176, ref global bit c22__ANONYMOUS_s164, ref global bit c23__ANONYMOUS_s187, ref global bit c2__ANONYMOUS_s249, ref global bit c3__ANONYMOUS_s289, ref global bit c4__ANONYMOUS_s300, ref global bit c5__ANONYMOUS_s270, ref global bit c6__ANONYMOUS_s247, ref global bit c7__ANONYMOUS_s263, ref global bit c8__ANONYMOUS_s271, ref global bit c9__ANONYMOUS_s230, ref global int count__ANONYMOUS_s155, ref global bit f1change__ANONYMOUS_s305, ref global bit f2change__ANONYMOUS_s272, ref global bit f3change__ANONYMOUS_s231, ref global bit f4change__ANONYMOUS_s278, ref global bit f5change__ANONYMOUS_s262, ref global int[6] ia__ANONYMOUS_s156, ref global int[6] numa__ANONYMOUS_s157)/*evalpol..mbined.sk:222*/
+{
+  _out = 0;
+  count__ANONYMOUS_s155 = 0;
+  int num_s20 = 0;
+  f1(N, p, x, num_s20, c1__ANONYMOUS_s200, c2__ANONYMOUS_s249, c3__ANONYMOUS_s289, c4__ANONYMOUS_s300, f1change__ANONYMOUS_s305);
+  _out = num_s20;
+  int i_s22 = 0;
+  f2(N, p, x, i_s22, c5__ANONYMOUS_s270, c6__ANONYMOUS_s247, c7__ANONYMOUS_s263, c8__ANONYMOUS_s271, f2change__ANONYMOUS_s272);
+  int i;
+  i = i_s22;
+  numa__ANONYMOUS_s157[0] = num_s20;
+  ia__ANONYMOUS_s156[0] = i_s22;
+  count__ANONYMOUS_s155 = 1;
+  bit __sa0_s24 = 0;
+  f3(N, p, x, i_s22, __sa0_s24, c10__ANONYMOUS_s292, c11__ANONYMOUS_s303, c12__ANONYMOUS_s253, c13__ANONYMOUS_s234, c9__ANONYMOUS_s230, f3change__ANONYMOUS_s231);
+  bit __sa0;
+  __sa0 = __sa0_s24;
+  while(__sa0)
+  {
+    int num_s26 = 0;
+    f4(N, p, x, i, num_s26, c14__ANONYMOUS_s190, c15__ANONYMOUS_s170, c16__ANONYMOUS_s205, c17__ANONYMOUS_s178, c18__ANONYMOUS_s258, f4change__ANONYMOUS_s278);
+    _out = _out + num_s26;
+    int i_s28 = 0;
+    f5(N, p, x, i, i_s28, c19__ANONYMOUS_s261, c20__ANONYMOUS_s251, c21__ANONYMOUS_s176, c22__ANONYMOUS_s164, c23__ANONYMOUS_s187, f5change__ANONYMOUS_s262);
+    i = i_s28;
+    numa__ANONYMOUS_s157[count__ANONYMOUS_s155] = _out;
+    ia__ANONYMOUS_s156[count__ANONYMOUS_s155] = i_s28;
+    count__ANONYMOUS_s155 = count__ANONYMOUS_s155 + 1;
+    bit __sa0_s30 = 0;
+    f3(N, p, x, i_s28, __sa0_s30, c10__ANONYMOUS_s292, c11__ANONYMOUS_s303, c12__ANONYMOUS_s253, c13__ANONYMOUS_s234, c9__ANONYMOUS_s230, f3change__ANONYMOUS_s231);
+    __sa0 = __sa0_s30;
+  }
+  return;
+}
+/*evalpol..mbined.sk:5*/
+
+void coeff1 (ref int _out, ref global bit c1__ANONYMOUS_s108)/*evalpol..mbined.sk:5*/
+{
+  _out = 0;
+  if(c1__ANONYMOUS_s108 == 0)/*evalpol..mbined.sk:6*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:71*/
+
+void coeff10 (ref int _out, ref global bit c10__ANONYMOUS_s101)/*evalpol..mbined.sk:71*/
+{
+  _out = 0;
+  if(c10__ANONYMOUS_s101 == 0)/*evalpol..mbined.sk:72*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:78*/
+
+void coeff11 (ref int _out, ref global bit c11__ANONYMOUS_s109)/*evalpol..mbined.sk:78*/
+{
+  _out = 0;
+  if(c11__ANONYMOUS_s109 == 0)/*evalpol..mbined.sk:79*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:85*/
+
+void coeff12 (ref int _out, ref global bit c12__ANONYMOUS_s104)/*evalpol..mbined.sk:85*/
+{
+  _out = 0;
+  if(c12__ANONYMOUS_s104 == 0)/*evalpol..mbined.sk:86*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:92*/
+
+void coeff13 (ref int _out, ref global bit c13__ANONYMOUS_s97)/*evalpol..mbined.sk:92*/
+{
+  _out = 0;
+  if(c13__ANONYMOUS_s97 == 0)/*evalpol..mbined.sk:93*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:99*/
+
+void coeff14 (ref int _out, ref global bit c14__ANONYMOUS_s154)/*evalpol..mbined.sk:99*/
+{
+  _out = 0;
+  if(c14__ANONYMOUS_s154 == 0)/*evalpol..mbined.sk:100*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:106*/
+
+void coeff15 (ref int _out, ref global bit c15__ANONYMOUS_s107)/*evalpol..mbined.sk:106*/
+{
+  _out = 0;
+  if(c15__ANONYMOUS_s107 == 0)/*evalpol..mbined.sk:107*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:113*/
+
+void coeff16 (ref int _out, ref global bit c16__ANONYMOUS_s112)/*evalpol..mbined.sk:113*/
+{
+  _out = 0;
+  if(c16__ANONYMOUS_s112 == 0)/*evalpol..mbined.sk:114*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:121*/
+
+void coeff17 (ref int _out, ref global bit c17__ANONYMOUS_s151)/*evalpol..mbined.sk:121*/
+{
+  _out = 0;
+  if(c17__ANONYMOUS_s151 == 0)/*evalpol..mbined.sk:122*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:128*/
+
+void coeff18 (ref int _out, ref global bit c18__ANONYMOUS_s148)/*evalpol..mbined.sk:128*/
+{
+  _out = 0;
+  if(c18__ANONYMOUS_s148 == 0)/*evalpol..mbined.sk:129*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:135*/
+
+void coeff19 (ref int _out, ref global bit c19__ANONYMOUS_s106)/*evalpol..mbined.sk:135*/
+{
+  _out = 0;
+  if(c19__ANONYMOUS_s106 == 0)/*evalpol..mbined.sk:136*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:14*/
+
+void coeff2 (ref int _out, ref global bit c2__ANONYMOUS_s152)/*evalpol..mbined.sk:14*/
+{
+  _out = 0;
+  if(c2__ANONYMOUS_s152 == 0)/*evalpol..mbined.sk:15*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:142*/
+
+void coeff20 (ref int _out, ref global bit c20__ANONYMOUS_s150)/*evalpol..mbined.sk:142*/
+{
+  _out = 0;
+  if(c20__ANONYMOUS_s150 == 0)/*evalpol..mbined.sk:143*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:149*/
+
+void coeff21 (ref int _out, ref global bit c21__ANONYMOUS_s149)/*evalpol..mbined.sk:149*/
+{
+  _out = 0;
+  if(c21__ANONYMOUS_s149 == 0)/*evalpol..mbined.sk:150*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:156*/
+
+void coeff22 (ref int _out, ref global bit c22__ANONYMOUS_s153)/*evalpol..mbined.sk:156*/
+{
+  _out = 0;
+  if(c22__ANONYMOUS_s153 == 0)/*evalpol..mbined.sk:157*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:163*/
+
+void coeff23 (ref int _out, ref global bit c23__ANONYMOUS_s113)/*evalpol..mbined.sk:163*/
+{
+  _out = 0;
+  if(c23__ANONYMOUS_s113 == 0)/*evalpol..mbined.sk:164*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:22*/
+
+void coeff3 (ref int _out, ref global bit c3__ANONYMOUS_s96)/*evalpol..mbined.sk:22*/
+{
+  _out = 0;
+  if(c3__ANONYMOUS_s96 == 0)/*evalpol..mbined.sk:23*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:29*/
+
+void coeff4 (ref int _out, ref global bit c4__ANONYMOUS_s105)/*evalpol..mbined.sk:29*/
+{
+  _out = 0;
+  if(c4__ANONYMOUS_s105 == 0)/*evalpol..mbined.sk:30*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:36*/
+
+void coeff5 (ref int _out, ref global bit c5__ANONYMOUS_s103)/*evalpol..mbined.sk:36*/
+{
+  _out = 0;
+  if(c5__ANONYMOUS_s103 == 0)/*evalpol..mbined.sk:37*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:43*/
+
+void coeff6 (ref int _out, ref global bit c6__ANONYMOUS_s102)/*evalpol..mbined.sk:43*/
+{
+  _out = 0;
+  if(c6__ANONYMOUS_s102 == 0)/*evalpol..mbined.sk:44*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:50*/
+
+void coeff7 (ref int _out, ref global bit c7__ANONYMOUS_s110)/*evalpol..mbined.sk:50*/
+{
+  _out = 0;
+  if(c7__ANONYMOUS_s110 == 0)/*evalpol..mbined.sk:51*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:57*/
+
+void coeff8 (ref int _out, ref global bit c8__ANONYMOUS_s93)/*evalpol..mbined.sk:57*/
+{
+  _out = 0;
+  if(c8__ANONYMOUS_s93 == 0)/*evalpol..mbined.sk:58*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:64*/
+
+void coeff9 (ref int _out, ref global bit c9__ANONYMOUS_s95)/*evalpol..mbined.sk:64*/
+{
+  _out = 0;
+  if(c9__ANONYMOUS_s95 == 0)/*evalpol..mbined.sk:65*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = -1;
+    return;
+  }
+}
+/*evalpol..mbined.sk:173*/
+
+void f1 (int N, int[N] p, int x, ref int _out, ref global bit c1__ANONYMOUS_s173, ref global bit c2__ANONYMOUS_s296, ref global bit c3__ANONYMOUS_s257, ref global bit c4__ANONYMOUS_s232, ref global bit f1change__ANONYMOUS_s118)/*evalpol..mbined.sk:173*/
+{
+  _out = 0;
+  if(f1change__ANONYMOUS_s118 == 0)/*evalpol..mbined.sk:174*/
+  {
+    _out = p[0];
+    return;
+  }
+  else
+  {
+    int _out_s72 = 0;
+    coeff1(_out_s72, c1__ANONYMOUS_s173);
+    int _out_s74 = 0;
+    coeff2(_out_s74, c2__ANONYMOUS_s296);
+    int _out_s76 = 0;
+    coeff3(_out_s76, c3__ANONYMOUS_s257);
+    int _out_s78 = 0;
+    coeff4(_out_s78, c4__ANONYMOUS_s232);
+    _out = (((_out_s72 * N) + (_out_s74 * (p[1]))) + (_out_s76 * x)) + (_out_s78 * 16);
+    return;
+  }
+}
+/*evalpol..mbined.sk:180*/
+
+void f2 (int N, int[N] p, int x, ref int _out, ref global bit c5__ANONYMOUS_s171, ref global bit c6__ANONYMOUS_s199, ref global bit c7__ANONYMOUS_s183, ref global bit c8__ANONYMOUS_s243, ref global bit f2change__ANONYMOUS_s119)/*evalpol..mbined.sk:180*/
+{
+  _out = 0;
+  if(f2change__ANONYMOUS_s119 == 0)/*evalpol..mbined.sk:181*/
+  {
+    _out = N - 1;
+    return;
+  }
+  else
+  {
+    int _out_s64 = 0;
+    coeff5(_out_s64, c5__ANONYMOUS_s171);
+    int _out_s66 = 0;
+    coeff6(_out_s66, c6__ANONYMOUS_s199);
+    int _out_s68 = 0;
+    coeff7(_out_s68, c7__ANONYMOUS_s183);
+    int _out_s70 = 0;
+    coeff8(_out_s70, c8__ANONYMOUS_s243);
+    _out = (((_out_s64 * N) + (_out_s66 * (p[4]))) + (_out_s68 * x)) + (_out_s70 * 16);
+    return;
+  }
+}
+/*evalpol..mbined.sk:188*/
+
+void f3 (int N, int[N] p, int x, int i, ref bit _out, ref global bit c10__ANONYMOUS_s255, ref global bit c11__ANONYMOUS_s277, ref global bit c12__ANONYMOUS_s302, ref global bit c13__ANONYMOUS_s291, ref global bit c9__ANONYMOUS_s175, ref global bit f3change__ANONYMOUS_s94)/*evalpol..mbined.sk:188*/
+{
+  _out = 0;
+  if(f3change__ANONYMOUS_s94 == 0)/*evalpol..mbined.sk:189*/
+  {
+    _out = i >= 0;
+    return;
+  }
+  else
+  {
+    int _out_s32 = 0;
+    coeff9(_out_s32, c9__ANONYMOUS_s175);
+    int _out_s34 = 0;
+    coeff10(_out_s34, c10__ANONYMOUS_s255);
+    int _out_s36 = 0;
+    coeff11(_out_s36, c11__ANONYMOUS_s277);
+    int _out_s38 = 0;
+    coeff12(_out_s38, c12__ANONYMOUS_s302);
+    int _out_s40 = 0;
+    coeff13(_out_s40, c13__ANONYMOUS_s291);
+    _out = (((((_out_s32 * N) + (_out_s34 * (p[3]))) + (_out_s36 * x)) + (_out_s38 * i)) + (_out_s40 * 4)) > 0;
+    return;
+  }
+}
+/*evalpol..mbined.sk:195*/
+
+void f4 (int N, int[N] p, int x, int i, ref int _out, ref global bit c14__ANONYMOUS_s298, ref global bit c15__ANONYMOUS_s275, ref global bit c16__ANONYMOUS_s293, ref global bit c17__ANONYMOUS_s273, ref global bit c18__ANONYMOUS_s283, ref global bit f4change__ANONYMOUS_s158)/*evalpol..mbined.sk:195*/
+{
+  _out = 0;
+  if(f4change__ANONYMOUS_s158 == 0)/*evalpol..mbined.sk:196*/
+  {
+    int _out_s52 = 0;
+    uf(x, i, _out_s52);
+    _out = (p[i]) * _out_s52;
+    return;
+  }
+  else
+  {
+    int _out_s54 = 0;
+    coeff14(_out_s54, c14__ANONYMOUS_s298);
+    int _out_s56 = 0;
+    coeff15(_out_s56, c15__ANONYMOUS_s275);
+    int _out_s58 = 0;
+    coeff16(_out_s58, c16__ANONYMOUS_s293);
+    int _out_s60 = 0;
+    coeff17(_out_s60, c17__ANONYMOUS_s273);
+    int _out_s62 = 0;
+    coeff18(_out_s62, c18__ANONYMOUS_s283);
+    _out = ((((_out_s54 * N) + (_out_s56 * (p[8]))) + (_out_s58 * x)) + (_out_s60 * i)) + (_out_s62 * 12);
+    return;
+  }
+}
+/*evalpol..mbined.sk:202*/
+
+void f5 (int N, int[N] p, int x, int i, ref int _out, ref global bit c19__ANONYMOUS_s179, ref global bit c20__ANONYMOUS_s256, ref global bit c21__ANONYMOUS_s280, ref global bit c22__ANONYMOUS_s288, ref global bit c23__ANONYMOUS_s297, ref global bit f5change__ANONYMOUS_s111)/*evalpol..mbined.sk:202*/
+{
+  _out = 0;
+  if(f5change__ANONYMOUS_s111 == 0)/*evalpol..mbined.sk:203*/
+  {
+    _out = i - 1;
+    return;
+  }
+  else
+  {
+    int _out_s42 = 0;
+    coeff19(_out_s42, c19__ANONYMOUS_s179);
+    int _out_s44 = 0;
+    coeff20(_out_s44, c20__ANONYMOUS_s256);
+    int _out_s46 = 0;
+    coeff21(_out_s46, c21__ANONYMOUS_s280);
+    int _out_s48 = 0;
+    coeff22(_out_s48, c22__ANONYMOUS_s288);
+    int _out_s50 = 0;
+    coeff23(_out_s50, c23__ANONYMOUS_s297);
+    _out = ((((_out_s42 * N) + (_out_s44 * (p[1]))) + (_out_s46 * x)) + (_out_s48 * i)) + (_out_s50 * 9);
+    return;
+  }
+}
+/*evalpol..mbined.sk:260*/
+
+void fixed (int N, int[N] p, int x, ref int _out)/*evalpol..mbined.sk:260*/
+{
+  _out = 0;
+  _out = 0;
+  int i = N - 1;
+  while(i >= 0)
+  {
+    int num_s92 = 0;
+    uf(x, i, num_s92);
+    _out = _out + ((p[i]) * num_s92);
+    i = i - 1;
+  }
+  return;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c10__ANONYMOUS_s307 (ref bit c10__ANONYMOUS_s306)/*evalpol..mbined.sk:3*/
+{
+  c10__ANONYMOUS_s306 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c11__ANONYMOUS_s309 (ref bit c11__ANONYMOUS_s308)/*evalpol..mbined.sk:3*/
+{
+  c11__ANONYMOUS_s308 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c12__ANONYMOUS_s311 (ref bit c12__ANONYMOUS_s310)/*evalpol..mbined.sk:3*/
+{
+  c12__ANONYMOUS_s310 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c13__ANONYMOUS_s313 (ref bit c13__ANONYMOUS_s312)/*evalpol..mbined.sk:3*/
+{
+  c13__ANONYMOUS_s312 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c14__ANONYMOUS_s315 (ref bit c14__ANONYMOUS_s314)/*evalpol..mbined.sk:3*/
+{
+  c14__ANONYMOUS_s314 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c15__ANONYMOUS_s317 (ref bit c15__ANONYMOUS_s316)/*evalpol..mbined.sk:3*/
+{
+  c15__ANONYMOUS_s316 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c16__ANONYMOUS_s319 (ref bit c16__ANONYMOUS_s318)/*evalpol..mbined.sk:3*/
+{
+  c16__ANONYMOUS_s318 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c17__ANONYMOUS_s321 (ref bit c17__ANONYMOUS_s320)/*evalpol..mbined.sk:3*/
+{
+  c17__ANONYMOUS_s320 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c18__ANONYMOUS_s323 (ref bit c18__ANONYMOUS_s322)/*evalpol..mbined.sk:3*/
+{
+  c18__ANONYMOUS_s322 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c19__ANONYMOUS_s325 (ref bit c19__ANONYMOUS_s324)/*evalpol..mbined.sk:3*/
+{
+  c19__ANONYMOUS_s324 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c1__ANONYMOUS_s327 (ref bit c1__ANONYMOUS_s326)/*evalpol..mbined.sk:3*/
+{
+  c1__ANONYMOUS_s326 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c20__ANONYMOUS_s329 (ref bit c20__ANONYMOUS_s328)/*evalpol..mbined.sk:3*/
+{
+  c20__ANONYMOUS_s328 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c21__ANONYMOUS_s331 (ref bit c21__ANONYMOUS_s330)/*evalpol..mbined.sk:3*/
+{
+  c21__ANONYMOUS_s330 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c22__ANONYMOUS_s333 (ref bit c22__ANONYMOUS_s332)/*evalpol..mbined.sk:3*/
+{
+  c22__ANONYMOUS_s332 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c23__ANONYMOUS_s335 (ref bit c23__ANONYMOUS_s334)/*evalpol..mbined.sk:3*/
+{
+  c23__ANONYMOUS_s334 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c2__ANONYMOUS_s337 (ref bit c2__ANONYMOUS_s336)/*evalpol..mbined.sk:3*/
+{
+  c2__ANONYMOUS_s336 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c3__ANONYMOUS_s339 (ref bit c3__ANONYMOUS_s338)/*evalpol..mbined.sk:3*/
+{
+  c3__ANONYMOUS_s338 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c4__ANONYMOUS_s341 (ref bit c4__ANONYMOUS_s340)/*evalpol..mbined.sk:3*/
+{
+  c4__ANONYMOUS_s340 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c5__ANONYMOUS_s343 (ref bit c5__ANONYMOUS_s342)/*evalpol..mbined.sk:3*/
+{
+  c5__ANONYMOUS_s342 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c6__ANONYMOUS_s345 (ref bit c6__ANONYMOUS_s344)/*evalpol..mbined.sk:3*/
+{
+  c6__ANONYMOUS_s344 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c7__ANONYMOUS_s347 (ref bit c7__ANONYMOUS_s346)/*evalpol..mbined.sk:3*/
+{
+  c7__ANONYMOUS_s346 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c8__ANONYMOUS_s349 (ref bit c8__ANONYMOUS_s348)/*evalpol..mbined.sk:3*/
+{
+  c8__ANONYMOUS_s348 = 0;
+}
+/*evalpol..mbined.sk:3*/
+
+void glblInit_c9__ANONYMOUS_s351 (ref bit c9__ANONYMOUS_s350)/*evalpol..mbined.sk:3*/
+{
+  c9__ANONYMOUS_s350 = 0;
+}
+/*evalpol..mbined.sk:1*/
+
+void glblInit_f1change__ANONYMOUS_s353 (ref bit f1change__ANONYMOUS_s352)/*evalpol..mbined.sk:1*/
+{
+  f1change__ANONYMOUS_s352 = 1;
+}
+/*evalpol..mbined.sk:1*/
+
+void glblInit_f2change__ANONYMOUS_s355 (ref bit f2change__ANONYMOUS_s354)/*evalpol..mbined.sk:1*/
+{
+  f2change__ANONYMOUS_s354 = 0;
+}
+/*evalpol..mbined.sk:1*/
+
+void glblInit_f3change__ANONYMOUS_s357 (ref bit f3change__ANONYMOUS_s356)/*evalpol..mbined.sk:1*/
+{
+  f3change__ANONYMOUS_s356 = 0;
+}
+/*evalpol..mbined.sk:1*/
+
+void glblInit_f4change__ANONYMOUS_s359 (ref bit f4change__ANONYMOUS_s358)/*evalpol..mbined.sk:1*/
+{
+  f4change__ANONYMOUS_s358 = 0;
+}
+/*evalpol..mbined.sk:1*/
+
+void glblInit_f5change__ANONYMOUS_s361 (ref bit f5change__ANONYMOUS_s360)/*evalpol..mbined.sk:1*/
+{
+  f5change__ANONYMOUS_s360 = 0;
+}
+/*evalpol..mbined.sk:240*/
+
+void orig (int N, int[N] p, int x, ref int _out, ref global int count__ANONYMOUS_s98, ref global int[6] iap__ANONYMOUS_s99, ref global int[6] numap__ANONYMOUS_s100)/*evalpol..mbined.sk:240*/
+{
+  _out = 0;
+  count__ANONYMOUS_s98 = 0;
+  _out = p[0];
+  int i = N - 1;
+  numap__ANONYMOUS_s100[0] = _out;
+  iap__ANONYMOUS_s99[0] = i;
+  count__ANONYMOUS_s98 = 1;
+  while(i > 0)
+  {
+    int num_s16 = 0;
+    uf(x, i, num_s16);
+    _out = _out + ((p[i]) * num_s16);
+    i = i - 1;
+    numap__ANONYMOUS_s100[count__ANONYMOUS_s98] = _out;
+    iap__ANONYMOUS_s99[count__ANONYMOUS_s98] = i;
+    count__ANONYMOUS_s98 = count__ANONYMOUS_s98 + 1;
+  }
+  return;
+}
+/*evalpol..mbined.sk:285*/
+
+void semantic (ref global bit c10__ANONYMOUS_s202, ref global bit c11__ANONYMOUS_s301, ref global bit c12__ANONYMOUS_s242, ref global bit c13__ANONYMOUS_s237, ref global bit c14__ANONYMOUS_s204, ref global bit c15__ANONYMOUS_s172, ref global bit c16__ANONYMOUS_s206, ref global bit c17__ANONYMOUS_s207, ref global bit c18__ANONYMOUS_s260, ref global bit c19__ANONYMOUS_s281, ref global bit c1__ANONYMOUS_s177, ref global bit c20__ANONYMOUS_s248, ref global bit c21__ANONYMOUS_s208, ref global bit c22__ANONYMOUS_s209, ref global bit c23__ANONYMOUS_s210, ref global bit c2__ANONYMOUS_s274, ref global bit c3__ANONYMOUS_s284, ref global bit c4__ANONYMOUS_s285, ref global bit c5__ANONYMOUS_s180, ref global bit c6__ANONYMOUS_s233, ref global bit c7__ANONYMOUS_s169, ref global bit c8__ANONYMOUS_s279, ref global bit c9__ANONYMOUS_s239, ref global int count__ANONYMOUS_s211, ref global bit f1change__ANONYMOUS_s286, ref global bit f2change__ANONYMOUS_s181, ref global bit f3change__ANONYMOUS_s240, ref global bit f4change__ANONYMOUS_s276, ref global bit f5change__ANONYMOUS_s287, ref global int[6] ia__ANONYMOUS_s114, ref global int[6] iap__ANONYMOUS_s115, ref global int[6] numa__ANONYMOUS_s116, ref global int[6] numap__ANONYMOUS_s117)/*evalpol..mbined.sk:285*/
+{
+  numa__ANONYMOUS_s116 = ((global int[6]){0,0,0,0,0,0});
+  numap__ANONYMOUS_s117 = ((global int[6]){0,0,0,0,0,0});
+  ia__ANONYMOUS_s114 = ((global int[6]){0,0,0,0,0,0});
+  iap__ANONYMOUS_s115 = ((global int[6]){0,0,0,0,0,0});
+  int _out_s8 = 0;
+  buggy(5, {2,3,1,1,2}, 2, _out_s8, c10__ANONYMOUS_s202, c11__ANONYMOUS_s301, c12__ANONYMOUS_s242, c13__ANONYMOUS_s237, c14__ANONYMOUS_s204, c15__ANONYMOUS_s172, c16__ANONYMOUS_s206, c17__ANONYMOUS_s207, c18__ANONYMOUS_s260, c19__ANONYMOUS_s281, c1__ANONYMOUS_s177, c20__ANONYMOUS_s248, c21__ANONYMOUS_s208, c22__ANONYMOUS_s209, c23__ANONYMOUS_s210, c2__ANONYMOUS_s274, c3__ANONYMOUS_s284, c4__ANONYMOUS_s285, c5__ANONYMOUS_s180, c6__ANONYMOUS_s233, c7__ANONYMOUS_s169, c8__ANONYMOUS_s279, c9__ANONYMOUS_s239, count__ANONYMOUS_s211, f1change__ANONYMOUS_s286, f2change__ANONYMOUS_s181, f3change__ANONYMOUS_s240, f4change__ANONYMOUS_s276, f5change__ANONYMOUS_s287, ia__ANONYMOUS_s114, numa__ANONYMOUS_s116);
+  int _out_s10 = 0;
+  orig(5, {2,3,1,1,2}, 2, _out_s10, count__ANONYMOUS_s211, iap__ANONYMOUS_s115, numap__ANONYMOUS_s117);
+  numa__ANONYMOUS_s116 = ((global int[6]){0,0,0,0,0,0});
+  numap__ANONYMOUS_s117 = ((global int[6]){0,0,0,0,0,0});
+  ia__ANONYMOUS_s114 = ((global int[6]){0,0,0,0,0,0});
+  iap__ANONYMOUS_s115 = ((global int[6]){0,0,0,0,0,0});
+  int _out_s12 = 0;
+  buggy(4, {1,5,2,1}, 2, _out_s12, c10__ANONYMOUS_s202, c11__ANONYMOUS_s301, c12__ANONYMOUS_s242, c13__ANONYMOUS_s237, c14__ANONYMOUS_s204, c15__ANONYMOUS_s172, c16__ANONYMOUS_s206, c17__ANONYMOUS_s207, c18__ANONYMOUS_s260, c19__ANONYMOUS_s281, c1__ANONYMOUS_s177, c20__ANONYMOUS_s248, c21__ANONYMOUS_s208, c22__ANONYMOUS_s209, c23__ANONYMOUS_s210, c2__ANONYMOUS_s274, c3__ANONYMOUS_s284, c4__ANONYMOUS_s285, c5__ANONYMOUS_s180, c6__ANONYMOUS_s233, c7__ANONYMOUS_s169, c8__ANONYMOUS_s279, c9__ANONYMOUS_s239, count__ANONYMOUS_s211, f1change__ANONYMOUS_s286, f2change__ANONYMOUS_s181, f3change__ANONYMOUS_s240, f4change__ANONYMOUS_s276, f5change__ANONYMOUS_s287, ia__ANONYMOUS_s114, numa__ANONYMOUS_s116);
+  int _out_s14 = 0;
+  orig(4, {1,5,2,1}, 2, _out_s14, count__ANONYMOUS_s211, iap__ANONYMOUS_s115, numap__ANONYMOUS_s117);
+}
+/*evalpol..mbined.sk:285*/
+
+void semantic__Wrapper ()  implements semantic__WrapperNospec/*evalpol..mbined.sk:285*/
+{
+  global bit f5change__ANONYMOUS_s266 = 0;
+  glblInit_f5change__ANONYMOUS_s361(f5change__ANONYMOUS_s266);
+  global bit f4change__ANONYMOUS_s282 = 0;
+  glblInit_f4change__ANONYMOUS_s359(f4change__ANONYMOUS_s282);
+  global bit f3change__ANONYMOUS_s236 = 0;
+  glblInit_f3change__ANONYMOUS_s357(f3change__ANONYMOUS_s236);
+  global bit f2change__ANONYMOUS_s269 = 0;
+  glblInit_f2change__ANONYMOUS_s355(f2change__ANONYMOUS_s269);
+  global bit f1change__ANONYMOUS_s304 = 0;
+  glblInit_f1change__ANONYMOUS_s353(f1change__ANONYMOUS_s304);
+  global bit c9__ANONYMOUS_s235 = 0;
+  glblInit_c9__ANONYMOUS_s351(c9__ANONYMOUS_s235);
+  global bit c8__ANONYMOUS_s268 = 0;
+  glblInit_c8__ANONYMOUS_s349(c8__ANONYMOUS_s268);
+  global bit c7__ANONYMOUS_s264 = 0;
+  glblInit_c7__ANONYMOUS_s347(c7__ANONYMOUS_s264);
+  global bit c6__ANONYMOUS_s241 = 0;
+  glblInit_c6__ANONYMOUS_s345(c6__ANONYMOUS_s241);
+  global bit c5__ANONYMOUS_s267 = 0;
+  glblInit_c5__ANONYMOUS_s343(c5__ANONYMOUS_s267);
+  global bit c4__ANONYMOUS_s299 = 0;
+  glblInit_c4__ANONYMOUS_s341(c4__ANONYMOUS_s299);
+  global bit c3__ANONYMOUS_s290 = 0;
+  glblInit_c3__ANONYMOUS_s339(c3__ANONYMOUS_s290);
+  global bit c2__ANONYMOUS_s250 = 0;
+  glblInit_c2__ANONYMOUS_s337(c2__ANONYMOUS_s250);
+  global bit c23__ANONYMOUS_s188 = 0;
+  glblInit_c23__ANONYMOUS_s335(c23__ANONYMOUS_s188);
+  global bit c22__ANONYMOUS_s165 = 0;
+  glblInit_c22__ANONYMOUS_s333(c22__ANONYMOUS_s165);
+  global bit c21__ANONYMOUS_s182 = 0;
+  glblInit_c21__ANONYMOUS_s331(c21__ANONYMOUS_s182);
+  global bit c20__ANONYMOUS_s252 = 0;
+  glblInit_c20__ANONYMOUS_s329(c20__ANONYMOUS_s252);
+  global bit c1__ANONYMOUS_s166 = 0;
+  glblInit_c1__ANONYMOUS_s327(c1__ANONYMOUS_s166);
+  global bit c19__ANONYMOUS_s265 = 0;
+  glblInit_c19__ANONYMOUS_s325(c19__ANONYMOUS_s265);
+  global bit c18__ANONYMOUS_s259 = 0;
+  glblInit_c18__ANONYMOUS_s323(c18__ANONYMOUS_s259);
+  global bit c17__ANONYMOUS_s174 = 0;
+  glblInit_c17__ANONYMOUS_s321(c17__ANONYMOUS_s174);
+  global bit c16__ANONYMOUS_s186 = 0;
+  glblInit_c16__ANONYMOUS_s319(c16__ANONYMOUS_s186);
+  global bit c15__ANONYMOUS_s168 = 0;
+  glblInit_c15__ANONYMOUS_s317(c15__ANONYMOUS_s168);
+  global bit c14__ANONYMOUS_s191 = 0;
+  glblInit_c14__ANONYMOUS_s315(c14__ANONYMOUS_s191);
+  global bit c13__ANONYMOUS_s238 = 0;
+  glblInit_c13__ANONYMOUS_s313(c13__ANONYMOUS_s238);
+  global bit c12__ANONYMOUS_s254 = 0;
+  glblInit_c12__ANONYMOUS_s311(c12__ANONYMOUS_s254);
+  global bit c11__ANONYMOUS_s294 = 0;
+  glblInit_c11__ANONYMOUS_s309(c11__ANONYMOUS_s294);
+  global bit c10__ANONYMOUS_s295 = 0;
+  glblInit_c10__ANONYMOUS_s307(c10__ANONYMOUS_s295);
+  global int[6] numap__ANONYMOUS_s163 = {0,0,0,0,0,0};
+  global int[6] numa__ANONYMOUS_s162 = {0,0,0,0,0,0};
+  global int[6] iap__ANONYMOUS_s161 = {0,0,0,0,0,0};
+  global int[6] ia__ANONYMOUS_s160 = {0,0,0,0,0,0};
+  global int count__ANONYMOUS_s192 = 0;
+  semantic(c10__ANONYMOUS_s295, c11__ANONYMOUS_s294, c12__ANONYMOUS_s254, c13__ANONYMOUS_s238, c14__ANONYMOUS_s191, c15__ANONYMOUS_s168, c16__ANONYMOUS_s186, c17__ANONYMOUS_s174, c18__ANONYMOUS_s259, c19__ANONYMOUS_s265, c1__ANONYMOUS_s166, c20__ANONYMOUS_s252, c21__ANONYMOUS_s182, c22__ANONYMOUS_s165, c23__ANONYMOUS_s188, c2__ANONYMOUS_s250, c3__ANONYMOUS_s290, c4__ANONYMOUS_s299, c5__ANONYMOUS_s267, c6__ANONYMOUS_s241, c7__ANONYMOUS_s264, c8__ANONYMOUS_s268, c9__ANONYMOUS_s235, count__ANONYMOUS_s192, f1change__ANONYMOUS_s304, f2change__ANONYMOUS_s269, f3change__ANONYMOUS_s236, f4change__ANONYMOUS_s282, f5change__ANONYMOUS_s266, ia__ANONYMOUS_s160, iap__ANONYMOUS_s161, numa__ANONYMOUS_s162, numap__ANONYMOUS_s163);
+}
+/*evalpol..mbined.sk:285*/
+
+void semantic__WrapperNospec ()/*evalpol..mbined.sk:285*/
+{ }
+/*evalpol..mbined.sk:274*/
+
+void syntactic (ref global bit c10__ANONYMOUS_s120, ref global bit c11__ANONYMOUS_s121, ref global bit c12__ANONYMOUS_s122, ref global bit c13__ANONYMOUS_s123, ref global bit c14__ANONYMOUS_s124, ref global bit c15__ANONYMOUS_s125, ref global bit c16__ANONYMOUS_s126, ref global bit c17__ANONYMOUS_s127, ref global bit c18__ANONYMOUS_s128, ref global bit c19__ANONYMOUS_s129, ref global bit c1__ANONYMOUS_s130, ref global bit c20__ANONYMOUS_s131, ref global bit c21__ANONYMOUS_s132, ref global bit c22__ANONYMOUS_s133, ref global bit c23__ANONYMOUS_s134, ref global bit c2__ANONYMOUS_s135, ref global bit c3__ANONYMOUS_s136, ref global bit c4__ANONYMOUS_s137, ref global bit c5__ANONYMOUS_s138, ref global bit c6__ANONYMOUS_s139, ref global bit c7__ANONYMOUS_s140, ref global bit c8__ANONYMOUS_s141, ref global bit c9__ANONYMOUS_s142, ref global int count__ANONYMOUS_s244, ref global bit f1change__ANONYMOUS_s143, ref global bit f2change__ANONYMOUS_s144, ref global bit f3change__ANONYMOUS_s145, ref global bit f4change__ANONYMOUS_s146, ref global bit f5change__ANONYMOUS_s147, ref global int[6] ia__ANONYMOUS_s245, ref global int[6] numa__ANONYMOUS_s246)/*evalpol..mbined.sk:274*/
+{
+  int _out_s80 = 0;
+  buggy(3, {2,3,1}, 2, _out_s80, c10__ANONYMOUS_s120, c11__ANONYMOUS_s121, c12__ANONYMOUS_s122, c13__ANONYMOUS_s123, c14__ANONYMOUS_s124, c15__ANONYMOUS_s125, c16__ANONYMOUS_s126, c17__ANONYMOUS_s127, c18__ANONYMOUS_s128, c19__ANONYMOUS_s129, c1__ANONYMOUS_s130, c20__ANONYMOUS_s131, c21__ANONYMOUS_s132, c22__ANONYMOUS_s133, c23__ANONYMOUS_s134, c2__ANONYMOUS_s135, c3__ANONYMOUS_s136, c4__ANONYMOUS_s137, c5__ANONYMOUS_s138, c6__ANONYMOUS_s139, c7__ANONYMOUS_s140, c8__ANONYMOUS_s141, c9__ANONYMOUS_s142, count__ANONYMOUS_s244, f1change__ANONYMOUS_s143, f2change__ANONYMOUS_s144, f3change__ANONYMOUS_s145, f4change__ANONYMOUS_s146, f5change__ANONYMOUS_s147, ia__ANONYMOUS_s245, numa__ANONYMOUS_s246);
+  int _out_s82 = 0;
+  fixed(3, {2,3,1}, 2, _out_s82);
+  assert (_out_s80 == _out_s82); //Assert at evalpol..mbined.sk:275 (-3260192860662258316)
+  int _out_s84 = 0;
+  buggy(2, {1,2}, 5, _out_s84, c10__ANONYMOUS_s120, c11__ANONYMOUS_s121, c12__ANONYMOUS_s122, c13__ANONYMOUS_s123, c14__ANONYMOUS_s124, c15__ANONYMOUS_s125, c16__ANONYMOUS_s126, c17__ANONYMOUS_s127, c18__ANONYMOUS_s128, c19__ANONYMOUS_s129, c1__ANONYMOUS_s130, c20__ANONYMOUS_s131, c21__ANONYMOUS_s132, c22__ANONYMOUS_s133, c23__ANONYMOUS_s134, c2__ANONYMOUS_s135, c3__ANONYMOUS_s136, c4__ANONYMOUS_s137, c5__ANONYMOUS_s138, c6__ANONYMOUS_s139, c7__ANONYMOUS_s140, c8__ANONYMOUS_s141, c9__ANONYMOUS_s142, count__ANONYMOUS_s244, f1change__ANONYMOUS_s143, f2change__ANONYMOUS_s144, f3change__ANONYMOUS_s145, f4change__ANONYMOUS_s146, f5change__ANONYMOUS_s147, ia__ANONYMOUS_s245, numa__ANONYMOUS_s246);
+  int _out_s86 = 0;
+  fixed(2, {1,2}, 5, _out_s86);
+  assert (_out_s84 == _out_s86); //Assert at evalpol..mbined.sk:276 (-7400424922905914656)
+  int _out_s88 = 0;
+  buggy(4, {1,5,2,1}, 2, _out_s88, c10__ANONYMOUS_s120, c11__ANONYMOUS_s121, c12__ANONYMOUS_s122, c13__ANONYMOUS_s123, c14__ANONYMOUS_s124, c15__ANONYMOUS_s125, c16__ANONYMOUS_s126, c17__ANONYMOUS_s127, c18__ANONYMOUS_s128, c19__ANONYMOUS_s129, c1__ANONYMOUS_s130, c20__ANONYMOUS_s131, c21__ANONYMOUS_s132, c22__ANONYMOUS_s133, c23__ANONYMOUS_s134, c2__ANONYMOUS_s135, c3__ANONYMOUS_s136, c4__ANONYMOUS_s137, c5__ANONYMOUS_s138, c6__ANONYMOUS_s139, c7__ANONYMOUS_s140, c8__ANONYMOUS_s141, c9__ANONYMOUS_s142, count__ANONYMOUS_s244, f1change__ANONYMOUS_s143, f2change__ANONYMOUS_s144, f3change__ANONYMOUS_s145, f4change__ANONYMOUS_s146, f5change__ANONYMOUS_s147, ia__ANONYMOUS_s245, numa__ANONYMOUS_s246);
+  int _out_s90 = 0;
+  fixed(4, {1,5,2,1}, 2, _out_s90);
+  assert (_out_s88 == _out_s90); //Assert at evalpol..mbined.sk:277 (-6963780637149210132)
+  assert (((((f1change__ANONYMOUS_s143 + f2change__ANONYMOUS_s144) + f3change__ANONYMOUS_s145) + f4change__ANONYMOUS_s146) + f5change__ANONYMOUS_s147) < 2); //Assert at evalpol..mbined.sk:279 (-5067966287239508533)
+  minimize((((((((((((((((((((((c1__ANONYMOUS_s130 + c2__ANONYMOUS_s135) + c3__ANONYMOUS_s136) + c4__ANONYMOUS_s137) + c5__ANONYMOUS_s138) + c6__ANONYMOUS_s139) + c7__ANONYMOUS_s140) + c8__ANONYMOUS_s141) + c9__ANONYMOUS_s142) + c10__ANONYMOUS_s120) + c11__ANONYMOUS_s121) + c12__ANONYMOUS_s122) + c13__ANONYMOUS_s123) + c14__ANONYMOUS_s124) + c15__ANONYMOUS_s125) + c16__ANONYMOUS_s126) + c17__ANONYMOUS_s127) + c18__ANONYMOUS_s128) + c19__ANONYMOUS_s129) + c20__ANONYMOUS_s131) + c21__ANONYMOUS_s132) + c22__ANONYMOUS_s133) + c23__ANONYMOUS_s134)
+}
+/*evalpol..mbined.sk:274*/
+
+void syntactic__Wrapper ()  implements syntactic__WrapperNospec/*evalpol..mbined.sk:274*/
+{
+  global bit f5change__ANONYMOUS_s229 = 0;
+  glblInit_f5change__ANONYMOUS_s361(f5change__ANONYMOUS_s229);
+  global bit f4change__ANONYMOUS_s228 = 0;
+  glblInit_f4change__ANONYMOUS_s359(f4change__ANONYMOUS_s228);
+  global bit f3change__ANONYMOUS_s227 = 0;
+  glblInit_f3change__ANONYMOUS_s357(f3change__ANONYMOUS_s227);
+  global bit f2change__ANONYMOUS_s167 = 0;
+  glblInit_f2change__ANONYMOUS_s355(f2change__ANONYMOUS_s167);
+  global bit f1change__ANONYMOUS_s226 = 0;
+  glblInit_f1change__ANONYMOUS_s353(f1change__ANONYMOUS_s226);
+  global bit c9__ANONYMOUS_s225 = 0;
+  glblInit_c9__ANONYMOUS_s351(c9__ANONYMOUS_s225);
+  global bit c8__ANONYMOUS_s224 = 0;
+  glblInit_c8__ANONYMOUS_s349(c8__ANONYMOUS_s224);
+  global bit c7__ANONYMOUS_s201 = 0;
+  glblInit_c7__ANONYMOUS_s347(c7__ANONYMOUS_s201);
+  global bit c6__ANONYMOUS_s223 = 0;
+  glblInit_c6__ANONYMOUS_s345(c6__ANONYMOUS_s223);
+  global bit c5__ANONYMOUS_s222 = 0;
+  glblInit_c5__ANONYMOUS_s343(c5__ANONYMOUS_s222);
+  global bit c4__ANONYMOUS_s221 = 0;
+  glblInit_c4__ANONYMOUS_s341(c4__ANONYMOUS_s221);
+  global bit c3__ANONYMOUS_s220 = 0;
+  glblInit_c3__ANONYMOUS_s339(c3__ANONYMOUS_s220);
+  global bit c2__ANONYMOUS_s219 = 0;
+  glblInit_c2__ANONYMOUS_s337(c2__ANONYMOUS_s219);
+  global bit c23__ANONYMOUS_s195 = 0;
+  glblInit_c23__ANONYMOUS_s335(c23__ANONYMOUS_s195);
+  global bit c22__ANONYMOUS_s189 = 0;
+  glblInit_c22__ANONYMOUS_s333(c22__ANONYMOUS_s189);
+  global bit c21__ANONYMOUS_s194 = 0;
+  glblInit_c21__ANONYMOUS_s331(c21__ANONYMOUS_s194);
+  global bit c20__ANONYMOUS_s203 = 0;
+  glblInit_c20__ANONYMOUS_s329(c20__ANONYMOUS_s203);
+  global bit c1__ANONYMOUS_s218 = 0;
+  glblInit_c1__ANONYMOUS_s327(c1__ANONYMOUS_s218);
+  global bit c19__ANONYMOUS_s217 = 0;
+  glblInit_c19__ANONYMOUS_s325(c19__ANONYMOUS_s217);
+  global bit c18__ANONYMOUS_s216 = 0;
+  glblInit_c18__ANONYMOUS_s323(c18__ANONYMOUS_s216);
+  global bit c17__ANONYMOUS_s193 = 0;
+  glblInit_c17__ANONYMOUS_s321(c17__ANONYMOUS_s193);
+  global bit c16__ANONYMOUS_s215 = 0;
+  glblInit_c16__ANONYMOUS_s319(c16__ANONYMOUS_s215);
+  global bit c15__ANONYMOUS_s159 = 0;
+  glblInit_c15__ANONYMOUS_s317(c15__ANONYMOUS_s159);
+  global bit c14__ANONYMOUS_s184 = 0;
+  glblInit_c14__ANONYMOUS_s315(c14__ANONYMOUS_s184);
+  global bit c13__ANONYMOUS_s214 = 0;
+  glblInit_c13__ANONYMOUS_s313(c13__ANONYMOUS_s214);
+  global bit c12__ANONYMOUS_s213 = 0;
+  glblInit_c12__ANONYMOUS_s311(c12__ANONYMOUS_s213);
+  global bit c11__ANONYMOUS_s185 = 0;
+  glblInit_c11__ANONYMOUS_s309(c11__ANONYMOUS_s185);
+  global bit c10__ANONYMOUS_s212 = 0;
+  glblInit_c10__ANONYMOUS_s307(c10__ANONYMOUS_s212);
+  global int[6] numa__ANONYMOUS_s198 = {0,0,0,0,0,0};
+  global int[6] ia__ANONYMOUS_s197 = {0,0,0,0,0,0};
+  global int count__ANONYMOUS_s196 = 0;
+  syntactic(c10__ANONYMOUS_s212, c11__ANONYMOUS_s185, c12__ANONYMOUS_s213, c13__ANONYMOUS_s214, c14__ANONYMOUS_s184, c15__ANONYMOUS_s159, c16__ANONYMOUS_s215, c17__ANONYMOUS_s193, c18__ANONYMOUS_s216, c19__ANONYMOUS_s217, c1__ANONYMOUS_s218, c20__ANONYMOUS_s203, c21__ANONYMOUS_s194, c22__ANONYMOUS_s189, c23__ANONYMOUS_s195, c2__ANONYMOUS_s219, c3__ANONYMOUS_s220, c4__ANONYMOUS_s221, c5__ANONYMOUS_s222, c6__ANONYMOUS_s223, c7__ANONYMOUS_s201, c8__ANONYMOUS_s224, c9__ANONYMOUS_s225, count__ANONYMOUS_s196, f1change__ANONYMOUS_s226, f2change__ANONYMOUS_s167, f3change__ANONYMOUS_s227, f4change__ANONYMOUS_s228, f5change__ANONYMOUS_s229, ia__ANONYMOUS_s197, numa__ANONYMOUS_s198);
+}
+/*evalpol..mbined.sk:274*/
+
+void syntactic__WrapperNospec ()/*evalpol..mbined.sk:274*/
+{ }
+/*evalpol..mbined.sk:210*/
+
+void uf (int x, int i, ref int _out)/*evalpol..mbined.sk:210*/
+{
+  _out = 0;
+  if(i == 1)/*evalpol..mbined.sk:211*/
+  {
+    _out = x;
+    return;
+  }
+  if(i == 0)/*evalpol..mbined.sk:212*/
+  {
+    _out = 1;
+    return;
+  }
+  int _out_s18 = 0;
+  uff(x, i, _out_s18);
+  _out = _out_s18;
+  return;
+}
+/*evalpol..mbined.sk:216*/
+
+uninterp void uff (int x, int i, ref int _out)/*evalpol..mbined.sk:216*/
+/* END PACKAGE ANONYMOUS*/
+[SKETCH] DONE
+Total time = 10562

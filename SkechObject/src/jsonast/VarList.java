@@ -35,7 +35,7 @@ public class VarList extends JsonNode{
 		}
 		return null;
 	}
-
+	
 	public String toString(){
 		String result = "";
 		for(Var v: var){

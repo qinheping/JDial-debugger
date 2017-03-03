@@ -1,0 +1,311 @@
+bit f1change = ??, f2change = ??, f3change = ??, f4change = ??, f5change = ??;
+
+bit c1 = ??, c2=??, c3=??, c4=??, c5=??, c6=??, c7=??, c8=??, c9=??, c10=??, c11=??, c12=??, c13=??, c14=??, c15=??, c16=??, c17=??, c18=??, c19=??, c20 = ??, c21 = ??, c22 = ??, c23 = ??;
+
+int coeff1(){
+  if(c1==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+
+int coeff2(){
+  if(c2==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+int coeff3(){
+  if(c3==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff4(){
+  if(c4==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff5(){
+  if(c5==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff6(){
+  if(c6==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff7(){
+  if(c7==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff8(){
+  if(c8==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff9(){
+  if(c9==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff10(){
+  if(c10==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff11(){
+  if(c11==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff12(){
+  if(c12==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff13(){
+  if(c13==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff14(){
+  if(c14==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff15(){
+  if(c15==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff16(){
+  if(c16==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+int coeff17(){
+  if(c17==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff18(){
+  if(c18==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff19(){
+  if(c19==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff20(){
+  if(c20==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff21(){
+  if(c21==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff22(){
+  if(c22==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff23(){
+  if(c23==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+
+
+int f1(int N, int[N] p, int x){
+  if(f1change == 0) return p[0];
+  else{
+    return coeff1()*N + coeff2()*p[??] + coeff3()*x + coeff4()*??;
+  }
+}
+
+int f2(int N, int[N] p, int x){
+  if(f2change == 0) return N-1;
+  else{
+    return coeff5()*N + coeff6()*p[??] + coeff7()*x + coeff8()*??;
+  }
+}
+
+
+bit f3(int N, int[N] p, int x, int i){
+  if(f3change == 0) return i>=0;
+  else{
+    return coeff9()*N + coeff10()*p[??] + coeff11()*x + coeff12()*i+coeff13()*?? > 0;
+  }
+}
+
+int f4(int N, int[N] p, int x, int i){
+  if(f4change == 0) return p[i]*uf(x,i);
+  else{
+    return coeff14()*N + coeff15()*p[??] + coeff16()*x + coeff17()*i+coeff18()*??;
+  }
+}
+
+int f5(int N, int[N] p, int x, int i){
+  if(f5change == 0) return i-1;
+  else{
+    return coeff19()*N + coeff20()*p[??] + coeff21()*x + coeff22()*i+coeff23()*??;
+  }
+}
+
+
+int uf(int x, int i){
+  if(i==1) return x;
+  if(i==0) return 1;
+  return uff(x,i);
+}
+
+int uff(int x, int i);
+
+
+int[6] numa, numap, ia,iap;
+int count;
+
+int buggy(int N, int[N] p, int x){
+  count = 0;
+  int num = f1(N,p,x);
+  int i = f2(N,p,x);
+  numa[count]=num;
+  ia[count]=i;
+  count++;
+  while(f3(N,p,x,i)){
+    num += f4(N,p,x,i);
+    i = f5(N,p,x,i);
+  numa[count]=num;
+  ia[count]=i;
+  count++;
+  }
+
+  return num;
+}
+
+int orig(int N, int[N] p, int x){
+  count = 0;
+  int num = p[0];
+  int i = N-1;
+  numap[count]=num;
+  iap[count]=i;
+  count++;
+
+  while(i>0){
+    num += p[i]*uf(x,i);
+    i--;
+  numap[count]=num;
+  iap[count]=i;
+  count++;
+
+  }
+
+  return num;
+}
+
+int fixed(int N, int[N] p, int x){
+  int num = 0;
+  int i = N-1;
+
+  while(i>=0){
+    num += p[i]*uf(x,i);
+    i--;
+  }
+
+  return num;
+}
+
+
+
+harness void syntactic(){
+  assert buggy(3,{2,3,1},2) == fixed(3,{2,3,1},2);
+  assert buggy(2,{1,2},5) == fixed(2,{1,2},5);
+  assert buggy(4,{1,5,2,1},2) == fixed(4,{1,5,2,1},2);
+
+  assert f1change + f2change + f3change + f4change + f5change < 2;
+  int sumexpr = c1 + c2 + c3+c4+c5+c6+c7+c8+c9+c10+c11+c12+c13 + c14 + c15 + c16 + c17 + c18 + c19 + c20 + c21 + c22 + c23;
+  minimize(sumexpr);
+
+}
+int pp = ??;
+
+harness void semantic(){
+
+  numa={0,0,0,0,0,0};  numap={0,0,0,0,0,0};
+  ia={0,0,0,0,0,0};  iap={0,0,0,0,0,0};
+
+ assert (pp==)
+
+  buggy(5,{2,3,1,1,2},2);
+  orig(5,{2,3,1,1,2},2);
+  int s1 = (numa[0]!=numap[0]) + (numa[1]!=numap[1]) +(numa[2]!=numap[2]) +(numa[3]!=numap[3]) +(numa[4]!=numap[4]) +(numa[5]!=numap[5])
+    +(ia[0]!=iap[0]) +(ia[1]!=iap[1]) +(ia[2]!=iap[2]) +(ia[3]!=iap[3]) +(ia[4]!=iap[4]) +(ia[5]!=iap[5]);
+
+  numa={0,0,0,0,0,0};  numap={0,0,0,0,0,0};
+  ia={0,0,0,0,0,0};  iap={0,0,0,0,0,0};
+
+  buggy(4,{1,5,2,1},2);
+  orig(4,{1,5,2,1},2);
+  int s2 = (numa[0]!=numap[0]) + (numa[1]!=numap[1]) +(numa[2]!=numap[2]) +(numa[3]!=numap[3]) +(numa[4]!=numap[4]) +(numa[5]!=numap[5])
+    +(ia[0]!=iap[0]) +(ia[1]!=iap[1]) +(ia[2]!=iap[2]) +(ia[3]!=iap[3]) +(ia[4]!=iap[4]) +(ia[5]!=iap[5]);
+
+  //minimize(s1+s2);
+
+
+}
+
+

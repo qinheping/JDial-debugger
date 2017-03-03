@@ -457,6 +457,7 @@ public class ConstraintFactory {
 		}
 
 		for (String v : finalState.getOrdered_locals()) {
+			if(finalState.getLocals().find(v)!=null)
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), "correctFinal_" + v,
 					new ExprConstInt(finalState.getLocals().find(v).getValue()), 0));
 		}
@@ -561,6 +562,11 @@ public class ConstraintFactory {
 						new ExprArrayRange(new ExprVar("lineArray"),
 								new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0),
 						new ExprConstInt(lineNumber), 0));
+
+		for (String s : Vars) {
+			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(s + "Array"),
+					new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0), new ExprVar(s), 0));
+		}
 		if (lineNumber == hitline) {
 			result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("linehit"), 0), 0));
 			List<Statement> consStmts = new ArrayList<>();
@@ -577,10 +583,6 @@ public class ConstraintFactory {
 					new ExprBinary(new ExprVar("linehit"), "==", new ExprConstInt(ConstraintFactory.hitnumber), 0),
 					cons, null, 0);
 			result.addStmt(iflinehit);
-		}
-		for (String s : Vars) {
-			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(s + "Array"),
-					new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0), new ExprVar(s), 0));
 		}
 		return result;
 	}

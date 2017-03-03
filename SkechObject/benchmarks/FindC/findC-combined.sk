@@ -1,0 +1,237 @@
+
+int N=7;
+
+bit f1change=??, f2change=??, f3change=??;
+
+int UNDEFINED = -100;
+
+
+int f1(char[N]s, char c, int k){
+if(f1change==0){
+ return 0;
+}
+else{
+  return coeff()*k + ??;
+ }
+}
+
+bit f2(char[N]s, char c, int k, int i){
+ if(f2change == 0) {
+   return i < k;
+ }
+else{
+  char cChar = ??;
+  if(??) return {| s[i] | c |} == {| s[i] | c | cChar |};
+  if(??) return {| s[i] | c |} != {| s[i] | c | cChar |};
+  if(??) return coeff()*k + coeff()*i + coeff() > 0;
+
+}
+}
+
+bit f3(char[N]s, char c, int k, int i){
+ if(f3change == 0) {
+   return s[i]==c;
+ }
+else{
+  char cChar = ??;
+  if(??) return {| s[i] | c |} == {| s[i] | c | cChar |};
+  if(??) return {| s[i] | c |} != {| s[i] | c | cChar |};
+  if(??) return coeff()*k + coeff()*i + coeff() > 0;
+
+}
+}
+
+
+generator int coeff(){
+if(??) return 1;
+if(??) return -1;
+return 0;
+}
+
+
+
+bit buggy_orig(char[N] s, char c, int k){
+ for(int i=0; i < k; i++){
+  if(s[i]==c) return 1;
+}
+return 0;
+}
+
+int i0Orig(char[N] s, char c, int k){
+ return 0;
+}
+
+int i1Orig(char[N] s, char c, int k){
+ int i = i0(s,c,k);
+ if(i != UNDEFINED && i<k && s[i]!=c) return i+1;
+ else return UNDEFINED;
+}
+
+int i2Orig(char[N] s, char c, int k){
+ int i = i1(s,c,k);
+ if(i != UNDEFINED && i<k && s[i]!=c) return i+1;
+ else return UNDEFINED;
+}
+
+
+int i3Orig(char[N] s, char c, int k){
+ int i = i2(s,c,k);
+ if(i != UNDEFINED && i<k && s[i]!=c) return i+1;
+ else return UNDEFINED;
+}
+
+int i4Orig(char[N] s, char c, int k){
+ int i = i3(s,c,k);
+ if(i != UNDEFINED && i<k && s[i]!=c) return i+1;
+ else return UNDEFINED;
+}
+
+int i5Orig(char[N] s, char c, int k){
+ int i = i4(s,c,k);
+ if(i != UNDEFINED && i<k && s[i]!=c) return i+1;
+ else return UNDEFINED;
+}
+
+int i6Orig(char[N] s, char c, int k){
+ int i = i5(s,c,k);
+ if(i != UNDEFINED && i<k && s[i]!=c) return i+1;
+ else return UNDEFINED;
+}
+
+
+
+int i0(char[N] s, char c, int k){
+ return f1(s,c,k);
+}
+
+int i1(char[N] s, char c, int k){
+ int i = i0(s,c,k);
+ if(i != UNDEFINED && f2(s,c,k,i) && !f3(s,c,k,i)) {
+   return i + 1;
+ }
+else{
+ return UNDEFINED;
+}
+}
+
+int i2(char[N] s, char c, int k){
+ int i = i1(s,c,k);
+ if(i != UNDEFINED && f2(s,c,k,i) && !f3(s,c,k,i)) {
+   return i + 1;
+ }
+else{
+ return UNDEFINED;
+}
+}
+
+
+int i3(char[N] s, char c, int k){
+ int i = i2(s,c,k);
+ if(i != UNDEFINED && f2(s,c,k,i) && !f3(s,c,k,i)) {
+   return i + 1;
+ }
+else{
+ return UNDEFINED;
+}
+}
+
+
+int i4(char[N] s, char c, int k){
+ int i = i3(s,c,k);
+ if(i != UNDEFINED && f2(s,c,k,i) && !f3(s,c,k,i)) {
+   return i + 1;
+ }
+else{
+ return UNDEFINED;
+}
+}
+
+
+int i5(char[N] s, char c, int k){
+ int i = i4(s,c,k);
+ if(i != UNDEFINED && f2(s,c,k,i) && !f3(s,c,k,i)) {
+   return i + 1;
+ }
+else{
+ return UNDEFINED;
+}
+}
+
+
+int i6(char[N] s, char c, int k){
+ int i = i5(s,c,k);
+ if(i != UNDEFINED && f2(s,c,k,i) && !f3(s,c,k,i)) {
+   return i + 1;
+ }
+else{
+ return UNDEFINED;
+}
+}
+
+
+bit buggy(char[N] s, char c, int k){
+  for(int i=f1(s,c,k); f2(s,c,k,i); i++){
+    if(f3(s,c,k,i)){
+       return 1;
+    }
+  }
+ return 0;
+}
+
+
+harness void testHarness(){
+ char[N] s1 = "ab?";
+ char c1 = '?';
+ int k1 = 2;
+ char[N] s2 = "aba?cg";
+ char c2 = '?';
+ int k2 = 5;
+ char[N] s3 = "?aba";
+ char c3 = '?';
+ int k3 = 3;
+ char[N] s4 = "abcdd?";
+ char c4 = '?';
+ int k4 = 4;
+
+
+ assert buggy(s1,c1,k1);
+ assert buggy(s2,c2,k2);
+ assert buggy(s3,c3,k3);
+ assert !buggy(s4,c4,k4); 
+
+ assert (f1change + f2change + f3change) < 2;
+
+
+ bit i0s2 = i0(s2,c2,k2) != i0Orig(s2,c2,k2);
+ bit i1s2 = i1(s2,c2,k2) != i1Orig(s2,c2,k2);
+ bit i2s2 = i2(s2,c2,k2) != i2Orig(s2,c2,k2);
+ bit i3s2 = i3(s2,c2,k2) != i3Orig(s2,c2,k2);
+ bit i4s2 = i4(s2,c2,k2) != i4Orig(s2,c2,k2);
+ bit i5s2 = i5(s2,c2,k2) != i5Orig(s2,c2,k2);
+ bit i6s2 = i6(s2,c2,k2) != i6Orig(s2,c2,k2);
+
+ bit i0s3 = i0(s3,c3,k3) != i0Orig(s3,c3,k3);
+ bit i1s3 = i1(s3,c3,k3) != i1Orig(s3,c3,k3);
+ bit i2s3 = i2(s3,c3,k3) != i2Orig(s3,c3,k3);
+ bit i3s3 = i3(s3,c3,k3) != i3Orig(s3,c3,k3);
+ bit i4s3 = i4(s3,c3,k3) != i4Orig(s3,c3,k3);
+ bit i5s3 = i5(s3,c3,k3) != i5Orig(s3,c3,k3);
+ bit i6s3 = i6(s3,c3,k3) != i6Orig(s3,c3,k3);
+
+ bit i0s4 = i0(s4,c4,k4) != i0Orig(s4,c4,k4);
+ bit i1s4 = i1(s4,c4,k4) != i1Orig(s4,c4,k4);
+ bit i2s4 = i2(s4,c4,k4) != i2Orig(s4,c4,k4);
+ bit i3s4 = i3(s4,c4,k4) != i3Orig(s4,c4,k4);
+ bit i4s4 = i4(s4,c4,k4) != i4Orig(s4,c4,k4);
+ bit i5s4 = i5(s4,c4,k4) != i5Orig(s4,c4,k4);
+ bit i6s4 = i6(s4,c4,k4) != i6Orig(s4,c4,k4);
+
+
+
+ minimize(i0s2 + i1s2 + i2s2 + i3s2 + i4s2 + i5s2 + i6s2 + i0s3 + i1s3 + i2s3 + i3s3 + i4s3 + i5s3 + i6s3 + i0s4 + i1s4 + i2s4 + i3s4+ i4s4+ i5s4 + i6s4);
+ 
+}
+
+
+
+

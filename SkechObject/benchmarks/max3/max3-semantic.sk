@@ -1,0 +1,202 @@
+bit f1change = ??, f2change = ??, f3change = ??, f4change = ??;
+
+bit c1 = ??, c2=??, c3=??, c4=??, c5=??, c6=??, c7=??, c8=??, c9=??, c10=??, c11=??, c12=??, c13=??, c14=??, c15=??, c16=??;
+
+int coeff1(){
+  if(c1==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+
+int coeff2(){
+  if(c2==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+int coeff3(){
+  if(c3==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff4(){
+  if(c4==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff5(){
+  if(c5==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff6(){
+  if(c6==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff7(){
+  if(c7==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff8(){
+  if(c8==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff9(){
+  if(c9==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff10(){
+  if(c10==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff11(){
+  if(c11==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff12(){
+  if(c12==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff13(){
+  if(c13==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff14(){
+  if(c14==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff15(){
+  if(c15==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff16(){
+  if(c16==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+
+int fixed(int x, int y, int z){
+  if(x>y) y = x;
+  x1=x;y1=y;z1=y;
+  if(y>z) z = y;
+  x2=x;y2=y;z2=z;
+  return z;
+}
+
+
+bit f1(int x, int y, int z){
+  if(f1change==0) return x>y;
+  else{
+    return coeff1()*x + coeff2()*y + coeff3()*z + coeff4()*??>0;
+  }
+}
+
+bit f3(int x, int y, int z){
+  if(f3change==0) return y>z;
+  else{
+    return coeff5()*x + coeff6()*y + coeff7()*z + coeff8()*??>0;
+  }
+}
+
+
+int f2(int x, int y, int z){
+  if(f2change==0) return x;
+  else{
+    return coeff9()*x + coeff10()*y + coeff11()*z + coeff12()*??;
+  }
+}
+
+int f4(int x, int y, int z){
+  if(f4change==0) return x;
+  else{
+    return coeff13()*x + coeff14()*y + coeff15()*z + coeff16()*??;
+  }
+}
+
+
+int x1,y1,z1,x2,y2,z2;
+int x1p,y1p,z1p,x2p,y2p,z2p;
+
+int buggy(int x, int y, int z){
+  if(f1(x,y,z)) y = f2(x,y,z);
+  x1p=x; y1p=y; z1p=z;
+  if(f3(x,y,z)) z = f4(x,y,z);
+  x2p=x;y2p=y;z2p=z;
+  return z;
+}
+
+harness void syntactic(){
+
+  assert buggy(1,2,3) == 3;
+  assert buggy(1,5,4) == 5;
+  assert buggy(8,2,1) == 8;
+  assert buggy(4,2,4) == 4;
+
+  //assert f1change + f2change + f3change + f4change < 2;
+  int exprsize = c1+c2+c3+c4+c5+c6+c7+c8+c9+c10+c11+c12+c13+c14+c15+c16;
+  //minimize(exprsize);
+}
+
+
+harness void semantic(){
+  x1=0;y1=0;z1=0;x2=0;y2=0;z2=0;
+  x1p=0;y1p=0;z1p=0;x2p=0;y2p=0;z2p=0;
+
+  buggy(1,2,3);
+  fixed(1,2,3);
+  int s1 = (x1 !=x1p) + (x2 !=x2p) + (y1 != y1p) + (y2 != y2p) + (z1 != z1p) + (z2 != z2p);
+
+  x1=0;y1=0;z1=0;x2=0;y2=0;z2=0;
+  x1p=0;y1p=0;z1p=0;x2p=0;y2p=0;z2p=0;
+
+  buggy(3,2,4);
+  fixed(3,2,4);
+  int s2 = (x1 !=x1p) + (x2 !=x2p) + (y1 != y1p) + (y2 != y2p) + (z1 != z1p) + (z2 != z2p);
+
+  minimize(s1+s2);
+
+}

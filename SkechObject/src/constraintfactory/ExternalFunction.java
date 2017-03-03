@@ -14,12 +14,14 @@ public class ExternalFunction {
 	private String name_Java;
 	private Map<ExpressionTuple, Expression> safeTable;
 	private Integer num_Args;
+	private Integer num_Calls;
 
-	public ExternalFunction(String name, String nameJ, Integer n){
+	public ExternalFunction(String name, String nameJ, Integer n, Integer m){
 		setSafeTable(new HashMap<ExpressionTuple, Expression>());
 		this.setName(name);
 		this.setName_Java(nameJ);
 		this.num_Args = n;
+		this.num_Calls = m;
 	}
 	
 	public void put(ExpressionTuple arg0, Expression arg1){

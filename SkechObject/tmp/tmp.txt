@@ -5,73 +5,98 @@ bit const0change = ??;
  int Const0(){
 if(const0change == 1){
 return ??;}else{
-return 1;}
+return 0;}
+}
+
+bit const1change = ??;
+ int Const1(){
+if(const1change == 1){
+return ??;}else{
+return 0;}
 }
 
 
-int[8] lineArray;
-int[8] aArray = {0,0,0,0,0,0,0,0};
-int[8] bArray = {0,0,0,0,0,0,0,0};
-int[8] cArray = {0,0,0,0,0,0,0,0};
+int[26] lineArray;
+int[26] sumArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[26] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-int cfinal = 0;
+int sumfinal = 0;
 int finalcount = 0;
 
- int SimpleJava(){
+ int SimpleJava(int n){
 int count = -1;
 int linehit = 0;
 (count)++;
+lineArray[count] = 4;
+
+int sum = Const0();
+
+(count)++;
+lineArray[count] = 5;
+sumArray[count] = sum;
+
+for(int i = Const1(); i < n; (i)++){
+(count)++;
+lineArray[count] = 5;
+sumArray[count] = sum;
+iArray[count] = i;
+
+(count)++;
 lineArray[count] = 6;
-
-int a = 2;
-
-(count)++;
-lineArray[count] = 7;
-aArray[count] = a;
-
-int b = a + (Const0());
-
-(count)++;
-lineArray[count] = 8;
-aArray[count] = a;
-bArray[count] = b;
-
-int c = a + b;
-
-(count)++;
-lineArray[count] = 9;
+sumArray[count] = sum;
+iArray[count] = i;
 (linehit)++;
-if(linehit == 1){
-cfinal = c;
+if(linehit == 4){
+sumfinal = sum;
 finalcount = count;
 return 0;
 }
 
-aArray[count] = a;
-bArray[count] = b;
-cArray[count] = c;
 
-return c;
+sum += External_Mathpow(n, i);
+
+
+
+(count)++;
+lineArray[count] = 5;
+sumArray[count] = sum;
+iArray[count] = i;
+
+}
+
+
+(count)++;
+lineArray[count] = 5;
+sumArray[count] = sum;
+
+
+(count)++;
+lineArray[count] = 8;
+sumArray[count] = sum;
+
+return sum;
 
 
 
 }
 
 harness void HammingTest(){
-int[4] oringianlaArray = {0,2,2,2};
-int[4] oringianlbArray = {0,0,3,3};
-int[4] oringianlcArray = {0,0,0,5};
-int correctFinal_c = 6;
-SimpleJava();
+int[13] oringianlsumArray = {0,0,0,0,1,1,1,6,6,6,31,31,31};
+int[13] oringianliArray = {0,0,0,0,0,1,1,1,2,2,2,3,3};
+int correctFinal_sum = 30;
+SimpleJava(5);
 int HammingDistance = 0;
-for(int i = 0; i < 4; (i)++){
-HammingDistance += (aArray[i]) != (oringianlaArray[i]);
-HammingDistance += (bArray[i]) != (oringianlbArray[i]);
-HammingDistance += (cArray[i]) != (oringianlcArray[i]);
+for(int i = 0; i < 13; (i)++){
+if(const0change == 0){
+HammingDistance += (sumArray[i]) != (oringianlsumArray[i]);}
+
+if(const1change == 0){
+HammingDistance += (iArray[i]) != (oringianliArray[i]);}
+
 }
 
-assert (cfinal == correctFinal_c);
-assert (const0change == 1);
+assert (sumfinal == correctFinal_sum);
+assert ((const0change + const1change) == 1);
 minimize(HammingDistance);
 }

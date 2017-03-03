@@ -1,0 +1,232 @@
+bit f1change = ??, f2change = ??, f3change = ??, f4change = ??;
+
+bit c1 = ??, c2=??, c3=??, c4=??, c5=??, c6=??, c7=??, c8=??, c9=??, c10=??, c11=??, c12=??, c13=??, c14=??, c15=??, c16=??;
+
+int coeff1(){
+  if(c1==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+
+int coeff2(){
+  if(c2==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+int coeff3(){
+  if(c3==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff4(){
+  if(c4==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff5(){
+  if(c5==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff6(){
+  if(c6==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff7(){
+  if(c7==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff8(){
+  if(c8==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff9(){
+  if(c9==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff10(){
+  if(c10==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff11(){
+  if(c11==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff12(){
+  if(c12==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff13(){
+  if(c13==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff14(){
+  if(c14==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff15(){
+  if(c15==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+int coeff16(){
+  if(c16==0) return 0;
+  else{
+    if(??) return 1;
+    return -1;
+  }
+}
+
+
+int f1(int base, int exp){
+  if(f1change == 0) return 0;
+  else{
+    return coeff1()*base + coeff2()*exp + coeff3()*??;
+  }
+}
+
+
+bit f2(int base, int exp, int result){
+  if(f2change == 0) return result < exp-1;
+  else{
+    return coeff4()*base + coeff5()*exp + coeff6()*result + coeff7()*?? > 0;
+  }
+}
+
+
+
+int f3(int base, int exp, int result){
+  if(f3change == 0) return 0;
+  else{
+    return coeff8()*base + coeff9()*exp + coeff10()*result + coeff11()*??;
+  }
+}
+
+int f4(int base, int exp, int result){
+  if(f4change == 0) return base;
+  else{
+    return coeff12()*base + coeff13()*exp + coeff14()*result + coeff15()*??;
+  }
+}
+
+
+
+
+int buggy(int base, int exp){
+  count= 0;
+  int result = f1(base,exp);
+  result1p[count]=result;
+   count++;
+  for(int i=f3(base,exp,result); f2(base,exp,i); i++){
+    result += f4(base, exp, result);
+  result1p[count]=result;
+  exp1p[count] = i;
+  count++;
+  }
+
+  return result;
+}
+
+int[6] result1, result1p, exp1, exp1p;
+int count;
+
+int fixed(int base, int exp){
+  count = 0;
+  int result = 0;
+  result1[count]=result;
+   count++;
+   for(int i=0; i<exp-1;i++){
+    assert count<7;
+    result += base;
+  result1[count]=result;
+  exp1[count] = i;
+  count++;
+
+  }
+
+  return result;
+}
+
+
+
+harness void syntactic(){
+
+  assert buggy(2,4) == 8;
+  
+  assert buggy(5,1) == 5;
+  assert buggy(3,3) == 9;
+  assert buggy(4,5) == 20;
+  
+  // assert f1change + f2change + f3change + f4change < 2;
+  int exprsize = c1+c2+c3+c4+c5+c6+c7+c8+c9+c10+c11+c12+c13+c14+c15;
+  // minimize(exprsize);
+}
+
+harness void semantic(){
+
+  result1={0,0,0,0,0,0}; result1p = {0,0,0,0,0,0};
+  exp1={0,0,0,0,0,0}; exp1p = {0,0,0,0,0,0};
+
+  buggy(2,4);
+  fixed(2,4);
+
+  int sem1 = (result1[0]!=result1p[0]) + (result1[1]!=result1p[1]) +
+ (result1[2]!=result1p[2]) + (result1[3]!=result1p[3]) +
+ (result1[4]!=result1p[4]) + (result1[5]!=result1p[5]) +
+    (exp1[0] != exp1p[0]) +  (exp1[1] != exp1p[1]) + (exp1[2] != exp1p[2]) + (exp1[3] != exp1p[3]) + (exp1[4] != exp1p[4]) + (exp1[5] != exp1p[5]);
+
+  result1={0,0,0,0,0,0}; result1p = {0,0,0,0,0,0};
+  exp1={0,0,0,0,0,0}; exp1p = {0,0,0,0,0,0};
+
+  buggy(4,5);
+  fixed(4,5);
+
+  int sem2 = (result1[0]!=result1p[0]) + (result1[1]!=result1p[1]) +
+ (result1[2]!=result1p[2]) + (result1[3]!=result1p[3]) +
+ (result1[4]!=result1p[4]) + (result1[5]!=result1p[5]) +
+    (exp1[0] != exp1p[0]) +  (exp1[1] != exp1p[1]) + (exp1[2] != exp1p[2]) + (exp1[3] != exp1p[3]) + (exp1[4] != exp1p[4]) + (exp1[5] != exp1p[5]);
+
+  minimize(sem1+sem2);
+
+}

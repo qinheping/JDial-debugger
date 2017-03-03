@@ -49,6 +49,15 @@ public class Test {
 		//assert s.toString().equals("{7=2}") ;
 	}
 	
+	@org.junit.Test
+	public void testSumupExternal_2() throws FileNotFoundException, InterruptedException{
+		String oriTraces = new Scanner(new File("benchmarks/sumup_external_2/errortrace")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/sumup_external_2/correction")).useDelimiter("\\Z").next();
+
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,6);
+		String s = me.Synthesize().toString();
+		//assert s.toString().equals("{7=2}") ;
+	}
 	
 	@org.junit.Test
 	public void testSumupExternal() throws FileNotFoundException, InterruptedException{
@@ -98,7 +107,7 @@ public class Test {
 	
 	@org.junit.Test
 	public void testExternalFunction(){
-		ExternalFunction ef = new ExternalFunction("Math.power","Math.power",2);
+		ExternalFunction ef = new ExternalFunction("Math.power","Math.power",2,5);
 		ef.put(new ExpressionTuple(2,2), new ExprConstInt(4));
 
 		ef.put(new ExpressionTuple(2,3), new ExprConstInt(8));

@@ -129,7 +129,8 @@ public class ExprFunCall extends Expression
 				return externalFuncNames;
 		}
 		Integer ary = this.params.size();
-		externalFuncNames.add(new ExternalFunction(this.name,this.name_Java, ary));
+		// TODO: Number of External Call
+		externalFuncNames.add(new ExternalFunction(this.name,this.name_Java, ary,10));
 		return externalFuncNames;
 	}
 

@@ -1,0 +1,2260 @@
+SKETCH version 1.7.2
+Benchmark = tmp.txt
+/* BEGIN PACKAGE ANONYMOUS*/
+/*tmp.txt:2*/
+
+void Coeff0 (ref int _out)/*tmp.txt:2*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:10*/
+
+void Coeff1 (ref int _out, ref global bit coeff1change__ANONYMOUS_s293)/*tmp.txt:10*/
+{
+  _out = 0;
+  if(coeff1change__ANONYMOUS_s293 == 0)/*tmp.txt:11*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:100*/
+
+void Coeff10 (ref int _out, ref global bit coeff10change__ANONYMOUS_s312)/*tmp.txt:100*/
+{
+  _out = 0;
+  if(coeff10change__ANONYMOUS_s312 == 0)/*tmp.txt:101*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:111*/
+
+void Coeff11 (ref int _out, ref global bit coeff11change__ANONYMOUS_s344)/*tmp.txt:111*/
+{
+  _out = 0;
+  if(coeff11change__ANONYMOUS_s344 == 0)/*tmp.txt:112*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:122*/
+
+void Coeff12 (ref int _out, ref global bit coeff12change__ANONYMOUS_s304)/*tmp.txt:122*/
+{
+  _out = 0;
+  if(coeff12change__ANONYMOUS_s304 == 0)/*tmp.txt:123*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:133*/
+
+void Coeff13 (ref int _out, ref global bit coeff13change__ANONYMOUS_s309)/*tmp.txt:133*/
+{
+  _out = 0;
+  if(coeff13change__ANONYMOUS_s309 == 0)/*tmp.txt:134*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:144*/
+
+void Coeff14 (ref int _out, ref global bit coeff14change__ANONYMOUS_s209)/*tmp.txt:144*/
+{
+  _out = 0;
+  if(coeff14change__ANONYMOUS_s209 == 0)/*tmp.txt:145*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:155*/
+
+void Coeff15 (ref int _out, ref global bit coeff15change__ANONYMOUS_s351)/*tmp.txt:155*/
+{
+  _out = 0;
+  if(coeff15change__ANONYMOUS_s351 == 0)/*tmp.txt:156*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:166*/
+
+void Coeff16 (ref int _out)/*tmp.txt:166*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:174*/
+
+void Coeff17 (ref int _out, ref global bit coeff17change__ANONYMOUS_s298)/*tmp.txt:174*/
+{
+  _out = 0;
+  if(coeff17change__ANONYMOUS_s298 == 0)/*tmp.txt:175*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:185*/
+
+void Coeff18 (ref int _out, ref global bit coeff18change__ANONYMOUS_s334)/*tmp.txt:185*/
+{
+  _out = 0;
+  if(coeff18change__ANONYMOUS_s334 == 0)/*tmp.txt:186*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:196*/
+
+void Coeff19 (ref int _out, ref global bit coeff19change__ANONYMOUS_s297)/*tmp.txt:196*/
+{
+  _out = 0;
+  if(coeff19change__ANONYMOUS_s297 == 0)/*tmp.txt:197*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:21*/
+
+void Coeff2 (ref int _out)/*tmp.txt:21*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:207*/
+
+void Coeff20 (ref int _out, ref global bit coeff20change__ANONYMOUS_s204)/*tmp.txt:207*/
+{
+  _out = 0;
+  if(coeff20change__ANONYMOUS_s204 == 0)/*tmp.txt:208*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:218*/
+
+void Coeff21 (ref int _out, ref global bit coeff21change__ANONYMOUS_s322)/*tmp.txt:218*/
+{
+  _out = 0;
+  if(coeff21change__ANONYMOUS_s322 == 0)/*tmp.txt:219*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:229*/
+
+void Coeff22 (ref int _out, ref global bit coeff22change__ANONYMOUS_s346)/*tmp.txt:229*/
+{
+  _out = 0;
+  if(coeff22change__ANONYMOUS_s346 == 0)/*tmp.txt:230*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:240*/
+
+void Coeff23 (ref int _out)/*tmp.txt:240*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:248*/
+
+void Coeff24 (ref int _out, ref global bit coeff24change__ANONYMOUS_s207)/*tmp.txt:248*/
+{
+  _out = 0;
+  if(coeff24change__ANONYMOUS_s207 == 0)/*tmp.txt:249*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:259*/
+
+void Coeff25 (ref int _out, ref global bit coeff25change__ANONYMOUS_s296)/*tmp.txt:259*/
+{
+  _out = 0;
+  if(coeff25change__ANONYMOUS_s296 == 0)/*tmp.txt:260*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:270*/
+
+void Coeff26 (ref int _out, ref global bit coeff26change__ANONYMOUS_s362)/*tmp.txt:270*/
+{
+  _out = 0;
+  if(coeff26change__ANONYMOUS_s362 == 0)/*tmp.txt:271*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:281*/
+
+void Coeff27 (ref int _out, ref global bit coeff27change__ANONYMOUS_s302)/*tmp.txt:281*/
+{
+  _out = 0;
+  if(coeff27change__ANONYMOUS_s302 == 0)/*tmp.txt:282*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:292*/
+
+void Coeff28 (ref int _out, ref global bit coeff28change__ANONYMOUS_s291)/*tmp.txt:292*/
+{
+  _out = 0;
+  if(coeff28change__ANONYMOUS_s291 == 0)/*tmp.txt:293*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:303*/
+
+void Coeff29 (ref int _out, ref global bit coeff29change__ANONYMOUS_s356)/*tmp.txt:303*/
+{
+  _out = 0;
+  if(coeff29change__ANONYMOUS_s356 == 0)/*tmp.txt:304*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:29*/
+
+void Coeff3 (ref int _out, ref global bit coeff3change__ANONYMOUS_s306)/*tmp.txt:29*/
+{
+  _out = 0;
+  if(coeff3change__ANONYMOUS_s306 == 0)/*tmp.txt:30*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:314*/
+
+void Coeff30 (ref int _out)/*tmp.txt:314*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:322*/
+
+void Coeff31 (ref int _out, ref global bit coeff31change__ANONYMOUS_s292)/*tmp.txt:322*/
+{
+  _out = 0;
+  if(coeff31change__ANONYMOUS_s292 == 0)/*tmp.txt:323*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:333*/
+
+void Coeff32 (ref int _out, ref global bit coeff32change__ANONYMOUS_s314)/*tmp.txt:333*/
+{
+  _out = 0;
+  if(coeff32change__ANONYMOUS_s314 == 0)/*tmp.txt:334*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:344*/
+
+void Coeff33 (ref int _out, ref global bit coeff33change__ANONYMOUS_s332)/*tmp.txt:344*/
+{
+  _out = 0;
+  if(coeff33change__ANONYMOUS_s332 == 0)/*tmp.txt:345*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:355*/
+
+void Coeff34 (ref int _out, ref global bit coeff34change__ANONYMOUS_s329)/*tmp.txt:355*/
+{
+  _out = 0;
+  if(coeff34change__ANONYMOUS_s329 == 0)/*tmp.txt:356*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:366*/
+
+void Coeff35 (ref int _out, ref global bit coeff35change__ANONYMOUS_s295)/*tmp.txt:366*/
+{
+  _out = 0;
+  if(coeff35change__ANONYMOUS_s295 == 0)/*tmp.txt:367*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:377*/
+
+void Coeff36 (ref int _out, ref global bit coeff36change__ANONYMOUS_s308)/*tmp.txt:377*/
+{
+  _out = 0;
+  if(coeff36change__ANONYMOUS_s308 == 0)/*tmp.txt:378*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:388*/
+
+void Coeff37 (ref int _out)/*tmp.txt:388*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:396*/
+
+void Coeff38 (ref int _out, ref global bit coeff38change__ANONYMOUS_s353)/*tmp.txt:396*/
+{
+  _out = 0;
+  if(coeff38change__ANONYMOUS_s353 == 0)/*tmp.txt:397*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = 0;
+  return;
+}
+/*tmp.txt:407*/
+
+void Coeff39 (ref int _out, ref global bit coeff39change__ANONYMOUS_s355)/*tmp.txt:407*/
+{
+  _out = 0;
+  if(coeff39change__ANONYMOUS_s355 == 0)/*tmp.txt:408*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:40*/
+
+void Coeff4 (ref int _out, ref global bit coeff4change__ANONYMOUS_s326)/*tmp.txt:40*/
+{
+  _out = 0;
+  if(coeff4change__ANONYMOUS_s326 == 0)/*tmp.txt:41*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:418*/
+
+void Coeff40 (ref int _out, ref global bit coeff40change__ANONYMOUS_s350)/*tmp.txt:418*/
+{
+  _out = 0;
+  if(coeff40change__ANONYMOUS_s350 == 0)/*tmp.txt:419*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:429*/
+
+void Coeff41 (ref int _out, ref global bit coeff41change__ANONYMOUS_s361)/*tmp.txt:429*/
+{
+  _out = 0;
+  if(coeff41change__ANONYMOUS_s361 == 0)/*tmp.txt:430*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = 1;
+  return;
+}
+/*tmp.txt:440*/
+
+void Coeff42 (ref int _out, ref global bit coeff42change__ANONYMOUS_s299)/*tmp.txt:440*/
+{
+  _out = 0;
+  if(coeff42change__ANONYMOUS_s299 == 0)/*tmp.txt:441*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:451*/
+
+void Coeff43 (ref int _out)/*tmp.txt:451*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:459*/
+
+void Coeff44 (ref int _out, ref global bit coeff44change__ANONYMOUS_s206)/*tmp.txt:459*/
+{
+  _out = 0;
+  if(coeff44change__ANONYMOUS_s206 == 0)/*tmp.txt:460*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:470*/
+
+void Coeff45 (ref int _out, ref global bit coeff45change__ANONYMOUS_s311)/*tmp.txt:470*/
+{
+  _out = 0;
+  if(coeff45change__ANONYMOUS_s311 == 0)/*tmp.txt:471*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:481*/
+
+void Coeff46 (ref int _out, ref global bit coeff46change__ANONYMOUS_s324)/*tmp.txt:481*/
+{
+  _out = 0;
+  if(coeff46change__ANONYMOUS_s324 == 0)/*tmp.txt:482*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:492*/
+
+void Coeff47 (ref int _out, ref global bit coeff47change__ANONYMOUS_s358)/*tmp.txt:492*/
+{
+  _out = 0;
+  if(coeff47change__ANONYMOUS_s358 == 0)/*tmp.txt:493*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:503*/
+
+void Coeff48 (ref int _out, ref global bit coeff48change__ANONYMOUS_s357)/*tmp.txt:503*/
+{
+  _out = 0;
+  if(coeff48change__ANONYMOUS_s357 == 0)/*tmp.txt:504*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:514*/
+
+void Coeff49 (ref int _out, ref global bit coeff49change__ANONYMOUS_s360)/*tmp.txt:514*/
+{
+  _out = 0;
+  if(coeff49change__ANONYMOUS_s360 == 0)/*tmp.txt:515*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:51*/
+
+void Coeff5 (ref int _out)/*tmp.txt:51*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:525*/
+
+void Coeff50 (ref int _out)/*tmp.txt:525*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:533*/
+
+void Coeff51 (ref int _out, ref global bit coeff51change__ANONYMOUS_s348)/*tmp.txt:533*/
+{
+  _out = 0;
+  if(coeff51change__ANONYMOUS_s348 == 0)/*tmp.txt:534*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:544*/
+
+void Coeff52 (ref int _out, ref global bit coeff52change__ANONYMOUS_s320)/*tmp.txt:544*/
+{
+  _out = 0;
+  if(coeff52change__ANONYMOUS_s320 == 0)/*tmp.txt:545*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:555*/
+
+void Coeff53 (ref int _out, ref global bit coeff53change__ANONYMOUS_s321)/*tmp.txt:555*/
+{
+  _out = 0;
+  if(coeff53change__ANONYMOUS_s321 == 0)/*tmp.txt:556*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:566*/
+
+void Coeff54 (ref int _out, ref global bit coeff54change__ANONYMOUS_s301)/*tmp.txt:566*/
+{
+  _out = 0;
+  if(coeff54change__ANONYMOUS_s301 == 0)/*tmp.txt:567*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:577*/
+
+void Coeff55 (ref int _out, ref global bit coeff55change__ANONYMOUS_s208)/*tmp.txt:577*/
+{
+  _out = 0;
+  if(coeff55change__ANONYMOUS_s208 == 0)/*tmp.txt:578*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:588*/
+
+void Coeff56 (ref int _out, ref global bit coeff56change__ANONYMOUS_s303)/*tmp.txt:588*/
+{
+  _out = 0;
+  if(coeff56change__ANONYMOUS_s303 == 0)/*tmp.txt:589*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:599*/
+
+void Coeff57 (ref int _out)/*tmp.txt:599*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:607*/
+
+void Coeff58 (ref int _out, ref global bit coeff58change__ANONYMOUS_s325)/*tmp.txt:607*/
+{
+  _out = 0;
+  if(coeff58change__ANONYMOUS_s325 == 0)/*tmp.txt:608*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:618*/
+
+void Coeff59 (ref int _out, ref global bit coeff59change__ANONYMOUS_s318)/*tmp.txt:618*/
+{
+  _out = 0;
+  if(coeff59change__ANONYMOUS_s318 == 0)/*tmp.txt:619*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:59*/
+
+void Coeff6 (ref int _out, ref global bit coeff6change__ANONYMOUS_s327)/*tmp.txt:59*/
+{
+  _out = 0;
+  if(coeff6change__ANONYMOUS_s327 == 0)/*tmp.txt:60*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:629*/
+
+void Coeff60 (ref int _out, ref global bit coeff60change__ANONYMOUS_s317)/*tmp.txt:629*/
+{
+  _out = 0;
+  if(coeff60change__ANONYMOUS_s317 == 0)/*tmp.txt:630*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:640*/
+
+void Coeff61 (ref int _out, ref global bit coeff61change__ANONYMOUS_s319)/*tmp.txt:640*/
+{
+  _out = 0;
+  if(coeff61change__ANONYMOUS_s319 == 0)/*tmp.txt:641*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:651*/
+
+void Coeff62 (ref int _out, ref global bit coeff62change__ANONYMOUS_s359)/*tmp.txt:651*/
+{
+  _out = 0;
+  if(coeff62change__ANONYMOUS_s359 == 0)/*tmp.txt:652*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:662*/
+
+void Coeff63 (ref int _out, ref global bit coeff63change__ANONYMOUS_s349)/*tmp.txt:662*/
+{
+  _out = 0;
+  if(coeff63change__ANONYMOUS_s349 == 0)/*tmp.txt:663*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:673*/
+
+void Coeff64 (ref int _out)/*tmp.txt:673*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:681*/
+
+void Coeff65 (ref int _out, ref global bit coeff65change__ANONYMOUS_s333)/*tmp.txt:681*/
+{
+  _out = 0;
+  if(coeff65change__ANONYMOUS_s333 == 0)/*tmp.txt:682*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:692*/
+
+void Coeff66 (ref int _out, ref global bit coeff66change__ANONYMOUS_s313)/*tmp.txt:692*/
+{
+  _out = 0;
+  if(coeff66change__ANONYMOUS_s313 == 0)/*tmp.txt:693*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:703*/
+
+void Coeff67 (ref int _out, ref global bit coeff67change__ANONYMOUS_s300)/*tmp.txt:703*/
+{
+  _out = 0;
+  if(coeff67change__ANONYMOUS_s300 == 0)/*tmp.txt:704*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:714*/
+
+void Coeff68 (ref int _out, ref global bit coeff68change__ANONYMOUS_s335)/*tmp.txt:714*/
+{
+  _out = 0;
+  if(coeff68change__ANONYMOUS_s335 == 0)/*tmp.txt:715*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:725*/
+
+void Coeff69 (ref int _out, ref global bit coeff69change__ANONYMOUS_s307)/*tmp.txt:725*/
+{
+  _out = 0;
+  if(coeff69change__ANONYMOUS_s307 == 0)/*tmp.txt:726*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:70*/
+
+void Coeff7 (ref int _out, ref global bit coeff7change__ANONYMOUS_s330)/*tmp.txt:70*/
+{
+  _out = 0;
+  if(coeff7change__ANONYMOUS_s330 == 0)/*tmp.txt:71*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:736*/
+
+void Coeff70 (ref int _out, ref global bit coeff70change__ANONYMOUS_s323)/*tmp.txt:736*/
+{
+  _out = 0;
+  if(coeff70change__ANONYMOUS_s323 == 0)/*tmp.txt:737*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:747*/
+
+void Coeff71 (ref int _out)/*tmp.txt:747*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:755*/
+
+void Coeff72 (ref int _out, ref global bit coeff72change__ANONYMOUS_s328)/*tmp.txt:755*/
+{
+  _out = 0;
+  if(coeff72change__ANONYMOUS_s328 == 0)/*tmp.txt:756*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:766*/
+
+void Coeff73 (ref int _out, ref global bit coeff73change__ANONYMOUS_s354)/*tmp.txt:766*/
+{
+  _out = 0;
+  if(coeff73change__ANONYMOUS_s354 == 0)/*tmp.txt:767*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:777*/
+
+void Coeff74 (ref int _out, ref global bit coeff74change__ANONYMOUS_s201)/*tmp.txt:777*/
+{
+  _out = 0;
+  if(coeff74change__ANONYMOUS_s201 == 0)/*tmp.txt:778*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:788*/
+
+void Coeff75 (ref int _out, ref global bit coeff75change__ANONYMOUS_s347)/*tmp.txt:788*/
+{
+  _out = 0;
+  if(coeff75change__ANONYMOUS_s347 == 0)/*tmp.txt:789*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:799*/
+
+void Coeff76 (ref int _out, ref global bit coeff76change__ANONYMOUS_s305)/*tmp.txt:799*/
+{
+  _out = 0;
+  if(coeff76change__ANONYMOUS_s305 == 0)/*tmp.txt:800*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:810*/
+
+void Coeff77 (ref int _out)/*tmp.txt:810*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:818*/
+
+void Coeff78 (ref int _out, ref global bit coeff78change__ANONYMOUS_s331)/*tmp.txt:818*/
+{
+  _out = 0;
+  if(coeff78change__ANONYMOUS_s331 == 0)/*tmp.txt:819*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:829*/
+
+void Coeff79 (ref int _out, ref global bit coeff79change__ANONYMOUS_s203)/*tmp.txt:829*/
+{
+  _out = 0;
+  if(coeff79change__ANONYMOUS_s203 == 0)/*tmp.txt:830*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:81*/
+
+void Coeff8 (ref int _out, ref global bit coeff8change__ANONYMOUS_s343)/*tmp.txt:81*/
+{
+  _out = 0;
+  if(coeff8change__ANONYMOUS_s343 == 0)/*tmp.txt:82*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:840*/
+
+void Coeff80 (ref int _out, ref global bit coeff80change__ANONYMOUS_s202)/*tmp.txt:840*/
+{
+  _out = 0;
+  if(coeff80change__ANONYMOUS_s202 == 0)/*tmp.txt:841*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:851*/
+
+void Coeff81 (ref int _out, ref global bit coeff81change__ANONYMOUS_s315)/*tmp.txt:851*/
+{
+  _out = 0;
+  if(coeff81change__ANONYMOUS_s315 == 0)/*tmp.txt:852*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:862*/
+
+void Coeff82 (ref int _out, ref global bit coeff82change__ANONYMOUS_s205)/*tmp.txt:862*/
+{
+  _out = 0;
+  if(coeff82change__ANONYMOUS_s205 == 0)/*tmp.txt:863*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = -1;
+  return;
+}
+/*tmp.txt:873*/
+
+void Coeff83 (ref int _out)/*tmp.txt:873*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:881*/
+
+void Coeff84 (ref int _out, ref global bit coeff84change__ANONYMOUS_s345)/*tmp.txt:881*/
+{
+  _out = 0;
+  if(coeff84change__ANONYMOUS_s345 == 0)/*tmp.txt:882*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = 1;
+  return;
+}
+/*tmp.txt:892*/
+
+void Coeff85 (ref int _out, ref global bit coeff85change__ANONYMOUS_s352)/*tmp.txt:892*/
+{
+  _out = 0;
+  if(coeff85change__ANONYMOUS_s352 == 0)/*tmp.txt:893*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = 1;
+  return;
+}
+/*tmp.txt:903*/
+
+void Coeff86 (ref int _out, ref global bit coeff86change__ANONYMOUS_s310)/*tmp.txt:903*/
+{
+  _out = 0;
+  if(coeff86change__ANONYMOUS_s310 == 0)/*tmp.txt:904*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = 1;
+  return;
+}
+/*tmp.txt:914*/
+
+void Coeff87 (ref int _out, ref global bit coeff87change__ANONYMOUS_s316)/*tmp.txt:914*/
+{
+  _out = 0;
+  if(coeff87change__ANONYMOUS_s316 == 0)/*tmp.txt:915*/
+  {
+    _out = 0;
+    return;
+  }
+  _out = 1;
+  return;
+}
+/*tmp.txt:925*/
+
+void Coeff88 (ref int _out)/*tmp.txt:925*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:92*/
+
+void Coeff9 (ref int _out)/*tmp.txt:92*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*tmp.txt:949*/
+
+void Coeff91 (ref int _out, ref global bit coeff91change__ANONYMOUS_s294)/*tmp.txt:949*/
+{
+  _out = 0;
+  if(coeff91change__ANONYMOUS_s294 == 0)/*tmp.txt:950*/
+  {
+    _out = 1;
+    return;
+  }
+  _out = 0;
+  return;
+}
+/*tmp.txt:1111*/
+
+void HammingTest (ref global int[16] aArray__ANONYMOUS_s210, ref global int[16] bArray__ANONYMOUS_s211, ref global int[16] cArray__ANONYMOUS_s212, ref global bit coeff10change__ANONYMOUS_s213, ref global bit coeff11change__ANONYMOUS_s214, ref global bit coeff12change__ANONYMOUS_s215, ref global bit coeff13change__ANONYMOUS_s216, ref global bit coeff14change__ANONYMOUS_s217, ref global bit coeff15change__ANONYMOUS_s218, ref global bit coeff17change__ANONYMOUS_s219, ref global bit coeff18change__ANONYMOUS_s220, ref global bit coeff19change__ANONYMOUS_s221, ref global bit coeff1change__ANONYMOUS_s222, ref global bit coeff20change__ANONYMOUS_s223, ref global bit coeff21change__ANONYMOUS_s224, ref global bit coeff22change__ANONYMOUS_s225, ref global bit coeff24change__ANONYMOUS_s226, ref global bit coeff25change__ANONYMOUS_s227, ref global bit coeff26change__ANONYMOUS_s228, ref global bit coeff27change__ANONYMOUS_s229, ref global bit coeff28change__ANONYMOUS_s230, ref global bit coeff29change__ANONYMOUS_s231, ref global bit coeff31change__ANONYMOUS_s232, ref global bit coeff32change__ANONYMOUS_s233, ref global bit coeff33change__ANONYMOUS_s234, ref global bit coeff34change__ANONYMOUS_s235, ref global bit coeff35change__ANONYMOUS_s236, ref global bit coeff36change__ANONYMOUS_s237, ref global bit coeff38change__ANONYMOUS_s238, ref global bit coeff39change__ANONYMOUS_s239, ref global bit coeff3change__ANONYMOUS_s240, ref global bit coeff40change__ANONYMOUS_s241, ref global bit coeff41change__ANONYMOUS_s242, ref global bit coeff42change__ANONYMOUS_s243, ref global bit coeff44change__ANONYMOUS_s244, ref global bit coeff45change__ANONYMOUS_s245, ref global bit coeff46change__ANONYMOUS_s246, ref global bit coeff47change__ANONYMOUS_s247, ref global bit coeff48change__ANONYMOUS_s248, ref global bit coeff49change__ANONYMOUS_s249, ref global bit coeff4change__ANONYMOUS_s250, ref global bit coeff51change__ANONYMOUS_s251, ref global bit coeff52change__ANONYMOUS_s252, ref global bit coeff53change__ANONYMOUS_s253, ref global bit coeff54change__ANONYMOUS_s254, ref global bit coeff55change__ANONYMOUS_s255, ref global bit coeff56change__ANONYMOUS_s256, ref global bit coeff58change__ANONYMOUS_s257, ref global bit coeff59change__ANONYMOUS_s258, ref global bit coeff60change__ANONYMOUS_s259, ref global bit coeff61change__ANONYMOUS_s260, ref global bit coeff62change__ANONYMOUS_s261, ref global bit coeff63change__ANONYMOUS_s262, ref global bit coeff65change__ANONYMOUS_s263, ref global bit coeff66change__ANONYMOUS_s264, ref global bit coeff67change__ANONYMOUS_s265, ref global bit coeff68change__ANONYMOUS_s266, ref global bit coeff69change__ANONYMOUS_s267, ref global bit coeff6change__ANONYMOUS_s268, ref global bit coeff70change__ANONYMOUS_s269, ref global bit coeff72change__ANONYMOUS_s270, ref global bit coeff73change__ANONYMOUS_s271, ref global bit coeff74change__ANONYMOUS_s272, ref global bit coeff75change__ANONYMOUS_s273, ref global bit coeff76change__ANONYMOUS_s274, ref global bit coeff78change__ANONYMOUS_s275, ref global bit coeff79change__ANONYMOUS_s276, ref global bit coeff7change__ANONYMOUS_s277, ref global bit coeff80change__ANONYMOUS_s278, ref global bit coeff81change__ANONYMOUS_s279, ref global bit coeff82change__ANONYMOUS_s280, ref global bit coeff84change__ANONYMOUS_s281, ref global bit coeff85change__ANONYMOUS_s282, ref global bit coeff86change__ANONYMOUS_s283, ref global bit coeff87change__ANONYMOUS_s284, ref global bit coeff8change__ANONYMOUS_s285, ref global bit coeff91change__ANONYMOUS_s286, ref global int finalcount__ANONYMOUS_s410, ref global int[16] lineArray__ANONYMOUS_s287, ref global int[16] mArray__ANONYMOUS_s288, ref global int mfinal__ANONYMOUS_s289, ref global int[16] zArray__ANONYMOUS_s290)/*tmp.txt:1111*/
+{
+  int[8] oringianlbArray = {0,0,2,2,2,2,2,2};
+  int[8] oringianlcArray = {0,0,0,9,9,9,9,9};
+  int[8] oringianlaArray = {0,6,6,6,6,6,6,6};
+  int[8] oringianlmArray = {0,0,0,0,0,0,2,2};
+  int[8] oringianlzArray = ((int[8]){0,0,0,0,0,0,0,0});
+  int[8] oringianllineArray = {3,4,5,6,7,8,8,14};
+  _main(aArray__ANONYMOUS_s210, bArray__ANONYMOUS_s211, cArray__ANONYMOUS_s212, coeff10change__ANONYMOUS_s213, coeff11change__ANONYMOUS_s214, coeff12change__ANONYMOUS_s215, coeff13change__ANONYMOUS_s216, coeff14change__ANONYMOUS_s217, coeff15change__ANONYMOUS_s218, coeff17change__ANONYMOUS_s219, coeff18change__ANONYMOUS_s220, coeff19change__ANONYMOUS_s221, coeff1change__ANONYMOUS_s222, coeff20change__ANONYMOUS_s223, coeff21change__ANONYMOUS_s224, coeff22change__ANONYMOUS_s225, coeff24change__ANONYMOUS_s226, coeff25change__ANONYMOUS_s227, coeff26change__ANONYMOUS_s228, coeff27change__ANONYMOUS_s229, coeff28change__ANONYMOUS_s230, coeff29change__ANONYMOUS_s231, coeff31change__ANONYMOUS_s232, coeff32change__ANONYMOUS_s233, coeff33change__ANONYMOUS_s234, coeff34change__ANONYMOUS_s235, coeff35change__ANONYMOUS_s236, coeff36change__ANONYMOUS_s237, coeff38change__ANONYMOUS_s238, coeff39change__ANONYMOUS_s239, coeff3change__ANONYMOUS_s240, coeff40change__ANONYMOUS_s241, coeff41change__ANONYMOUS_s242, coeff42change__ANONYMOUS_s243, coeff44change__ANONYMOUS_s244, coeff45change__ANONYMOUS_s245, coeff46change__ANONYMOUS_s246, coeff47change__ANONYMOUS_s247, coeff48change__ANONYMOUS_s248, coeff49change__ANONYMOUS_s249, coeff4change__ANONYMOUS_s250, coeff51change__ANONYMOUS_s251, coeff52change__ANONYMOUS_s252, coeff53change__ANONYMOUS_s253, coeff54change__ANONYMOUS_s254, coeff55change__ANONYMOUS_s255, coeff56change__ANONYMOUS_s256, coeff58change__ANONYMOUS_s257, coeff59change__ANONYMOUS_s258, coeff60change__ANONYMOUS_s259, coeff61change__ANONYMOUS_s260, coeff62change__ANONYMOUS_s261, coeff63change__ANONYMOUS_s262, coeff65change__ANONYMOUS_s263, coeff66change__ANONYMOUS_s264, coeff67change__ANONYMOUS_s265, coeff68change__ANONYMOUS_s266, coeff69change__ANONYMOUS_s267, coeff6change__ANONYMOUS_s268, coeff70change__ANONYMOUS_s269, coeff72change__ANONYMOUS_s270, coeff73change__ANONYMOUS_s271, coeff74change__ANONYMOUS_s272, coeff75change__ANONYMOUS_s273, coeff76change__ANONYMOUS_s274, coeff78change__ANONYMOUS_s275, coeff79change__ANONYMOUS_s276, coeff7change__ANONYMOUS_s277, coeff80change__ANONYMOUS_s278, coeff81change__ANONYMOUS_s279, coeff82change__ANONYMOUS_s280, coeff84change__ANONYMOUS_s281, coeff85change__ANONYMOUS_s282, coeff86change__ANONYMOUS_s283, coeff87change__ANONYMOUS_s284, coeff8change__ANONYMOUS_s285, coeff91change__ANONYMOUS_s286, finalcount__ANONYMOUS_s410, lineArray__ANONYMOUS_s287, mArray__ANONYMOUS_s288, mfinal__ANONYMOUS_s289);
+  int EditDistance = coeff1change__ANONYMOUS_s222 + coeff3change__ANONYMOUS_s240;
+  EditDistance = EditDistance + coeff4change__ANONYMOUS_s250;
+  EditDistance = EditDistance + coeff6change__ANONYMOUS_s268;
+  EditDistance = EditDistance + coeff7change__ANONYMOUS_s277;
+  EditDistance = EditDistance + coeff8change__ANONYMOUS_s285;
+  EditDistance = EditDistance + coeff10change__ANONYMOUS_s213;
+  EditDistance = EditDistance + coeff11change__ANONYMOUS_s214;
+  EditDistance = EditDistance + coeff12change__ANONYMOUS_s215;
+  EditDistance = EditDistance + coeff13change__ANONYMOUS_s216;
+  EditDistance = EditDistance + coeff14change__ANONYMOUS_s217;
+  EditDistance = EditDistance + coeff15change__ANONYMOUS_s218;
+  EditDistance = EditDistance + coeff17change__ANONYMOUS_s219;
+  EditDistance = EditDistance + coeff18change__ANONYMOUS_s220;
+  EditDistance = EditDistance + coeff19change__ANONYMOUS_s221;
+  EditDistance = EditDistance + coeff20change__ANONYMOUS_s223;
+  EditDistance = EditDistance + coeff21change__ANONYMOUS_s224;
+  EditDistance = EditDistance + coeff22change__ANONYMOUS_s225;
+  EditDistance = EditDistance + coeff24change__ANONYMOUS_s226;
+  EditDistance = EditDistance + coeff25change__ANONYMOUS_s227;
+  EditDistance = EditDistance + coeff26change__ANONYMOUS_s228;
+  EditDistance = EditDistance + coeff27change__ANONYMOUS_s229;
+  EditDistance = EditDistance + coeff28change__ANONYMOUS_s230;
+  EditDistance = EditDistance + coeff29change__ANONYMOUS_s231;
+  EditDistance = EditDistance + coeff31change__ANONYMOUS_s232;
+  EditDistance = EditDistance + coeff32change__ANONYMOUS_s233;
+  EditDistance = EditDistance + coeff33change__ANONYMOUS_s234;
+  EditDistance = EditDistance + coeff34change__ANONYMOUS_s235;
+  EditDistance = EditDistance + coeff35change__ANONYMOUS_s236;
+  EditDistance = EditDistance + coeff36change__ANONYMOUS_s237;
+  EditDistance = EditDistance + coeff38change__ANONYMOUS_s238;
+  EditDistance = EditDistance + coeff39change__ANONYMOUS_s239;
+  EditDistance = EditDistance + coeff40change__ANONYMOUS_s241;
+  EditDistance = EditDistance + coeff41change__ANONYMOUS_s242;
+  EditDistance = EditDistance + coeff42change__ANONYMOUS_s243;
+  EditDistance = EditDistance + coeff44change__ANONYMOUS_s244;
+  EditDistance = EditDistance + coeff45change__ANONYMOUS_s245;
+  EditDistance = EditDistance + coeff46change__ANONYMOUS_s246;
+  EditDistance = EditDistance + coeff47change__ANONYMOUS_s247;
+  EditDistance = EditDistance + coeff48change__ANONYMOUS_s248;
+  EditDistance = EditDistance + coeff49change__ANONYMOUS_s249;
+  EditDistance = EditDistance + coeff51change__ANONYMOUS_s251;
+  EditDistance = EditDistance + coeff52change__ANONYMOUS_s252;
+  EditDistance = EditDistance + coeff53change__ANONYMOUS_s253;
+  EditDistance = EditDistance + coeff54change__ANONYMOUS_s254;
+  EditDistance = EditDistance + coeff55change__ANONYMOUS_s255;
+  EditDistance = EditDistance + coeff56change__ANONYMOUS_s256;
+  EditDistance = EditDistance + coeff58change__ANONYMOUS_s257;
+  EditDistance = EditDistance + coeff59change__ANONYMOUS_s258;
+  EditDistance = EditDistance + coeff60change__ANONYMOUS_s259;
+  EditDistance = EditDistance + coeff61change__ANONYMOUS_s260;
+  EditDistance = EditDistance + coeff62change__ANONYMOUS_s261;
+  EditDistance = EditDistance + coeff63change__ANONYMOUS_s262;
+  EditDistance = EditDistance + coeff65change__ANONYMOUS_s263;
+  EditDistance = EditDistance + coeff66change__ANONYMOUS_s264;
+  EditDistance = EditDistance + coeff67change__ANONYMOUS_s265;
+  EditDistance = EditDistance + coeff68change__ANONYMOUS_s266;
+  EditDistance = EditDistance + coeff69change__ANONYMOUS_s267;
+  EditDistance = EditDistance + coeff70change__ANONYMOUS_s269;
+  EditDistance = EditDistance + coeff72change__ANONYMOUS_s270;
+  EditDistance = EditDistance + coeff73change__ANONYMOUS_s271;
+  EditDistance = EditDistance + coeff74change__ANONYMOUS_s272;
+  EditDistance = EditDistance + coeff75change__ANONYMOUS_s273;
+  EditDistance = EditDistance + coeff76change__ANONYMOUS_s274;
+  EditDistance = EditDistance + coeff78change__ANONYMOUS_s275;
+  EditDistance = EditDistance + coeff79change__ANONYMOUS_s276;
+  EditDistance = EditDistance + coeff80change__ANONYMOUS_s278;
+  EditDistance = EditDistance + coeff81change__ANONYMOUS_s279;
+  EditDistance = EditDistance + coeff82change__ANONYMOUS_s280;
+  EditDistance = EditDistance + coeff84change__ANONYMOUS_s281;
+  EditDistance = EditDistance + coeff85change__ANONYMOUS_s282;
+  EditDistance = EditDistance + coeff86change__ANONYMOUS_s283;
+  EditDistance = EditDistance + coeff87change__ANONYMOUS_s284;
+  EditDistance = EditDistance + coeff91change__ANONYMOUS_s286;
+  int HammingDistance = 0;
+  for(int i = 0; i < 8; i = i + 1)/*Canonical*/
+  {
+    HammingDistance = HammingDistance + ((bArray__ANONYMOUS_s211[i]) != (oringianlbArray[i]));
+    HammingDistance = HammingDistance + ((cArray__ANONYMOUS_s212[i]) != (oringianlcArray[i]));
+    HammingDistance = HammingDistance + ((aArray__ANONYMOUS_s210[i]) != (oringianlaArray[i]));
+    HammingDistance = HammingDistance + ((mArray__ANONYMOUS_s288[i]) != (oringianlmArray[i]));
+    HammingDistance = HammingDistance + ((zArray__ANONYMOUS_s290[i]) != (oringianlzArray[i]));
+    HammingDistance = HammingDistance + ((lineArray__ANONYMOUS_s287[i]) != (oringianllineArray[i]));
+  }
+  assert (mfinal__ANONYMOUS_s289 == 6); //Assert at tmp.txt:1225 (-6332319418197914130)
+  minimize(EditDistance)
+  minimize(HammingDistance)
+}
+/*tmp.txt:1111*/
+
+void HammingTest__Wrapper ()  implements HammingTest__WrapperNospec/*tmp.txt:1111*/
+{
+  global int[16] zArray__ANONYMOUS_s474 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  glblInit_zArray__ANONYMOUS_s719(zArray__ANONYMOUS_s474);
+  global int mfinal__ANONYMOUS_s390 = 0;
+  glblInit_mfinal__ANONYMOUS_s717(mfinal__ANONYMOUS_s390);
+  global int[16] mArray__ANONYMOUS_s389 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  glblInit_mArray__ANONYMOUS_s715(mArray__ANONYMOUS_s389);
+  global int finalcount__ANONYMOUS_s387 = 0;
+  glblInit_finalcount__ANONYMOUS_s713(finalcount__ANONYMOUS_s387);
+  global bit coeff91change__ANONYMOUS_s473 = 0;
+  glblInit_coeff91change__ANONYMOUS_s707(coeff91change__ANONYMOUS_s473);
+  global bit coeff8change__ANONYMOUS_s370 = 0;
+  glblInit_coeff8change__ANONYMOUS_s703(coeff8change__ANONYMOUS_s370);
+  global bit coeff87change__ANONYMOUS_s405 = 0;
+  glblInit_coeff87change__ANONYMOUS_s697(coeff87change__ANONYMOUS_s405);
+  global bit coeff86change__ANONYMOUS_s472 = 0;
+  glblInit_coeff86change__ANONYMOUS_s695(coeff86change__ANONYMOUS_s472);
+  global bit coeff85change__ANONYMOUS_s424 = 0;
+  glblInit_coeff85change__ANONYMOUS_s693(coeff85change__ANONYMOUS_s424);
+  global bit coeff84change__ANONYMOUS_s471 = 0;
+  glblInit_coeff84change__ANONYMOUS_s691(coeff84change__ANONYMOUS_s471);
+  global bit coeff82change__ANONYMOUS_s401 = 0;
+  glblInit_coeff82change__ANONYMOUS_s687(coeff82change__ANONYMOUS_s401);
+  global bit coeff81change__ANONYMOUS_s470 = 0;
+  glblInit_coeff81change__ANONYMOUS_s685(coeff81change__ANONYMOUS_s470);
+  global bit coeff80change__ANONYMOUS_s469 = 0;
+  glblInit_coeff80change__ANONYMOUS_s683(coeff80change__ANONYMOUS_s469);
+  global bit coeff7change__ANONYMOUS_s468 = 0;
+  glblInit_coeff7change__ANONYMOUS_s681(coeff7change__ANONYMOUS_s468);
+  global bit coeff79change__ANONYMOUS_s436 = 0;
+  glblInit_coeff79change__ANONYMOUS_s679(coeff79change__ANONYMOUS_s436);
+  global bit coeff78change__ANONYMOUS_s467 = 0;
+  glblInit_coeff78change__ANONYMOUS_s677(coeff78change__ANONYMOUS_s467);
+  global bit coeff76change__ANONYMOUS_s466 = 0;
+  glblInit_coeff76change__ANONYMOUS_s673(coeff76change__ANONYMOUS_s466);
+  global bit coeff75change__ANONYMOUS_s376 = 0;
+  glblInit_coeff75change__ANONYMOUS_s671(coeff75change__ANONYMOUS_s376);
+  global bit coeff74change__ANONYMOUS_s399 = 0;
+  glblInit_coeff74change__ANONYMOUS_s669(coeff74change__ANONYMOUS_s399);
+  global bit coeff73change__ANONYMOUS_s423 = 0;
+  glblInit_coeff73change__ANONYMOUS_s667(coeff73change__ANONYMOUS_s423);
+  global bit coeff72change__ANONYMOUS_s408 = 0;
+  glblInit_coeff72change__ANONYMOUS_s665(coeff72change__ANONYMOUS_s408);
+  global bit coeff70change__ANONYMOUS_s465 = 0;
+  glblInit_coeff70change__ANONYMOUS_s661(coeff70change__ANONYMOUS_s465);
+  global bit coeff6change__ANONYMOUS_s464 = 0;
+  glblInit_coeff6change__ANONYMOUS_s659(coeff6change__ANONYMOUS_s464);
+  global bit coeff69change__ANONYMOUS_s386 = 0;
+  glblInit_coeff69change__ANONYMOUS_s657(coeff69change__ANONYMOUS_s386);
+  global bit coeff68change__ANONYMOUS_s463 = 0;
+  glblInit_coeff68change__ANONYMOUS_s655(coeff68change__ANONYMOUS_s463);
+  global bit coeff67change__ANONYMOUS_s462 = 0;
+  glblInit_coeff67change__ANONYMOUS_s653(coeff67change__ANONYMOUS_s462);
+  global bit coeff66change__ANONYMOUS_s369 = 0;
+  glblInit_coeff66change__ANONYMOUS_s651(coeff66change__ANONYMOUS_s369);
+  global bit coeff65change__ANONYMOUS_s461 = 0;
+  glblInit_coeff65change__ANONYMOUS_s649(coeff65change__ANONYMOUS_s461);
+  global bit coeff63change__ANONYMOUS_s460 = 0;
+  glblInit_coeff63change__ANONYMOUS_s645(coeff63change__ANONYMOUS_s460);
+  global bit coeff62change__ANONYMOUS_s459 = 0;
+  glblInit_coeff62change__ANONYMOUS_s643(coeff62change__ANONYMOUS_s459);
+  global bit coeff61change__ANONYMOUS_s458 = 0;
+  glblInit_coeff61change__ANONYMOUS_s641(coeff61change__ANONYMOUS_s458);
+  global bit coeff60change__ANONYMOUS_s377 = 0;
+  glblInit_coeff60change__ANONYMOUS_s639(coeff60change__ANONYMOUS_s377);
+  global bit coeff59change__ANONYMOUS_s457 = 0;
+  glblInit_coeff59change__ANONYMOUS_s635(coeff59change__ANONYMOUS_s457);
+  global bit coeff58change__ANONYMOUS_s372 = 0;
+  glblInit_coeff58change__ANONYMOUS_s633(coeff58change__ANONYMOUS_s372);
+  global bit coeff56change__ANONYMOUS_s456 = 0;
+  glblInit_coeff56change__ANONYMOUS_s629(coeff56change__ANONYMOUS_s456);
+  global bit coeff55change__ANONYMOUS_s428 = 0;
+  glblInit_coeff55change__ANONYMOUS_s627(coeff55change__ANONYMOUS_s428);
+  global bit coeff54change__ANONYMOUS_s455 = 0;
+  glblInit_coeff54change__ANONYMOUS_s625(coeff54change__ANONYMOUS_s455);
+  global bit coeff53change__ANONYMOUS_s366 = 0;
+  glblInit_coeff53change__ANONYMOUS_s623(coeff53change__ANONYMOUS_s366);
+  global bit coeff52change__ANONYMOUS_s365 = 0;
+  glblInit_coeff52change__ANONYMOUS_s621(coeff52change__ANONYMOUS_s365);
+  global bit coeff51change__ANONYMOUS_s418 = 0;
+  glblInit_coeff51change__ANONYMOUS_s619(coeff51change__ANONYMOUS_s418);
+  global bit coeff4change__ANONYMOUS_s409 = 0;
+  glblInit_coeff4change__ANONYMOUS_s615(coeff4change__ANONYMOUS_s409);
+  global bit coeff49change__ANONYMOUS_s420 = 0;
+  glblInit_coeff49change__ANONYMOUS_s613(coeff49change__ANONYMOUS_s420);
+  global bit coeff48change__ANONYMOUS_s454 = 0;
+  glblInit_coeff48change__ANONYMOUS_s611(coeff48change__ANONYMOUS_s454);
+  global bit coeff47change__ANONYMOUS_s453 = 0;
+  glblInit_coeff47change__ANONYMOUS_s609(coeff47change__ANONYMOUS_s453);
+  global bit coeff46change__ANONYMOUS_s414 = 0;
+  glblInit_coeff46change__ANONYMOUS_s607(coeff46change__ANONYMOUS_s414);
+  global bit coeff45change__ANONYMOUS_s429 = 0;
+  glblInit_coeff45change__ANONYMOUS_s605(coeff45change__ANONYMOUS_s429);
+  global bit coeff44change__ANONYMOUS_s452 = 0;
+  glblInit_coeff44change__ANONYMOUS_s603(coeff44change__ANONYMOUS_s452);
+  global bit coeff42change__ANONYMOUS_s451 = 0;
+  glblInit_coeff42change__ANONYMOUS_s599(coeff42change__ANONYMOUS_s451);
+  global bit coeff41change__ANONYMOUS_s450 = 0;
+  glblInit_coeff41change__ANONYMOUS_s597(coeff41change__ANONYMOUS_s450);
+  global bit coeff40change__ANONYMOUS_s417 = 0;
+  glblInit_coeff40change__ANONYMOUS_s595(coeff40change__ANONYMOUS_s417);
+  global bit coeff3change__ANONYMOUS_s449 = 0;
+  glblInit_coeff3change__ANONYMOUS_s593(coeff3change__ANONYMOUS_s449);
+  global bit coeff39change__ANONYMOUS_s426 = 0;
+  glblInit_coeff39change__ANONYMOUS_s591(coeff39change__ANONYMOUS_s426);
+  global bit coeff38change__ANONYMOUS_s403 = 0;
+  glblInit_coeff38change__ANONYMOUS_s589(coeff38change__ANONYMOUS_s403);
+  global bit coeff36change__ANONYMOUS_s413 = 0;
+  glblInit_coeff36change__ANONYMOUS_s585(coeff36change__ANONYMOUS_s413);
+  global bit coeff35change__ANONYMOUS_s385 = 0;
+  glblInit_coeff35change__ANONYMOUS_s583(coeff35change__ANONYMOUS_s385);
+  global bit coeff34change__ANONYMOUS_s448 = 0;
+  glblInit_coeff34change__ANONYMOUS_s581(coeff34change__ANONYMOUS_s448);
+  global bit coeff33change__ANONYMOUS_s447 = 0;
+  glblInit_coeff33change__ANONYMOUS_s579(coeff33change__ANONYMOUS_s447);
+  global bit coeff32change__ANONYMOUS_s384 = 0;
+  glblInit_coeff32change__ANONYMOUS_s577(coeff32change__ANONYMOUS_s384);
+  global bit coeff31change__ANONYMOUS_s446 = 0;
+  glblInit_coeff31change__ANONYMOUS_s575(coeff31change__ANONYMOUS_s446);
+  global bit coeff29change__ANONYMOUS_s445 = 0;
+  glblInit_coeff29change__ANONYMOUS_s569(coeff29change__ANONYMOUS_s445);
+  global bit coeff28change__ANONYMOUS_s444 = 0;
+  glblInit_coeff28change__ANONYMOUS_s567(coeff28change__ANONYMOUS_s444);
+  global bit coeff27change__ANONYMOUS_s383 = 0;
+  glblInit_coeff27change__ANONYMOUS_s565(coeff27change__ANONYMOUS_s383);
+  global bit coeff26change__ANONYMOUS_s443 = 0;
+  glblInit_coeff26change__ANONYMOUS_s563(coeff26change__ANONYMOUS_s443);
+  global bit coeff25change__ANONYMOUS_s375 = 0;
+  glblInit_coeff25change__ANONYMOUS_s561(coeff25change__ANONYMOUS_s375);
+  global bit coeff24change__ANONYMOUS_s382 = 0;
+  glblInit_coeff24change__ANONYMOUS_s559(coeff24change__ANONYMOUS_s382);
+  global bit coeff22change__ANONYMOUS_s419 = 0;
+  glblInit_coeff22change__ANONYMOUS_s555(coeff22change__ANONYMOUS_s419);
+  global bit coeff21change__ANONYMOUS_s442 = 0;
+  glblInit_coeff21change__ANONYMOUS_s553(coeff21change__ANONYMOUS_s442);
+  global bit coeff20change__ANONYMOUS_s441 = 0;
+  glblInit_coeff20change__ANONYMOUS_s551(coeff20change__ANONYMOUS_s441);
+  global bit coeff1change__ANONYMOUS_s395 = 0;
+  glblInit_coeff1change__ANONYMOUS_s549(coeff1change__ANONYMOUS_s395);
+  global bit coeff19change__ANONYMOUS_s416 = 0;
+  glblInit_coeff19change__ANONYMOUS_s547(coeff19change__ANONYMOUS_s416);
+  global bit coeff18change__ANONYMOUS_s440 = 0;
+  glblInit_coeff18change__ANONYMOUS_s545(coeff18change__ANONYMOUS_s440);
+  global bit coeff17change__ANONYMOUS_s439 = 0;
+  glblInit_coeff17change__ANONYMOUS_s543(coeff17change__ANONYMOUS_s439);
+  global bit coeff15change__ANONYMOUS_s391 = 0;
+  glblInit_coeff15change__ANONYMOUS_s539(coeff15change__ANONYMOUS_s391);
+  global bit coeff14change__ANONYMOUS_s381 = 0;
+  glblInit_coeff14change__ANONYMOUS_s537(coeff14change__ANONYMOUS_s381);
+  global bit coeff13change__ANONYMOUS_s438 = 0;
+  glblInit_coeff13change__ANONYMOUS_s535(coeff13change__ANONYMOUS_s438);
+  global bit coeff12change__ANONYMOUS_s374 = 0;
+  glblInit_coeff12change__ANONYMOUS_s533(coeff12change__ANONYMOUS_s374);
+  global bit coeff11change__ANONYMOUS_s393 = 0;
+  glblInit_coeff11change__ANONYMOUS_s531(coeff11change__ANONYMOUS_s393);
+  global bit coeff10change__ANONYMOUS_s437 = 0;
+  glblInit_coeff10change__ANONYMOUS_s529(coeff10change__ANONYMOUS_s437);
+  global int[16] cArray__ANONYMOUS_s380 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  glblInit_cArray__ANONYMOUS_s525(cArray__ANONYMOUS_s380);
+  global int[16] bArray__ANONYMOUS_s379 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  glblInit_bArray__ANONYMOUS_s523(bArray__ANONYMOUS_s379);
+  global int[16] aArray__ANONYMOUS_s378 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  glblInit_aArray__ANONYMOUS_s521(aArray__ANONYMOUS_s378);
+  global int[16] lineArray__ANONYMOUS_s388 = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  HammingTest(aArray__ANONYMOUS_s378, bArray__ANONYMOUS_s379, cArray__ANONYMOUS_s380, coeff10change__ANONYMOUS_s437, coeff11change__ANONYMOUS_s393, coeff12change__ANONYMOUS_s374, coeff13change__ANONYMOUS_s438, coeff14change__ANONYMOUS_s381, coeff15change__ANONYMOUS_s391, coeff17change__ANONYMOUS_s439, coeff18change__ANONYMOUS_s440, coeff19change__ANONYMOUS_s416, coeff1change__ANONYMOUS_s395, coeff20change__ANONYMOUS_s441, coeff21change__ANONYMOUS_s442, coeff22change__ANONYMOUS_s419, coeff24change__ANONYMOUS_s382, coeff25change__ANONYMOUS_s375, coeff26change__ANONYMOUS_s443, coeff27change__ANONYMOUS_s383, coeff28change__ANONYMOUS_s444, coeff29change__ANONYMOUS_s445, coeff31change__ANONYMOUS_s446, coeff32change__ANONYMOUS_s384, coeff33change__ANONYMOUS_s447, coeff34change__ANONYMOUS_s448, coeff35change__ANONYMOUS_s385, coeff36change__ANONYMOUS_s413, coeff38change__ANONYMOUS_s403, coeff39change__ANONYMOUS_s426, coeff3change__ANONYMOUS_s449, coeff40change__ANONYMOUS_s417, coeff41change__ANONYMOUS_s450, coeff42change__ANONYMOUS_s451, coeff44change__ANONYMOUS_s452, coeff45change__ANONYMOUS_s429, coeff46change__ANONYMOUS_s414, coeff47change__ANONYMOUS_s453, coeff48change__ANONYMOUS_s454, coeff49change__ANONYMOUS_s420, coeff4change__ANONYMOUS_s409, coeff51change__ANONYMOUS_s418, coeff52change__ANONYMOUS_s365, coeff53change__ANONYMOUS_s366, coeff54change__ANONYMOUS_s455, coeff55change__ANONYMOUS_s428, coeff56change__ANONYMOUS_s456, coeff58change__ANONYMOUS_s372, coeff59change__ANONYMOUS_s457, coeff60change__ANONYMOUS_s377, coeff61change__ANONYMOUS_s458, coeff62change__ANONYMOUS_s459, coeff63change__ANONYMOUS_s460, coeff65change__ANONYMOUS_s461, coeff66change__ANONYMOUS_s369, coeff67change__ANONYMOUS_s462, coeff68change__ANONYMOUS_s463, coeff69change__ANONYMOUS_s386, coeff6change__ANONYMOUS_s464, coeff70change__ANONYMOUS_s465, coeff72change__ANONYMOUS_s408, coeff73change__ANONYMOUS_s423, coeff74change__ANONYMOUS_s399, coeff75change__ANONYMOUS_s376, coeff76change__ANONYMOUS_s466, coeff78change__ANONYMOUS_s467, coeff79change__ANONYMOUS_s436, coeff7change__ANONYMOUS_s468, coeff80change__ANONYMOUS_s469, coeff81change__ANONYMOUS_s470, coeff82change__ANONYMOUS_s401, coeff84change__ANONYMOUS_s471, coeff85change__ANONYMOUS_s424, coeff86change__ANONYMOUS_s472, coeff87change__ANONYMOUS_s405, coeff8change__ANONYMOUS_s370, coeff91change__ANONYMOUS_s473, finalcount__ANONYMOUS_s387, lineArray__ANONYMOUS_s388, mArray__ANONYMOUS_s389, mfinal__ANONYMOUS_s390, zArray__ANONYMOUS_s474);
+}
+/*tmp.txt:1111*/
+
+void HammingTest__WrapperNospec ()/*tmp.txt:1111*/
+{ }
+/*tmp.txt:979*/
+
+void _main (ref global int[16] aArray__ANONYMOUS_s336, ref global int[16] bArray__ANONYMOUS_s337, ref global int[16] cArray__ANONYMOUS_s338, ref global bit coeff10change__ANONYMOUS_s507, ref global bit coeff11change__ANONYMOUS_s515, ref global bit coeff12change__ANONYMOUS_s475, ref global bit coeff13change__ANONYMOUS_s491, ref global bit coeff14change__ANONYMOUS_s371, ref global bit coeff15change__ANONYMOUS_s482, ref global bit coeff17change__ANONYMOUS_s509, ref global bit coeff18change__ANONYMOUS_s478, ref global bit coeff19change__ANONYMOUS_s498, ref global bit coeff1change__ANONYMOUS_s489, ref global bit coeff20change__ANONYMOUS_s480, ref global bit coeff21change__ANONYMOUS_s430, ref global bit coeff22change__ANONYMOUS_s513, ref global bit coeff24change__ANONYMOUS_s368, ref global bit coeff25change__ANONYMOUS_s476, ref global bit coeff26change__ANONYMOUS_s412, ref global bit coeff27change__ANONYMOUS_s373, ref global bit coeff28change__ANONYMOUS_s517, ref global bit coeff29change__ANONYMOUS_s479, ref global bit coeff31change__ANONYMOUS_s511, ref global bit coeff32change__ANONYMOUS_s367, ref global bit coeff33change__ANONYMOUS_s425, ref global bit coeff34change__ANONYMOUS_s415, ref global bit coeff35change__ANONYMOUS_s364, ref global bit coeff36change__ANONYMOUS_s396, ref global bit coeff38change__ANONYMOUS_s504, ref global bit coeff39change__ANONYMOUS_s516, ref global bit coeff3change__ANONYMOUS_s506, ref global bit coeff40change__ANONYMOUS_s404, ref global bit coeff41change__ANONYMOUS_s398, ref global bit coeff42change__ANONYMOUS_s483, ref global bit coeff44change__ANONYMOUS_s495, ref global bit coeff45change__ANONYMOUS_s503, ref global bit coeff46change__ANONYMOUS_s402, ref global bit coeff47change__ANONYMOUS_s406, ref global bit coeff48change__ANONYMOUS_s487, ref global bit coeff49change__ANONYMOUS_s496, ref global bit coeff4change__ANONYMOUS_s490, ref global bit coeff51change__ANONYMOUS_s518, ref global bit coeff52change__ANONYMOUS_s493, ref global bit coeff53change__ANONYMOUS_s422, ref global bit coeff54change__ANONYMOUS_s432, ref global bit coeff55change__ANONYMOUS_s392, ref global bit coeff56change__ANONYMOUS_s488, ref global bit coeff58change__ANONYMOUS_s427, ref global bit coeff59change__ANONYMOUS_s400, ref global bit coeff60change__ANONYMOUS_s514, ref global bit coeff61change__ANONYMOUS_s394, ref global bit coeff62change__ANONYMOUS_s492, ref global bit coeff63change__ANONYMOUS_s499, ref global bit coeff65change__ANONYMOUS_s477, ref global bit coeff66change__ANONYMOUS_s494, ref global bit coeff67change__ANONYMOUS_s434, ref global bit coeff68change__ANONYMOUS_s481, ref global bit coeff69change__ANONYMOUS_s363, ref global bit coeff6change__ANONYMOUS_s510, ref global bit coeff70change__ANONYMOUS_s435, ref global bit coeff72change__ANONYMOUS_s486, ref global bit coeff73change__ANONYMOUS_s519, ref global bit coeff74change__ANONYMOUS_s485, ref global bit coeff75change__ANONYMOUS_s497, ref global bit coeff76change__ANONYMOUS_s502, ref global bit coeff78change__ANONYMOUS_s431, ref global bit coeff79change__ANONYMOUS_s505, ref global bit coeff7change__ANONYMOUS_s508, ref global bit coeff80change__ANONYMOUS_s407, ref global bit coeff81change__ANONYMOUS_s411, ref global bit coeff82change__ANONYMOUS_s484, ref global bit coeff84change__ANONYMOUS_s421, ref global bit coeff85change__ANONYMOUS_s500, ref global bit coeff86change__ANONYMOUS_s397, ref global bit coeff87change__ANONYMOUS_s512, ref global bit coeff8change__ANONYMOUS_s433, ref global bit coeff91change__ANONYMOUS_s501, ref global int finalcount__ANONYMOUS_s339, ref global int[16] lineArray__ANONYMOUS_s340, ref global int[16] mArray__ANONYMOUS_s341, ref global int mfinal__ANONYMOUS_s342)/*tmp.txt:979*/
+{
+  lineArray__ANONYMOUS_s340[0] = 3;
+  int a_s16 = 0;
+  Coeff0(a_s16);
+  int a;
+  a = 6 + a_s16;
+  lineArray__ANONYMOUS_s340[1] = 4;
+  aArray__ANONYMOUS_s336[1] = a;
+  int b_s18 = 0;
+  Coeff1(b_s18, coeff1change__ANONYMOUS_s489);
+  int b_s20 = 0;
+  Coeff2(b_s20);
+  int b;
+  b = (2 + (b_s18 * a)) + b_s20;
+  lineArray__ANONYMOUS_s340[2] = 5;
+  bArray__ANONYMOUS_s337[2] = b;
+  aArray__ANONYMOUS_s336[2] = a;
+  int c_s22 = 0;
+  Coeff3(c_s22, coeff3change__ANONYMOUS_s506);
+  int c_s24 = 0;
+  Coeff4(c_s24, coeff4change__ANONYMOUS_s490);
+  int c_s26 = 0;
+  Coeff5(c_s26);
+  int c;
+  c = ((9 + (c_s22 * b)) + (c_s24 * a)) + c_s26;
+  lineArray__ANONYMOUS_s340[3] = 6;
+  bArray__ANONYMOUS_s337[3] = b;
+  cArray__ANONYMOUS_s338[3] = c;
+  aArray__ANONYMOUS_s336[3] = a;
+  int m_s28 = 0;
+  Coeff6(m_s28, coeff6change__ANONYMOUS_s510);
+  int m_s30 = 0;
+  Coeff7(m_s30, coeff7change__ANONYMOUS_s508);
+  int m_s32 = 0;
+  Coeff8(m_s32, coeff8change__ANONYMOUS_s433);
+  int m_s34 = 0;
+  Coeff9(m_s34);
+  int m;
+  m = (((m_s28 * b) + (m_s30 * c)) + (m_s32 * a)) + m_s34;
+  lineArray__ANONYMOUS_s340[4] = 7;
+  bArray__ANONYMOUS_s337[4] = b;
+  cArray__ANONYMOUS_s338[4] = c;
+  aArray__ANONYMOUS_s336[4] = a;
+  mArray__ANONYMOUS_s341[4] = m;
+  int _pac_sc_s36_s38 = 0;
+  Coeff11(_pac_sc_s36_s38, coeff11change__ANONYMOUS_s515);
+  int _pac_sc_s36_s40 = 0;
+  Coeff10(_pac_sc_s36_s40, coeff10change__ANONYMOUS_s507);
+  int _pac_sc_s36_s42 = 0;
+  Coeff12(_pac_sc_s36_s42, coeff12change__ANONYMOUS_s475);
+  int _pac_sc_s36_s44 = 0;
+  Coeff13(_pac_sc_s36_s44, coeff13change__ANONYMOUS_s491);
+  int _pac_sc_s36_s46 = 0;
+  Coeff14(_pac_sc_s36_s46, coeff14change__ANONYMOUS_s371);
+  int _pac_sc_s36_s48 = 0;
+  Coeff15(_pac_sc_s36_s48, coeff15change__ANONYMOUS_s482);
+  int _pac_sc_s36_s50 = 0;
+  Coeff16(_pac_sc_s36_s50);
+  bit _pac_sc_s36;
+  _pac_sc_s36 = ((_pac_sc_s36_s38 * a) - ((((((_pac_sc_s36_s40 * b) + (_pac_sc_s36_s42 * b)) + (_pac_sc_s36_s44 * c)) + (_pac_sc_s36_s46 * a)) + (_pac_sc_s36_s48 * m)) + _pac_sc_s36_s50)) >= 0;
+  if(_pac_sc_s36)/*tmp.txt:1015*/
+  {
+    int _pac_sc_s36_s52 = 0;
+    Coeff18(_pac_sc_s36_s52, coeff18change__ANONYMOUS_s478);
+    int _pac_sc_s36_s54 = 0;
+    Coeff17(_pac_sc_s36_s54, coeff17change__ANONYMOUS_s509);
+    int _pac_sc_s36_s56 = 0;
+    Coeff19(_pac_sc_s36_s56, coeff19change__ANONYMOUS_s498);
+    int _pac_sc_s36_s58 = 0;
+    Coeff20(_pac_sc_s36_s58, coeff20change__ANONYMOUS_s480);
+    int _pac_sc_s36_s60 = 0;
+    Coeff21(_pac_sc_s36_s60, coeff21change__ANONYMOUS_s430);
+    int _pac_sc_s36_s62 = 0;
+    Coeff22(_pac_sc_s36_s62, coeff22change__ANONYMOUS_s513);
+    int _pac_sc_s36_s64 = 0;
+    Coeff23(_pac_sc_s36_s64);
+    _pac_sc_s36 = ((_pac_sc_s36_s52 * a) - ((((((_pac_sc_s36_s54 * c) + (_pac_sc_s36_s56 * b)) + (_pac_sc_s36_s58 * c)) + (_pac_sc_s36_s60 * a)) + (_pac_sc_s36_s62 * m)) + _pac_sc_s36_s64)) <= 0;
+  }
+  bit _pac_sc_s35 = _pac_sc_s36;
+  if(!(_pac_sc_s36))/*tmp.txt:1015*/
+  {
+    int _pac_sc_s65_s67 = 0;
+    Coeff25(_pac_sc_s65_s67, coeff25change__ANONYMOUS_s476);
+    int _pac_sc_s65_s69 = 0;
+    Coeff24(_pac_sc_s65_s69, coeff24change__ANONYMOUS_s368);
+    int _pac_sc_s65_s71 = 0;
+    Coeff26(_pac_sc_s65_s71, coeff26change__ANONYMOUS_s412);
+    int _pac_sc_s65_s73 = 0;
+    Coeff27(_pac_sc_s65_s73, coeff27change__ANONYMOUS_s373);
+    int _pac_sc_s65_s75 = 0;
+    Coeff28(_pac_sc_s65_s75, coeff28change__ANONYMOUS_s517);
+    int _pac_sc_s65_s77 = 0;
+    Coeff29(_pac_sc_s65_s77, coeff29change__ANONYMOUS_s479);
+    int _pac_sc_s65_s79 = 0;
+    Coeff30(_pac_sc_s65_s79);
+    bit _pac_sc_s65;
+    _pac_sc_s65 = ((_pac_sc_s65_s67 * a) - ((((((_pac_sc_s65_s69 * c) + (_pac_sc_s65_s71 * b)) + (_pac_sc_s65_s73 * c)) + (_pac_sc_s65_s75 * a)) + (_pac_sc_s65_s77 * m)) + _pac_sc_s65_s79)) >= 0;
+    if(_pac_sc_s65)/*tmp.txt:1015*/
+    {
+      int _pac_sc_s65_s81 = 0;
+      Coeff32(_pac_sc_s65_s81, coeff32change__ANONYMOUS_s367);
+      int _pac_sc_s65_s83 = 0;
+      Coeff31(_pac_sc_s65_s83, coeff31change__ANONYMOUS_s511);
+      int _pac_sc_s65_s85 = 0;
+      Coeff33(_pac_sc_s65_s85, coeff33change__ANONYMOUS_s425);
+      int _pac_sc_s65_s87 = 0;
+      Coeff34(_pac_sc_s65_s87, coeff34change__ANONYMOUS_s415);
+      int _pac_sc_s65_s89 = 0;
+      Coeff35(_pac_sc_s65_s89, coeff35change__ANONYMOUS_s364);
+      int _pac_sc_s65_s91 = 0;
+      Coeff36(_pac_sc_s65_s91, coeff36change__ANONYMOUS_s396);
+      int _pac_sc_s65_s93 = 0;
+      Coeff37(_pac_sc_s65_s93);
+      _pac_sc_s65 = ((_pac_sc_s65_s81 * a) - ((((((_pac_sc_s65_s83 * b) + (_pac_sc_s65_s85 * b)) + (_pac_sc_s65_s87 * c)) + (_pac_sc_s65_s89 * a)) + (_pac_sc_s65_s91 * m)) + _pac_sc_s65_s93)) <= 0;
+    }
+    _pac_sc_s35 = _pac_sc_s65;
+  }
+  int count = 0;
+  if(_pac_sc_s35)/*tmp.txt:1015*/
+  {
+    lineArray__ANONYMOUS_s340[5] = 8;
+    bArray__ANONYMOUS_s337[5] = b;
+    cArray__ANONYMOUS_s338[5] = c;
+    aArray__ANONYMOUS_s336[5] = a;
+    mArray__ANONYMOUS_s341[5] = m;
+    int m_s95 = 0;
+    Coeff38(m_s95, coeff38change__ANONYMOUS_s504);
+    int m_s97 = 0;
+    Coeff39(m_s97, coeff39change__ANONYMOUS_s516);
+    int m_s99 = 0;
+    Coeff40(m_s99, coeff40change__ANONYMOUS_s404);
+    int m_s101 = 0;
+    Coeff41(m_s101, coeff41change__ANONYMOUS_s398);
+    int m_s103 = 0;
+    Coeff42(m_s103, coeff42change__ANONYMOUS_s483);
+    int m_s105 = 0;
+    Coeff43(m_s105);
+    m = (((((m_s95 * b) + (m_s97 * b)) + (m_s99 * c)) + (m_s101 * a)) + (m_s103 * m)) + m_s105;
+    count = 6;
+    lineArray__ANONYMOUS_s340[6] = 8;
+    bArray__ANONYMOUS_s337[6] = b;
+    cArray__ANONYMOUS_s338[6] = c;
+    aArray__ANONYMOUS_s336[6] = a;
+    mArray__ANONYMOUS_s341[6] = m;
+  }
+  else
+  {
+    lineArray__ANONYMOUS_s340[5] = 9;
+    bArray__ANONYMOUS_s337[5] = b;
+    cArray__ANONYMOUS_s338[5] = c;
+    aArray__ANONYMOUS_s336[5] = a;
+    mArray__ANONYMOUS_s341[5] = m;
+    int _pac_sc_s107_s109 = 0;
+    Coeff45(_pac_sc_s107_s109, coeff45change__ANONYMOUS_s503);
+    int _pac_sc_s107_s111 = 0;
+    Coeff44(_pac_sc_s107_s111, coeff44change__ANONYMOUS_s495);
+    int _pac_sc_s107_s113 = 0;
+    Coeff46(_pac_sc_s107_s113, coeff46change__ANONYMOUS_s402);
+    int _pac_sc_s107_s115 = 0;
+    Coeff47(_pac_sc_s107_s115, coeff47change__ANONYMOUS_s406);
+    int _pac_sc_s107_s117 = 0;
+    Coeff48(_pac_sc_s107_s117, coeff48change__ANONYMOUS_s487);
+    int _pac_sc_s107_s119 = 0;
+    Coeff49(_pac_sc_s107_s119, coeff49change__ANONYMOUS_s496);
+    int _pac_sc_s107_s121 = 0;
+    Coeff50(_pac_sc_s107_s121);
+    bit _pac_sc_s107;
+    _pac_sc_s107 = ((_pac_sc_s107_s109 * b) - ((((((_pac_sc_s107_s111 * a) + (_pac_sc_s107_s113 * b)) + (_pac_sc_s107_s115 * c)) + (_pac_sc_s107_s117 * a)) + (_pac_sc_s107_s119 * m)) + _pac_sc_s107_s121)) >= 0;
+    if(_pac_sc_s107)/*tmp.txt:1041*/
+    {
+      int _pac_sc_s107_s123 = 0;
+      Coeff52(_pac_sc_s107_s123, coeff52change__ANONYMOUS_s493);
+      int _pac_sc_s107_s125 = 0;
+      Coeff51(_pac_sc_s107_s125, coeff51change__ANONYMOUS_s518);
+      int _pac_sc_s107_s127 = 0;
+      Coeff53(_pac_sc_s107_s127, coeff53change__ANONYMOUS_s422);
+      int _pac_sc_s107_s129 = 0;
+      Coeff54(_pac_sc_s107_s129, coeff54change__ANONYMOUS_s432);
+      int _pac_sc_s107_s131 = 0;
+      Coeff55(_pac_sc_s107_s131, coeff55change__ANONYMOUS_s392);
+      int _pac_sc_s107_s133 = 0;
+      Coeff56(_pac_sc_s107_s133, coeff56change__ANONYMOUS_s488);
+      int _pac_sc_s107_s135 = 0;
+      Coeff57(_pac_sc_s107_s135);
+      _pac_sc_s107 = ((_pac_sc_s107_s123 * b) - ((((((_pac_sc_s107_s125 * c) + (_pac_sc_s107_s127 * b)) + (_pac_sc_s107_s129 * c)) + (_pac_sc_s107_s131 * a)) + (_pac_sc_s107_s133 * m)) + _pac_sc_s107_s135)) <= 0;
+    }
+    bit _pac_sc_s106 = _pac_sc_s107;
+    if(!(_pac_sc_s107))/*tmp.txt:1041*/
+    {
+      int _pac_sc_s136_s138 = 0;
+      Coeff59(_pac_sc_s136_s138, coeff59change__ANONYMOUS_s400);
+      int _pac_sc_s136_s140 = 0;
+      Coeff58(_pac_sc_s136_s140, coeff58change__ANONYMOUS_s427);
+      int _pac_sc_s136_s142 = 0;
+      Coeff60(_pac_sc_s136_s142, coeff60change__ANONYMOUS_s514);
+      int _pac_sc_s136_s144 = 0;
+      Coeff61(_pac_sc_s136_s144, coeff61change__ANONYMOUS_s394);
+      int _pac_sc_s136_s146 = 0;
+      Coeff62(_pac_sc_s136_s146, coeff62change__ANONYMOUS_s492);
+      int _pac_sc_s136_s148 = 0;
+      Coeff63(_pac_sc_s136_s148, coeff63change__ANONYMOUS_s499);
+      int _pac_sc_s136_s150 = 0;
+      Coeff64(_pac_sc_s136_s150);
+      bit _pac_sc_s136;
+      _pac_sc_s136 = ((_pac_sc_s136_s138 * b) - ((((((_pac_sc_s136_s140 * c) + (_pac_sc_s136_s142 * b)) + (_pac_sc_s136_s144 * c)) + (_pac_sc_s136_s146 * a)) + (_pac_sc_s136_s148 * m)) + _pac_sc_s136_s150)) >= 0;
+      if(_pac_sc_s136)/*tmp.txt:1041*/
+      {
+        int _pac_sc_s136_s152 = 0;
+        Coeff66(_pac_sc_s136_s152, coeff66change__ANONYMOUS_s494);
+        int _pac_sc_s136_s154 = 0;
+        Coeff65(_pac_sc_s136_s154, coeff65change__ANONYMOUS_s477);
+        int _pac_sc_s136_s156 = 0;
+        Coeff67(_pac_sc_s136_s156, coeff67change__ANONYMOUS_s434);
+        int _pac_sc_s136_s158 = 0;
+        Coeff68(_pac_sc_s136_s158, coeff68change__ANONYMOUS_s481);
+        int _pac_sc_s136_s160 = 0;
+        Coeff69(_pac_sc_s136_s160, coeff69change__ANONYMOUS_s363);
+        int _pac_sc_s136_s162 = 0;
+        Coeff70(_pac_sc_s136_s162, coeff70change__ANONYMOUS_s435);
+        int _pac_sc_s136_s164 = 0;
+        Coeff71(_pac_sc_s136_s164);
+        _pac_sc_s136 = ((_pac_sc_s136_s152 * b) - ((((((_pac_sc_s136_s154 * a) + (_pac_sc_s136_s156 * b)) + (_pac_sc_s136_s158 * c)) + (_pac_sc_s136_s160 * a)) + (_pac_sc_s136_s162 * m)) + _pac_sc_s136_s164)) <= 0;
+      }
+      _pac_sc_s106 = _pac_sc_s136;
+    }
+    if(_pac_sc_s106)/*tmp.txt:1041*/
+    {
+      lineArray__ANONYMOUS_s340[6] = 10;
+      bArray__ANONYMOUS_s337[6] = b;
+      cArray__ANONYMOUS_s338[6] = c;
+      aArray__ANONYMOUS_s336[6] = a;
+      mArray__ANONYMOUS_s341[6] = m;
+      int m_s166 = 0;
+      Coeff72(m_s166, coeff72change__ANONYMOUS_s486);
+      int m_s168 = 0;
+      Coeff73(m_s168, coeff73change__ANONYMOUS_s519);
+      int m_s170 = 0;
+      Coeff74(m_s170, coeff74change__ANONYMOUS_s485);
+      int m_s172 = 0;
+      Coeff75(m_s172, coeff75change__ANONYMOUS_s497);
+      int m_s174 = 0;
+      Coeff76(m_s174, coeff76change__ANONYMOUS_s502);
+      int m_s176 = 0;
+      Coeff77(m_s176);
+      m = (((((m_s166 * b) + (m_s168 * b)) + (m_s170 * c)) + (m_s172 * a)) + (m_s174 * m)) + m_s176;
+      lineArray__ANONYMOUS_s340[7] = 10;
+      bArray__ANONYMOUS_s337[7] = b;
+      cArray__ANONYMOUS_s338[7] = c;
+      aArray__ANONYMOUS_s336[7] = a;
+      mArray__ANONYMOUS_s341[7] = m;
+    }
+    else
+    {
+      lineArray__ANONYMOUS_s340[6] = 12;
+      bArray__ANONYMOUS_s337[6] = b;
+      cArray__ANONYMOUS_s338[6] = c;
+      aArray__ANONYMOUS_s336[6] = a;
+      mArray__ANONYMOUS_s341[6] = m;
+      int m_s178 = 0;
+      Coeff78(m_s178, coeff78change__ANONYMOUS_s431);
+      int m_s180 = 0;
+      Coeff79(m_s180, coeff79change__ANONYMOUS_s505);
+      int m_s182 = 0;
+      Coeff80(m_s182, coeff80change__ANONYMOUS_s407);
+      int m_s184 = 0;
+      Coeff81(m_s184, coeff81change__ANONYMOUS_s411);
+      int m_s186 = 0;
+      Coeff82(m_s186, coeff82change__ANONYMOUS_s484);
+      int m_s188 = 0;
+      Coeff83(m_s188);
+      m = (((((m_s178 * c) + (m_s180 * b)) + (m_s182 * c)) + (m_s184 * a)) + (m_s186 * m)) + m_s188;
+      lineArray__ANONYMOUS_s340[7] = 12;
+      bArray__ANONYMOUS_s337[7] = b;
+      cArray__ANONYMOUS_s338[7] = c;
+      aArray__ANONYMOUS_s336[7] = a;
+      mArray__ANONYMOUS_s341[7] = m;
+    }
+    count = 8;
+    lineArray__ANONYMOUS_s340[8] = 9;
+    bArray__ANONYMOUS_s337[8] = b;
+    cArray__ANONYMOUS_s338[8] = c;
+    aArray__ANONYMOUS_s336[8] = a;
+    mArray__ANONYMOUS_s341[8] = m;
+  }
+  count = count + 1;
+  lineArray__ANONYMOUS_s340[count] = 14;
+  mfinal__ANONYMOUS_s342 = m;
+  finalcount__ANONYMOUS_s339 = count;
+  return;
+}
+/*tmp.txt:971*/
+
+void glblInit_aArray__ANONYMOUS_s521 (ref int[16] aArray__ANONYMOUS_s520)/*tmp.txt:971*/
+{
+  aArray__ANONYMOUS_s520 = ((int[16]){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+}
+/*tmp.txt:969*/
+
+void glblInit_bArray__ANONYMOUS_s523 (ref int[16] bArray__ANONYMOUS_s522)/*tmp.txt:969*/
+{
+  bArray__ANONYMOUS_s522 = ((int[16]){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+}
+/*tmp.txt:970*/
+
+void glblInit_cArray__ANONYMOUS_s525 (ref int[16] cArray__ANONYMOUS_s524)/*tmp.txt:970*/
+{
+  cArray__ANONYMOUS_s524 = ((int[16]){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+}
+/*tmp.txt:1*/
+
+void glblInit_coeff0change__ANONYMOUS_s527 (ref int coeff0change__ANONYMOUS_s526)/*tmp.txt:1*/
+{
+  coeff0change__ANONYMOUS_s526 = 0;
+}
+/*tmp.txt:99*/
+
+void glblInit_coeff10change__ANONYMOUS_s529 (ref bit coeff10change__ANONYMOUS_s528)/*tmp.txt:99*/
+{
+  coeff10change__ANONYMOUS_s528 = 0;
+}
+/*tmp.txt:110*/
+
+void glblInit_coeff11change__ANONYMOUS_s531 (ref bit coeff11change__ANONYMOUS_s530)/*tmp.txt:110*/
+{
+  coeff11change__ANONYMOUS_s530 = 0;
+}
+/*tmp.txt:121*/
+
+void glblInit_coeff12change__ANONYMOUS_s533 (ref bit coeff12change__ANONYMOUS_s532)/*tmp.txt:121*/
+{
+  coeff12change__ANONYMOUS_s532 = 0;
+}
+/*tmp.txt:132*/
+
+void glblInit_coeff13change__ANONYMOUS_s535 (ref bit coeff13change__ANONYMOUS_s534)/*tmp.txt:132*/
+{
+  coeff13change__ANONYMOUS_s534 = 0;
+}
+/*tmp.txt:143*/
+
+void glblInit_coeff14change__ANONYMOUS_s537 (ref bit coeff14change__ANONYMOUS_s536)/*tmp.txt:143*/
+{
+  coeff14change__ANONYMOUS_s536 = 0;
+}
+/*tmp.txt:154*/
+
+void glblInit_coeff15change__ANONYMOUS_s539 (ref bit coeff15change__ANONYMOUS_s538)/*tmp.txt:154*/
+{
+  coeff15change__ANONYMOUS_s538 = 0;
+}
+/*tmp.txt:165*/
+
+void glblInit_coeff16change__ANONYMOUS_s541 (ref int coeff16change__ANONYMOUS_s540)/*tmp.txt:165*/
+{
+  coeff16change__ANONYMOUS_s540 = 0;
+}
+/*tmp.txt:173*/
+
+void glblInit_coeff17change__ANONYMOUS_s543 (ref bit coeff17change__ANONYMOUS_s542)/*tmp.txt:173*/
+{
+  coeff17change__ANONYMOUS_s542 = 0;
+}
+/*tmp.txt:184*/
+
+void glblInit_coeff18change__ANONYMOUS_s545 (ref bit coeff18change__ANONYMOUS_s544)/*tmp.txt:184*/
+{
+  coeff18change__ANONYMOUS_s544 = 0;
+}
+/*tmp.txt:195*/
+
+void glblInit_coeff19change__ANONYMOUS_s547 (ref bit coeff19change__ANONYMOUS_s546)/*tmp.txt:195*/
+{
+  coeff19change__ANONYMOUS_s546 = 0;
+}
+/*tmp.txt:9*/
+
+void glblInit_coeff1change__ANONYMOUS_s549 (ref bit coeff1change__ANONYMOUS_s548)/*tmp.txt:9*/
+{
+  coeff1change__ANONYMOUS_s548 = 0;
+}
+/*tmp.txt:206*/
+
+void glblInit_coeff20change__ANONYMOUS_s551 (ref bit coeff20change__ANONYMOUS_s550)/*tmp.txt:206*/
+{
+  coeff20change__ANONYMOUS_s550 = 0;
+}
+/*tmp.txt:217*/
+
+void glblInit_coeff21change__ANONYMOUS_s553 (ref bit coeff21change__ANONYMOUS_s552)/*tmp.txt:217*/
+{
+  coeff21change__ANONYMOUS_s552 = 0;
+}
+/*tmp.txt:228*/
+
+void glblInit_coeff22change__ANONYMOUS_s555 (ref bit coeff22change__ANONYMOUS_s554)/*tmp.txt:228*/
+{
+  coeff22change__ANONYMOUS_s554 = 0;
+}
+/*tmp.txt:239*/
+
+void glblInit_coeff23change__ANONYMOUS_s557 (ref int coeff23change__ANONYMOUS_s556)/*tmp.txt:239*/
+{
+  coeff23change__ANONYMOUS_s556 = 0;
+}
+/*tmp.txt:247*/
+
+void glblInit_coeff24change__ANONYMOUS_s559 (ref bit coeff24change__ANONYMOUS_s558)/*tmp.txt:247*/
+{
+  coeff24change__ANONYMOUS_s558 = 0;
+}
+/*tmp.txt:258*/
+
+void glblInit_coeff25change__ANONYMOUS_s561 (ref bit coeff25change__ANONYMOUS_s560)/*tmp.txt:258*/
+{
+  coeff25change__ANONYMOUS_s560 = 0;
+}
+/*tmp.txt:269*/
+
+void glblInit_coeff26change__ANONYMOUS_s563 (ref bit coeff26change__ANONYMOUS_s562)/*tmp.txt:269*/
+{
+  coeff26change__ANONYMOUS_s562 = 0;
+}
+/*tmp.txt:280*/
+
+void glblInit_coeff27change__ANONYMOUS_s565 (ref bit coeff27change__ANONYMOUS_s564)/*tmp.txt:280*/
+{
+  coeff27change__ANONYMOUS_s564 = 0;
+}
+/*tmp.txt:291*/
+
+void glblInit_coeff28change__ANONYMOUS_s567 (ref bit coeff28change__ANONYMOUS_s566)/*tmp.txt:291*/
+{
+  coeff28change__ANONYMOUS_s566 = 0;
+}
+/*tmp.txt:302*/
+
+void glblInit_coeff29change__ANONYMOUS_s569 (ref bit coeff29change__ANONYMOUS_s568)/*tmp.txt:302*/
+{
+  coeff29change__ANONYMOUS_s568 = 0;
+}
+/*tmp.txt:20*/
+
+void glblInit_coeff2change__ANONYMOUS_s571 (ref int coeff2change__ANONYMOUS_s570)/*tmp.txt:20*/
+{
+  coeff2change__ANONYMOUS_s570 = 0;
+}
+/*tmp.txt:313*/
+
+void glblInit_coeff30change__ANONYMOUS_s573 (ref int coeff30change__ANONYMOUS_s572)/*tmp.txt:313*/
+{
+  coeff30change__ANONYMOUS_s572 = 0;
+}
+/*tmp.txt:321*/
+
+void glblInit_coeff31change__ANONYMOUS_s575 (ref bit coeff31change__ANONYMOUS_s574)/*tmp.txt:321*/
+{
+  coeff31change__ANONYMOUS_s574 = 0;
+}
+/*tmp.txt:332*/
+
+void glblInit_coeff32change__ANONYMOUS_s577 (ref bit coeff32change__ANONYMOUS_s576)/*tmp.txt:332*/
+{
+  coeff32change__ANONYMOUS_s576 = 0;
+}
+/*tmp.txt:343*/
+
+void glblInit_coeff33change__ANONYMOUS_s579 (ref bit coeff33change__ANONYMOUS_s578)/*tmp.txt:343*/
+{
+  coeff33change__ANONYMOUS_s578 = 0;
+}
+/*tmp.txt:354*/
+
+void glblInit_coeff34change__ANONYMOUS_s581 (ref bit coeff34change__ANONYMOUS_s580)/*tmp.txt:354*/
+{
+  coeff34change__ANONYMOUS_s580 = 0;
+}
+/*tmp.txt:365*/
+
+void glblInit_coeff35change__ANONYMOUS_s583 (ref bit coeff35change__ANONYMOUS_s582)/*tmp.txt:365*/
+{
+  coeff35change__ANONYMOUS_s582 = 0;
+}
+/*tmp.txt:376*/
+
+void glblInit_coeff36change__ANONYMOUS_s585 (ref bit coeff36change__ANONYMOUS_s584)/*tmp.txt:376*/
+{
+  coeff36change__ANONYMOUS_s584 = 0;
+}
+/*tmp.txt:387*/
+
+void glblInit_coeff37change__ANONYMOUS_s587 (ref int coeff37change__ANONYMOUS_s586)/*tmp.txt:387*/
+{
+  coeff37change__ANONYMOUS_s586 = 0;
+}
+/*tmp.txt:395*/
+
+void glblInit_coeff38change__ANONYMOUS_s589 (ref bit coeff38change__ANONYMOUS_s588)/*tmp.txt:395*/
+{
+  coeff38change__ANONYMOUS_s588 = 1;
+}
+/*tmp.txt:406*/
+
+void glblInit_coeff39change__ANONYMOUS_s591 (ref bit coeff39change__ANONYMOUS_s590)/*tmp.txt:406*/
+{
+  coeff39change__ANONYMOUS_s590 = 0;
+}
+/*tmp.txt:28*/
+
+void glblInit_coeff3change__ANONYMOUS_s593 (ref bit coeff3change__ANONYMOUS_s592)/*tmp.txt:28*/
+{
+  coeff3change__ANONYMOUS_s592 = 0;
+}
+/*tmp.txt:417*/
+
+void glblInit_coeff40change__ANONYMOUS_s595 (ref bit coeff40change__ANONYMOUS_s594)/*tmp.txt:417*/
+{
+  coeff40change__ANONYMOUS_s594 = 0;
+}
+/*tmp.txt:428*/
+
+void glblInit_coeff41change__ANONYMOUS_s597 (ref bit coeff41change__ANONYMOUS_s596)/*tmp.txt:428*/
+{
+  coeff41change__ANONYMOUS_s596 = 1;
+}
+/*tmp.txt:439*/
+
+void glblInit_coeff42change__ANONYMOUS_s599 (ref bit coeff42change__ANONYMOUS_s598)/*tmp.txt:439*/
+{
+  coeff42change__ANONYMOUS_s598 = 0;
+}
+/*tmp.txt:450*/
+
+void glblInit_coeff43change__ANONYMOUS_s601 (ref int coeff43change__ANONYMOUS_s600)/*tmp.txt:450*/
+{
+  coeff43change__ANONYMOUS_s600 = 0;
+}
+/*tmp.txt:458*/
+
+void glblInit_coeff44change__ANONYMOUS_s603 (ref bit coeff44change__ANONYMOUS_s602)/*tmp.txt:458*/
+{
+  coeff44change__ANONYMOUS_s602 = 0;
+}
+/*tmp.txt:469*/
+
+void glblInit_coeff45change__ANONYMOUS_s605 (ref bit coeff45change__ANONYMOUS_s604)/*tmp.txt:469*/
+{
+  coeff45change__ANONYMOUS_s604 = 0;
+}
+/*tmp.txt:480*/
+
+void glblInit_coeff46change__ANONYMOUS_s607 (ref bit coeff46change__ANONYMOUS_s606)/*tmp.txt:480*/
+{
+  coeff46change__ANONYMOUS_s606 = 0;
+}
+/*tmp.txt:491*/
+
+void glblInit_coeff47change__ANONYMOUS_s609 (ref bit coeff47change__ANONYMOUS_s608)/*tmp.txt:491*/
+{
+  coeff47change__ANONYMOUS_s608 = 0;
+}
+/*tmp.txt:502*/
+
+void glblInit_coeff48change__ANONYMOUS_s611 (ref bit coeff48change__ANONYMOUS_s610)/*tmp.txt:502*/
+{
+  coeff48change__ANONYMOUS_s610 = 0;
+}
+/*tmp.txt:513*/
+
+void glblInit_coeff49change__ANONYMOUS_s613 (ref bit coeff49change__ANONYMOUS_s612)/*tmp.txt:513*/
+{
+  coeff49change__ANONYMOUS_s612 = 0;
+}
+/*tmp.txt:39*/
+
+void glblInit_coeff4change__ANONYMOUS_s615 (ref bit coeff4change__ANONYMOUS_s614)/*tmp.txt:39*/
+{
+  coeff4change__ANONYMOUS_s614 = 0;
+}
+/*tmp.txt:524*/
+
+void glblInit_coeff50change__ANONYMOUS_s617 (ref int coeff50change__ANONYMOUS_s616)/*tmp.txt:524*/
+{
+  coeff50change__ANONYMOUS_s616 = 0;
+}
+/*tmp.txt:532*/
+
+void glblInit_coeff51change__ANONYMOUS_s619 (ref bit coeff51change__ANONYMOUS_s618)/*tmp.txt:532*/
+{
+  coeff51change__ANONYMOUS_s618 = 0;
+}
+/*tmp.txt:543*/
+
+void glblInit_coeff52change__ANONYMOUS_s621 (ref bit coeff52change__ANONYMOUS_s620)/*tmp.txt:543*/
+{
+  coeff52change__ANONYMOUS_s620 = 0;
+}
+/*tmp.txt:554*/
+
+void glblInit_coeff53change__ANONYMOUS_s623 (ref bit coeff53change__ANONYMOUS_s622)/*tmp.txt:554*/
+{
+  coeff53change__ANONYMOUS_s622 = 0;
+}
+/*tmp.txt:565*/
+
+void glblInit_coeff54change__ANONYMOUS_s625 (ref bit coeff54change__ANONYMOUS_s624)/*tmp.txt:565*/
+{
+  coeff54change__ANONYMOUS_s624 = 0;
+}
+/*tmp.txt:576*/
+
+void glblInit_coeff55change__ANONYMOUS_s627 (ref bit coeff55change__ANONYMOUS_s626)/*tmp.txt:576*/
+{
+  coeff55change__ANONYMOUS_s626 = 0;
+}
+/*tmp.txt:587*/
+
+void glblInit_coeff56change__ANONYMOUS_s629 (ref bit coeff56change__ANONYMOUS_s628)/*tmp.txt:587*/
+{
+  coeff56change__ANONYMOUS_s628 = 0;
+}
+/*tmp.txt:598*/
+
+void glblInit_coeff57change__ANONYMOUS_s631 (ref int coeff57change__ANONYMOUS_s630)/*tmp.txt:598*/
+{
+  coeff57change__ANONYMOUS_s630 = 0;
+}
+/*tmp.txt:606*/
+
+void glblInit_coeff58change__ANONYMOUS_s633 (ref bit coeff58change__ANONYMOUS_s632)/*tmp.txt:606*/
+{
+  coeff58change__ANONYMOUS_s632 = 0;
+}
+/*tmp.txt:617*/
+
+void glblInit_coeff59change__ANONYMOUS_s635 (ref bit coeff59change__ANONYMOUS_s634)/*tmp.txt:617*/
+{
+  coeff59change__ANONYMOUS_s634 = 0;
+}
+/*tmp.txt:50*/
+
+void glblInit_coeff5change__ANONYMOUS_s637 (ref int coeff5change__ANONYMOUS_s636)/*tmp.txt:50*/
+{
+  coeff5change__ANONYMOUS_s636 = 0;
+}
+/*tmp.txt:628*/
+
+void glblInit_coeff60change__ANONYMOUS_s639 (ref bit coeff60change__ANONYMOUS_s638)/*tmp.txt:628*/
+{
+  coeff60change__ANONYMOUS_s638 = 0;
+}
+/*tmp.txt:639*/
+
+void glblInit_coeff61change__ANONYMOUS_s641 (ref bit coeff61change__ANONYMOUS_s640)/*tmp.txt:639*/
+{
+  coeff61change__ANONYMOUS_s640 = 0;
+}
+/*tmp.txt:650*/
+
+void glblInit_coeff62change__ANONYMOUS_s643 (ref bit coeff62change__ANONYMOUS_s642)/*tmp.txt:650*/
+{
+  coeff62change__ANONYMOUS_s642 = 0;
+}
+/*tmp.txt:661*/
+
+void glblInit_coeff63change__ANONYMOUS_s645 (ref bit coeff63change__ANONYMOUS_s644)/*tmp.txt:661*/
+{
+  coeff63change__ANONYMOUS_s644 = 0;
+}
+/*tmp.txt:672*/
+
+void glblInit_coeff64change__ANONYMOUS_s647 (ref int coeff64change__ANONYMOUS_s646)/*tmp.txt:672*/
+{
+  coeff64change__ANONYMOUS_s646 = 0;
+}
+/*tmp.txt:680*/
+
+void glblInit_coeff65change__ANONYMOUS_s649 (ref bit coeff65change__ANONYMOUS_s648)/*tmp.txt:680*/
+{
+  coeff65change__ANONYMOUS_s648 = 0;
+}
+/*tmp.txt:691*/
+
+void glblInit_coeff66change__ANONYMOUS_s651 (ref bit coeff66change__ANONYMOUS_s650)/*tmp.txt:691*/
+{
+  coeff66change__ANONYMOUS_s650 = 0;
+}
+/*tmp.txt:702*/
+
+void glblInit_coeff67change__ANONYMOUS_s653 (ref bit coeff67change__ANONYMOUS_s652)/*tmp.txt:702*/
+{
+  coeff67change__ANONYMOUS_s652 = 0;
+}
+/*tmp.txt:713*/
+
+void glblInit_coeff68change__ANONYMOUS_s655 (ref bit coeff68change__ANONYMOUS_s654)/*tmp.txt:713*/
+{
+  coeff68change__ANONYMOUS_s654 = 0;
+}
+/*tmp.txt:724*/
+
+void glblInit_coeff69change__ANONYMOUS_s657 (ref bit coeff69change__ANONYMOUS_s656)/*tmp.txt:724*/
+{
+  coeff69change__ANONYMOUS_s656 = 0;
+}
+/*tmp.txt:58*/
+
+void glblInit_coeff6change__ANONYMOUS_s659 (ref bit coeff6change__ANONYMOUS_s658)/*tmp.txt:58*/
+{
+  coeff6change__ANONYMOUS_s658 = 0;
+}
+/*tmp.txt:735*/
+
+void glblInit_coeff70change__ANONYMOUS_s661 (ref bit coeff70change__ANONYMOUS_s660)/*tmp.txt:735*/
+{
+  coeff70change__ANONYMOUS_s660 = 0;
+}
+/*tmp.txt:746*/
+
+void glblInit_coeff71change__ANONYMOUS_s663 (ref int coeff71change__ANONYMOUS_s662)/*tmp.txt:746*/
+{
+  coeff71change__ANONYMOUS_s662 = 0;
+}
+/*tmp.txt:754*/
+
+void glblInit_coeff72change__ANONYMOUS_s665 (ref bit coeff72change__ANONYMOUS_s664)/*tmp.txt:754*/
+{
+  coeff72change__ANONYMOUS_s664 = 0;
+}
+/*tmp.txt:765*/
+
+void glblInit_coeff73change__ANONYMOUS_s667 (ref bit coeff73change__ANONYMOUS_s666)/*tmp.txt:765*/
+{
+  coeff73change__ANONYMOUS_s666 = 0;
+}
+/*tmp.txt:776*/
+
+void glblInit_coeff74change__ANONYMOUS_s669 (ref bit coeff74change__ANONYMOUS_s668)/*tmp.txt:776*/
+{
+  coeff74change__ANONYMOUS_s668 = 0;
+}
+/*tmp.txt:787*/
+
+void glblInit_coeff75change__ANONYMOUS_s671 (ref bit coeff75change__ANONYMOUS_s670)/*tmp.txt:787*/
+{
+  coeff75change__ANONYMOUS_s670 = 0;
+}
+/*tmp.txt:798*/
+
+void glblInit_coeff76change__ANONYMOUS_s673 (ref bit coeff76change__ANONYMOUS_s672)/*tmp.txt:798*/
+{
+  coeff76change__ANONYMOUS_s672 = 0;
+}
+/*tmp.txt:809*/
+
+void glblInit_coeff77change__ANONYMOUS_s675 (ref int coeff77change__ANONYMOUS_s674)/*tmp.txt:809*/
+{
+  coeff77change__ANONYMOUS_s674 = 0;
+}
+/*tmp.txt:817*/
+
+void glblInit_coeff78change__ANONYMOUS_s677 (ref bit coeff78change__ANONYMOUS_s676)/*tmp.txt:817*/
+{
+  coeff78change__ANONYMOUS_s676 = 0;
+}
+/*tmp.txt:828*/
+
+void glblInit_coeff79change__ANONYMOUS_s679 (ref bit coeff79change__ANONYMOUS_s678)/*tmp.txt:828*/
+{
+  coeff79change__ANONYMOUS_s678 = 0;
+}
+/*tmp.txt:69*/
+
+void glblInit_coeff7change__ANONYMOUS_s681 (ref bit coeff7change__ANONYMOUS_s680)/*tmp.txt:69*/
+{
+  coeff7change__ANONYMOUS_s680 = 0;
+}
+/*tmp.txt:839*/
+
+void glblInit_coeff80change__ANONYMOUS_s683 (ref bit coeff80change__ANONYMOUS_s682)/*tmp.txt:839*/
+{
+  coeff80change__ANONYMOUS_s682 = 0;
+}
+/*tmp.txt:850*/
+
+void glblInit_coeff81change__ANONYMOUS_s685 (ref bit coeff81change__ANONYMOUS_s684)/*tmp.txt:850*/
+{
+  coeff81change__ANONYMOUS_s684 = 0;
+}
+/*tmp.txt:861*/
+
+void glblInit_coeff82change__ANONYMOUS_s687 (ref bit coeff82change__ANONYMOUS_s686)/*tmp.txt:861*/
+{
+  coeff82change__ANONYMOUS_s686 = 0;
+}
+/*tmp.txt:872*/
+
+void glblInit_coeff83change__ANONYMOUS_s689 (ref int coeff83change__ANONYMOUS_s688)/*tmp.txt:872*/
+{
+  coeff83change__ANONYMOUS_s688 = 0;
+}
+/*tmp.txt:880*/
+
+void glblInit_coeff84change__ANONYMOUS_s691 (ref bit coeff84change__ANONYMOUS_s690)/*tmp.txt:880*/
+{
+  coeff84change__ANONYMOUS_s690 = 0;
+}
+/*tmp.txt:891*/
+
+void glblInit_coeff85change__ANONYMOUS_s693 (ref bit coeff85change__ANONYMOUS_s692)/*tmp.txt:891*/
+{
+  coeff85change__ANONYMOUS_s692 = 0;
+}
+/*tmp.txt:902*/
+
+void glblInit_coeff86change__ANONYMOUS_s695 (ref bit coeff86change__ANONYMOUS_s694)/*tmp.txt:902*/
+{
+  coeff86change__ANONYMOUS_s694 = 0;
+}
+/*tmp.txt:913*/
+
+void glblInit_coeff87change__ANONYMOUS_s697 (ref bit coeff87change__ANONYMOUS_s696)/*tmp.txt:913*/
+{
+  coeff87change__ANONYMOUS_s696 = 0;
+}
+/*tmp.txt:924*/
+
+void glblInit_coeff88change__ANONYMOUS_s699 (ref int coeff88change__ANONYMOUS_s698)/*tmp.txt:924*/
+{
+  coeff88change__ANONYMOUS_s698 = 0;
+}
+/*tmp.txt:932*/
+
+void glblInit_coeff89change__ANONYMOUS_s701 (ref int coeff89change__ANONYMOUS_s700)/*tmp.txt:932*/
+{
+  coeff89change__ANONYMOUS_s700 = 0;
+}
+/*tmp.txt:80*/
+
+void glblInit_coeff8change__ANONYMOUS_s703 (ref bit coeff8change__ANONYMOUS_s702)/*tmp.txt:80*/
+{
+  coeff8change__ANONYMOUS_s702 = 0;
+}
+/*tmp.txt:940*/
+
+void glblInit_coeff90change__ANONYMOUS_s705 (ref int coeff90change__ANONYMOUS_s704)/*tmp.txt:940*/
+{
+  coeff90change__ANONYMOUS_s704 = 0;
+}
+/*tmp.txt:948*/
+
+void glblInit_coeff91change__ANONYMOUS_s707 (ref bit coeff91change__ANONYMOUS_s706)/*tmp.txt:948*/
+{
+  coeff91change__ANONYMOUS_s706 = 0;
+}
+/*tmp.txt:959*/
+
+void glblInit_coeff92change__ANONYMOUS_s709 (ref int coeff92change__ANONYMOUS_s708)/*tmp.txt:959*/
+{
+  coeff92change__ANONYMOUS_s708 = 0;
+}
+/*tmp.txt:91*/
+
+void glblInit_coeff9change__ANONYMOUS_s711 (ref int coeff9change__ANONYMOUS_s710)/*tmp.txt:91*/
+{
+  coeff9change__ANONYMOUS_s710 = 0;
+}
+/*tmp.txt:977*/
+
+void glblInit_finalcount__ANONYMOUS_s713 (ref int finalcount__ANONYMOUS_s712)/*tmp.txt:977*/
+{
+  finalcount__ANONYMOUS_s712 = 0;
+}
+/*tmp.txt:972*/
+
+void glblInit_mArray__ANONYMOUS_s715 (ref int[16] mArray__ANONYMOUS_s714)/*tmp.txt:972*/
+{
+  mArray__ANONYMOUS_s714 = ((int[16]){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+}
+/*tmp.txt:976*/
+
+void glblInit_mfinal__ANONYMOUS_s717 (ref int mfinal__ANONYMOUS_s716)/*tmp.txt:976*/
+{
+  mfinal__ANONYMOUS_s716 = 0;
+}
+/*tmp.txt:973*/
+
+void glblInit_zArray__ANONYMOUS_s719 (ref int[16] zArray__ANONYMOUS_s718)/*tmp.txt:973*/
+{
+  zArray__ANONYMOUS_s718 = ((int[16]){0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
+}
+/* END PACKAGE ANONYMOUS*/
+[SKETCH] DONE
+Total time = 17916
