@@ -70,6 +70,7 @@ public class StmtFor extends Statement {
 
 	@Override
 	public Context buildContext(Context prectx) {
+		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);
 		this.setPostctx(new Context(prectx));
@@ -79,6 +80,7 @@ public class StmtFor extends Statement {
 		int temp = postctx.getLinenumber();
 		postctx.setLinenumber(temp);
 		postctx = init.buildContext(postctx);
+		cond.setCtx(postctx);
 		postctx = incr.buildContext(postctx);
 		postctx = body.buildContext(postctx);
 		postctx.popVars();
@@ -123,7 +125,7 @@ public class StmtFor extends Statement {
 		toAdd.add(init);
 		toAdd.add(incr);
 		toAdd.add(body);
-		toAdd.add(cond);
+		//toAdd.add(cond);
 		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 

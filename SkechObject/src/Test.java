@@ -87,8 +87,8 @@ public class Test {
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/sumup/correction")).useDelimiter("\\Z").next();
 		
-		MainEntrance me = new MainEntrance(oriTraces,correctTrace,12);
-		me.Synthesize();
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,10);
+		me.Synthesize(true);
 	}
 	
 	@org.junit.Test
@@ -426,7 +426,7 @@ public class Test {
 	public void testMax3() throws FileNotFoundException, InterruptedException{
 		String oriTraces = new Scanner(new File("benchmarks/max3/max3-test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/max3/max3-target")).useDelimiter("\\Z").next();
-		MainEntrance me = new MainEntrance(oriTraces,correctTrace,5);
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,8);
 		String res = me.Synthesize(true).toString();
 		System.out.println(res);
 	}

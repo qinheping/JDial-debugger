@@ -446,6 +446,8 @@ public class ExprBinary extends Expression {
 
 	@Override
 	public ConstData replaceLinearCombination(int index) {
+		System.out.println(this);
+		System.out.println(this.getCtx());
 		if (this.isBoolean()) {
 			if (this.op == 8 || this.op == 9 || this.op == 10 || this.op == 11 || this.op == 12 || this.op == 13) {
 				this.left = new ExprBinary(this.left, "-", this.right);

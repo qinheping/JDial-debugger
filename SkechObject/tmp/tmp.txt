@@ -1,21 +1,18 @@
-bit coeff0change = ??;
+int coeff0change = ??;
  int Coeff0(){
-if(coeff0change == 0){
-return 1;}
-
 if(??){
 return 0;}
 
-return -1;
+return coeff0change;
 }
 
 bit coeff1change = ??;
  int Coeff1(){
 if(coeff1change == 0){
-return 1;}
+return 0;}
 
 if(??){
-return 0;}
+return 1;}
 
 return -1;
 }
@@ -28,15 +25,34 @@ return 0;}
 return coeff2change;
 }
 
-bit coeff5change = ??;
- int Coeff5(){
-if(coeff5change == 0){
+bit coeff3change = ??;
+ int Coeff3(){
+if(coeff3change == 0){
+return 0;}
+
+if(??){
 return 1;}
 
+return -1;
+}
+
+bit coeff4change = ??;
+ int Coeff4(){
+if(coeff4change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff5change = ??;
+ int Coeff5(){
 if(??){
 return 0;}
 
-return -1;
+return coeff5change;
 }
 
 bit coeff6change = ??;
@@ -50,80 +66,139 @@ return 0;}
 return -1;
 }
 
-int coeff7change = ??;
+bit coeff7change = ??;
  int Coeff7(){
+if(coeff7change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff8change = ??;
+ int Coeff8(){
+if(coeff8change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff9change = ??;
+ int Coeff9(){
+if(coeff9change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff10change = ??;
+ int Coeff10(){
 if(??){
 return 0;}
 
-return coeff7change;
+return coeff10change;
 }
 
 
-int[6] lineArray;
+int[16] lineArray;
+int[16] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[16] nArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[16] sumArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 
-int xfinal = 0;
-int yfinal = 0;
-int zfinal = 0;
+int nfinal = 0;
+int sumfinal = 0;
+int ifinal = 0;
 int finalcount = 0;
 
- int max3(int x, int y, int z){
+ int SumUp(){
 int count = -1;
 int linehit = 0;
 (count)++;
-lineArray[count] = 6;
-
-if((((Coeff1()) * x) - (((Coeff0()) * y) + (Coeff2()))) > 0){
-(count)++;
-lineArray[count] = 6;
-
-y = ((Coeff3()) * x) + (Coeff4());
-
-(count)++;
-lineArray[count] = 6;
-
-}
-
-
-(count)++;
 lineArray[count] = 7;
 
-if((((Coeff6()) * y) - (((Coeff5()) * z) + (Coeff7()))) > 0){
-(count)++;
-lineArray[count] = 7;
-
-z = ((Coeff8()) * x) + (Coeff9());
-
-(count)++;
-lineArray[count] = 7;
-
-}
-
+int n = 5 + (Coeff0());
 
 (count)++;
 lineArray[count] = 8;
+nArray[count] = n;
+
+int sum = (0 + ((Coeff1()) * n)) + (Coeff2());
+
+(count)++;
+lineArray[count] = 9;
+nArray[count] = n;
+sumArray[count] = sum;
+
+for(int i = ((0 + ((Coeff3()) * n)) + ((Coeff4()) * sum)) + (Coeff5()); i < n; (i)++){
+(count)++;
+lineArray[count] = 9;
+iArray[count] = i;
+nArray[count] = n;
+sumArray[count] = sum;
+
+(count)++;
+lineArray[count] = 10;
+iArray[count] = i;
+nArray[count] = n;
+sumArray[count] = sum;
 (linehit)++;
-if(linehit == 1){
-xfinal = x;
-yfinal = y;
-zfinal = z;
+if(linehit == 2){
+nfinal = n;
+sumfinal = sum;
+ifinal = i;
 finalcount = count;
 return 0;
 }
 
 
-return z;
+sum += (((((Coeff6()) * i) + ((Coeff7()) * i)) + ((Coeff8()) * n)) + ((Coeff9()) * sum)) + (Coeff10());
+
+
+
+(count)++;
+lineArray[count] = 9;
+iArray[count] = i;
+nArray[count] = n;
+sumArray[count] = sum;
+
+}
+
+
+(count)++;
+lineArray[count] = 9;
+nArray[count] = n;
+sumArray[count] = sum;
+
+
+(count)++;
+lineArray[count] = 12;
+nArray[count] = n;
+sumArray[count] = sum;
+
+return sum;
 
 
 
 }
 
 harness void HammingTest(){
-int[3] oringianllineArray = {6,7,8};
-int correctFinal_x = 3;
-int correctFinal_y = 5;
-int correctFinal_z = 5;
-max3(3, 5, 1);
+int[8] oringianliArray = {0,0,0,0,0,0,1,1};
+int[8] oringianlnArray = {0,5,5,5,5,5,5,5};
+int[8] oringianlsumArray = {0,0,0,0,0,0,0,0};
+int[8] oringianllineArray = {7,8,9,9,10,9,9,10};
+int correctFinal_n = 5;
+int correctFinal_sum = 1;
+int correctFinal_i = 1;
+SumUp();
 int HammingDistance = 0;
 int EditDistance = 0;
 EditDistance += coeff0change;
@@ -136,14 +211,18 @@ EditDistance += coeff6change;
 EditDistance += coeff7change;
 EditDistance += coeff8change;
 EditDistance += coeff9change;
+EditDistance += coeff10change;
 
-for(int i = 0; i < 3; (i)++){
+for(int i = 0; i < 8; (i)++){
+HammingDistance += (iArray[i]) != (oringianliArray[i]);
+HammingDistance += (nArray[i]) != (oringianlnArray[i]);
+HammingDistance += (sumArray[i]) != (oringianlsumArray[i]);
 HammingDistance += (lineArray[i]) != (oringianllineArray[i]);
 }
 
-assert (xfinal == correctFinal_x);
-assert (yfinal == correctFinal_y);
-assert (zfinal == correctFinal_z);
+assert (nfinal == correctFinal_n);
+assert (sumfinal == correctFinal_sum);
+assert (ifinal == correctFinal_i);
 minimize(EditDistance);
 minimize(HammingDistance);
 }

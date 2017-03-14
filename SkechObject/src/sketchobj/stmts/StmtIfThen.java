@@ -130,6 +130,7 @@ public class StmtIfThen extends Statement {
 		this.setPrectx(prectx);
 		this.setPostctx(prectx);
 		Context postctx = new Context(prectx);
+		
 		postctx.pushNewVars();;
 		postctx = cons.buildContext(postctx);
 		postctx.popVars();
