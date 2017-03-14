@@ -120,13 +120,14 @@ public class MainEntrance {
 		}
 		for(int c: rangedCoeff){
 			if(result.containsKey(c))
-			stmtString = stmtString.replaceAll("(Coeff"+c+"())", result.get(c).toString());
+			stmtString = stmtString.replaceAll("(Coeff"+c+"())()", result.get(c).toString());
 			else
-				stmtString = stmtString.replaceAll("(Coeff"+c+"())", "0");
+				stmtString = stmtString.replaceAll("(Coeff"+c+"())()", "0");
 				
 		}
+		stmtString = stmtString.replaceAll("[()]", "");
 		System.out.println(stmtString);
-		return " ";
+		return stmtString;
 	}
 
 	public void setRepairRange(List<Integer> l) {
@@ -164,7 +165,7 @@ public class MainEntrance {
 		return new JavaVisitor(target).visit(tree);
 	}
 
-	public Map<Integer, Integer> Synthesize() throws InterruptedException {
+	public Map<Integer, String> Synthesize() throws InterruptedException {
 		return this.Synthesize(false);
 	}
 }

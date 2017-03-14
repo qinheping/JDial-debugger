@@ -103,7 +103,7 @@ public class CallSketch {
 		if (lstr.size() == 0)
 			return lint;
 		for (String s : lstr) {
-			if (s.length() == 0 || s.length() > 5)
+			if (s.length() == 0 || s.length() > 5 || s.equals("-"))
 				continue;
 			lint.add(Integer.parseInt(s));
 		}
