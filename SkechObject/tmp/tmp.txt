@@ -1,102 +1,149 @@
- int External_Mathpow(int p0, int p1){
-return ??;
-}
-bit const0change = ??;
- int Const0(){
-if(const0change == 1){
-return ??;}else{
+bit coeff0change = ??;
+ int Coeff0(){
+if(coeff0change == 0){
+return 1;}
+
+if(??){
 return 0;}
+
+return -1;
 }
 
-bit const1change = ??;
- int Const1(){
-if(const1change == 1){
-return ??;}else{
+bit coeff1change = ??;
+ int Coeff1(){
+if(coeff1change == 0){
+return 1;}
+
+if(??){
 return 0;}
+
+return -1;
+}
+
+int coeff2change = ??;
+ int Coeff2(){
+if(??){
+return 0;}
+
+return coeff2change;
+}
+
+bit coeff5change = ??;
+ int Coeff5(){
+if(coeff5change == 0){
+return 1;}
+
+if(??){
+return 0;}
+
+return -1;
+}
+
+bit coeff6change = ??;
+ int Coeff6(){
+if(coeff6change == 0){
+return 1;}
+
+if(??){
+return 0;}
+
+return -1;
+}
+
+int coeff7change = ??;
+ int Coeff7(){
+if(??){
+return 0;}
+
+return coeff7change;
 }
 
 
-int[26] lineArray;
-int[26] sumArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[26] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[6] lineArray;
 
 
-int sumfinal = 0;
+int xfinal = 0;
+int yfinal = 0;
+int zfinal = 0;
 int finalcount = 0;
 
- int SimpleJava(int n){
+ int max3(int x, int y, int z){
 int count = -1;
 int linehit = 0;
 (count)++;
-lineArray[count] = 4;
+lineArray[count] = 6;
 
-int sum = Const0();
-
+if((((Coeff1()) * x) - (((Coeff0()) * y) + (Coeff2()))) > 0){
 (count)++;
-lineArray[count] = 5;
-sumArray[count] = sum;
+lineArray[count] = 6;
 
-for(int i = Const1(); i < n; (i)++){
-(count)++;
-lineArray[count] = 5;
-sumArray[count] = sum;
-iArray[count] = i;
+y = ((Coeff3()) * x) + (Coeff4());
 
 (count)++;
 lineArray[count] = 6;
-sumArray[count] = sum;
-iArray[count] = i;
+
+}
+
+
+(count)++;
+lineArray[count] = 7;
+
+if((((Coeff6()) * y) - (((Coeff5()) * z) + (Coeff7()))) > 0){
+(count)++;
+lineArray[count] = 7;
+
+z = ((Coeff8()) * x) + (Coeff9());
+
+(count)++;
+lineArray[count] = 7;
+
+}
+
+
+(count)++;
+lineArray[count] = 8;
 (linehit)++;
-if(linehit == 4){
-sumfinal = sum;
+if(linehit == 1){
+xfinal = x;
+yfinal = y;
+zfinal = z;
 finalcount = count;
 return 0;
 }
 
 
-sum += External_Mathpow(n, i);
-
-
-
-(count)++;
-lineArray[count] = 5;
-sumArray[count] = sum;
-iArray[count] = i;
-
-}
-
-
-(count)++;
-lineArray[count] = 5;
-sumArray[count] = sum;
-
-
-(count)++;
-lineArray[count] = 8;
-sumArray[count] = sum;
-
-return sum;
+return z;
 
 
 
 }
 
 harness void HammingTest(){
-int[13] oringianlsumArray = {0,0,0,0,1,1,1,6,6,6,31,31,31};
-int[13] oringianliArray = {0,0,0,0,0,1,1,1,2,2,2,3,3};
-int correctFinal_sum = 30;
-SimpleJava(5);
+int[3] oringianllineArray = {6,7,8};
+int correctFinal_x = 3;
+int correctFinal_y = 5;
+int correctFinal_z = 5;
+max3(3, 5, 1);
 int HammingDistance = 0;
-for(int i = 0; i < 13; (i)++){
-if(const0change == 0){
-HammingDistance += (sumArray[i]) != (oringianlsumArray[i]);}
+int EditDistance = 0;
+EditDistance += coeff0change;
+EditDistance += coeff1change;
+EditDistance += coeff2change;
+EditDistance += coeff3change;
+EditDistance += coeff4change;
+EditDistance += coeff5change;
+EditDistance += coeff6change;
+EditDistance += coeff7change;
+EditDistance += coeff8change;
+EditDistance += coeff9change;
 
-if(const1change == 0){
-HammingDistance += (iArray[i]) != (oringianliArray[i]);}
-
+for(int i = 0; i < 3; (i)++){
+HammingDistance += (lineArray[i]) != (oringianllineArray[i]);
 }
 
-assert (sumfinal == correctFinal_sum);
-assert ((const0change + const1change) == 1);
+assert (xfinal == correctFinal_x);
+assert (yfinal == correctFinal_y);
+assert (zfinal == correctFinal_z);
+minimize(EditDistance);
 minimize(HammingDistance);
 }

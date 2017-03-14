@@ -72,6 +72,8 @@ public class MainEntrance {
 
 		List<ExternalFunction> externalFuncs = ConstraintFactory.externalFuncs;
 		
+		System.out.println(script);
+		
 		// no external Functions
 		if (externalFuncs.size() == 0) {
 
