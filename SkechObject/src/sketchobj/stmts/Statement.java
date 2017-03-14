@@ -82,4 +82,6 @@ public abstract class Statement extends SketchNode {
 	public abstract ConstData replaceConst_Exclude_This(int index,List<Integer> repair_range);
 
 	public abstract List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames);
+
+	public abstract Map<Integer,String> ConstructLineToString(Map<Integer, String> line_to_string);
 }

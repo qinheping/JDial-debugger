@@ -129,4 +129,18 @@ public class StmtFor extends Statement {
 		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
+		String result = null;
+		if (incr.toString().endsWith(";"))
+			result = "for(" + init.toString() + " " + cond.toString() + "; "
+					+ incr.toString().substring(0, incr.toString().length() - 1) + "){";
+		else
+			result = "for(" + init.toString() + " " + cond.toString() + "; "
+					+ incr.toString().substring(0, incr.toString().length() - 2) + ")";
+		line_to_string.put(this.getLineNumber(), result);
+		line_to_string = body.ConstructLineToString(line_to_string);
+		return line_to_string;
+	}
+
 }

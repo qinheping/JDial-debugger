@@ -104,4 +104,11 @@ public class StmtWhile extends Statement {
 		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}
 
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
+		line_to_string.put(this.getLineNumber(), "while(" + getCond() + ")");
+		line_to_string = body.ConstructLineToString(line_to_string);
+		return line_to_string;
+	}
+
 }

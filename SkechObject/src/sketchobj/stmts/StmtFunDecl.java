@@ -69,4 +69,10 @@ public class StmtFunDecl extends Statement {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -179,4 +179,10 @@ public class StmtAssign extends Statement {
 		return new ConstData(t, toAdd,index+1,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
 	}
 
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
+		line_to_string.put(this.getLineNumber(), this.toString());
+		return line_to_string;
+	}
+
 }

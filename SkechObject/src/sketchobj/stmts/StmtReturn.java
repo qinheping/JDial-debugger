@@ -125,4 +125,9 @@ public class StmtReturn extends Statement
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
 		return value.extractExternalFuncs(externalFuncNames);
 	}
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

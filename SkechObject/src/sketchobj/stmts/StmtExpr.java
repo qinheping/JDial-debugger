@@ -79,4 +79,10 @@ public class StmtExpr extends Statement {
 		return expr.extractExternalFuncs(externalFuncNames);
 	}
 
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
+		line_to_string.put(this.getLineNumber(), this.toString());
+		return line_to_string;
+	}
+
 }

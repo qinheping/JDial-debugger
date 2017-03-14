@@ -44,7 +44,7 @@ public class MainEntrance {
 		this.repair_range = null;
 	}
 
-	public Map<Integer, Integer> Synthesize(boolean useLC) throws InterruptedException {
+	public Map<Integer, String> Synthesize(boolean useLC) throws InterruptedException {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
@@ -65,44 +65,68 @@ public class MainEntrance {
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
 		String script;
-		if(useLC)
+		if (useLC)
 			script = cf.getScript_linearCombination(function.getBody());
 		else
-			script= cf.getScript(function.getBody());
+			script = cf.getScript(function.getBody());
 
 		List<ExternalFunction> externalFuncs = ConstraintFactory.externalFuncs;
-		
+
 		System.out.println(script);
-		
+		System.out.println(cf.line_to_string);
+
 		// no external Functions
 		if (externalFuncs.size() == 0) {
 
 			Map<Integer, Integer> result = CallSketch.CallByString(script);
 			List<Integer> indexset = new ArrayList<Integer>();
 			indexset.addAll(result.keySet());
-			Map<Integer, Integer> repair = new HashMap<Integer, Integer>();
-			for (Integer ke : indexset) {
-				repair.put(ConstraintFactory.getconstMapLine().get(ke), result.get(ke));
+			Map<Integer, String> repair = new HashMap<Integer, String>();
+			int tmpLine = -1;
+			for (int k : result.keySet()) {
+				if (cf.coeffIndex_to_Line.get(k) == tmpLine)
+					continue;
+
+				tmpLine = cf.coeffIndex_to_Line.get(k);
+				String stmtString = cf.line_to_string.get(tmpLine);
+				repair.put(tmpLine, replaceCoeff(stmtString,result,cf.coeffIndex_to_Line,tmpLine));
 			}
 			System.out.println(repair);
 			return repair;
-		} else{
+		} else {
 			boolean consistancy = false;
 			List<ExternalFunction> efs = new ArrayList<ExternalFunction>();
-			for(ExternalFunction s: externalFuncs){
+			for (ExternalFunction s : externalFuncs) {
 				efs.add(s);
 			}
-			while(!consistancy){
+			while (!consistancy) {
 				String script_ex = script;
-				for(ExternalFunction ef: efs){
-					script_ex = ef.toString()+script_ex;
+				for (ExternalFunction ef : efs) {
+					script_ex = ef.toString() + script_ex;
 				}
-				//System.out.println(script_ex);
+				// System.out.println(script_ex);
 				Map<Integer, Integer> result = CallSketch.CallByString(script_ex);
-				consistancy= true;
+				consistancy = true;
 			}
 			return null;
 		}
+	}
+
+	private String replaceCoeff(String stmtString, Map<Integer, Integer> result, Map<Integer, Integer> coeffIndex_to_Line, int tmpLine) {
+		List<Integer> rangedCoeff = new ArrayList<Integer>();
+		for(int k: coeffIndex_to_Line.keySet()){
+			if(coeffIndex_to_Line.get(k) == tmpLine)
+				rangedCoeff.add(k);
+		}
+		for(int c: rangedCoeff){
+			if(result.containsKey(c))
+			stmtString = stmtString.replaceAll("(Coeff"+c+"())", result.get(c).toString());
+			else
+				stmtString = stmtString.replaceAll("(Coeff"+c+"())", "0");
+				
+		}
+		System.out.println(stmtString);
+		return " ";
 	}
 
 	public void setRepairRange(List<Integer> l) {
@@ -140,7 +164,7 @@ public class MainEntrance {
 		return new JavaVisitor(target).visit(tree);
 	}
 
-	public Map<Integer, Integer> Synthesize () throws InterruptedException {
+	public Map<Integer, Integer> Synthesize() throws InterruptedException {
 		return this.Synthesize(false);
 	}
 }

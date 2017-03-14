@@ -118,4 +118,12 @@ public class StmtBlock extends Statement {
 		return externalFuncNames;
 	}
 
+	@Override
+	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {		
+		for(Statement s: stmts){
+			line_to_string = s.ConstructLineToString(line_to_string);
+	}
+		return line_to_string;
+	}
+
 }
