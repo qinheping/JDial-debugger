@@ -17,6 +17,7 @@ public class CallSketch {
 		File tmp = new File(dir, "tmp.txt");
 		Runtime rt = Runtime.getRuntime();
 		Map<Integer, Integer> result = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> oriValue = new HashMap<Integer, Integer>();
 		List<Integer> valid = new ArrayList<Integer>();
 
 		try {
@@ -54,6 +55,12 @@ public class CallSketch {
 							waitting = true;
 						}
 					}
+					
+					if(line.length() >= 10)
+						if(waitting && line.substring(4, 10).equals("return")){
+							oriValue.put(coeffIndex, tmp_return);
+						}
+					
 					if (line.length() >= 8)
 						if (waitting && line.substring(2, 8).equals("return")) {
 							coeffReturn =  tmp_return;
@@ -72,6 +79,8 @@ public class CallSketch {
 						if (extractInt(line).size() > 0)
 							if (extractInt(line).get(extractInt(line).size() - 1) == 0) {
 								result.remove(checkIndex);
+								if(oriValue.containsKey(checkIndex))
+								result.put(checkIndex, oriValue.get(checkIndex));
 								checking = false;
 							}
 					}
@@ -79,8 +88,9 @@ public class CallSketch {
 						if(line.substring(0,5).equals("Total"))
 							break;
 					}
-
+					
 				}
+				System.out.println(result);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

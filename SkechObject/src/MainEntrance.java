@@ -89,7 +89,7 @@ public class MainEntrance {
 
 				tmpLine = cf.coeffIndex_to_Line.get(k);
 				String stmtString = cf.line_to_string.get(tmpLine);
-				repair.put(tmpLine, replaceCoeff(stmtString,result,cf.coeffIndex_to_Line,tmpLine));
+				repair.put(tmpLine, replaceCoeff(stmtString, result, cf.coeffIndex_to_Line, tmpLine));
 			}
 			System.out.println(repair);
 			return repair;
@@ -112,20 +112,35 @@ public class MainEntrance {
 		}
 	}
 
-	private String replaceCoeff(String stmtString, Map<Integer, Integer> result, Map<Integer, Integer> coeffIndex_to_Line, int tmpLine) {
+	private String replaceCoeff(String stmtString, Map<Integer, Integer> result,
+			Map<Integer, Integer> coeffIndex_to_Line, int tmpLine) {
 		List<Integer> rangedCoeff = new ArrayList<Integer>();
-		for(int k: coeffIndex_to_Line.keySet()){
-			if(coeffIndex_to_Line.get(k) == tmpLine)
+		for (int k : coeffIndex_to_Line.keySet()) {
+			if (coeffIndex_to_Line.get(k) == tmpLine)
 				rangedCoeff.add(k);
 		}
-		for(int c: rangedCoeff){
-			if(result.containsKey(c))
-			stmtString = stmtString.replaceAll("(Coeff"+c+"())()", result.get(c).toString());
+		for (int c : rangedCoeff) {
+			if (result.containsKey(c))
+				stmtString = stmtString.replace("(Coeff" + c + "())", result.get(c).toString());
 			else
-				stmtString = stmtString.replaceAll("(Coeff"+c+"())()", "0");
-				
+				stmtString = stmtString.replace("(Coeff" + c + "())", "0");
+
 		}
-		stmtString = stmtString.replaceAll("[()]", "");
+		System.out.println(stmtString);
+		String tmp = "";
+		while(!tmp.equals(stmtString)) {
+			tmp = stmtString;
+			stmtString = stmtString.replaceAll("[(]0( )*[*]( )*([0-9A-Za-z])+( )*[)]", "0");
+			stmtString = stmtString.replaceAll("0( )*[+]( )*", "");
+			stmtString = stmtString.replaceAll("( )*[+]( )*0", "");
+			stmtString = stmtString.replaceAll("( )*[-]( )*0", "");
+			stmtString = stmtString.replaceAll("[(]0[)]", "0");
+			stmtString = stmtString.replaceAll("1( )*[*]( )*", "");
+			stmtString = stmtString.replaceAll("( )*[*]( )*1", "");
+			stmtString = stmtString.replaceAll("[()]", "");
+			
+		}
+		// stmtString = stmtString.replaceAll("[()]", "");
 		System.out.println(stmtString);
 		return stmtString;
 	}
