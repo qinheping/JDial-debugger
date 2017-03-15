@@ -1,4 +1,4 @@
-# QuantitativeDebugger
+# JDial-Debugger
 
 Test instruction: 
 
