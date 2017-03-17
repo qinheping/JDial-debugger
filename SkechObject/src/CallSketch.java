@@ -2,8 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CallSketch {
 	public CallSketch() {
@@ -20,6 +22,8 @@ public class CallSketch {
 		Map<Integer, Integer> oriValue = new HashMap<Integer, Integer>();
 		List<Integer> valid = new ArrayList<Integer>();
 
+		
+		
 		try {
 			tmp.createNewFile();
 			WriteStringToFile(tmp, s);
@@ -39,6 +43,7 @@ public class CallSketch {
 			boolean waitting = false;
 			boolean checking = false;
 			int tmp_return = -1;
+			Set<Integer> validList = new HashSet<Integer>();
 			Map<Integer, Integer> tagToValue = new HashMap<>();
 			List<Integer> changedConsts = new ArrayList<>();
 
@@ -52,6 +57,7 @@ public class CallSketch {
 						if (line.substring(0, 10).equals("void Coeff")) {
 
 							coeffIndex = extractInt(line).get(0);
+							validList.add(coeffIndex);
 							waitting = true;
 						}
 					}
