@@ -1,16 +1,17 @@
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SketchResult {
 
 	Map<Integer, Integer> Result;
-	List<Integer> valid_List;
-	SketchResult(Map<Integer,Integer> r, List<Integer> l){
+	Set<Integer> valid_Set;
+	SketchResult(Map<Integer,Integer> r, Set<Integer> l){
 		this.Result = r;
-		this.valid_List = l;
+		this.valid_Set = l;
 	}
 	
 	Map<Integer, Integer> getResult(){ return this.Result;}
-	List<Integer> get_Valid_List(){ return this.valid_List;}
+	Set<Integer> get_Valid_List(){ return this.valid_Set;}
 	
 }

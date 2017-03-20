@@ -12,7 +12,7 @@ public class CallSketch {
 
 	}
 
-	static public Map<Integer, Integer> CallByString(String s) throws InterruptedException {
+	static public SketchResult CallByString(String s) throws InterruptedException {
 
 		File dir = new File("tmp");
 		dir.mkdirs();
@@ -20,10 +20,8 @@ public class CallSketch {
 		Runtime rt = Runtime.getRuntime();
 		Map<Integer, Integer> result = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> oriValue = new HashMap<Integer, Integer>();
-		List<Integer> valid = new ArrayList<Integer>();
+		Set<Integer> validList = new HashSet<Integer>();
 
-		
-		
 		try {
 			tmp.createNewFile();
 			WriteStringToFile(tmp, s);
@@ -43,7 +41,6 @@ public class CallSketch {
 			boolean waitting = false;
 			boolean checking = false;
 			int tmp_return = -1;
-			Set<Integer> validList = new HashSet<Integer>();
 			Map<Integer, Integer> tagToValue = new HashMap<>();
 			List<Integer> changedConsts = new ArrayList<>();
 
@@ -61,15 +58,15 @@ public class CallSketch {
 							waitting = true;
 						}
 					}
-					
-					if(line.length() >= 10)
-						if(waitting && line.substring(4, 10).equals("return")){
+
+					if (line.length() >= 10)
+						if (waitting && line.substring(4, 10).equals("return")) {
 							oriValue.put(coeffIndex, tmp_return);
 						}
-					
+
 					if (line.length() >= 8)
 						if (waitting && line.substring(2, 8).equals("return")) {
-							coeffReturn =  tmp_return;
+							coeffReturn = tmp_return;
 							waitting = false;
 							result.put(coeffIndex, coeffReturn);
 						}
@@ -85,23 +82,23 @@ public class CallSketch {
 						if (extractInt(line).size() > 0)
 							if (extractInt(line).get(extractInt(line).size() - 1) == 0) {
 								result.remove(checkIndex);
-								if(oriValue.containsKey(checkIndex))
-								result.put(checkIndex, oriValue.get(checkIndex));
+								validList.remove(checkIndex);
+								if (oriValue.containsKey(checkIndex))
+									result.put(checkIndex, oriValue.get(checkIndex));
 								checking = false;
 							}
 					}
-					if(line.length() >10){
-						if(line.substring(0,5).equals("Total"))
+					if (line.length() > 10) {
+						if (line.substring(0, 5).equals("Total"))
 							break;
 					}
-					
+
 				}
-				System.out.println(result);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return new SketchResult(result,validList);
 	}
 
 	static void WriteStringToFile(File f, String s) throws IOException {

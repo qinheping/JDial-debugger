@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -78,13 +79,17 @@ public class MainEntrance {
 		// no external Functions
 		if (externalFuncs.size() == 0) {
 
-			Map<Integer, Integer> result = CallSketch.CallByString(script);
+			SketchResult resultS = CallSketch.CallByString(script);
+			Map<Integer, Integer> result = resultS.Result;
+			Set<Integer> validIndexSet = resultS.valid_Set;
 			List<Integer> indexset = new ArrayList<Integer>();
 			indexset.addAll(result.keySet());
 			Map<Integer, String> repair = new HashMap<Integer, String>();
 			int tmpLine = -1;
 			for (int k : result.keySet()) {
 				if (cf.coeffIndex_to_Line.get(k) == tmpLine)
+					continue;
+				if(!validIndexSet.contains(k))
 					continue;
 
 				tmpLine = cf.coeffIndex_to_Line.get(k);
@@ -105,7 +110,7 @@ public class MainEntrance {
 					script_ex = ef.toString() + script_ex;
 				}
 				// System.out.println(script_ex);
-				Map<Integer, Integer> result = CallSketch.CallByString(script_ex);
+				//Map<Integer, Integer> result = CallSketch.CallByString(script_ex);
 				consistancy = true;
 			}
 			return null;
