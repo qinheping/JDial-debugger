@@ -84,10 +84,11 @@ public class Test {
 	
 	@org.junit.Test
 	public void testSumUp() throws FileNotFoundException, InterruptedException{
+		int index = 22;
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
-		String correctTrace = new Scanner(new File("benchmarks/sumup/correction")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/sumup/correction_index_" + index)).useDelimiter("\\Z").next();
 		
-		MainEntrance me = new MainEntrance(oriTraces,correctTrace,10);
+		MainEntrance me = new MainEntrance(oriTraces,correctTrace,index);
 		me.Synthesize(true);
 	}
 	

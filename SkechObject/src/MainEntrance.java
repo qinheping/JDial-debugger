@@ -96,7 +96,6 @@ public class MainEntrance {
 				String stmtString = cf.line_to_string.get(tmpLine);
 				repair.put(tmpLine, replaceCoeff(stmtString, result, cf.coeffIndex_to_Line, tmpLine));
 			}
-			System.out.println(repair);
 			return repair;
 		} else {
 			boolean consistancy = false;
@@ -120,6 +119,7 @@ public class MainEntrance {
 	private String replaceCoeff(String stmtString, Map<Integer, Integer> result,
 			Map<Integer, Integer> coeffIndex_to_Line, int tmpLine) {
 		List<Integer> rangedCoeff = new ArrayList<Integer>();
+		System.out.println(result);
 		for (int k : coeffIndex_to_Line.keySet()) {
 			if (coeffIndex_to_Line.get(k) == tmpLine)
 				rangedCoeff.add(k);
