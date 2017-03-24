@@ -17,3 +17,9 @@ https://github.com/pgbovine/OnlinePythonTutor/blob/master/v3/docs/opt-trace-form
 /benchmarks/sumup/oritrace is the execution trace in testSumUp(). Another one is the correction of program state taken from the execution trace, /benchmarks/sumup/correction is the example.
 
 After constructing an instance of MainEntrace class with the above two strings and an index indicating where the correction happen (which program state you take from the states array), calling MainEntrance.Synthesize(true) will return repairs as a map from line numbers to repaired string.
+
+### TODO list
+
+- [ ] aovid ??*x appear in the rhs of x = expr;
+- [ ] rewrite the generator of minimize statments
+- [ ] write a parameter loader to load parameter to live variables context
