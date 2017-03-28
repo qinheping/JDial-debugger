@@ -169,6 +169,8 @@ public class StmtAssign extends Statement {
 		for(String v: vars){
 			if(((TypePrimitive)this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive)t).getType())
 				continue;
+			if(v.equals(lhs.toString()))
+				continue;
 			Expression newTerm = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",new ExprVar(v,t));
 			this.rhs= new ExprBinary(rhs,"+",newTerm);
 			liveVarsIndexSet.add(index);

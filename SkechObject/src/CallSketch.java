@@ -77,15 +77,17 @@ public class CallSketch {
 						if (line.substring(5, 19).equals("glblInit_coeff")) {
 							checkIndex = extractInt(line).get(0);
 							checking = true;
+							continue;
 						}
 					if (checking) {
 						if (extractInt(line).size() > 0)
-							if (extractInt(line).get(extractInt(line).size() - 1) == 0) {
+							if (extractInt(line).get(extractInt(line).size() - 1) == 0 && line.substring(2,7).equals("coeff")) {
 								result.remove(checkIndex);
 								validList.remove(checkIndex);
 								if (oriValue.containsKey(checkIndex))
 									result.put(checkIndex, oriValue.get(checkIndex));
 								checking = false;
+								continue;
 							}
 					}
 					if (line.length() > 10) {

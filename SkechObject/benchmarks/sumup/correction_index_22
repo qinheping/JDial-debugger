@@ -7,12 +7,10 @@
         {
             "func_name":"SumUp:12",
             "encoded_locals":{
-                "n":6,
-                "sum":10
+                "n":6
             },
             "ordered_varnames":[
-                "n",
-                "sum"
+                "n"
             ],
             "parent_frame_id_list":[
             ],

@@ -433,9 +433,9 @@ public class ConstraintFactory {
 		}
 
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
-		stmts.add(new StmtMinimize(new ExprVar("EditDistance"), true));
+		stmts.add(new StmtMinimize(new ExprVar("EditDistance+HammingDistance"), true));
 
-		stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
+		//stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 
 		return new Function("HammingTest", new TypeVoid(), new ArrayList<Parameter>(), new StmtBlock(stmts),
 				FcnType.Harness);
