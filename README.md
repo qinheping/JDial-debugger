@@ -20,6 +20,4 @@ After constructing an instance of MainEntrace class with the above two strings a
 
 ### TODO list
 
-- [ ] aovid ??*x appear in the rhs of x = expr;
-- [ ] rewrite the generator of minimize statments
 - [ ] write a parameter loader to load parameter to live variables context
