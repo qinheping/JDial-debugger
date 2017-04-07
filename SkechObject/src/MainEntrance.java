@@ -63,13 +63,14 @@ public class MainEntrance {
 
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args);
+		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
 		String script;
-		if (useLC)
-			script = cf.getScript_linearCombination(function.getBody());
-		else
-			script = cf.getScript(function.getBody());
+		//if (useLC)
+			script = cf.getScript_linearCombination(function.getBody(), 0);
+		//else
+		//	script = cf.getScript(function.getBody());
 
 		List<ExternalFunction> externalFuncs = ConstraintFactory.externalFuncs;
 
