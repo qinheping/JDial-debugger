@@ -38,6 +38,11 @@ public class StmtAssign extends Statement {
 		this.rhs.setParent(this);
 
 	}
+	
+	@Override
+	public StmtAssign clone(){
+		return new StmtAssign(lhs.clone(), rhs.clone(), op, this.getLineNumber());
+	}
 
 	/**
 	 * Creates a new assignment statement with the specified left- and

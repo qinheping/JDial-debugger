@@ -34,7 +34,10 @@ public class ExprField extends Expression
         this.hole = false;
     }
 
-
+	@Override
+	public ExprField clone() {
+		return new ExprField(this.left, this.name, this.hole);
+	}
 
 
 
@@ -126,4 +129,5 @@ public class ExprField extends Expression
 	public ConstData replaceLinearCombination(int index) {
 		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
+
 }

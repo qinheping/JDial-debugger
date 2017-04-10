@@ -85,4 +85,8 @@ public class StmtExpr extends Statement {
 		return line_to_string;
 	}
 
+	@Override
+	public StmtExpr clone() {
+		return new StmtExpr(this.expr.clone(), this.getLineNumber());
+	}
 }

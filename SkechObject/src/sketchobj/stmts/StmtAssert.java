@@ -226,4 +226,10 @@ public class StmtAssert extends Statement {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
+		@Override
+		public Statement clone() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 }

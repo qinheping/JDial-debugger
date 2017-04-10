@@ -29,6 +29,11 @@ public class StmtFor extends Statement {
 		this.setLineNumber(i);
 	}
 
+	@Override
+	public StmtFor clone() {
+		
+		return new StmtFor(init.clone(), cond.clone(), incr.clone(), body.clone(), false, this.getLineNumber());
+	}
 	public String toString() {
 		String result = null;
 		if (incr.toString().endsWith(";"))
@@ -142,5 +147,6 @@ public class StmtFor extends Statement {
 		line_to_string = body.ConstructLineToString(line_to_string);
 		return line_to_string;
 	}
+
 
 }

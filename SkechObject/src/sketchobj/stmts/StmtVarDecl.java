@@ -61,7 +61,10 @@ public class StmtVarDecl extends Statement {
 		}
 		this.setLineNumber(i);
 	}
-
+	@Override
+	public StmtVarDecl clone() {
+				return new StmtVarDecl(this.types, this.names, this.inits, this.getLineNumber());
+	}
 	/**
 	 * Create a new variable declaration with exactly one variable in it. If the
 	 * variable is uninitialized, the initializer may be <code>null</code>.
@@ -440,5 +443,7 @@ public class StmtVarDecl extends Statement {
 		line_to_string.put(this.getLineNumber(), this.toString());
 		return line_to_string;
 	}
+
+
 
 }

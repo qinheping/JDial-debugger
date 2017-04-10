@@ -84,4 +84,7 @@ public abstract class Statement extends SketchNode {
 	public abstract List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames);
 
 	public abstract Map<Integer,String> ConstructLineToString(Map<Integer, String> line_to_string);
+	
+	public abstract Statement clone();
+	
 }

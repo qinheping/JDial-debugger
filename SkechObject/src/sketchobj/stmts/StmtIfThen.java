@@ -41,6 +41,12 @@ public class StmtIfThen extends Statement {
 		this(cond,cons,alt,0);
 	}
 
+	@Override
+	public StmtIfThen clone() {
+		
+		return new StmtIfThen(cond.clone(),cons.clone(), alt.clone(), this.getLineNumber());
+	}
+
 	// @Override
 	// public int size() {
 	// int sz_cons = cons == null ? 0 : cons.size();
@@ -195,6 +201,5 @@ public class StmtIfThen extends Statement {
 		}
 		return line_to_string;
 	}
-
 
 }

@@ -27,6 +27,11 @@ public class StmtWhile extends Statement {
 		this.setLineNumber(i);
 	}
 
+	@Override
+	public StmtWhile clone() {
+		return new StmtWhile(this.cond, this.body, this.getLineNumber());
+	}
+	
 	/** Returns the loop condition. */
 	public Expression getCond() {
 		return cond;
@@ -110,5 +115,7 @@ public class StmtWhile extends Statement {
 		line_to_string = body.ConstructLineToString(line_to_string);
 		return line_to_string;
 	}
+
+
 
 }

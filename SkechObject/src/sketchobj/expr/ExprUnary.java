@@ -64,7 +64,10 @@ public class ExprUnary extends Expression
         expr.setParent(this);
         this.line = line;
     }
-
+	@Override
+	public ExprUnary clone() {
+		return new ExprUnary(this.op, this.expr, this.line);
+	}
 
   
 

@@ -44,6 +44,11 @@ public class StmtReturn extends Statement
     {
     	this(value, 0);
     }
+
+	@Override
+	public StmtReturn clone() {
+		return new StmtReturn(value.clone(),this.getLineNumber());
+	}
     public StmtReturn( int line)
     {
 //        if (value instanceof ExprConstUnit) {

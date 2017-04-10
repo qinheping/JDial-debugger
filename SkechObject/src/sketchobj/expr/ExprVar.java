@@ -23,6 +23,11 @@ public class ExprVar extends Expression
     	this.name = name;
     	this.t = t;
     }
+    
+	@Override
+	public ExprVar clone() {
+		return new ExprVar(this.name, this.t);
+	}
 
     /** Return the name of the variable referenced. */
     public String getName() { return name; }

@@ -13,6 +13,11 @@ public class ExprString extends Expression{
 		this.content = content;
 	}
 	
+	@Override
+	public Expression clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	public String toString(){
 		return this.content;
 	}

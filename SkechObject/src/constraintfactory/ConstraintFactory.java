@@ -58,7 +58,6 @@ public class ConstraintFactory {
 							// 1: 1 line minimization
 							// 2: 1 line fix before minimization
 	
-	static Integer targetLine_mod2 = -1;
 
 	public static List<ExternalFunction> externalFuncs = new ArrayList<ExternalFunction>();
 
@@ -157,10 +156,51 @@ public class ConstraintFactory {
 	// linear combination replace
 	public String getScript_linearCombination(Statement source, Integer mod) {
 		ConstraintFactory.mod = mod;
+		source = source.clone();
 		if(mod !=2)
 		return getScript_linearCombination(source);
 		
+		List<Statement> list = new ArrayList<Statement>();
+		Stack<SketchObject> stmtStack = new Stack<SketchObject>();
+		int index = 0;
+		stmtStack.push(source);
+		while (!stmtStack.empty()) {
+			SketchObject target = stmtStack.pop();
+			ConstData data = null;
+			if (ConstraintFactory.sign_limited_range) {
+				data = target.replaceLinearCombination(index, ConstraintFactory.repair_range);
+			} else {
+				data = target.replaceLinearCombination(index);
+			}
+			if (data.getType() != null) {
+				while (index <= data.getPrimaryCoeffIndex()) {
+					list.add(coeffChangeDecl(index, new TypePrimitive(1)));
+					list.add(new StmtFunDecl(addCoeffFun(index, 1, data.getType())));
+					coeffIndex_to_Line.put(index, data.getOriline());
+					index++;
+				}
+				if (data.getLiveVarsIndexSet() != null) {
+					for (int ii : data.getLiveVarsIndexSet()) {
+						list.add(coeffChangeDecl(ii, new TypePrimitive(1)));
+						list.add(new StmtFunDecl(addCoeffFun(ii, 0, data.getType())));
+						coeffIndex_to_Line.put(ii, data.getOriline());
+					}
+
+				}
+				index = data.getIndex();
+				list.add(coeffChangeDecl(index - 1, new TypePrimitive(4)));
+				list.add(new StmtFunDecl(addLCConstFun(index - 1, data.getType())));
+				coeffIndex_to_Line.put(index - 1, data.getOriline());
+			}
+			index = data.getIndex();
+			pushAll(stmtStack, data.getChildren());
+		}
+		constNumber = index;
+
+		source.ConstructLineToString(line_to_string);
+
 		return null;
+		
 	}
 
 	public String getScript_linearCombination(Statement source) {

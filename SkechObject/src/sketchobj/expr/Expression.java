@@ -86,5 +86,7 @@ public abstract class Expression extends SketchNode{
 	public void setLCadded(boolean lCadded) {
 		LCadded = lCadded;
 	}
+	
+	public abstract Expression clone();
 
 }

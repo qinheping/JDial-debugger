@@ -14,7 +14,10 @@ public class ExprConstChar extends ExprConstant{
 	public ExprConstChar(String s){
 		this.setVal(s);
 	}
-
+	@Override
+	public ExprConstChar clone() {
+		return new ExprConstChar(val);
+	}
 	@Override
 	public Type getType() {
 		return new TypePrimitive(17);
@@ -63,5 +66,7 @@ public class ExprConstChar extends ExprConstant{
 	public ConstData replaceLinearCombination(int index) {
 		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
+
+
 
 }

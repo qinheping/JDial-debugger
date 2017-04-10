@@ -24,6 +24,15 @@ public class StmtBlock extends Statement {
 	public StmtBlock() {
 		this.stmts = new ArrayList<Statement>();
 	}
+	
+	@Override
+	public StmtBlock clone(){
+		List<Statement> newStmts = new ArrayList<Statement>();
+		for(Statement s: stmts){
+			newStmts.add(s.clone());
+		}
+		return new StmtBlock(newStmts);
+	}
 
 	/** Create a new StmtBlock for a pair of statements. */
 	public StmtBlock(Statement stmt1, Statement stmt2) {

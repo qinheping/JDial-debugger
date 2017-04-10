@@ -28,6 +28,10 @@ public class ExprConstInt extends ExprConstant
     {
         this.val = val;
     }
+	@Override
+	public ExprConstInt clone() {
+		return new ExprConstInt(val);
+	}
 
 
     /** Parse a string as an integer, and create a new ExprConstInt
@@ -104,4 +108,6 @@ public class ExprConstInt extends ExprConstant
 	public ConstData replaceLinearCombination(int index) {
 		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
+
+
 }

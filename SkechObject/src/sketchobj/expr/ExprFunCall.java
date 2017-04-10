@@ -46,7 +46,11 @@ public class ExprFunCall extends Expression
     	this.name = name;
     	this.params = l.getList();
     	this.name_Java = nameJ;
-    }
+    }	
+    @Override
+	public ExprFunCall clone() {
+		return new ExprFunCall(this.name, this.params, this.name_Java);
+	}
 
 
     /** Creates a new function call with the specified name and
@@ -144,4 +148,6 @@ public class ExprFunCall extends Expression
 	public ConstData replaceLinearCombination(int index) {
 		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
+
+
 }

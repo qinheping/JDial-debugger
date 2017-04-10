@@ -63,6 +63,11 @@ public class ExprBinary extends Expression {
 		this.lineNumber = i;
 	}
 
+	@Override
+	public ExprBinary clone() {
+		return new ExprBinary(this.op,this.left, this.right, this.lineNumber);
+	}
+
 	/**
 	 * Create a new binary expression given the operation and the left and right
 	 * child nodes. Requires that op is a valid operator code and that left and
@@ -521,5 +526,6 @@ public class ExprBinary extends Expression {
 		}
 		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, 0);
 	}
+
 
 }

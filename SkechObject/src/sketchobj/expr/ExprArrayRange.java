@@ -53,7 +53,11 @@ public class ExprArrayRange extends Expression
 		}
 	}
 
-
+	@Override
+	public ExprArrayRange clone() {
+		return new ExprArrayRange(this.base,this.index, this.unchecked,this.line);
+	}
+	
 	private Expression base;
 	private RangeLen index;
 	 private boolean unchecked=false;
@@ -254,4 +258,6 @@ public class ExprArrayRange extends Expression
 	public ConstData replaceLinearCombination(int index) {
 		return new ConstData(null, new ArrayList<>(), index, 0, null,0);
 	}
+
+
 }
