@@ -53,6 +53,7 @@ public class StmtFor extends Statement {
 		toAdd.add(init);
 		toAdd.add(incr);
 		toAdd.add(body);
+		toAdd.add(cond);
 		if (cond instanceof ExprConstant) {
 			int value = ((ExprConstant) cond).getVal();
 			Type t = ((ExprConstant) cond).getType();
@@ -130,6 +131,7 @@ public class StmtFor extends Statement {
 		toAdd.add(init);
 		toAdd.add(incr);
 		toAdd.add(body);
+		toAdd.add(cond);
 		//toAdd.add(cond);
 		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
 	}

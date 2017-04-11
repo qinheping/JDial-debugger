@@ -65,7 +65,7 @@ public class ExprBinary extends Expression {
 
 	@Override
 	public ExprBinary clone() {
-		return new ExprBinary(this.op,this.left, this.right, this.lineNumber);
+		return new ExprBinary(this.op, this.left, this.right, this.lineNumber);
 	}
 
 	/**
@@ -451,17 +451,23 @@ public class ExprBinary extends Expression {
 
 	@Override
 	public ConstData replaceLinearCombination(int index) {
-		System.out.println(this);
-		System.out.println(this.getCtx());
+		// System.out.println(this);
+		// System.out.println(this.getCtx());
 		if (this.isBoolean()) {
+			Integer primaryIndex = -1;
 			if (this.op == 8 || this.op == 9 || this.op == 10 || this.op == 11 || this.op == 12 || this.op == 13) {
 				this.left = new ExprBinary(this.left, "-", this.right);
 				this.right = new ExprConstInt(0);
 				this.left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
+				this.left = new ExprBinary(this.left, "+",
+						new ExprFunCall("Coeff" + index, new ArrayList<Expression>()));
+				primaryIndex = index;
+				index++;
+				left.setCtx(this.getCtx());
+				this.left.setT(new TypePrimitive(4));
 				List<SketchObject> toAdd = new ArrayList<SketchObject>();
-				toAdd.add(this.left);
-				return new ConstData(null, toAdd, index, 0, null, 0);
+				return new ConstData(new TypePrimitive(4), toAdd, index, 0, null, this.lineNumber, null, null, 0);
 			} else {
 				this.left.setBoolean(true);
 				this.right.setBoolean(true);
@@ -522,10 +528,9 @@ public class ExprBinary extends Expression {
 				this.right = new ExprBinary(this.right, "+",
 						new ExprFunCall("Coeff" + index, new ArrayList<Expression>()));
 			}
-			return new ConstData(t, toAdd, index+1, 0, null, 0, liveVarsIndexSet, liveVarsNameSet, primaryIndex);
+			return new ConstData(t, toAdd, index + 1, 0, null, 0, liveVarsIndexSet, liveVarsNameSet, primaryIndex);
 		}
 		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, 0);
 	}
-
 
 }

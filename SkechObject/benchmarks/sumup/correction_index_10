@@ -10,9 +10,7 @@
                 "sum":1
             },
             "ordered_varnames":[
-                "n",
                 "sum",
-                "i"
             ],
             "parent_frame_id_list":[
             ],
