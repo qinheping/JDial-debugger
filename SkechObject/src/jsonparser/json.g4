@@ -1,4 +1,3 @@
-
 grammar json;
 
 json
@@ -8,6 +7,11 @@ json
 			'"trace"' COLON traces COMMA
 			'"userlog"' COLON userlog 	'}'
 	;
+	
+userlog
+	:	STRING
+	;
+	
 
 code
 	:	STRING
@@ -24,9 +28,6 @@ trace
 	:	'{' stdout event line stack_to_render globals ordered_globals func_name heap '}'
 	;
 
-userlog
-	:	STRING
-	;
 
 stdout		
 	:	'"stdout"' COLON STRING COMMA

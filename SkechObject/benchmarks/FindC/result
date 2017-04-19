@@ -1,0 +1,490 @@
+SKETCH version 1.7.2
+Benchmark = findC-combined.sk
+Is CT
+Is CT
+/* BEGIN PACKAGE ANONYMOUS*/
+/*findC-combined.sk:172*/
+
+void buggy (char[7] s, char c, int k, ref bit _out, ref global bit f1change__ANONYMOUS_s172, ref global bit f2change__ANONYMOUS_s153, ref global bit f3change__ANONYMOUS_s160)/*findC-combined.sk:172*/
+{
+  _out = 0;
+  int i_s119 = 0;
+  f1(s, c, k, i_s119, f1change__ANONYMOUS_s172);
+  int i;
+  i = i_s119;
+  bit __sa0_s121 = 0;
+  f2(s, c, k, i_s119, __sa0_s121, f2change__ANONYMOUS_s153);
+  bit __sa0;
+  __sa0 = __sa0_s121;
+  while(__sa0)
+  {
+    bit _out_s123 = 0;
+    f3(s, c, k, i, _out_s123, f3change__ANONYMOUS_s160);
+    if(_out_s123)/*findC-combined.sk:174*/
+    {
+      _out = 1;
+      return;
+    }
+    i = i + 1;
+    bit __sa0_s125 = 0;
+    f2(s, c, k, i, __sa0_s125, f2change__ANONYMOUS_s153);
+    __sa0 = __sa0_s125;
+  }
+  _out = 0;
+  return;
+}
+/*findC-combined.sk:9*/
+
+void f1 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s130)/*findC-combined.sk:9*/
+{
+  _out = 0;
+  if(f1change__ANONYMOUS_s130 == 0)/*findC-combined.sk:10*/
+  {
+    _out = 0;
+    return;
+  }
+  else
+  {
+    _out = k;
+    return;
+  }
+}
+/*findC-combined.sk:18*/
+
+void f2 (char[7] s, char c, int k, int i, ref bit _out, ref global bit f2change__ANONYMOUS_s126)/*findC-combined.sk:18*/
+{
+  _out = 0;
+  if(f2change__ANONYMOUS_s126 == 0)/*findC-combined.sk:19*/
+  {
+    _out = i < k;
+    return;
+  }
+  else
+  {
+    _out = c == c;
+    return;
+  }
+}
+/*findC-combined.sk:31*/
+
+void f3 (char[7] s, char c, int k, int i, ref bit _out, ref global bit f3change__ANONYMOUS_s131)/*findC-combined.sk:31*/
+{
+  _out = 0;
+  if(f3change__ANONYMOUS_s131 == 0)/*findC-combined.sk:32*/
+  {
+    _out = (s[i]) == c;
+    return;
+  }
+}
+/*findC-combined.sk:4*/
+
+void glblInit_f1change__ANONYMOUS_s174 (ref bit f1change__ANONYMOUS_s173)/*findC-combined.sk:4*/
+{
+  f1change__ANONYMOUS_s173 = 0;
+}
+/*findC-combined.sk:4*/
+
+void glblInit_f2change__ANONYMOUS_s176 (ref bit f2change__ANONYMOUS_s175)/*findC-combined.sk:4*/
+{
+  f2change__ANONYMOUS_s175 = 1;
+}
+/*findC-combined.sk:4*/
+
+void glblInit_f3change__ANONYMOUS_s178 (ref bit f3change__ANONYMOUS_s177)/*findC-combined.sk:4*/
+{
+  f3change__ANONYMOUS_s177 = 0;
+}
+/*findC-combined.sk:103*/
+
+void i0 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s140)/*findC-combined.sk:103*/
+{
+  _out = 0;
+  int _out_s97 = 0;
+  f1(s, c, k, _out_s97, f1change__ANONYMOUS_s140);
+  _out = _out_s97;
+  return;
+}
+/*findC-combined.sk:60*/
+
+void i0Orig (char[7] s, char c, int k, ref int _out)/*findC-combined.sk:60*/
+{
+  _out = 0;
+  _out = 0;
+  return;
+}
+/*findC-combined.sk:107*/
+
+void i1 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s167, ref global bit f2change__ANONYMOUS_s151, ref global bit f3change__ANONYMOUS_s143)/*findC-combined.sk:107*/
+{
+  _out = 0;
+  int i_s89 = 0;
+  i0(s, c, k, i_s89, f1change__ANONYMOUS_s167);
+  bit _pac_sc_s91 = i_s89 != -100;
+  if(_pac_sc_s91)/*findC-combined.sk:109*/
+  {
+    bit _pac_sc_s91_s93 = 0;
+    f2(s, c, k, i_s89, _pac_sc_s91_s93, f2change__ANONYMOUS_s151);
+    _pac_sc_s91 = _pac_sc_s91_s93;
+  }
+  bit _pac_sc_s90 = _pac_sc_s91;
+  if(_pac_sc_s91)/*findC-combined.sk:109*/
+  {
+    bit _pac_sc_s90_s95 = 0;
+    f3(s, c, k, i_s89, _pac_sc_s90_s95, f3change__ANONYMOUS_s143);
+    _pac_sc_s90 = !(_pac_sc_s90_s95);
+  }
+  if(_pac_sc_s90)/*findC-combined.sk:109*/
+  {
+    _out = i_s89 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:64*/
+
+void i1Orig (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s137)/*findC-combined.sk:64*/
+{
+  _out = 0;
+  int i_s117 = 0;
+  i0(s, c, k, i_s117, f1change__ANONYMOUS_s137);
+  if(((i_s117 != -100) && (i_s117 < k)) && ((s[i_s117]) != c))/*findC-combined.sk:66*/
+  {
+    _out = i_s117 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:117*/
+
+void i2 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s150, ref global bit f2change__ANONYMOUS_s170, ref global bit f3change__ANONYMOUS_s169)/*findC-combined.sk:117*/
+{
+  _out = 0;
+  int i_s81 = 0;
+  i1(s, c, k, i_s81, f1change__ANONYMOUS_s150, f2change__ANONYMOUS_s170, f3change__ANONYMOUS_s169);
+  bit _pac_sc_s83 = i_s81 != -100;
+  if(_pac_sc_s83)/*findC-combined.sk:119*/
+  {
+    bit _pac_sc_s83_s85 = 0;
+    f2(s, c, k, i_s81, _pac_sc_s83_s85, f2change__ANONYMOUS_s170);
+    _pac_sc_s83 = _pac_sc_s83_s85;
+  }
+  bit _pac_sc_s82 = _pac_sc_s83;
+  if(_pac_sc_s83)/*findC-combined.sk:119*/
+  {
+    bit _pac_sc_s82_s87 = 0;
+    f3(s, c, k, i_s81, _pac_sc_s82_s87, f3change__ANONYMOUS_s169);
+    _pac_sc_s82 = !(_pac_sc_s82_s87);
+  }
+  if(_pac_sc_s82)/*findC-combined.sk:119*/
+  {
+    _out = i_s81 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:70*/
+
+void i2Orig (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s144, ref global bit f2change__ANONYMOUS_s133, ref global bit f3change__ANONYMOUS_s145)/*findC-combined.sk:70*/
+{
+  _out = 0;
+  int i_s115 = 0;
+  i1(s, c, k, i_s115, f1change__ANONYMOUS_s144, f2change__ANONYMOUS_s133, f3change__ANONYMOUS_s145);
+  if(((i_s115 != -100) && (i_s115 < k)) && ((s[i_s115]) != c))/*findC-combined.sk:72*/
+  {
+    _out = i_s115 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:128*/
+
+void i3 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s132, ref global bit f2change__ANONYMOUS_s149, ref global bit f3change__ANONYMOUS_s168)/*findC-combined.sk:128*/
+{
+  _out = 0;
+  int i_s73 = 0;
+  i2(s, c, k, i_s73, f1change__ANONYMOUS_s132, f2change__ANONYMOUS_s149, f3change__ANONYMOUS_s168);
+  bit _pac_sc_s75 = i_s73 != -100;
+  if(_pac_sc_s75)/*findC-combined.sk:130*/
+  {
+    bit _pac_sc_s75_s77 = 0;
+    f2(s, c, k, i_s73, _pac_sc_s75_s77, f2change__ANONYMOUS_s149);
+    _pac_sc_s75 = _pac_sc_s75_s77;
+  }
+  bit _pac_sc_s74 = _pac_sc_s75;
+  if(_pac_sc_s75)/*findC-combined.sk:130*/
+  {
+    bit _pac_sc_s74_s79 = 0;
+    f3(s, c, k, i_s73, _pac_sc_s74_s79, f3change__ANONYMOUS_s168);
+    _pac_sc_s74 = !(_pac_sc_s74_s79);
+  }
+  if(_pac_sc_s74)/*findC-combined.sk:130*/
+  {
+    _out = i_s73 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:77*/
+
+void i3Orig (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s146, ref global bit f2change__ANONYMOUS_s161, ref global bit f3change__ANONYMOUS_s157)/*findC-combined.sk:77*/
+{
+  _out = 0;
+  int i_s113 = 0;
+  i2(s, c, k, i_s113, f1change__ANONYMOUS_s146, f2change__ANONYMOUS_s161, f3change__ANONYMOUS_s157);
+  if(((i_s113 != -100) && (i_s113 < k)) && ((s[i_s113]) != c))/*findC-combined.sk:79*/
+  {
+    _out = i_s113 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:139*/
+
+void i4 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s152, ref global bit f2change__ANONYMOUS_s171, ref global bit f3change__ANONYMOUS_s159)/*findC-combined.sk:139*/
+{
+  _out = 0;
+  int i_s65 = 0;
+  i3(s, c, k, i_s65, f1change__ANONYMOUS_s152, f2change__ANONYMOUS_s171, f3change__ANONYMOUS_s159);
+  bit _pac_sc_s67 = i_s65 != -100;
+  if(_pac_sc_s67)/*findC-combined.sk:141*/
+  {
+    bit _pac_sc_s67_s69 = 0;
+    f2(s, c, k, i_s65, _pac_sc_s67_s69, f2change__ANONYMOUS_s171);
+    _pac_sc_s67 = _pac_sc_s67_s69;
+  }
+  bit _pac_sc_s66 = _pac_sc_s67;
+  if(_pac_sc_s67)/*findC-combined.sk:141*/
+  {
+    bit _pac_sc_s66_s71 = 0;
+    f3(s, c, k, i_s65, _pac_sc_s66_s71, f3change__ANONYMOUS_s159);
+    _pac_sc_s66 = !(_pac_sc_s66_s71);
+  }
+  if(_pac_sc_s66)/*findC-combined.sk:141*/
+  {
+    _out = i_s65 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:83*/
+
+void i4Orig (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s155, ref global bit f2change__ANONYMOUS_s162, ref global bit f3change__ANONYMOUS_s139)/*findC-combined.sk:83*/
+{
+  _out = 0;
+  int i_s111 = 0;
+  i3(s, c, k, i_s111, f1change__ANONYMOUS_s155, f2change__ANONYMOUS_s162, f3change__ANONYMOUS_s139);
+  if(((i_s111 != -100) && (i_s111 < k)) && ((s[i_s111]) != c))/*findC-combined.sk:85*/
+  {
+    _out = i_s111 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:150*/
+
+void i5 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s158, ref global bit f2change__ANONYMOUS_s163, ref global bit f3change__ANONYMOUS_s164)/*findC-combined.sk:150*/
+{
+  _out = 0;
+  int i_s45 = 0;
+  i4(s, c, k, i_s45, f1change__ANONYMOUS_s158, f2change__ANONYMOUS_s163, f3change__ANONYMOUS_s164);
+  bit _pac_sc_s47 = i_s45 != -100;
+  if(_pac_sc_s47)/*findC-combined.sk:152*/
+  {
+    bit _pac_sc_s47_s49 = 0;
+    f2(s, c, k, i_s45, _pac_sc_s47_s49, f2change__ANONYMOUS_s163);
+    _pac_sc_s47 = _pac_sc_s47_s49;
+  }
+  bit _pac_sc_s46 = _pac_sc_s47;
+  if(_pac_sc_s47)/*findC-combined.sk:152*/
+  {
+    bit _pac_sc_s46_s51 = 0;
+    f3(s, c, k, i_s45, _pac_sc_s46_s51, f3change__ANONYMOUS_s164);
+    _pac_sc_s46 = !(_pac_sc_s46_s51);
+  }
+  if(_pac_sc_s46)/*findC-combined.sk:152*/
+  {
+    _out = i_s45 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:89*/
+
+void i5Orig (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s154, ref global bit f2change__ANONYMOUS_s147, ref global bit f3change__ANONYMOUS_s142)/*findC-combined.sk:89*/
+{
+  _out = 0;
+  int i_s109 = 0;
+  i4(s, c, k, i_s109, f1change__ANONYMOUS_s154, f2change__ANONYMOUS_s147, f3change__ANONYMOUS_s142);
+  if(((i_s109 != -100) && (i_s109 < k)) && ((s[i_s109]) != c))/*findC-combined.sk:91*/
+  {
+    _out = i_s109 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:161*/
+
+void i6 (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s141, ref global bit f2change__ANONYMOUS_s165, ref global bit f3change__ANONYMOUS_s156)/*findC-combined.sk:161*/
+{
+  _out = 0;
+  int i_s101 = 0;
+  i5(s, c, k, i_s101, f1change__ANONYMOUS_s141, f2change__ANONYMOUS_s165, f3change__ANONYMOUS_s156);
+  bit _pac_sc_s103 = i_s101 != -100;
+  if(_pac_sc_s103)/*findC-combined.sk:163*/
+  {
+    bit _pac_sc_s103_s105 = 0;
+    f2(s, c, k, i_s101, _pac_sc_s103_s105, f2change__ANONYMOUS_s165);
+    _pac_sc_s103 = _pac_sc_s103_s105;
+  }
+  bit _pac_sc_s102 = _pac_sc_s103;
+  if(_pac_sc_s103)/*findC-combined.sk:163*/
+  {
+    bit _pac_sc_s102_s107 = 0;
+    f3(s, c, k, i_s101, _pac_sc_s102_s107, f3change__ANONYMOUS_s156);
+    _pac_sc_s102 = !(_pac_sc_s102_s107);
+  }
+  if(_pac_sc_s102)/*findC-combined.sk:163*/
+  {
+    _out = i_s101 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:95*/
+
+void i6Orig (char[7] s, char c, int k, ref int _out, ref global bit f1change__ANONYMOUS_s148, ref global bit f2change__ANONYMOUS_s138, ref global bit f3change__ANONYMOUS_s166)/*findC-combined.sk:95*/
+{
+  _out = 0;
+  int i_s43 = 0;
+  i5(s, c, k, i_s43, f1change__ANONYMOUS_s148, f2change__ANONYMOUS_s138, f3change__ANONYMOUS_s166);
+  if(((i_s43 != -100) && (i_s43 < k)) && ((s[i_s43]) != c))/*findC-combined.sk:97*/
+  {
+    _out = i_s43 + 1;
+    return;
+  }
+  else
+  {
+    _out = -100;
+    return;
+  }
+}
+/*findC-combined.sk:182*/
+
+void testHarness (ref global bit f1change__ANONYMOUS_s127, ref global bit f2change__ANONYMOUS_s128, ref global bit f3change__ANONYMOUS_s129)/*findC-combined.sk:182*/
+{
+  char[7] s1 = ((char[7]){'a','b','?','\0'});
+  char[7] s2 = {'a','b','a','?','c','g','\0'};
+  bit _out_s11 = 0;
+  buggy(s1, 2, 2, _out_s11, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  assert (_out_s11); //Assert at findC-combined.sk:191 (-5564885962960835142)
+  bit _out_s13 = 0;
+  buggy(s2, 2, 5, _out_s13, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  assert (_out_s13); //Assert at findC-combined.sk:192 (-7597280357982126695)
+  assert (((f1change__ANONYMOUS_s127 + f2change__ANONYMOUS_s128) + f3change__ANONYMOUS_s129) < 2); //Assert at findC-combined.sk:194 (-2366295948151357582)
+  int i0s2_s15 = 0;
+  i0(s2, 2, 5, i0s2_s15, f1change__ANONYMOUS_s127);
+  int i0s2_s17 = 0;
+  i0Orig(s2, 2, 5, i0s2_s17);
+  bit i0s2;
+  i0s2 = i0s2_s15 != i0s2_s17;
+  int i1s2_s19 = 0;
+  i1(s2, 2, 5, i1s2_s19, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  int i1s2_s21 = 0;
+  i1Orig(s2, 2, 5, i1s2_s21, f1change__ANONYMOUS_s127);
+  bit i1s2;
+  i1s2 = i1s2_s19 != i1s2_s21;
+  int i2s2_s23 = 0;
+  i2(s2, 2, 5, i2s2_s23, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  int i2s2_s25 = 0;
+  i2Orig(s2, 2, 5, i2s2_s25, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  bit i2s2;
+  i2s2 = i2s2_s23 != i2s2_s25;
+  int i3s2_s27 = 0;
+  i3(s2, 2, 5, i3s2_s27, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  int i3s2_s29 = 0;
+  i3Orig(s2, 2, 5, i3s2_s29, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  bit i3s2;
+  i3s2 = i3s2_s27 != i3s2_s29;
+  int i4s2_s31 = 0;
+  i4(s2, 2, 5, i4s2_s31, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  int i4s2_s33 = 0;
+  i4Orig(s2, 2, 5, i4s2_s33, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  bit i4s2;
+  i4s2 = i4s2_s31 != i4s2_s33;
+  int i5s2_s35 = 0;
+  i5(s2, 2, 5, i5s2_s35, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  int i5s2_s37 = 0;
+  i5Orig(s2, 2, 5, i5s2_s37, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  bit i5s2;
+  i5s2 = i5s2_s35 != i5s2_s37;
+  int i6s2_s39 = 0;
+  i6(s2, 2, 5, i6s2_s39, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  int i6s2_s41 = 0;
+  i6Orig(s2, 2, 5, i6s2_s41, f1change__ANONYMOUS_s127, f2change__ANONYMOUS_s128, f3change__ANONYMOUS_s129);
+  bit i6s2;
+  i6s2 = i6s2_s39 != i6s2_s41;
+  minimize((((((i0s2 + i1s2) + i2s2) + i3s2) + i4s2) + i5s2) + i6s2)
+}
+/*findC-combined.sk:182*/
+
+void testHarness__Wrapper ()  implements testHarness__WrapperNospec/*findC-combined.sk:182*/
+{
+  global bit f3change__ANONYMOUS_s136 = 0;
+  glblInit_f3change__ANONYMOUS_s178(f3change__ANONYMOUS_s136);
+  global bit f2change__ANONYMOUS_s135 = 0;
+  glblInit_f2change__ANONYMOUS_s176(f2change__ANONYMOUS_s135);
+  global bit f1change__ANONYMOUS_s134 = 0;
+  glblInit_f1change__ANONYMOUS_s174(f1change__ANONYMOUS_s134);
+  testHarness(f1change__ANONYMOUS_s134, f2change__ANONYMOUS_s135, f3change__ANONYMOUS_s136);
+}
+/*findC-combined.sk:182*/
+
+void testHarness__WrapperNospec ()/*findC-combined.sk:182*/
+{ }
+/* END PACKAGE ANONYMOUS*/
+[SKETCH] DONE
+Total time = 601

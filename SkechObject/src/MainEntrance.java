@@ -66,6 +66,7 @@ public class MainEntrance {
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
+		System.out.println(code);
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
@@ -143,7 +144,7 @@ public class MainEntrance {
 		//System.out.println(result);
 		for (int k : coeffIndex_to_Line.keySet()) {
 			if (coeffIndex_to_Line.get(k) == tmpLine)
-				rangedCoeff.add(k);
+				rangedCoeff.add	(k);
 		}
 		for (int c : rangedCoeff) {
 			if (result.containsKey(c))

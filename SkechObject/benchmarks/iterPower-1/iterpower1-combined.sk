@@ -230,6 +230,6 @@ harness void semantic(){
  (result1[4]!=result1p[4]) + (result1[5]!=result1p[5]) +
     (exp1[0] != exp1p[0]) +  (exp1[1] != exp1p[1]) + (exp1[2] != exp1p[2]) + (exp1[3] != exp1p[3]) + (exp1[4] != exp1p[4]) + (exp1[5] != exp1p[5]);
 
-  minimize(sem1+sem2);
+  //minimize(sem1+sem2);
 
 }

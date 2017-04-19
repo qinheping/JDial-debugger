@@ -168,6 +168,8 @@ public class ConstraintFactory {
 
 		String resv_funcs = ReservedFuncs();
 
+		System.out.println(source);
+		
 		// extract info of external functions
 		externalFuncs = s.extractExternalFuncs(externalFuncs);
 		if (externalFuncs.size() > 0)

@@ -1,0 +1,18 @@
+int maxmin(){
+	int[] num = {3,5,8};
+	int n = 3;
+	int[] min = new int[3];
+	for(int i = 0; i < n; i++){
+			min[i] = num[0];	
+		for(int j = 1; j < i; j ++){
+			if(min[i]>num[j])
+				min[i] = num[j];
+		}	
+	}
+	int max = min[0];
+	for(int i = 1; i < n; i++){
+		if(max<min[i])
+			max = min[i];	
+	}
+	return max;
+}
