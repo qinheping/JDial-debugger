@@ -192,4 +192,10 @@ public class StmtAssign extends Statement {
 		return line_to_string;
 	}
 
+	@Override
+	public String toString_Context() {
+		// TODO Auto-generated method stub
+		return this.toString() + ": " +this.getPostctx().toString();
+	}
+
 }

@@ -87,4 +87,7 @@ public abstract class Statement extends SketchNode {
 	
 	public abstract Statement clone();
 	
+	public String toString_Context(){
+		return this.toString()+": "+this.postctx.toString();
+	};
 }

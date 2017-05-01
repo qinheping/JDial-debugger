@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Main
+{
+	public static int largestGap()
+	{	
+		int[] x = {9,5,4};
+		int N = 3;
+		int max = x[N-1];
+		int min = x[N-1];
+		for(int i = 1; i < N-1; i++){
+			if(max < x[i])
+				max = x[i];
+			if(min > x[i])
+				min = x[i];
+		}
+		int result = max - min;
+		return result;
+	}
+
+	public static void main(String[] args)
+	{
+	    int x = largestGap(); 
+	    System.out.println(x);
+	}		
+}

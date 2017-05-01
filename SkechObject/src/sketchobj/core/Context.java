@@ -21,6 +21,10 @@ public class Context {
 	public Map<String,Type> getCurrentVars() {
 		return currentVars;
 	}
+	
+	public String toString(){
+		return this.currentVars.toString();
+	}
 
 	public Context(Context ctx){
 		this.varStack = new Stack<Map<String,Type>>();

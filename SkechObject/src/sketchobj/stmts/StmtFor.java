@@ -149,6 +149,20 @@ public class StmtFor extends Statement {
 		line_to_string = body.ConstructLineToString(line_to_string);
 		return line_to_string;
 	}
+	
+	@Override
+	public String toString_Context(){
+		String result = null;
+		if (incr.toString().endsWith(";"))
+			result = "for(" + init.toString_Context() + " " + cond.toString() + "; "
+					+ incr.toString_Context() + "){\n";
+		else
+			result = "for(" + init.toString_Context() + " " + cond.toString() + "; "
+					+ incr.toString_Context()+ "){\n";
+
+		result += this.body.toString_Context() + "}\n";
+		return result + ": "+this.getPostctx().toString();
+	}
 
 
 }

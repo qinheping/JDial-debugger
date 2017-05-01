@@ -176,6 +176,7 @@ public class ConstraintFactory {
 			System.out.println(externalFuncs.get(0).getName_Java());
 
 		buildContext((StmtBlock) source);
+		System.out.println(source.toString_Context());
 		// replace all constants in source code
 		if (!ConstraintFactory.sign_limited_range) {
 			coeffFunDecls = ConstraintFactory.replaceLinearCombination(s);

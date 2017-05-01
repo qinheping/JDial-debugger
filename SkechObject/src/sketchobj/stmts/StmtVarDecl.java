@@ -443,6 +443,11 @@ public class StmtVarDecl extends Statement {
 		line_to_string.put(this.getLineNumber(), this.toString());
 		return line_to_string;
 	}
+	@Override
+	public String toString_Context() {
+		return this.toString()+ ": " +this.getPostctx().toString();
+		
+	}
 
 
 

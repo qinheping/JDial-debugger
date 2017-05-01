@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.script.ScriptException;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -388,6 +390,17 @@ public class Test {
 		String folder = "";
 		String oriTraces = new Scanner(new File("benchmarks/subsum/test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/subsum/target-"+index)).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true).toString();
+		System.out.println(res);
+	}
+	
+	@org.junit.Test
+	public void testtmp() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 11;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();
 		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
 		String res = me.Synthesize(true).toString();
 		System.out.println(res);

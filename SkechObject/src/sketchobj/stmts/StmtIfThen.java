@@ -103,7 +103,21 @@ public class StmtIfThen extends Statement {
 		}
 		return result;
 	}
-
+	
+	@Override
+	public String toString_Context(){
+		String result = "if(" + this.cond + "){\n";
+		result += this.cons.toString_Context();
+		result += "}";
+		if (this.alt != null) {
+			result += "else{\n";
+			result += this.alt.toString_Context() + "}\n";
+		} else {
+			result += "\n";
+		}
+		return result + ": "+this.getPostctx().toString();
+	}
+	
 	@Override
 	public ConstData replaceConst(int index) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();

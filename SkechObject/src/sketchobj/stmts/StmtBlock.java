@@ -135,4 +135,14 @@ public class StmtBlock extends Statement {
 		return line_to_string;
 	}
 
+	@Override
+	public String toString_Context() {
+		String result = "";
+		Iterator<Statement> it = stmts.iterator();
+		while (it.hasNext()) {
+			result += it.next().toString_Context() + "\n";
+		}
+		return result + ": "+ this.getPostctx().toString();
+	}
+
 }

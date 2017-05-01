@@ -45,7 +45,9 @@ public class StmtWhile extends Statement {
 	public String toString() {
 		return "while(" + getCond() + "){\n" + getBody() + "\n}";
 	}
-
+	public String toString_Context() {
+		return "while(" + getCond() + "){\n" + getBody().toString_Context() + "\n}: " + this.getPostctx().toString();
+	}
 	@Override
 	public ConstData replaceConst(int index) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();

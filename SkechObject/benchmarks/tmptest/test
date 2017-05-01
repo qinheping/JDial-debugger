@@ -1,0 +1,971 @@
+{
+  "code": "import java.util.Scanner;\n\npublic class Main\n{\n\tpublic static int largestGap()\n\t{\t\n\t\tint[] x = {9,5,4};\n\t\tint N = 3;\n\t\tint max = x[N-1];\n\t\tint min = x[N-1];\n\t\tfor(int i = 1; i < N-1; i++){\n\t\t\tif(max < x[i])\n\t\t\t\tmax = x[i];\n\t\t\tif(min > x[i])\n\t\t\t\tmin = x[i];\n\t\t}\n\t\tint result = max - min;\n\t\treturn result;\n\t}\n\n\tpublic static void main(String[] args)\n\t{\n\t    int x = largestGap(); \n\t    System.out.println(x);\n\t}\t\t\n}\n",
+  "stdin": "3 4\n5\n  \n",
+  "trace": [
+    {
+      "stdout": "",
+      "event": "call",
+      "line": 23,
+      "stack_to_render": [
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "1",
+          "frame_id": 1
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 23,
+      "stack_to_render": [
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "2",
+          "frame_id": 2
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "call",
+      "line": 7,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:7",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "3",
+          "frame_id": 3
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "4",
+          "frame_id": 4
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 7,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:7",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "5",
+          "frame_id": 5
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "6",
+          "frame_id": 6
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 8,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:8",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ]
+          },
+          "ordered_varnames": [
+            "x"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "37",
+          "frame_id": 37
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "38",
+          "frame_id": 38
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 9,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:9",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3
+          },
+          "ordered_varnames": [
+            "x",
+            "N"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "43",
+          "frame_id": 43
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "44",
+          "frame_id": 44
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 10,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:10",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "57",
+          "frame_id": 57
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "58",
+          "frame_id": 58
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 11,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:11",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 4,
+            "min": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "71",
+          "frame_id": 71
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "72",
+          "frame_id": 72
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 11,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:11",
+          "encoded_locals": {
+            "i": 1,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 4,
+            "min": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "77",
+          "frame_id": 77
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "78",
+          "frame_id": 78
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 12,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:12",
+          "encoded_locals": {
+            "i": 1,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 4,
+            "min": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "87",
+          "frame_id": 87
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "88",
+          "frame_id": 88
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 13,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:13",
+          "encoded_locals": {
+            "i": 1,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 4,
+            "min": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "99",
+          "frame_id": 99
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "100",
+          "frame_id": 100
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 14,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:14",
+          "encoded_locals": {
+            "i": 1,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "109",
+          "frame_id": 109
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "110",
+          "frame_id": 110
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 15,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:15",
+          "encoded_locals": {
+            "i": 1,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 4
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "121",
+          "frame_id": 121
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "122",
+          "frame_id": 122
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 11,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:11",
+          "encoded_locals": {
+            "i": 1,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 5
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "131",
+          "frame_id": 131
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "132",
+          "frame_id": 132
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 11,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:11",
+          "encoded_locals": {
+            "i": 2,
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 5
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "135",
+          "frame_id": 135
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "136",
+          "frame_id": 136
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 17,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:17",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 5
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "147",
+          "frame_id": 147
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "148",
+          "frame_id": 148
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 18,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:18",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 5,
+            "result": 0
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "result"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "157",
+          "frame_id": 157
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "158",
+          "frame_id": 158
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "return",
+      "line": 18,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:18",
+          "encoded_locals": {
+            "x": [
+              "REF",
+              163
+            ],
+            "N": 3,
+            "max": 5,
+            "min": 5,
+            "result": 0,
+            "__return__": 0
+          },
+          "ordered_varnames": [
+            "x",
+            "N",
+            "max",
+            "min",
+            "result",
+            "__return__"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "163",
+          "frame_id": 163
+        },
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "164",
+          "frame_id": 164
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "163": [
+          "LIST",
+          9,
+          5,
+          4
+        ]
+      }
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 23,
+      "stack_to_render": [
+        {
+          "func_name": "main:23",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "165",
+          "frame_id": 165
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 24,
+      "stack_to_render": [
+        {
+          "func_name": "main:24",
+          "encoded_locals": {
+            "x": 0
+          },
+          "ordered_varnames": [
+            "x"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "166",
+          "frame_id": 166
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    },
+    {
+      "stdout": "0\n",
+      "event": "step_line",
+      "line": 25,
+      "stack_to_render": [
+        {
+          "func_name": "main:25",
+          "encoded_locals": {
+            "x": 0
+          },
+          "ordered_varnames": [
+            "x"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "170",
+          "frame_id": 170
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    },
+    {
+      "stdout": "0\n",
+      "event": "return",
+      "line": 25,
+      "stack_to_render": [
+        {
+          "func_name": "main:25",
+          "encoded_locals": {
+            "x": 0,
+            "__return__": [
+              "VOID"
+            ]
+          },
+          "ordered_varnames": [
+            "x",
+            "__return__"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "171",
+          "frame_id": 171
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    }
+  ],
+  "userlog": "Debugger VM maxMemory: 239M\n"
+}
