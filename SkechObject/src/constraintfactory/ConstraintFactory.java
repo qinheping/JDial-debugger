@@ -418,7 +418,7 @@ public class ConstraintFactory {
 		}
 
 		if (mod == 1)
-			stmts.add(new StmtAssert(new ExprBinary(new ExprVar("SyntacticDistance"), "==", new ExprConstInt(1))));
+			stmts.add(new StmtAssert(new ExprBinary(new ExprVar("SyntacticDistance"), "==", new ExprConstInt(1),-1)));
 		// constrain on # of change
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
 		// minimize cost statement

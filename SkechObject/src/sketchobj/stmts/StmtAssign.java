@@ -153,7 +153,7 @@ public class StmtAssign extends Statement {
 		rhs.setLCadded(true);
 		Type t = this.getPrectx().getAllVars().get(lhs.toString());
 		if(rhs.isAtom()){
-			this.rhs = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",this.rhs);
+			this.rhs = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",this.rhs, this.getLineNumber());
 			primaryIndex = index;
 			index++;
 		}else{
@@ -191,14 +191,14 @@ public class StmtAssign extends Statement {
 				continue;
 			if(v.equals(lhs.toString()))
 				continue;
-			Expression newTerm = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",new ExprVar(v,t));
-			this.rhs= new ExprBinary(rhs,"+",newTerm);
+			Expression newTerm = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",new ExprVar(v,t),this.getLineNumber());
+			this.rhs= new ExprBinary(rhs,"+",newTerm,this.getLineNumber());
 			liveVarsIndexSet.add(index);
 			index++;
 			liveVarsNameSet.add(v);
 		}
 		this.rhs = new ExprBinary(this.rhs, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
-				new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>())));
+				new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()),this.getLineNumber()),this.getLineNumber());
 		index = index +2;
 		return new ConstData(t, toAdd,index,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
 	}

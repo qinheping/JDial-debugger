@@ -400,7 +400,7 @@ public class StmtVarDecl extends Statement {
 				Type t = this.getPostctx().getAllVars().get(this.names.get(i).toString());
 				if (inits.get(i).isAtom()) {
 					inits.set(i, new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*",
-							inits.get(i)));
+							inits.get(i), this.getLineNumber()));
 					primaryIndex = index;
 					index++;
 				} else {
@@ -441,14 +441,14 @@ public class StmtVarDecl extends Statement {
 							.getType())
 						continue;
 					Expression newTerm = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()),
-							"*", new ExprVar(v, t));
-					inits.set(i, new ExprBinary(inits.get(i), "+", newTerm));
+							"*", new ExprVar(v, t), this.getLineNumber());
+					inits.set(i, new ExprBinary(inits.get(i), "+", newTerm, this.getLineNumber()));
 					liveVarsIndexSet.add(index);
 					liveVarsNameSet.add(v);
 					index++;
 				}
 				inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
-						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()))));
+						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()), this.getLineNumber()));
 				index += 2;
 				return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 						primaryIndex);

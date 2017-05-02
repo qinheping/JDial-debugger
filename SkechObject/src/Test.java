@@ -377,7 +377,7 @@ public class Test {
 	
 	@org.junit.Test
 	public void testtmp() throws FileNotFoundException, InterruptedException, ScriptException {
-		int index = 11;
+		int index = 6;
 		String folder = "";
 		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();

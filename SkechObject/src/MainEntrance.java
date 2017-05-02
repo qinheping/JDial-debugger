@@ -143,6 +143,7 @@ public class MainEntrance {
 			Map<Integer, Integer> coeffIndex_to_Line, int tmpLine) {
 		List<Integer> rangedCoeff = new ArrayList<Integer>();
 		// System.out.println(result);
+		System.out.println(coeffIndex_to_Line);
 		for (int k : coeffIndex_to_Line.keySet()) {
 			if (coeffIndex_to_Line.get(k) == tmpLine)
 				rangedCoeff.add(k);
@@ -158,16 +159,17 @@ public class MainEntrance {
 		String tmp = "";
 		while (!tmp.equals(stmtString)) {
 			tmp = stmtString;
-			System.out.println(stmtString);
 			stmtString = stmtString.replaceAll("[(]0( )*[*]( )*[-]?( )*([0-9A-Za-z])*( )*[)]", "0");
 			stmtString = stmtString.replaceAll("[(]( )*[-]?( )*([0-9A-Za-z])*( )*[*]( )*[0]( )*[)]", "0");
 			stmtString = stmtString.replaceAll("[(]0( )*[+]( )*", "(");
 			stmtString = stmtString.replaceAll("( )*[+]( )*0[)]", ")");
 			stmtString = stmtString.replaceAll("( )*[-]( )*0[)]", ")");
+			stmtString = stmtString.replaceAll("( )*[+]( )*0[;]", ";");
+			stmtString = stmtString.replaceAll("( )*[-]( )*0[;]", ";");
 			stmtString = stmtString.replaceAll("[(]0[)]", "0");
 			stmtString = stmtString.replaceAll("[(]1( )*[*]( )*", "(");
-			stmtString = stmtString.replaceAll("( )*[*]( )*1[)]", ")");
-			System.out.println(stmtString);
+			stmtString = stmtString.replaceAll("( )*[*]( )*1( )*[)]", ")");
+			stmtString = stmtString.replaceAll("( )*[*]( )*1( )*[;]", ";");
 			stmtString = deleRedPara(stmtString);
 			
 		}
@@ -178,8 +180,15 @@ public class MainEntrance {
 	
 	public String deleRedPara(String s){
 		int len = s.length();
-		for(int k = 4; k < len; k++){
+		for(int k = 2; k < len; k++){
 			for(int i = 0; i <= len - k; i++){
+				if(s.substring(i, i+k).matches("[(]( )*[\\d\\w]*( )*[)]")){
+					s = s.substring(0,i)+s.substring(i+1,i+k-1)+s.substring(i+k);
+					len = len -2;
+					k = 4;
+					i = 0;
+					continue;
+				}
 				if(s.substring(i, i+k).matches("[(]( )*[(][\\w\\W]*[)]()*[)]")){
 					s = s.substring(0,i)+s.substring(i+1,i+k-1)+s.substring(i+k);
 					len = len -2;
