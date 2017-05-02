@@ -427,12 +427,15 @@ public class StmtVarDecl extends Statement {
 								.getType() != ((TypePrimitive) t).getType())
 							continue;
 
-						Expression newTerm = new ExprBinary(
-								new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*", new ExprArrayRange(v, new ExprStar(), this.getLineNumber()));
-						inits.set(i, new ExprBinary(inits.get(i), "+", newTerm));
-						liveVarsIndexSet.add(index);
-						liveVarsNameSet.add(v);
-						index++;
+						/*
+						 * Expression newTerm = new ExprBinary( new
+						 * ExprFunCall("Coeff" + index, new
+						 * ArrayList<Expression>()), "*", new ExprArrayRange(v,
+						 * new ExprStar(), this.getLineNumber())); inits.set(i,
+						 * new ExprBinary(inits.get(i), "+", newTerm));
+						 * liveVarsIndexSet.add(index); liveVarsNameSet.add(v);
+						 * index++;
+						 */
 						continue;
 					} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
 							.getType())
@@ -444,9 +447,9 @@ public class StmtVarDecl extends Statement {
 					liveVarsNameSet.add(v);
 					index++;
 				}
-				inits.set(i, new ExprBinary(inits.get(i), "+",
-						new ExprFunCall("Coeff" + index, new ArrayList<Expression>())));
-				index++;
+				inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()))));
+				index += 2;
 				return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 						primaryIndex);
 			}

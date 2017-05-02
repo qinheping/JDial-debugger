@@ -460,10 +460,10 @@ public class ExprBinary extends Expression {
 				this.right = new ExprConstInt(0);
 				this.left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
-				this.left = new ExprBinary(this.left, "+",
-						new ExprFunCall("Coeff" + index, new ArrayList<Expression>()));
+				this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>())));
 				primaryIndex = index;
-				index++;
+				index += 2;
 				left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
 				List<SketchObject> toAdd = new ArrayList<SketchObject>();
@@ -525,10 +525,12 @@ public class ExprBinary extends Expression {
 					index++;
 					liveVarsNameSet.add(v);
 				}
-				this.right = new ExprBinary(this.right, "+",
-						new ExprFunCall("Coeff" + index, new ArrayList<Expression>()));
+				this.right = new ExprBinary(this.right, "+",new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>())));
+				index++;
+				return new ConstData(t, toAdd, index + 1, 0, null, 0, liveVarsIndexSet, liveVarsNameSet, primaryIndex);
 			}
-			return new ConstData(t, toAdd, index + 1, 0, null, 0, liveVarsIndexSet, liveVarsNameSet, primaryIndex);
+			return new ConstData(t, toAdd, index , 0, null, 0, liveVarsIndexSet, liveVarsNameSet, primaryIndex, true);
 		}
 		return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, 0);
 	}

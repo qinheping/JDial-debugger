@@ -102,9 +102,9 @@ public class StmtFor extends Statement {
 		parent.stmts.set(index, sb
 				);
 		body = new StmtBlock(ConstraintFactory.recordState(this.getPostctx().getLinenumber(),
-				new ArrayList<String>(init.getPostctx().getAllVars().keySet())), body);
+				init.getPostctx().getAllVars()), body);
 		body =  new StmtBlock(body,ConstraintFactory.recordState(this.getPostctx().getLinenumber(),
-				new ArrayList<String>(init.getPostctx().getAllVars().keySet())));
+				init.getPostctx().getAllVars()));
 		return ((StmtBlock)((StmtBlock) body).stmts.get(0)).stmts.get(((StmtBlock)((StmtBlock) body).stmts.get(0)).stmts.size()-1).addRecordStmt((StmtBlock) body, 1, m);
 	}
 

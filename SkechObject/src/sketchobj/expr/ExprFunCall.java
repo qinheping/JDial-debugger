@@ -63,10 +63,12 @@ public class ExprFunCall extends Expression
     /**
      * Creates a new function call with the specified name and two specified parameters.
      */
+    public ExprFunCall( String name) {
+        this(name, new ArrayList<Expression>());
+    }
     public ExprFunCall( String name, String nameJ, Expression... params) {
         this(name, Arrays.asList(params), nameJ);
     }
-
 
 
     /** Returns the name of the function being called. */

@@ -134,26 +134,6 @@ public class Test {
 		me.Synthesize();
 	}
 
-	@org.junit.Test
-	public void test1() {
-		Function f = ConstraintFactory.addConstFun(0, 5, new TypePrimitive(4));
-		// System.out.println(f);
-	}
-
-	@org.junit.Test
-	public void test3() {
-		Statement s = ConstraintFactory.varArrayDecl("t", 5, new TypePrimitive(4));
-		// System.out.println(s);
-	}
-
-	@org.junit.Test
-	public void test4() {
-		List<String> otherVars = new ArrayList<String>();
-		otherVars.add("y");
-		otherVars.add("z");
-		Statement s = ConstraintFactory.recordState(0, otherVars);
-		// System.out.println(s);
-	}
 
 	@org.junit.Test
 	public void testReplaceConst() {

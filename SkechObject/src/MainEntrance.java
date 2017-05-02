@@ -26,6 +26,7 @@ import sketchobj.stmts.Statement;
 import visitor.JavaVisitor;
 import visitor.JsonVisitor;
 
+
 public class MainEntrance {
 	private String json;
 	private String correctTrace;
@@ -158,19 +159,36 @@ public class MainEntrance {
 		while (!tmp.equals(stmtString)) {
 			tmp = stmtString;
 			System.out.println(stmtString);
-			stmtString = stmtString.replaceAll("[(]0( )*[*]( )*([0-9A-Za-z])+( )*[)]", "0");
+			stmtString = stmtString.replaceAll("[(]0( )*[*]( )*[-]?( )*([0-9A-Za-z])*( )*[)]", "0");
+			stmtString = stmtString.replaceAll("[(]( )*[-]?( )*([0-9A-Za-z])*( )*[*]( )*[0]( )*[)]", "0");
 			stmtString = stmtString.replaceAll("[(]0( )*[+]( )*", "(");
 			stmtString = stmtString.replaceAll("( )*[+]( )*0[)]", ")");
 			stmtString = stmtString.replaceAll("( )*[-]( )*0[)]", ")");
 			stmtString = stmtString.replaceAll("[(]0[)]", "0");
 			stmtString = stmtString.replaceAll("[(]1( )*[*]( )*", "(");
 			stmtString = stmtString.replaceAll("( )*[*]( )*1[)]", ")");
-			stmtString = stmtString.replaceAll("[()]", "");
-
+			System.out.println(stmtString);
+			stmtString = deleRedPara(stmtString);
+			
 		}
 		// stmtString = stmtString.replaceAll("[()]", "");
 		// System.out.println(stmtString);
 		return stmtString;
+	}
+	
+	public String deleRedPara(String s){
+		int len = s.length();
+		for(int k = 4; k < len; k++){
+			for(int i = 0; i <= len - k; i++){
+				if(s.substring(i, i+k).matches("[(]( )*[(][\\w\\W]*[)]()*[)]")){
+					s = s.substring(0,i)+s.substring(i+1,i+k-1)+s.substring(i+k);
+					len = len -2;
+					k = 4;
+					i = 0;
+				}
+			}
+		}
+		return s;
 	}
 
 	public void setRepairRange(List<Integer> l) {

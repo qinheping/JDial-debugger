@@ -17,6 +17,7 @@ public class ConstData {
 	private List<Integer> liveVarsIndexSet;
 	private List<String> liveVarsNameSet;
 	private Integer primaryCoeffIndex;
+	private boolean ifLC;
 	
 	@SuppressWarnings("unchecked")
 	public ConstData(Type type, @SuppressWarnings("rawtypes") List children, int index, int value, String name, int line, boolean isc){
@@ -39,7 +40,7 @@ public class ConstData {
 	}
 
 	public ConstData(Type t, List<SketchObject> toAdd, int index2, int i, String name, int lineNumber,
-			List<Integer> liveVarsIndexSet2, List<String> liveVarsNameSet2, Integer primaryCoeffIndex) {
+			List<Integer> liveVarsIndexSet2, List<String> liveVarsNameSet2, Integer primaryCoeffIndex, boolean ifLC) {
 		this.setType(t);
 		this.setChildren(toAdd);
 		this.setIndex(index2);
@@ -50,6 +51,12 @@ public class ConstData {
 		this.liveVarsIndexSet = liveVarsIndexSet2;
 		this.liveVarsNameSet = liveVarsNameSet2;
 		this.primaryCoeffIndex = primaryCoeffIndex;
+		this.ifLC = ifLC;
+	}
+	public ConstData(Type t, List<SketchObject> toAdd, int i, int j, String name, int k,
+			List<Integer> liveVarsIndexSet2, List<String> liveVarsNameSet2, Integer primaryIndex) {
+		this(t, toAdd, i, j, name, k, liveVarsIndexSet2, liveVarsNameSet2, primaryIndex, false);
+		
 	}
 	public List<SketchObject> getChildren() {
 		return children;
@@ -113,5 +120,11 @@ public class ConstData {
 	}
 	public void setPrimaryCoeffIndex(Integer primaryCoeffIndex) {
 		this.primaryCoeffIndex = primaryCoeffIndex;
+	}
+	public boolean isIfLC() {
+		return ifLC;
+	}
+	public void setIfLC(boolean ifLC) {
+		this.ifLC = ifLC;
 	}
 }
