@@ -104,9 +104,7 @@ public class ConstData {
 	public void setLiveVarsIndexSet(List<Integer> liveVarsIndexSet) {
 		this.liveVarsIndexSet = liveVarsIndexSet;
 	}
-	public List<String> getLiveVarsNameSet() {
-		return liveVarsNameSet;
-	}
+
 	public void setLiveVarsNameSet(List<String> liveVarsNameSet) {
 		this.liveVarsNameSet = liveVarsNameSet;
 	}

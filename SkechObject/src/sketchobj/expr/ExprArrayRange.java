@@ -86,6 +86,11 @@ public class ExprArrayRange extends Expression
 		this( new ExprVar(s), new RangeLen(new ExprConstInt(i),null), false, line);
 	}
     
+    
+    public ExprArrayRange( String s, Expression i, int line)
+	{
+		this( new ExprVar(s), new RangeLen(i,null), false, line);
+	}
     public ExprArrayRange( String s, String i, int line)
 	{
 		this( new ExprVar(s), new RangeLen(new ExprVar(i),null), false, line);

@@ -16,10 +16,12 @@ import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.core.TypeArray;
 import sketchobj.core.TypePrimitive;
+import sketchobj.expr.ExprArrayRange;
 import sketchobj.expr.ExprBinary;
 import sketchobj.expr.ExprConstInt;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
+import sketchobj.expr.ExprStar;
 import sketchobj.expr.ExprVar;
 import sketchobj.expr.Expression;
 
@@ -47,7 +49,7 @@ public class StmtVarDecl extends Statement {
 	 * @param inits
 	 *            List of <code>Expression</code> (or <code>null</code>)
 	 *            containing initializers of the variables declared here
-	 * @param i 
+	 * @param i
 	 */
 	public StmtVarDecl(List<? extends Type> types, List<String> names, List<? extends Expression> inits, int i) {
 		// TODO: check for validity, including types of object
@@ -55,16 +57,18 @@ public class StmtVarDecl extends Statement {
 		this.types = new java.util.ArrayList<Type>(types);
 		this.names = new java.util.ArrayList<String>(names);
 		this.inits = new java.util.ArrayList<Expression>(inits);
-		for(Expression e: inits){
-			if(e!=null)
-			e.setParent(this);
+		for (Expression e : inits) {
+			if (e != null)
+				e.setParent(this);
 		}
 		this.setLineNumber(i);
 	}
+
 	@Override
 	public StmtVarDecl clone() {
-				return new StmtVarDecl(this.types, this.names, this.inits, this.getLineNumber());
+		return new StmtVarDecl(this.types, this.names, this.inits, this.getLineNumber());
 	}
+
 	/**
 	 * Create a new variable declaration with exactly one variable in it. If the
 	 * variable is uninitialized, the initializer may be <code>null</code>.
@@ -81,21 +85,17 @@ public class StmtVarDecl extends Statement {
 	 *            the variable is uninitialized
 	 */
 	public StmtVarDecl(Type type, String name, Expression init, int i) {
-		this(Collections.singletonList(type), Collections.singletonList(name), Collections.singletonList(init),i);
+		this(Collections.singletonList(type), Collections.singletonList(name), Collections.singletonList(init), i);
 	}
 
-/*	public StmtVarDecl(Vector<VarDeclEntry> next) {
-		this.types = new Vector<Type>(next.size());
-		this.names = new Vector<String>(next.size());
-		this.inits = new Vector<Expression>(next.size());
-
-		for (VarDeclEntry e : next) {
-			this.types.add(e.getType());
-			this.names.add(e.getName());
-			this.inits.add(e.getInit());
-		}
-	}
-*/
+	/*
+	 * public StmtVarDecl(Vector<VarDeclEntry> next) { this.types = new
+	 * Vector<Type>(next.size()); this.names = new Vector<String>(next.size());
+	 * this.inits = new Vector<Expression>(next.size());
+	 * 
+	 * for (VarDeclEntry e : next) { this.types.add(e.getType());
+	 * this.names.add(e.getName()); this.inits.add(e.getInit()); } }
+	 */
 	/**
 	 * Get the type of the nth variable declared by this.
 	 *
@@ -335,20 +335,19 @@ public class StmtVarDecl extends Statement {
 					Type t = ((ExprConstant) inits.get(i)).getType();
 					inits.set(i, new ExprFunCall("Const" + index, new ArrayList<Expression>(), null));
 
-					return new ConstData(t, toAdd, index + 1, value, names.get(i),this.getLineNumber());
+					return new ConstData(t, toAdd, index + 1, value, names.get(i), this.getLineNumber());
 				} else {
 					toAdd.add(inits.get(i));
 				}
 			}
 		}
-		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
+		return new ConstData(null, toAdd, index, 0, null, this.getLineNumber());
 	}
-	
 
 	@Override
 	public ConstData replaceConst_Exclude_This(int index, List<Integer> repair_range) {
 		List<SketchObject> toAdd = new ArrayList<SketchObject>();
-		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
+		return new ConstData(null, toAdd, index, 0, null, this.getLineNumber());
 	}
 
 	@Override
@@ -369,13 +368,11 @@ public class StmtVarDecl extends Statement {
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 
-		parent.stmts.set(index,
-				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+		parent.stmts.set(index, new StmtBlock(
+				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		m.putAll(this.getPostctx().getAllVars());
 		return m;
 	}
-
-
 
 	@Override
 	public boolean isBasic() {
@@ -384,8 +381,8 @@ public class StmtVarDecl extends Statement {
 
 	@Override
 	public List<ExternalFunction> extractExternalFuncs(List<ExternalFunction> externalFuncNames) {
-		for(int i = 0; i < inits.size(); i++){
-			if(inits.get(i)==null)
+		for (int i = 0; i < inits.size(); i++) {
+			if (inits.get(i) == null)
 				continue;
 			externalFuncNames = inits.get(i).extractExternalFuncs(externalFuncNames);
 		}
@@ -401,41 +398,60 @@ public class StmtVarDecl extends Statement {
 				inits.get(i).checkAtom();
 				inits.get(i).setLCadded(true);
 				Type t = this.getPostctx().getAllVars().get(this.names.get(i).toString());
-				if(inits.get(i).isAtom()){
-					inits.set(i,new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",inits.get(i)));
+				if (inits.get(i).isAtom()) {
+					inits.set(i, new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*",
+							inits.get(i)));
 					primaryIndex = index;
 					index++;
-				}
-				else{
+				} else {
 					inits.get(i).setT(t);
 					inits.get(i).setCtx(this.getPrectx());
 					toAdd.add(inits.get(i));
 				}
 				List<Integer> liveVarsIndexSet = new ArrayList<Integer>();
 				List<String> liveVarsNameSet = new ArrayList<String>();
-				if((t instanceof TypePrimitive) && ((TypePrimitive)t).getType() == 1){
-					inits.get(i).setBoolean(true);;
-					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+				if ((t instanceof TypePrimitive) && ((TypePrimitive) t).getType() == 1) {
+					inits.get(i).setBoolean(true);
+					;
+					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, this.getLineNumber());
 				}
-				if(t instanceof TypeArray){
-							return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null,this.getLineNumber());
+				if (t instanceof TypeArray) {
+					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, this.getLineNumber());
 				}
 				List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
-				for(String v: vars){
-					if(((TypePrimitive)this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive)t).getType())
+				for (String v : vars) {
+					// all 1 dimension array
+
+					if (this.getPrectx().getAllVars().get(v) instanceof TypeArray) {
+						if (((TypePrimitive) ((TypeArray) this.getPostctx().getAllVars().get(v)).getBase())
+								.getType() != ((TypePrimitive) t).getType())
+							continue;
+
+						Expression newTerm = new ExprBinary(
+								new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*", new ExprArrayRange(v, new ExprStar(), this.getLineNumber()));
+						inits.set(i, new ExprBinary(inits.get(i), "+", newTerm));
+						liveVarsIndexSet.add(index);
+						liveVarsNameSet.add(v);
+						index++;
 						continue;
-					Expression newTerm = new ExprBinary(new ExprFunCall("Coeff"+index, new ArrayList<Expression>()),"*",new ExprVar(v,t));
-					inits.set(i,new ExprBinary(inits.get(i),"+",newTerm));
+					} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
+							.getType())
+						continue;
+					Expression newTerm = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()),
+							"*", new ExprVar(v, t));
+					inits.set(i, new ExprBinary(inits.get(i), "+", newTerm));
 					liveVarsIndexSet.add(index);
 					liveVarsNameSet.add(v);
 					index++;
 				}
-				inits.set(i,new ExprBinary(inits.get(i), "+", new ExprFunCall("Coeff" + index, new ArrayList<Expression>())));
+				inits.set(i, new ExprBinary(inits.get(i), "+",
+						new ExprFunCall("Coeff" + index, new ArrayList<Expression>())));
 				index++;
-				return new ConstData(t, toAdd,index,0,null,this.getLineNumber(),liveVarsIndexSet,liveVarsNameSet,primaryIndex);
+				return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
+						primaryIndex);
 			}
 		}
-		return new ConstData(null, toAdd, index, 0, null,this.getLineNumber());
+		return new ConstData(null, toAdd, index, 0, null, this.getLineNumber());
 	}
 
 	@Override
@@ -443,12 +459,11 @@ public class StmtVarDecl extends Statement {
 		line_to_string.put(this.getLineNumber(), this.toString());
 		return line_to_string;
 	}
+
 	@Override
 	public String toString_Context() {
-		return this.toString()+ ": " +this.getPostctx().toString();
-		
+		return this.toString() + ": " + this.getPostctx().toString();
+
 	}
-
-
 
 }

@@ -25,7 +25,7 @@ public class TypeArray extends Type {
         return this.getBase() + "[" + s + "]";
     }
 
-	private Type getBase() {
+	public Type getBase() {
 		return base;
 	}
 
