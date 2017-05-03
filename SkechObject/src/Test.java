@@ -377,12 +377,12 @@ public class Test {
 	
 	@org.junit.Test
 	public void testtmp() throws FileNotFoundException, InterruptedException, ScriptException {
-		int index = 6;
+		int index = 15;
 		String folder = "";
 		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();
 		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
-		String res = me.Synthesize(true).toString();
+		String res = me.Synthesize(true,true).toString();
 		System.out.println(res);
 	}
 }

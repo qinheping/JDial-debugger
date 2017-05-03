@@ -63,6 +63,8 @@ public class MainEntrance {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
+		if(oneLine)
+			mod = 1;
 
 		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace);
 
@@ -76,7 +78,7 @@ public class MainEntrance {
 		System.out.println(function);
 
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args);
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args,mod);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
@@ -87,7 +89,7 @@ public class MainEntrance {
 		// script = cf.getScript(function.getBody());
 		if (mod != 2)
 			return this.actualSynthesize(useLC, script, cf, null);
-
+		
 		return null;
 	}
 

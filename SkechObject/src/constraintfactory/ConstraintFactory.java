@@ -30,6 +30,7 @@ public class ConstraintFactory {
 	static Map<String, Type> namesToType = new HashMap<String, Type>();
 	static Map<Integer, Integer> constMapLine = new HashMap<Integer, Integer>();
 	static List<Integer> noWeightCoeff = new ArrayList<Integer>();
+	static Integer numLines = -1;
 
 	//
 	static Traces oriTrace;
@@ -63,7 +64,7 @@ public class ConstraintFactory {
 	public static List<ExternalFunction> externalFuncs = new ArrayList<ExternalFunction>();
 
 	// ------------ Construct method
-	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args) {
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args, Integer mod) {
 		ConstraintFactory.fh = fh;
 		ConstraintFactory.oriTrace = oriTrace;
 		ConstraintFactory.finalState = finalState;
@@ -81,7 +82,12 @@ public class ConstraintFactory {
 		varList = new ArrayList<String>();
 
 		this.args = args;
+		this.mod = mod;
 
+	}
+
+	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args) {
+		this(oriTrace, finalState, fh, args, 0);
 	}
 
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
@@ -189,6 +195,8 @@ public class ConstraintFactory {
 			// constFunDecls = ConstraintFactory.replaceConst(s);
 		}
 
+		Statement globalVarDecls = getGlobalDecl();
+
 		// add record stmts to source code and collect vars info
 		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
 		ConstraintFactory.namesToType = vars;
@@ -205,6 +213,8 @@ public class ConstraintFactory {
 		Function f = new Function(ConstraintFactory.fh, s);
 
 		List<Statement> stmts = new ArrayList<>();
+
+		stmts.add(globalVarDecls);
 
 		// add declare of const functions
 		stmts.add(coeffFunDecls);
@@ -226,6 +236,19 @@ public class ConstraintFactory {
 		Statement block = new StmtBlock(stmts);
 
 		return block.toString() + "\n" + f.toString() + "\n" + constraintFunction_linearCombination().toString();
+	}
+
+	private Statement getGlobalDecl() {
+		StmtBlock result = new StmtBlock();
+		List<Integer> appeared = new ArrayList<Integer>();
+		for (int line : ConstraintFactory.coeffIndex_to_Line.values()) {
+			if (appeared.contains(line))
+				continue;
+			result.addStmt(new StmtVarDecl(new TypePrimitive(1), "line" + line + "change", new ExprConstInt(0), 0));
+			appeared.add(line);
+		}
+		ConstraintFactory.numLines = appeared.size();
+		return result;
 	}
 
 	// genearting reserved function such as abs min max
@@ -265,7 +288,7 @@ public class ConstraintFactory {
 				}
 				index = data.getIndex();
 				if (!data.isIfLC()) {
-					ConstraintFactory.noWeightCoeff.add(index-2);
+					ConstraintFactory.noWeightCoeff.add(index - 2);
 					list.add(coeffChangeDecl(index - 2, new TypePrimitive(1)));
 					list.add(new StmtFunDecl(addCoeffFun(index - 2, 0, data.getType())));
 					list.add(coeffChangeDecl(index - 1, new TypePrimitive(4)));
@@ -406,8 +429,9 @@ public class ConstraintFactory {
 		// semantic distance
 		StmtBlock editsb = new StmtBlock();
 		for (int i = 0; i < constNumber; i++) {
-			if(!ConstraintFactory.noWeightCoeff.contains(i))
-			editsb.addStmt(new StmtAssign(new ExprVar("SyntacticDistance"), new ExprVar("coeff" + i + "change"), 1, 1));
+			if (!ConstraintFactory.noWeightCoeff.contains(i))
+				editsb.addStmt(
+						new StmtAssign(new ExprVar("SyntacticDistance"), new ExprVar("coeff" + i + "change"), 1, 1));
 		}
 		stmts.add(editsb);
 
@@ -417,8 +441,9 @@ public class ConstraintFactory {
 					new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v), 0)));
 		}
 
-		if (mod == 1)
-			stmts.add(new StmtAssert(new ExprBinary(new ExprVar("SyntacticDistance"), "==", new ExprConstInt(1),-1)));
+		if (mod == 1) {
+			stmts.add(oneLineConstraint());
+		}
 		// constrain on # of change
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
 		// minimize cost statement
@@ -426,10 +451,40 @@ public class ConstraintFactory {
 
 		// stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 
-		return new Function("Constrain", new TypeVoid(), new ArrayList<Parameter>(), new StmtBlock(stmts),
+		return new Function("Constraint", new TypeVoid(), new ArrayList<Parameter>(), new StmtBlock(stmts),
 				FcnType.Harness);
 	}
 
+	private Statement oneLineConstraint() {
+		StmtBlock result = new StmtBlock();
+		Map<Integer, Expression> assign = new HashMap<Integer, Expression>();
+		List<Integer> appeared = new ArrayList<Integer>();
+		for (int line : ConstraintFactory.coeffIndex_to_Line.values()) {
+			if (appeared.contains(line))
+				continue;
+			assign.put(line, null);
+			appeared.add(line);
+		}
+
+		for (int coeff : ConstraintFactory.coeffIndex_to_Line.keySet()) {
+			int line = ConstraintFactory.coeffIndex_to_Line.get(coeff);
+			Expression old = assign.get(line);
+			if (old == null)
+				old = new ExprBinary(new ExprVar("coeff" + coeff + "change"), "!=", new ExprConstInt(0), -1);
+			else
+				old = new ExprBinary(old, "||",
+						new ExprBinary(new ExprVar("coeff" + coeff + "change"), "!=", new ExprConstInt(0), -1), -1);
+			assign.remove(line);
+			assign.put(line, old);
+		}
+		Expression sum = new ExprConstInt(0);
+		for(int line: appeared){
+			sum = new ExprBinary(sum, "+", new ExprVar("line"+line+"change"),-1);
+			result.addStmt(new StmtAssign(new ExprVar("line"+line+"change"), assign.get(line),-1));
+		}
+		result.addStmt(new StmtAssert(new ExprBinary(sum,"==", new ExprConstInt(1),-1)));
+		return result;
+	}
 	private Statement HammingDistance(Integer bound) {
 		List<Statement> forBody = new ArrayList<Statement>();
 		for (String v : varList) {

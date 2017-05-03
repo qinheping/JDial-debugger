@@ -4,7 +4,7 @@ public class Main
 {
 	public static int largestGap()
 	{	
-		int[] x = {9,5,4};
+		int[] x = {13,5,4};
 		int N = 3;
 		int max = x[N-1];
 		int min = x[N-1];

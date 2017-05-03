@@ -29,11 +29,11 @@ public class StmtAssign extends Statement {
 	 * 
 	 * @param i
 	 */
-	public StmtAssign(Expression lhs, Expression rhs, int op, int i) {
+	public StmtAssign(Expression lhs, Expression rhs, int op, int line) {
 		this.lhs = lhs;
 		this.rhs = rhs;
 		this.op = op;
-		this.setLineNumber(i);
+		this.setLineNumber(line);
 		this.lhs.setParent(this);
 		this.rhs.setParent(this);
 
