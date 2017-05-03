@@ -54,10 +54,12 @@ public class MainEntrance {
 	}
 
 	public Map<Integer, String> Synthesize() throws InterruptedException {
-		return this.Synthesize(false);
+		return this.Synthesize(false,false);
+	}	public Map<Integer, String> Synthesize(boolean useLC) throws InterruptedException {
+		return this.Synthesize(useLC,false);
 	}
 
-	public Map<Integer, String> Synthesize(boolean useLC) throws InterruptedException {
+	public Map<Integer, String> Synthesize(boolean useLC, boolean oneLine) throws InterruptedException {
 		this.targetFunc = extractFuncName(correctTrace);
 		this.root = jsonRootCompile(this.json);
 		this.code = root.getCode().getCode();
