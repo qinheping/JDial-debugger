@@ -120,7 +120,7 @@ public class StmtAssign extends Statement {
 		prectx.setLinenumber(this.getLineNumber());
 
 		List<String> tmp = postctx.getVarsInScope();
-		if (!tmp.contains(lhs.toString()))
+		if (!tmp.contains(lhs.toString())&& position > 0)
 			tmp.add(lhs.toString());
 		postctx.setVarsInScope(tmp);
 		this.setPostctx(new Context(postctx));

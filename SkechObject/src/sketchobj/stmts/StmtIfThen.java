@@ -208,7 +208,7 @@ public class StmtIfThen extends Statement {
 	}
 	@Override
 	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
-		String result = "if(" + this.cond + "){";
+		String result = "if(" + this.cond + ")";
 		line_to_string.put(this.getLineNumber(), result);
 		line_to_string = cons.ConstructLineToString(line_to_string);
 		if(alt != null){

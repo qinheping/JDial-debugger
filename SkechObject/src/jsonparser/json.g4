@@ -44,7 +44,9 @@ line
 globals
 	:	'"globals"' COLON '{' varlist '}' COMMA
 	;
-
+varnames
+	:	(STRING  COMMA)* (STRING)?
+	;
 ordered_globals
 	:	'"ordered_globals"' COLON '[' varnames ']' COMMA
 	;
@@ -71,9 +73,7 @@ value
 	|	'[' '"VOID"' ']'
 	;
 
-varnames
-	:	(STRING  COMMA)* (STRING)?
-	;
+
 
 heap_content
 	:	(heap_object COMMA)* (heap_object)?

@@ -1,14 +1,14 @@
-int coeff0change = ??;
+bit line3change = 0;
+bit line4change = 0;
+bit line5change = 0;
+bit line6change = 0;
+bit line7change = 0;
+bit line9change = 0;
+bit line10change = 0;
+
+bit coeff0change = ??;
  int Coeff0(){
-if(??){
-return 0;}
-
-return coeff0change;
-}
-
-bit coeff1change = ??;
- int Coeff1(){
-if(coeff1change == 0){
+if(coeff0change == 0){
 return 0;}
 
 if(??){
@@ -17,12 +17,23 @@ return 1;}
 return -1;
 }
 
-int coeff2change = ??;
- int Coeff2(){
+int coeff1change = ??;
+ int Coeff1(){
 if(??){
 return 0;}
 
-return coeff2change;
+return coeff1change;
+}
+
+bit coeff2change = ??;
+ int Coeff2(){
+if(coeff2change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
 }
 
 bit coeff3change = ??;
@@ -36,9 +47,17 @@ return 1;}
 return -1;
 }
 
-bit coeff4change = ??;
+int coeff4change = ??;
  int Coeff4(){
-if(coeff4change == 0){
+if(??){
+return 0;}
+
+return coeff4change;
+}
+
+bit coeff5change = ??;
+ int Coeff5(){
+if(coeff5change == 0){
 return 0;}
 
 if(??){
@@ -47,21 +66,13 @@ return 1;}
 return -1;
 }
 
-int coeff5change = ??;
- int Coeff5(){
-if(??){
-return 0;}
-
-return coeff5change;
-}
-
 bit coeff6change = ??;
  int Coeff6(){
 if(coeff6change == 0){
-return 1;}
+return 0;}
 
 if(??){
-return 0;}
+return 1;}
 
 return -1;
 }
@@ -77,15 +88,12 @@ return 1;}
 return -1;
 }
 
-bit coeff8change = ??;
+int coeff8change = ??;
  int Coeff8(){
-if(coeff8change == 0){
+if(??){
 return 0;}
 
-if(??){
-return 1;}
-
-return -1;
+return coeff8change;
 }
 
 bit coeff9change = ??;
@@ -107,122 +115,301 @@ return 0;}
 return coeff10change;
 }
 
+bit coeff11change = ??;
+ int Coeff11(){
+if(coeff11change == 0){
+return 1;}
 
-int[16] lineArray;
-int[16] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[16] nArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[16] sumArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+if(??){
+return 0;}
+
+return -1;
+}
+
+bit coeff12change = ??;
+ int Coeff12(){
+if(coeff12change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff13change = ??;
+ int Coeff13(){
+if(coeff13change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff14change = ??;
+ int Coeff14(){
+if(coeff14change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff15change = ??;
+ int Coeff15(){
+if(coeff15change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff16change = ??;
+ int Coeff16(){
+if(??){
+return 0;}
+
+return coeff16change;
+}
+
+bit coeff17change = ??;
+ int Coeff17(){
+if(coeff17change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff18change = ??;
+ int Coeff18(){
+if(??){
+return 0;}
+
+return coeff18change;
+}
+
+bit coeff19change = ??;
+ int Coeff19(){
+if(coeff19change == 0){
+return 1;}
+
+if(??){
+return 0;}
+
+return -1;
+}
+
+bit coeff20change = ??;
+ int Coeff20(){
+if(coeff20change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff21change = ??;
+ int Coeff21(){
+if(coeff21change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff22change = ??;
+ int Coeff22(){
+if(coeff22change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff23change = ??;
+ int Coeff23(){
+if(coeff23change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff24change = ??;
+ int Coeff24(){
+if(??){
+return 0;}
+
+return coeff24change;
+}
 
 
-int nfinal = 0;
-int sumfinal = 0;
-int ifinal = 0;
+int[14] lineArray;
+int[14] xArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[14] yArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+int[14] zArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+
+int zfinal = 0;
 int finalcount = 0;
-
- int SumUp(){
 int count = -1;
+
+ int largestGap(){
 int linehit = 0;
 (count)++;
+lineArray[count] = 3;
+
+int x = 3 + ((Coeff0()) * (Coeff1()));
+
+(count)++;
+lineArray[count] = 4;
+xArray[count] = x;
+
+int y = (10 + ((Coeff2()) * x)) + ((Coeff3()) * (Coeff4()));
+
+(count)++;
+lineArray[count] = 5;
+xArray[count] = x;
+yArray[count] = y;
+
+int z = ((5 + ((Coeff5()) * x)) + ((Coeff6()) * y)) + ((Coeff7()) * (Coeff8()));
+
+(count)++;
+lineArray[count] = 6;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
+
+if(((x - y) + ((Coeff9()) * (Coeff10()))) > 0){
+(count)++;
 lineArray[count] = 7;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
 
-int n = 5 + (Coeff0());
+y = (((((Coeff11()) * x) + ((Coeff12()) * x)) + ((Coeff13()) * y)) + ((Coeff14()) * z)) + ((Coeff15()) * (Coeff16()));
+
 
 (count)++;
-lineArray[count] = 8;
-nArray[count] = n;
+lineArray[count] = 7;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
 
-int sum = (0 + ((Coeff1()) * n)) + (Coeff2());
+}
+
 
 (count)++;
 lineArray[count] = 9;
-nArray[count] = n;
-sumArray[count] = sum;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
 
-for(int i = ((0 + ((Coeff3()) * n)) + ((Coeff4()) * sum)) + (Coeff5()); i < n; (i)++){
+if(((y - z) + ((Coeff17()) * (Coeff18()))) > 0){
 (count)++;
-lineArray[count] = 9;
-iArray[count] = i;
-nArray[count] = n;
-sumArray[count] = sum;
+lineArray[count] = 10;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
+
+z = (((((Coeff19()) * x) + ((Coeff20()) * x)) + ((Coeff21()) * y)) + ((Coeff22()) * z)) + ((Coeff23()) * (Coeff24()));
+
 
 (count)++;
 lineArray[count] = 10;
-iArray[count] = i;
-nArray[count] = n;
-sumArray[count] = sum;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
+
+}
+
+
+(count)++;
+lineArray[count] = 12;
+xArray[count] = x;
+yArray[count] = y;
+zArray[count] = z;
 (linehit)++;
-if(linehit == 2){
-nfinal = n;
-sumfinal = sum;
-ifinal = i;
+if(linehit == 1){
+zfinal = z;
 finalcount = count;
 return 0;
 }
 
 
-sum += (((((Coeff6()) * i) + ((Coeff7()) * i)) + ((Coeff8()) * n)) + ((Coeff9()) * sum)) + (Coeff10());
-
-
-
-(count)++;
-lineArray[count] = 9;
-iArray[count] = i;
-nArray[count] = n;
-sumArray[count] = sum;
-
-}
-
-
-(count)++;
-lineArray[count] = 9;
-nArray[count] = n;
-sumArray[count] = sum;
-
-
-(count)++;
-lineArray[count] = 12;
-nArray[count] = n;
-sumArray[count] = sum;
-
-return sum;
-
+return z;
 
 
 }
 
-harness void HammingTest(){
-int[8] oringianliArray = {0,0,0,0,0,0,1,1};
-int[8] oringianlnArray = {0,5,5,5,5,5,5,5};
-int[8] oringianlsumArray = {0,0,0,0,0,0,0,0};
-int[8] oringianllineArray = {7,8,9,9,10,9,9,10};
-int correctFinal_n = 5;
-int correctFinal_sum = 1;
-int correctFinal_i = 1;
-SumUp();
-int HammingDistance = 0;
-int EditDistance = 0;
-EditDistance += coeff0change;
-EditDistance += coeff1change;
-EditDistance += coeff2change;
-EditDistance += coeff3change;
-EditDistance += coeff4change;
-EditDistance += coeff5change;
-EditDistance += coeff6change;
-EditDistance += coeff7change;
-EditDistance += coeff8change;
-EditDistance += coeff9change;
-EditDistance += coeff10change;
-
-for(int i = 0; i < 8; (i)++){
-HammingDistance += (iArray[i]) != (oringianliArray[i]);
-HammingDistance += (nArray[i]) != (oringianlnArray[i]);
-HammingDistance += (sumArray[i]) != (oringianlsumArray[i]);
-HammingDistance += (lineArray[i]) != (oringianllineArray[i]);
+harness void Constraint(){
+int[7] oringianlxArray = {0,3,3,3,3,3,3};
+int[7] oringianlyArray = {0,0,10,10,10,10,10};
+int[7] oringianlzArray = {0,0,0,5,5,5,3};
+int[7] oringianllineArray = {3,4,5,6,9,10,12};
+int correctFinal_z = 10;
+largestGap();
+int SyntacticDistance = 0;
+int SemanticDistance = 0;
+for(int i = 0; i < 7; (i)++){
+SemanticDistance += (xArray[i]) != (oringianlxArray[i]);
+SemanticDistance += (yArray[i]) != (oringianlyArray[i]);
+SemanticDistance += (zArray[i]) != (oringianlzArray[i]);
+SemanticDistance += (lineArray[i]) != (oringianllineArray[i]);
 }
 
-assert (nfinal == correctFinal_n);
-assert (sumfinal == correctFinal_sum);
-assert (ifinal == correctFinal_i);
-minimize(EditDistance);
-minimize(HammingDistance);
+SyntacticDistance += coeff0change;
+SyntacticDistance += coeff1change;
+SyntacticDistance += coeff2change;
+SyntacticDistance += coeff3change;
+SyntacticDistance += coeff4change;
+SyntacticDistance += coeff5change;
+SyntacticDistance += coeff6change;
+SyntacticDistance += coeff7change;
+SyntacticDistance += coeff8change;
+SyntacticDistance += coeff9change;
+SyntacticDistance += coeff10change;
+SyntacticDistance += coeff11change;
+SyntacticDistance += coeff12change;
+SyntacticDistance += coeff13change;
+SyntacticDistance += coeff14change;
+SyntacticDistance += coeff15change;
+SyntacticDistance += coeff16change;
+SyntacticDistance += coeff17change;
+SyntacticDistance += coeff18change;
+SyntacticDistance += coeff19change;
+SyntacticDistance += coeff20change;
+SyntacticDistance += coeff21change;
+SyntacticDistance += coeff22change;
+SyntacticDistance += coeff23change;
+SyntacticDistance += coeff24change;
+
+assert (zfinal == correctFinal_z);
+line3change = (coeff0change != 0) || (coeff1change != 0);
+line4change = ((coeff2change != 0) || (coeff3change != 0)) || (coeff4change != 0);
+line5change = (((coeff5change != 0) || (coeff6change != 0)) || (coeff7change != 0)) || (coeff8change != 0);
+line6change = (coeff9change != 0) || (coeff10change != 0);
+line7change = (((((coeff11change != 0) || (coeff12change != 0)) || (coeff13change != 0)) || (coeff14change != 0)) || (coeff15change != 0)) || (coeff16change != 0);
+line9change = (coeff17change != 0) || (coeff18change != 0);
+line10change = (((((coeff19change != 0) || (coeff20change != 0)) || (coeff21change != 0)) || (coeff22change != 0)) || (coeff23change != 0)) || (coeff24change != 0);
+assert ((((((((0 + line3change) + line4change) + line5change) + line6change) + line7change) + line9change) + line10change) == 1);
+
+minimize(SemanticDistance+5*SyntacticDistance);
 }

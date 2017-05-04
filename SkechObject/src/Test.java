@@ -85,7 +85,7 @@ public class Test {
 
 	@org.junit.Test
 	public void testSumUp() throws FileNotFoundException, InterruptedException {
-		int index = 22;
+		int index = 10;
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/sumup/correction_index_" + index)).useDelimiter("\\Z")
 				.next();
@@ -377,7 +377,7 @@ public class Test {
 	
 	@org.junit.Test
 	public void testtmp() throws FileNotFoundException, InterruptedException, ScriptException {
-		int index = 15;
+		int index = 9;
 		String folder = "";
 		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();

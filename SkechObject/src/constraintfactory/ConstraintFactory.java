@@ -304,6 +304,7 @@ public class ConstraintFactory {
 
 		s.ConstructLineToString(line_to_string);
 
+		System.out.println(ConstraintFactory.line_to_string);
 		return new StmtBlock(list);
 	}
 
@@ -446,7 +447,7 @@ public class ConstraintFactory {
 		// constrain on # of change
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
 		// minimize cost statement
-		stmts.add(new StmtMinimize(new ExprVar("SemanticDistance+4*SyntacticDistance"), true));
+		stmts.add(new StmtMinimize(new ExprVar("SemanticDistance+5*SyntacticDistance"), true));
 
 		// stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 
