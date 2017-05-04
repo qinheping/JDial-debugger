@@ -429,9 +429,8 @@ public class ConstraintFactory {
 		// semantic distance
 		StmtBlock editsb = new StmtBlock();
 		for (int i = 0; i < constNumber; i++) {
-			if (!ConstraintFactory.noWeightCoeff.contains(i))
-				editsb.addStmt(
-						new StmtAssign(new ExprVar("SyntacticDistance"), new ExprVar("coeff" + i + "change"), 1, 1));
+			// if (!ConstraintFactory.noWeightCoeff.contains(i))
+			editsb.addStmt(new StmtAssign(new ExprVar("SyntacticDistance"), new ExprVar("coeff" + i + "change"), 1, 1));
 		}
 		stmts.add(editsb);
 
@@ -478,13 +477,14 @@ public class ConstraintFactory {
 			assign.put(line, old);
 		}
 		Expression sum = new ExprConstInt(0);
-		for(int line: appeared){
-			sum = new ExprBinary(sum, "+", new ExprVar("line"+line+"change"),-1);
-			result.addStmt(new StmtAssign(new ExprVar("line"+line+"change"), assign.get(line),-1));
+		for (int line : appeared) {
+			sum = new ExprBinary(sum, "+", new ExprVar("line" + line + "change"), -1);
+			result.addStmt(new StmtAssign(new ExprVar("line" + line + "change"), assign.get(line), -1));
 		}
-		result.addStmt(new StmtAssert(new ExprBinary(sum,"==", new ExprConstInt(1),-1)));
+		result.addStmt(new StmtAssert(new ExprBinary(sum, "==", new ExprConstInt(1), -1)));
 		return result;
 	}
+
 	private Statement HammingDistance(Integer bound) {
 		List<Statement> forBody = new ArrayList<Statement>();
 		for (String v : varList) {
@@ -770,7 +770,7 @@ public class ConstraintFactory {
 	}
 
 	static public void buildContext(StmtBlock sb) {
-		sb.buildContext(new Context(),0);
+		sb.buildContext(new Context(), 0);
 	}
 
 	static public Map<String, Type> addRecordStmt(StmtBlock sorce) {
