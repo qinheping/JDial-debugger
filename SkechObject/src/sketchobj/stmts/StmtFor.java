@@ -75,21 +75,23 @@ public class StmtFor extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context prectx) {
+	public Context buildContext(Context prectx, int position) {
 		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);
 		this.setPostctx(new Context(prectx));
 		Context postctx = new Context(prectx);
+		postctx.setVarsInScope(new ArrayList<String>());
 		
 		postctx.pushNewVars();
 		int temp = postctx.getLinenumber();
 		postctx.setLinenumber(temp);
-		postctx = init.buildContext(postctx);
+		postctx = init.buildContext(postctx, position);
 		cond.setCtx(postctx);
-		postctx = incr.buildContext(postctx);
-		postctx = body.buildContext(postctx);
+		postctx = incr.buildContext(postctx, position);
+		postctx = body.buildContext(postctx,position +1);
 		postctx.popVars();
+		postctx.setVarsInScope(new ArrayList<String>());
 		return postctx;
 
 	}

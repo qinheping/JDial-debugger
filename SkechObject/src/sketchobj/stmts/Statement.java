@@ -50,7 +50,6 @@ public abstract class Statement extends SketchNode {
 		this.postctx = ctx;
 	}
 
-	public abstract Context buildContext(Context prectx);
 
 	public abstract Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m);
 
@@ -89,5 +88,7 @@ public abstract class Statement extends SketchNode {
 	
 	public String toString_Context(){
 		return this.toString()+": "+this.postctx.toString();
-	};
+	}
+
+	public abstract Context buildContext(Context postctx2, int scopePosition);
 }

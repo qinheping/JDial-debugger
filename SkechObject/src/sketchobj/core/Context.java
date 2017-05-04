@@ -10,12 +10,14 @@ public class Context {
 	private Stack<Map<String,Type>> varStack;
 	private Map<String,Type> currentVars;
 	private int linenumber;
+	private List<String> varsInScope;
 	
 	public Context(){
 		this.setVarStack(new Stack<Map<String, Type>>());
 		this.setCurrentVars(new HashMap<String, Type>());
 		this.varStack.push(this.currentVars);
 		this.linenumber = 1;
+		this.varsInScope = new ArrayList<String>();
 		}
 
 	public Map<String,Type> getCurrentVars() {
@@ -39,6 +41,10 @@ public class Context {
 		}
 		this.linenumber = ctx.linenumber;
 		this.currentVars = new HashMap<String, Type>(ctx.currentVars);
+		
+		this.varsInScope = new ArrayList<String>();
+		for(String s: ctx.getVarsInScope())
+			this.varsInScope.add(s);
 	}
 
 	public void pushVars(Map<String, Type> m){
@@ -91,5 +97,13 @@ public class Context {
 
 	public void setLinenumber(int linenumber) {
 		this.linenumber = linenumber;
+	}
+
+	public List<String> getVarsInScope() {
+		return varsInScope;
+	}
+
+	public void setVarsInScope(List<String> varsInScope) {
+		this.varsInScope = varsInScope;
 	}
 }

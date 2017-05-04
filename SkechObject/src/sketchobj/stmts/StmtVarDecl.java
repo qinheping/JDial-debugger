@@ -351,7 +351,7 @@ public class StmtVarDecl extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context prectx) {
+	public Context buildContext(Context prectx, int sp) {
 		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);

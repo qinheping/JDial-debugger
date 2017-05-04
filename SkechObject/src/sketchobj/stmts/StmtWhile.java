@@ -71,14 +71,15 @@ public class StmtWhile extends Statement {
 	}
 
 	@Override
-	public Context buildContext(Context prectx) {
+	public Context buildContext(Context prectx, int sp) {
 		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		Context postctx  = new Context(prectx);
 		this.setPostctx(new Context(postctx));
 		postctx.pushVars(new HashMap<String, Type>());
-		postctx = body.buildContext(postctx);
+		postctx = body.buildContext(postctx, sp+1);
 		postctx.popVars();
+		postctx.setVarsInScope(new ArrayList<String>());
 		return postctx;
 	}
 

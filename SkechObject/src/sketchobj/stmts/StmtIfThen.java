@@ -144,7 +144,7 @@ public class StmtIfThen extends Statement {
 	}
 	
 	@Override
-	public Context buildContext(Context prectx) {
+	public Context buildContext(Context prectx, int sposition) {
 		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);
@@ -152,13 +152,14 @@ public class StmtIfThen extends Statement {
 		Context postctx = new Context(prectx);
 		
 		postctx.pushNewVars();;
-		postctx = cons.buildContext(postctx);
+		postctx = cons.buildContext(postctx, sposition);
 		postctx.popVars();
 		if (alt != null) {
 			postctx.pushNewVars();;
-			postctx = alt.buildContext(postctx);
+			postctx = alt.buildContext(postctx, sposition);
 			postctx.popVars();
 		}
+		prectx.setVarsInScope(postctx.getVarsInScope());
 		return prectx;
 	}
 
@@ -215,5 +216,6 @@ public class StmtIfThen extends Statement {
 		}
 		return line_to_string;
 	}
+
 
 }

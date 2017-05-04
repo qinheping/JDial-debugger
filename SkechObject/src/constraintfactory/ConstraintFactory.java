@@ -770,7 +770,7 @@ public class ConstraintFactory {
 	}
 
 	static public void buildContext(StmtBlock sb) {
-		sb.buildContext(new Context());
+		sb.buildContext(new Context(),0);
 	}
 
 	static public Map<String, Type> addRecordStmt(StmtBlock sorce) {

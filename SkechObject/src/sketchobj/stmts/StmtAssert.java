@@ -191,7 +191,7 @@ public class StmtAssert extends Statement {
 		}
 
 		@Override
-		public Context buildContext(Context prectx) {
+		public Context buildContext(Context prectx,int position) {
 			// TODO Auto-generated method stub
 			return null;
 		}
