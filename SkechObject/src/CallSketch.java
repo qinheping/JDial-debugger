@@ -21,6 +21,7 @@ public class CallSketch {
 		Map<Integer, Integer> result = new HashMap<Integer, Integer>();
 		Map<Integer, Integer> oriValue = new HashMap<Integer, Integer>();   // map from coeff to their original value in the original program
 		Set<Integer> validList = new HashSet<Integer>();	 
+		List<Integer> unchangedIndex = new ArrayList<Integer>();
 
 		try {
 			tmp.createNewFile();
@@ -48,7 +49,6 @@ public class CallSketch {
 
 			} else {
 				while ((line = input.readLine()) != null) {
-					int value_ConstFun = 0;
 					// the following 4 if statment is use to extract the original value and the guess
 					// value of a coeffX
 					// it will be the original val if coeffXchange == 0, and the guess val otherwise
@@ -84,10 +84,7 @@ public class CallSketch {
 						if (extractInt(line).size() > 0)
 							// if a coeffXchange == 0, we say its invalid and don't need them appear in the result
 							if (extractInt(line).get(extractInt(line).size() - 1) == 0 && line.substring(2,7).equals("coeff")) {
-								result.remove(checkIndex);
-								validList.remove(checkIndex);
-								if (oriValue.containsKey(checkIndex))
-									result.put(checkIndex, oriValue.get(checkIndex));
+								unchangedIndex.add(checkIndex);
 								checking = false;
 								continue;
 							}
@@ -100,6 +97,12 @@ public class CallSketch {
 					}
 
 				}
+				
+				for(Integer index: unchangedIndex){
+					result.remove(index);
+					validList.remove(index);
+					if (oriValue.containsKey(index))
+						result.put(index, oriValue.get(index));}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
