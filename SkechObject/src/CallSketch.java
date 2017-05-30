@@ -19,8 +19,8 @@ public class CallSketch {
 		File tmp = new File(dir, "tmp.txt");
 		Runtime rt = Runtime.getRuntime();
 		Map<Integer, Integer> result = new HashMap<Integer, Integer>();
-		Map<Integer, Integer> oriValue = new HashMap<Integer, Integer>();
-		Set<Integer> validList = new HashSet<Integer>();
+		Map<Integer, Integer> oriValue = new HashMap<Integer, Integer>();   // map from coeff to their original value in the original program
+		Set<Integer> validList = new HashSet<Integer>();	 
 
 		try {
 			tmp.createNewFile();
@@ -49,38 +49,40 @@ public class CallSketch {
 			} else {
 				while ((line = input.readLine()) != null) {
 					int value_ConstFun = 0;
+					// the following 4 if statment is use to extract the original value and the guess
+					// value of a coeffX
+					// it will be the original val if coeffXchange == 0, and the guess val otherwise
 					if (line.length() > 12) {
-
-						if (line.substring(0, 10).equals("void Coeff")) {
-
-							coeffIndex = extractInt(line).get(0);
-							validList.add(coeffIndex);
-							waitting = true;
+						if (line.substring(0, 10).equals("void Coeff")) { // determine X 
+							coeffIndex = extractInt(line).get(0); // coeffIndex = X
+							validList.add(coeffIndex); // assume X is valid
+							waitting = true; // waiting for oriVal and guessVal of coeffX
 						}
 					}
-
 					if (line.length() >= 10)
 						if (waitting && line.substring(4, 10).equals("return")) {
-							oriValue.put(coeffIndex, tmp_return);
+							oriValue.put(coeffIndex, tmp_return); // oriVal of coeffX
 						}
-
 					if (line.length() >= 8)
 						if (waitting && line.substring(2, 8).equals("return")) {
-							coeffReturn = tmp_return;
-							waitting = false;
+							coeffReturn = tmp_return; // guessVal of coeffX
+							waitting = false; // stoping waiting
 							result.put(coeffIndex, coeffReturn);
 						}
 					if (extractInt(line).size() > 0)
-						tmp_return = extractInt(line).get(0);
-
+						tmp_return = extractInt(line).get(0); // note that the last _out is the actual guessVal so we store
+										      // each _out we have seen until we hit return (which happen at line 68)
+					
+					// Then we scan and find all X such that coeffXchange == 1
 					if (line.length() > 25)
 						if (line.substring(5, 19).equals("glblInit_coeff")) {
-							checkIndex = extractInt(line).get(0);
+							checkIndex = extractInt(line).get(0); // get X
 							checking = true;
 							continue;
 						}
 					if (checking) {
 						if (extractInt(line).size() > 0)
+							// if a coeffXchange == 0, we say its invalid and don't need them appear in the result
 							if (extractInt(line).get(extractInt(line).size() - 1) == 0 && line.substring(2,7).equals("coeff")) {
 								result.remove(checkIndex);
 								validList.remove(checkIndex);
@@ -90,6 +92,8 @@ public class CallSketch {
 								continue;
 							}
 					}
+					
+					// extract the total weight
 					if (line.length() > 10) {
 						if (line.substring(0, 5).equals("Total"))
 							break;
