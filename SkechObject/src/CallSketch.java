@@ -26,7 +26,7 @@ public class CallSketch {
 		try {
 			tmp.createNewFile();
 			WriteStringToFile(tmp, s);
-			Process proc = rt.exec(new String[] { "lib/sketch", "tmp/tmp.txt" });
+			Process proc = rt.exec(new String[] { "lib/sketch", "tmp/tmp.txt"});
 			// InputStream stderr = proc.getErrorStream();
 			// InputStreamReader isr = new InputStreamReader(stderr);
 			// BufferedReader br = new BufferedReader(isr);
@@ -35,6 +35,7 @@ public class CallSketch {
 
 			String line = null;
 			line = input.readLine();
+			System.out.println(line);
 
 			int coeffIndex = -1;
 			int coeffReturn = -1;
@@ -49,6 +50,7 @@ public class CallSketch {
 
 			} else {
 				while ((line = input.readLine()) != null) {
+					//System.out.println(line);
 					// the following 4 if statment is use to extract the original value and the guess
 					// value of a coeffX
 					// it will be the original val if coeffXchange == 0, and the guess val otherwise
