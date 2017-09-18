@@ -419,12 +419,19 @@ return -1;
 }
 
 
-int[20] lineArray;
-int[20] resultArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] minArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] maxArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] NArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+struct Anode{
+    int lineval;
+    int ival;
+    int minval;
+    int maxval;
+    int Nval;
+    int resultval;
+    Anode prev;
+    int ct;
+}
+
+
+Anode dataArray = new Anode(lineval = 0, ival = 0, minval = 0, maxval = 0, Nval = 0, resultval = 0, prev = null, ct = -1);
 
 
 int maxfinal = 0;
@@ -434,33 +441,27 @@ int count = -1;
  int largestGap(){
 int linehit = 0;
 (count)++;
-lineArray[count] = 3;
-
+dataArray = new Anode(lineval = 3, ival = 0, minval = 0, maxval = 0, Nval = 0, resultval = 0, prev = dataArray, ct = count);
 int[] x = {13,5,4};
 
 (count)++;
-lineArray[count] = 4;
+dataArray = new Anode(lineval = 4, ival = 0, minval = 0, maxval = 0, Nval = 0, resultval = 0, prev = dataArray, ct = count);
 
 int N = 3 + ((Coeff0()) * (Coeff1()));
 
 (count)++;
-lineArray[count] = 5;
-NArray[count] = N;
+dataArray = new Anode(lineval = 5, ival = 0, minval = 0, maxval = 0, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 int max = (((Coeff2()) * (x[N - 1])) + ((Coeff3()) * N)) + ((Coeff4()) * (Coeff5()));
 
 (count)++;
-lineArray[count] = 6;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 6, ival = 0, minval = 0, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 int min = ((((Coeff6()) * (x[N - 1])) + ((Coeff7()) * max)) + ((Coeff8()) * N)) + ((Coeff9()) * (Coeff10()));
 
 (count)++;
-lineArray[count] = 7;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 7, ival = 0, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
+
 (linehit)++;
 if(linehit == 3){
 maxfinal = max;
@@ -471,11 +472,8 @@ return 0;
 
 for(int i = (((1 + ((Coeff11()) * min)) + ((Coeff12()) * max)) + ((Coeff13()) * N)) + ((Coeff14()) * (Coeff15())); ((i - (N - 1)) + ((Coeff31()) * (Coeff32()))) < 0; (i)++){
 (count)++;
-lineArray[count] = 7;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 7, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
+
 (linehit)++;
 if(linehit == 3){
 maxfinal = max;
@@ -485,54 +483,30 @@ return 0;
 
 
 (count)++;
-lineArray[count] = 8;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 8, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 if(((max - (x[i])) + ((Coeff16()) * (Coeff17()))) < 0){
 (count)++;
-lineArray[count] = 9;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 9, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 max = (((((Coeff18()) * (x[i])) + ((Coeff19()) * i)) + ((Coeff20()) * min)) + ((Coeff21()) * N)) + ((Coeff22()) * (Coeff23()));
 
 (count)++;
-lineArray[count] = 9;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-
+dataArray = new Anode(lineval = 9, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 }
 
 
 (count)++;
-lineArray[count] = 10;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 10, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 if(((min - (x[i])) + ((Coeff24()) * (Coeff25()))) > 0){
 (count)++;
-lineArray[count] = 11;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 11, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 min = ((((Coeff26()) * (x[i])) + ((Coeff27()) * i)) + ((Coeff28()) * N)) + ((Coeff29()) * (Coeff30()));
 
 (count)++;
-lineArray[count] = 11;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 11, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 }
 
@@ -540,12 +514,9 @@ NArray[count] = N;
 
 
 (count)++;
-lineArray[count] = 7;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 7, ival = i, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 (linehit)++;
+
 if(linehit == 3){
 maxfinal = max;
 finalcount = count;
@@ -557,10 +528,7 @@ return 0;
 
 
 (count)++;
-lineArray[count] = 7;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 7, ival = 0, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 (linehit)++;
 if(linehit == 3){
 maxfinal = max;
@@ -571,19 +539,12 @@ return 0;
 
 
 (count)++;
-lineArray[count] = 13;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 13, ival = 0, minval = min, maxval = max, Nval = N, resultval = 0, prev = dataArray, ct = count);
 
 int result = ((((((Coeff39()) * max) - ((Coeff38()) * min)) + ((Coeff33()) * min)) + ((Coeff34()) * max)) + ((Coeff35()) * N)) + ((Coeff36()) * (Coeff37()));
 
 (count)++;
-lineArray[count] = 14;
-resultArray[count] = result;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+dataArray = new Anode(lineval = 14, ival = 0, minval = min, maxval = max, Nval = N, resultval = result, prev = dataArray, ct = count);
 
 return result;
 
@@ -602,13 +563,28 @@ int correctFinal_max = 13;
 largestGap();
 int SyntacticDistance = 0;
 int SemanticDistance = 0;
-for(int i = 0; i < 10; (i)++){
-SemanticDistance += (resultArray[i]) != (oringianlresultArray[i]);
-SemanticDistance += (iArray[i]) != (oringianliArray[i]);
-SemanticDistance += (minArray[i]) != (oringianlminArray[i]);
-SemanticDistance += (maxArray[i]) != (oringianlmaxArray[i]);
-SemanticDistance += (NArray[i]) != (oringianlNArray[i]);
-SemanticDistance += (lineArray[i]) != (oringianllineArray[i]);
+
+
+if(dataArray != null)
+while(dataArray.ct > 9){
+if(dataArray !=null)
+	dataArray = dataArray.prev;
+}
+
+if(dataArray != null)
+while(dataArray.ct < 9){
+dataArray = new Anode(lineval = 0, ival = 0, minval = 0, maxval = 0, Nval = 0, resultval = 0, prev = dataArray, ct = dataArray.ct+1);
+}
+
+for(int i = 9; i >=10; (i)--){
+SemanticDistance += (dataArray.resultval) != (oringianlresultArray[i]);
+SemanticDistance += (dataArray.ival) != (oringianliArray[i]);
+SemanticDistance += (dataArray.minval) != (oringianlminArray[i]);
+SemanticDistance += (dataArray.maxval) != (oringianlmaxArray[i]);
+SemanticDistance += (dataArray.Nval) != (oringianlNArray[i]);
+SemanticDistance += (dataArray.lineval) != (oringianllineArray[i]);
+if(dataArray !=null)
+	dataArray = dataArray.prev;
 }
 
 SyntacticDistance += coeff0change;

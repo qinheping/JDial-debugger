@@ -1,14 +1,14 @@
 {
-  "code": "import java.util.Scanner;\n\npublic class Main\n{\n\tpublic static int largestGap()\n\t{\t\n\t\tint[] x = {9,5,4};\n\t\tint N = 3;\n\t\tint max = x[N-1];\n\t\tint min = x[N-1];\n\t\tfor(int i = 1; i < N-1; i++){\n\t\t\tif(max < x[i])\n\t\t\t\tmax = x[i];\n\t\t\tif(min > x[i])\n\t\t\t\tmin = x[i];\n\t\t}\n\t\tint result = max - min;\n\t\treturn result;\n\t}\n\n\tpublic static void main(String[] args)\n\t{\n\t    int x = largestGap(); \n\t    System.out.println(x);\n\t}\t\t\n}\n",
+  "code": "public class Main {\n  public static int SumUp() {\n    int n = 5;\n    int sum = 0;\n    for (int i = 0; i < n; i++) {\n      sum += i;\n    }\n    return sum;\n  }\n\n  public static void main(String[] args) {\n    int x = SumUp();\n    System.out.println(x);\n  }\n}\n",
   "stdin": "3 4\n5\n  \n",
   "trace": [
     {
       "stdout": "",
       "event": "call",
-      "line": 23,
+      "line": 12,
       "stack_to_render": [
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -27,10 +27,10 @@
     {
       "stdout": "",
       "event": "step_line",
-      "line": 23,
+      "line": 12,
       "stack_to_render": [
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -49,10 +49,10 @@
     {
       "stdout": "",
       "event": "call",
-      "line": 7,
+      "line": 3,
       "stack_to_render": [
         {
-          "func_name": "largestGap:7",
+          "func_name": "SumUp:3",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -63,7 +63,7 @@
           "frame_id": 3
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -76,16 +76,16 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
+      "func_name": "SumUp",
       "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 7,
+      "line": 3,
       "stack_to_render": [
         {
-          "func_name": "largestGap:7",
+          "func_name": "SumUp:3",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -96,7 +96,7 @@
           "frame_id": 5
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -109,73 +109,224 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
+      "func_name": "SumUp",
       "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 8,
+      "line": 4,
       "stack_to_render": [
         {
-          "func_name": "largestGap:8",
+          "func_name": "SumUp:4",
           "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ]
+            "n": 5
           },
           "ordered_varnames": [
-            "x"
+            "n"
           ],
           "parent_frame_id_list": [],
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "37",
-          "frame_id": 37
+          "unique_hash": "11",
+          "frame_id": 11
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
           "is_highlighted": false,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "38",
-          "frame_id": 38
+          "unique_hash": "12",
+          "frame_id": 12
         }
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 9,
+      "line": 5,
       "stack_to_render": [
         {
-          "func_name": "largestGap:9",
+          "func_name": "SumUp:5",
           "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3
+            "n": 5,
+            "sum": 0
           },
           "ordered_varnames": [
-            "x",
-            "N"
+            "n",
+            "sum"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "17",
+          "frame_id": 17
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "18",
+          "frame_id": 18
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 0,
+            "n": 5,
+            "sum": 0
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "23",
+          "frame_id": 23
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "24",
+          "frame_id": 24
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 6,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:6",
+          "encoded_locals": {
+            "i": 0,
+            "n": 5,
+            "sum": 0
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "29",
+          "frame_id": 29
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "30",
+          "frame_id": 30
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 0,
+            "n": 5,
+            "sum": 0
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "39",
+          "frame_id": 39
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "40",
+          "frame_id": 40
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 1,
+            "n": 5,
+            "sum": 0
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
           ],
           "parent_frame_id_list": [],
           "is_highlighted": true,
@@ -185,7 +336,7 @@
           "frame_id": 43
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -198,197 +349,229 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 10,
+      "line": 6,
       "stack_to_render": [
         {
-          "func_name": "largestGap:10",
-          "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 4
-          },
-          "ordered_varnames": [
-            "x",
-            "N",
-            "max"
-          ],
-          "parent_frame_id_list": [],
-          "is_highlighted": true,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "57",
-          "frame_id": 57
-        },
-        {
-          "func_name": "main:23",
-          "encoded_locals": {},
-          "ordered_varnames": [],
-          "parent_frame_id_list": [],
-          "is_highlighted": false,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "58",
-          "frame_id": 58
-        }
-      ],
-      "globals": {},
-      "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
-    },
-    {
-      "stdout": "",
-      "event": "step_line",
-      "line": 11,
-      "stack_to_render": [
-        {
-          "func_name": "largestGap:11",
-          "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 4,
-            "min": 4
-          },
-          "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min"
-          ],
-          "parent_frame_id_list": [],
-          "is_highlighted": true,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "71",
-          "frame_id": 71
-        },
-        {
-          "func_name": "main:23",
-          "encoded_locals": {},
-          "ordered_varnames": [],
-          "parent_frame_id_list": [],
-          "is_highlighted": false,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "72",
-          "frame_id": 72
-        }
-      ],
-      "globals": {},
-      "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
-    },
-    {
-      "stdout": "",
-      "event": "step_line",
-      "line": 11,
-      "stack_to_render": [
-        {
-          "func_name": "largestGap:11",
+          "func_name": "SumUp:6",
           "encoded_locals": {
             "i": 1,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 4,
-            "min": 4
+            "n": 5,
+            "sum": 0
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
+            "n",
+            "sum",
             "i"
           ],
           "parent_frame_id_list": [],
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "77",
-          "frame_id": 77
+          "unique_hash": "51",
+          "frame_id": 51
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
           "is_highlighted": false,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "78",
-          "frame_id": 78
+          "unique_hash": "52",
+          "frame_id": 52
         }
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 12,
+      "line": 5,
       "stack_to_render": [
         {
-          "func_name": "largestGap:12",
+          "func_name": "SumUp:5",
           "encoded_locals": {
             "i": 1,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 4,
-            "min": 4
+            "n": 5,
+            "sum": 1
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "61",
+          "frame_id": 61
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "62",
+          "frame_id": 62
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 2,
+            "n": 5,
+            "sum": 1
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "65",
+          "frame_id": 65
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "66",
+          "frame_id": 66
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 6,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:6",
+          "encoded_locals": {
+            "i": 2,
+            "n": 5,
+            "sum": 1
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "73",
+          "frame_id": 73
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "74",
+          "frame_id": 74
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 2,
+            "n": 5,
+            "sum": 3
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "83",
+          "frame_id": 83
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "84",
+          "frame_id": 84
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 3,
+            "n": 5,
+            "sum": 3
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
             "i"
           ],
           "parent_frame_id_list": [],
@@ -399,7 +582,7 @@
           "frame_id": 87
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -412,93 +595,106 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 13,
+      "line": 6,
       "stack_to_render": [
         {
-          "func_name": "largestGap:13",
+          "func_name": "SumUp:6",
           "encoded_locals": {
-            "i": 1,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 4,
-            "min": 4
+            "i": 3,
+            "n": 5,
+            "sum": 3
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
+            "n",
+            "sum",
             "i"
           ],
           "parent_frame_id_list": [],
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "99",
-          "frame_id": 99
+          "unique_hash": "95",
+          "frame_id": 95
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
           "is_highlighted": false,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "100",
-          "frame_id": 100
+          "unique_hash": "96",
+          "frame_id": 96
         }
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 14,
+      "line": 5,
       "stack_to_render": [
         {
-          "func_name": "largestGap:14",
+          "func_name": "SumUp:5",
           "encoded_locals": {
-            "i": 1,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 4
+            "i": 3,
+            "n": 5,
+            "sum": 6
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "105",
+          "frame_id": 105
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "106",
+          "frame_id": 106
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 4,
+            "n": 5,
+            "sum": 6
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
             "i"
           ],
           "parent_frame_id_list": [],
@@ -509,7 +705,7 @@
           "frame_id": 109
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -522,93 +718,106 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 15,
+      "line": 6,
       "stack_to_render": [
         {
-          "func_name": "largestGap:15",
+          "func_name": "SumUp:6",
           "encoded_locals": {
-            "i": 1,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 4
+            "i": 4,
+            "n": 5,
+            "sum": 6
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
+            "n",
+            "sum",
             "i"
           ],
           "parent_frame_id_list": [],
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "121",
-          "frame_id": 121
+          "unique_hash": "117",
+          "frame_id": 117
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
           "is_highlighted": false,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "122",
-          "frame_id": 122
+          "unique_hash": "118",
+          "frame_id": 118
         }
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 11,
+      "line": 5,
       "stack_to_render": [
         {
-          "func_name": "largestGap:11",
+          "func_name": "SumUp:5",
           "encoded_locals": {
-            "i": 1,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 5
+            "i": 4,
+            "n": 5,
+            "sum": 10
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
+            "n",
+            "sum",
+            "i"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "127",
+          "frame_id": 127
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "128",
+          "frame_id": 128
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 5,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:5",
+          "encoded_locals": {
+            "i": 5,
+            "n": 5,
+            "sum": 10
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
             "i"
           ],
           "parent_frame_id_list": [],
@@ -619,7 +828,7 @@
           "frame_id": 131
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
@@ -632,106 +841,126 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 11,
+      "line": 8,
       "stack_to_render": [
         {
-          "func_name": "largestGap:11",
+          "func_name": "SumUp:8",
           "encoded_locals": {
-            "i": 2,
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 5
+            "n": 5,
+            "sum": 10
           },
           "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
-            "i"
+            "n",
+            "sum"
           ],
           "parent_frame_id_list": [],
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "135",
-          "frame_id": 135
+          "unique_hash": "139",
+          "frame_id": 139
         },
         {
-          "func_name": "main:23",
+          "func_name": "main:12",
           "encoded_locals": {},
           "ordered_varnames": [],
           "parent_frame_id_list": [],
           "is_highlighted": false,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "136",
-          "frame_id": 136
+          "unique_hash": "140",
+          "frame_id": 140
         }
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
+      "func_name": "SumUp",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "return",
+      "line": 8,
+      "stack_to_render": [
+        {
+          "func_name": "SumUp:8",
+          "encoded_locals": {
+            "n": 5,
+            "sum": 10,
+            "__return__": 10
+          },
+          "ordered_varnames": [
+            "n",
+            "sum",
+            "__return__"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "145",
+          "frame_id": 145
+        },
+        {
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "146",
+          "frame_id": 146
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "SumUp",
+      "heap": {}
     },
     {
       "stdout": "",
       "event": "step_line",
-      "line": 17,
+      "line": 12,
       "stack_to_render": [
         {
-          "func_name": "largestGap:17",
-          "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 5
-          },
-          "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min"
-          ],
+          "func_name": "main:12",
+          "encoded_locals": {},
+          "ordered_varnames": [],
           "parent_frame_id_list": [],
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
           "unique_hash": "147",
           "frame_id": 147
-        },
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "main",
+      "heap": {}
+    },
+    {
+      "stdout": "",
+      "event": "step_line",
+      "line": 13,
+      "stack_to_render": [
         {
-          "func_name": "main:23",
-          "encoded_locals": {},
-          "ordered_varnames": [],
+          "func_name": "main:13",
+          "encoded_locals": {
+            "x": 10
+          },
+          "ordered_varnames": [
+            "x"
+          ],
           "parent_frame_id_list": [],
-          "is_highlighted": false,
+          "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
           "unique_hash": "148",
@@ -740,159 +969,18 @@
       ],
       "globals": {},
       "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
-    },
-    {
-      "stdout": "",
-      "event": "step_line",
-      "line": 18,
-      "stack_to_render": [
-        {
-          "func_name": "largestGap:18",
-          "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 5,
-            "result": 0
-          },
-          "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
-            "result"
-          ],
-          "parent_frame_id_list": [],
-          "is_highlighted": true,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "157",
-          "frame_id": 157
-        },
-        {
-          "func_name": "main:23",
-          "encoded_locals": {},
-          "ordered_varnames": [],
-          "parent_frame_id_list": [],
-          "is_highlighted": false,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "158",
-          "frame_id": 158
-        }
-      ],
-      "globals": {},
-      "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
-    },
-    {
-      "stdout": "",
-      "event": "return",
-      "line": 18,
-      "stack_to_render": [
-        {
-          "func_name": "largestGap:18",
-          "encoded_locals": {
-            "x": [
-              "REF",
-              163
-            ],
-            "N": 3,
-            "max": 5,
-            "min": 5,
-            "result": 0,
-            "__return__": 0
-          },
-          "ordered_varnames": [
-            "x",
-            "N",
-            "max",
-            "min",
-            "result",
-            "__return__"
-          ],
-          "parent_frame_id_list": [],
-          "is_highlighted": true,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "163",
-          "frame_id": 163
-        },
-        {
-          "func_name": "main:23",
-          "encoded_locals": {},
-          "ordered_varnames": [],
-          "parent_frame_id_list": [],
-          "is_highlighted": false,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "164",
-          "frame_id": 164
-        }
-      ],
-      "globals": {},
-      "ordered_globals": [],
-      "func_name": "largestGap",
-      "heap": {
-        "163": [
-          "LIST",
-          9,
-          5,
-          4
-        ]
-      }
-    },
-    {
-      "stdout": "",
-      "event": "step_line",
-      "line": 23,
-      "stack_to_render": [
-        {
-          "func_name": "main:23",
-          "encoded_locals": {},
-          "ordered_varnames": [],
-          "parent_frame_id_list": [],
-          "is_highlighted": true,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "165",
-          "frame_id": 165
-        }
-      ],
-      "globals": {},
-      "ordered_globals": [],
       "func_name": "main",
       "heap": {}
     },
     {
-      "stdout": "",
+      "stdout": "10\n",
       "event": "step_line",
-      "line": 24,
+      "line": 14,
       "stack_to_render": [
         {
-          "func_name": "main:24",
+          "func_name": "main:14",
           "encoded_locals": {
-            "x": 0
+            "x": 10
           },
           "ordered_varnames": [
             "x"
@@ -901,8 +989,8 @@
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "166",
-          "frame_id": 166
+          "unique_hash": "152",
+          "frame_id": 152
         }
       ],
       "globals": {},
@@ -911,40 +999,14 @@
       "heap": {}
     },
     {
-      "stdout": "0\n",
-      "event": "step_line",
-      "line": 25,
-      "stack_to_render": [
-        {
-          "func_name": "main:25",
-          "encoded_locals": {
-            "x": 0
-          },
-          "ordered_varnames": [
-            "x"
-          ],
-          "parent_frame_id_list": [],
-          "is_highlighted": true,
-          "is_zombie": false,
-          "is_parent": false,
-          "unique_hash": "170",
-          "frame_id": 170
-        }
-      ],
-      "globals": {},
-      "ordered_globals": [],
-      "func_name": "main",
-      "heap": {}
-    },
-    {
-      "stdout": "0\n",
+      "stdout": "10\n",
       "event": "return",
-      "line": 25,
+      "line": 14,
       "stack_to_render": [
         {
-          "func_name": "main:25",
+          "func_name": "main:14",
           "encoded_locals": {
-            "x": 0,
+            "x": 10,
             "__return__": [
               "VOID"
             ]
@@ -957,8 +1019,8 @@
           "is_highlighted": true,
           "is_zombie": false,
           "is_parent": false,
-          "unique_hash": "171",
-          "frame_id": 171
+          "unique_hash": "153",
+          "frame_id": 153
         }
       ],
       "globals": {},

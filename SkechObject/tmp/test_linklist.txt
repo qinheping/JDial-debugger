@@ -1,0 +1,287 @@
+bit line7change = 0;
+bit line8change = 0;
+bit line9change = 0;
+bit line10change = 0;
+
+bit coeff0change = ??;
+ int Coeff0(){
+if(coeff0change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff1change = ??;
+ int Coeff1(){
+if(??){
+return 0;}
+
+return coeff1change;
+}
+
+bit coeff2change = ??;
+ int Coeff2(){
+if(coeff2change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff3change = ??;
+ int Coeff3(){
+if(coeff3change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff4change = ??;
+ int Coeff4(){
+if(??){
+return 0;}
+
+return coeff4change;
+}
+
+bit coeff5change = ??;
+ int Coeff5(){
+if(coeff5change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff6change = ??;
+ int Coeff6(){
+if(coeff6change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff7change = ??;
+ int Coeff7(){
+if(coeff7change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff8change = ??;
+ int Coeff8(){
+if(??){
+return 0;}
+
+return coeff8change;
+}
+
+bit coeff9change = ??;
+ int Coeff9(){
+if(coeff9change == 0){
+return 1;}
+
+if(??){
+return 0;}
+
+return -1;
+}
+
+bit coeff10change = ??;
+ int Coeff10(){
+if(coeff10change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff11change = ??;
+ int Coeff11(){
+if(coeff11change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+bit coeff12change = ??;
+ int Coeff12(){
+if(coeff12change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff13change = ??;
+ int Coeff13(){
+if(??){
+return 0;}
+
+return coeff13change;
+}
+
+bit coeff14change = ??;
+ int Coeff14(){
+if(coeff14change == 0){
+return 0;}
+
+if(??){
+return 1;}
+
+return -1;
+}
+
+int coeff15change = ??;
+ int Coeff15(){
+if(??){
+return 0;}
+
+return coeff15change;
+}
+
+
+struct Anode{
+    int lineval;
+    int ival;
+    int nval;
+    int sumval;
+    Anode prev;
+    int ct;
+}
+
+Anode dataArray = new Anode(lineval = 0, ival = 0, nval = 0, sumval = 0, prev = null, ct = -1);
+
+
+
+int sumfinal = 0;
+int nfinal = 0;
+int finalcount = 0;
+int count = -1;
+
+ int SumUp(){
+int linehit = 0;
+(count)++;
+dataArray = new Anode(lineval = 7, ival = 0, nval = 0, sumval = 0, prev = dataArray, ct = count);
+
+int n = 5 + ((Coeff0()) * (Coeff1()));
+
+(count)++;
+dataArray = new Anode(lineval = 8, ival = 0, nval = n, sumval = 0, prev = dataArray, ct = count);
+
+int sum = (0 + ((Coeff2()) * n)) + ((Coeff3()) * (Coeff4()));
+
+(count)++;
+dataArray = new Anode(lineval = 9, ival = 0, nval = n, sumval = sum, prev = dataArray, ct = count);
+
+for(int i = ((0 + ((Coeff5()) * n)) + ((Coeff6()) * sum)) + ((Coeff7()) * (Coeff8())); ((i - n) + ((Coeff14()) * (Coeff15()))) < 0; (i)++){
+(count)++;
+dataArray = new Anode(lineval = 9, ival = i, nval = n, sumval = sum, prev = dataArray, ct = count);
+
+(count)++;
+dataArray = new Anode(lineval = 10, ival = i, nval = n, sumval = sum, prev = dataArray, ct = count);
+
+
+
+sum += ((((Coeff9()) * i) + ((Coeff10()) * i)) + ((Coeff11()) * n)) + ((Coeff12()) * (Coeff13()));
+
+
+
+(count)++;
+dataArray = new Anode(lineval = 9, ival = i, nval = n, sumval = sum, prev = dataArray, ct = count);
+(linehit)++;
+if(linehit == 4){
+nfinal = sum;
+finalcount = count;
+return 0;
+}
+
+}
+
+
+(count)++;
+dataArray = new Anode(lineval = 9, ival = 0, nval = n, sumval = sum, prev = dataArray, ct = count);
+
+
+(count)++;
+dataArray = new Anode(lineval = 12, ival = 0, nval = n, sumval = sum, prev = dataArray, ct = count);
+return sum;
+
+
+}
+
+harness void Constraint(){
+int[20] oringianliArray = {0,0,0,0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,0};
+int[20] oringianlnArray = {0,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5};
+int[20] oringianlsumArray = {0,0,0,0,0,0,0,0,1,1,1,3,3,3,6,6,6,10,10,10};
+int[20] oringianllineArray = {7,8,9,9,10,9,9,10,9,9,10,9,9,10,9,9,10,9,9,12};
+int correctFinal_n = 16;
+SumUp();
+int SyntacticDistance = 0;
+int SemanticDistance = 0;
+
+if(dataArray != null)
+while(dataArray.ct > finalcount){
+if(dataArray !=null)
+	dataArray = dataArray.prev;
+}
+
+if(dataArray != null)
+while(dataArray.ct < finalcount){
+dataArray = new Anode(lineval = 0, ival = 0, sumval = 0, nval = 0, prev = dataArray, ct = dataArray.ct+1);
+}
+
+
+for(int i = finalcount; i >=0; (i)--){
+SemanticDistance += (dataArray.ival) != (oringianliArray[i]);
+SemanticDistance += (dataArray.nval) != (oringianlnArray[i]);
+SemanticDistance += (dataArray.sumval) != (oringianlsumArray[i]);
+SemanticDistance += (dataArray.lineval) != (oringianllineArray[i]);
+if(dataArray !=null)
+	dataArray = dataArray.prev;
+}
+
+SyntacticDistance += coeff0change;
+SyntacticDistance += coeff1change;
+SyntacticDistance += coeff2change;
+SyntacticDistance += coeff3change;
+SyntacticDistance += coeff4change;
+SyntacticDistance += coeff5change;
+SyntacticDistance += coeff6change;
+SyntacticDistance += coeff7change;
+SyntacticDistance += coeff8change;
+SyntacticDistance += coeff9change;
+SyntacticDistance += coeff10change;
+SyntacticDistance += coeff11change;
+SyntacticDistance += coeff12change;
+SyntacticDistance += coeff13change;
+SyntacticDistance += coeff14change;
+SyntacticDistance += coeff15change;
+
+assert (nfinal == 14);
+minimize(SemanticDistance+5*SyntacticDistance);
+}

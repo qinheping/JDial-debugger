@@ -85,7 +85,7 @@ public class Test {
 
 	@org.junit.Test
 	public void testSumUp() throws FileNotFoundException, InterruptedException {
-		int index = 10;
+		int index = 22; // 10 | 22
 		String oriTraces = new Scanner(new File("benchmarks/sumup/oritrace")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/sumup/correction_index_" + index)).useDelimiter("\\Z")
 				.next();
@@ -357,7 +357,7 @@ public class Test {
 	}
 	@org.junit.Test
 	public void testlargestGap1() throws FileNotFoundException, InterruptedException {
-		int index = 10;
+		int index = 12;
 		String oriTraces = new Scanner(new File("benchmarks/LargestGap-1/largestGap1-test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/LargestGap-1/largestGap1-target")).useDelimiter("\\Z").next();
 		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
@@ -377,7 +377,7 @@ public class Test {
 	
 	@org.junit.Test
 	public void testtmp() throws FileNotFoundException, InterruptedException, ScriptException {
-		int index = 9;
+		int index = 11;
 		String folder = "";
 		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
 		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();
