@@ -50,7 +50,7 @@ public class CallSketch {
 
 			} else {
 				while ((line = input.readLine()) != null) {
-					//System.out.println(line);
+					System.out.println(line);
 					// the following 4 if statment is use to extract the original value and the guess
 					// value of a coeffX
 					// it will be the original val if coeffXchange == 0, and the guess val otherwise
