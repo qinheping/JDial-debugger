@@ -423,15 +423,16 @@ public class ConstraintFactory {
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "SyntacticDistance", new ExprConstInt(0), 0));
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "SemanticDistance", new ExprConstInt(0), 0));
 
-		// syntactic distance
+		// semantic distance
 		if (sign_distance == 0)
 			stmts.add(HammingDistance(bound));
 
-		// semantic distance
+		// syntactic distance
 		StmtBlock editsb = new StmtBlock();
 		for (int i = 0; i < constNumber; i++) {
 			// if (!ConstraintFactory.noWeightCoeff.contains(i))
 			editsb.addStmt(new StmtAssign(new ExprVar("SyntacticDistance"), new ExprVar("coeff" + i + "change"), 1, 1));
+			editsb.addStmt(new StmtAssert(new ExprBinary(new ExprVar("SyntacticDistance"), ">=", new ExprConstInt(0), 0)));
 		}
 		stmts.add(editsb);
 
