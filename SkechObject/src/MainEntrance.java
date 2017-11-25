@@ -112,7 +112,7 @@ public class MainEntrance {
 		// added
 		System.out.println("--------------------");
 		boolean prime_mod = true;
-		boolean rec_mod = false;
+		boolean rec_mod = true;
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;

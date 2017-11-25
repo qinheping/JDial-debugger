@@ -203,7 +203,12 @@ public class ConstraintFactory {
 		if (externalFuncs.size() > 0)
 			System.out.println(externalFuncs.get(0).getName_Java());
 
-		buildContext((StmtBlock) source);
+		Context paraContext = new Context();
+		for(Parameter para: ConstraintFactory.fh.getPara()){
+			paraContext.addVar(para.getName(), para.getType());
+		}
+		((StmtBlock) source).buildContext(paraContext,0);
+				
 		System.out.println(source.toString_Context());
 		// replace all constants in source code
 		if (!ConstraintFactory.sign_limited_range) {
@@ -218,7 +223,12 @@ public class ConstraintFactory {
 		Statement globalVarDecls = getGlobalDecl();
 
 		// add record stmts to source code and collect vars info
-		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
+		Map<String, Type> vars = new HashMap<String, Type>();
+		for(Parameter para: ConstraintFactory.fh.getPara()){
+			vars.put(para.getName(), para.getType());
+		}
+		vars = ((StmtBlock) s).addRecordStmt(null, 0, vars);
+		System.err.println("Vars: "+ vars.toString());
 		ConstraintFactory.namesToType = vars;
 		List<String> varsNames = new ArrayList<String>(vars.keySet());
 		varList = varsNames;
@@ -268,6 +278,7 @@ public class ConstraintFactory {
 	}
 	//added 11/18
 	
+	/* old
 	public String getScript_linearCombination(Statement source, List<Parameter> param)
 	{
 		Statement s = source;
@@ -353,7 +364,7 @@ public class ConstraintFactory {
 		String tmp3 = constraintFunction_linearCombination().toString();
 		return tmp1 + tmp2 + tmp3;
 	}
-
+	*/
 	public String getScript_linearCombination(Statement source) {
 
 		// a script consists of three parts:
@@ -377,7 +388,8 @@ public class ConstraintFactory {
 		if (externalFuncs.size() > 0)
 			System.out.println(externalFuncs.get(0).getName_Java());
 
-		buildContext((StmtBlock) source);
+		Context paraContext = new Context();
+		((StmtBlock) source).buildContext(paraContext,0);
 		System.out.println(source.toString_Context());
 		// replace all constants in source code
 		if (!ConstraintFactory.sign_limited_range) {
@@ -392,7 +404,7 @@ public class ConstraintFactory {
 		Statement globalVarDecls = getGlobalDecl();
 
 		// add record stmts to source code and collect vars info
-		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
+		Map<String, Type> vars = ((StmtBlock) s).addRecordStmt(null,0,new HashMap<String,Type>());
 		ConstraintFactory.namesToType = vars;
 		List<String> varsNames = new ArrayList<String>(vars.keySet());
 		varList = varsNames;
@@ -400,7 +412,6 @@ public class ConstraintFactory {
 		for (int i = 0; i < varsNames.size(); i++) {
 			varsTypes.add(vars.get(varsNames.get(i)));
 		}
-
 		// add declare of <linehit> and <count>
 		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
 
@@ -1060,14 +1071,6 @@ public class ConstraintFactory {
 			s.add(data.getIndex());
 			constMap.put(data.getName(), s);
 		}
-	}
-
-	static public void buildContext(StmtBlock sb) {
-		sb.buildContext(new Context(), 0);
-	}
-
-	static public Map<String, Type> addRecordStmt(StmtBlock sorce) {
-		return sorce.addRecordStmt(null, 0, new HashMap<String, Type>());
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
