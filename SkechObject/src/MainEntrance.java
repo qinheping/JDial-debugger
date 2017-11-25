@@ -44,6 +44,7 @@ public class MainEntrance {
 	private String code;
 	private String targetFunc;
 	private List<String> function_names;
+	private Map<String, String> func_name_to_code;
 	private Traces traces;
 
 	private int mod;
@@ -77,7 +78,9 @@ public class MainEntrance {
 	public Map<Integer, String> Synthesize(boolean useLC, boolean oneLine) throws InterruptedException {
 		this.targetFunc = extractFuncName(manipulation);
 		this.root = jsonRootCompile(this.originalTrace);
+		this.buildFuncNameList();
 		this.code = root.getCode().getCode();
+	
 		if (oneLine)
 			mod = 1;
 
@@ -92,6 +95,12 @@ public class MainEntrance {
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
+		for(String funcName: this.func_name_to_code.keySet()){
+			//if(!funcName.equals(targetFunc))
+				//TODO
+				
+				
+		}
 		System.out.println("function");
 		System.out.println("--------------------");
 		System.out.println(function);
@@ -159,6 +168,14 @@ public class MainEntrance {
 
 	//added 11/19
 
+
+	private void buildFuncNameList() {
+		List<Trace> traces = this.root.getTraces().getTraces();
+		for(Trace trace: traces){
+			if(!this.function_names.contains(trace.getFuncname()))
+				this.function_names.add(trace.getFuncname());
+		}
+	}
 
 	private String addGetArrayDistance(int[][] ori, int tarRow, int tarCol, int iValue)
 	{
