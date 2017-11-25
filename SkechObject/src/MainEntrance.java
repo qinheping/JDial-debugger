@@ -36,13 +36,14 @@ import org.matheclipse.parser.client.SyntaxError;
 import org.matheclipse.parser.client.math.MathException;
 
 public class MainEntrance {
-	private String json;
-	private String correctTrace;
+	private String originalTrace;
+	private String manipulation;
 	private int indexOfCorrectTrace;
 
 	private Root root;
 	private String code;
 	private String targetFunc;
+	private List<String> function_names;
 	private Traces traces;
 
 	private int mod;
@@ -57,10 +58,11 @@ public class MainEntrance {
 	}
 
 	public MainEntrance(String json, String correctTrace, int indexOfCorrectTrace, int mod) {
-		this.json = json;
-		this.correctTrace = correctTrace;
+		this.originalTrace = json;
+		this.manipulation = correctTrace;
 		this.indexOfCorrectTrace = indexOfCorrectTrace;
 		this.repair_range = null;
+		this.function_names = new ArrayList<String>(); 
 		this.mod = mod;
 	}
 
@@ -73,8 +75,8 @@ public class MainEntrance {
 	}
 
 	public Map<Integer, String> Synthesize(boolean useLC, boolean oneLine) throws InterruptedException {
-		this.targetFunc = extractFuncName(correctTrace);
-		this.root = jsonRootCompile(this.json);
+		this.targetFunc = extractFuncName(manipulation);
+		this.root = jsonRootCompile(this.originalTrace);
 		this.code = root.getCode().getCode();
 		if (oneLine)
 			mod = 1;
@@ -113,7 +115,7 @@ public class MainEntrance {
 		System.out.println("--------------------");
 		boolean prime_mod = true;
 		boolean rec_mod = true;
-		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
+		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
