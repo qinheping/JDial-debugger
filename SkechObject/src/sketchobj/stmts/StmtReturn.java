@@ -106,9 +106,15 @@ public class StmtReturn extends Statement
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-		parent.stmts.set(index,
-				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+//		StmtBlock tmpSB = new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this);
+//
+//		parent.stmts.set(index, tmpSB);
+//		return m;
+//
+		parent.stmts = new ArrayList<Statement>(parent.stmts);
+		parent.stmts.set(index, new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		return m;
+
 	}
 
 
@@ -132,7 +138,8 @@ public class StmtReturn extends Statement
 	}
 	@Override
 	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "return "+ value;
+		line_to_string.put(this.getLineNumber(), result);
+		return line_to_string;
 	}
 }

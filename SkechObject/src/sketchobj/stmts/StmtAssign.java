@@ -207,7 +207,7 @@ public class StmtAssign extends Statement {
 			liveVarsNameSet.add(v);
 		}
 		this.rhs = new ExprBinary(this.rhs, "+",
-				new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+				new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),
 				this.getLineNumber());
 		index = index + 2;

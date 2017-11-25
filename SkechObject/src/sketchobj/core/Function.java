@@ -110,7 +110,9 @@ public class Function extends SketchNode {
 	}
 
 	public String toString() {
-		return fcnType.cCodeName + " " + returnType.toString()+ " " + name + "(" + printParams() + ")" + "{\n"+ body.toString()+ "}\n";
+		String tmp1 = fcnType.cCodeName + " " + returnType.toString()+ " " + name + "(" + printParams() + ")";
+		String tmp2 = "{\n"+ body.toString()+ "}\n";
+		return tmp1 + tmp2;
 	}
 
 }

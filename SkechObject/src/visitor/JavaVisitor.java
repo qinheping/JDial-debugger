@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javaparser.*;
+import org.antlr.v4.runtime.tree.ParseTree;
 import sketchobj.core.*;
 import sketchobj.expr.*;
 import sketchobj.expr.ExprArrayRange.RangeLen;
@@ -339,9 +340,22 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 	@Override
 	public Statement visitExpressionStatement(simpleJavaParser.ExpressionStatementContext ctx) {
 		// TODO convert expression and statement
-		if (visit(ctx.statementExpression()).getClass().equals(StmtAssign.class))
+		ParseTree tree = ctx.statementExpression();
+		String tmp = ctx.getText();
+		SketchObject sk =  visit(tree);
+
+		if (sk == null)
+			return new StmtExpr((Expression) visit(ctx.statementExpression()), ctx.start.getLine());
+
+		Class<? extends SketchObject> sk1 = sk.getClass();
+		Class<? extends SketchObject> sk2 = StmtAssign.class;
+		if (sk1.equals(sk2))
 			return (Statement) visit(ctx.statementExpression());
 		return new StmtExpr((Expression) visit(ctx.statementExpression()), ctx.start.getLine());
+//
+//		if (visit(tree).getClass().equals(StmtAssign.class))
+//			return (Statement) visit(ctx.statementExpression());
+//		return new StmtExpr((Expression) visit(ctx.statementExpression()), ctx.start.getLine());
 	}
 
 	@Override
@@ -634,7 +648,19 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 				continue;
 			methodName += tmp;
 		}
-		return new ExprFunCall("External_" + methodName, (ExpressionList) visit(ctx.argumentList()), methodNameJ);
+		ParseTree tree = ctx.argumentList();
+		ExpressionList temp;
+		if(tree != null)
+		{
+			temp = (ExpressionList)visit(tree);
+		}
+		else
+		{
+			//temp = new ExpressionList(new ArrayList<>());
+			return new ExprFunCall("External_" + methodName);
+		}
+
+		return new ExprFunCall("External_" + methodName, temp , methodNameJ);
 	}
 
 	@Override

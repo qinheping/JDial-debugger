@@ -447,8 +447,10 @@ public class StmtVarDecl extends Statement {
 					liveVarsNameSet.add(v);
 					index++;
 				}
-				inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+				inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()), this.getLineNumber()));
+				//@2 ------added, declaration and initializations
+
 				index += 2;
 				return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 						primaryIndex);
@@ -459,7 +461,9 @@ public class StmtVarDecl extends Statement {
 
 	@Override
 	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
-		line_to_string.put(this.getLineNumber(), this.toString());
+		int tmpi = this.getLineNumber();
+		String tmps = this.toString();
+		line_to_string.put(tmpi, tmps);
 		return line_to_string;
 	}
 

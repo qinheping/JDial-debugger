@@ -457,7 +457,7 @@ public class ExprBinary extends Expression {
 				this.right = new ExprConstInt(0);
 				this.left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
-				this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+				this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
 				primaryIndex = index;
 				index += 2;

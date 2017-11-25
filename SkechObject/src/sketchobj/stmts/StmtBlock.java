@@ -18,7 +18,11 @@ public class StmtBlock extends Statement {
 	public StmtBlock(List<? extends Statement> stmts) {
 		for(Statement s:stmts)
 			s.setParent(this);
+
+		//this.stmts = new ArrayList<>(stmts);
+		//改动
 		this.stmts = Collections.unmodifiableList(stmts);
+
 	}
 
 	public StmtBlock() {
@@ -41,6 +45,9 @@ public class StmtBlock extends Statement {
 		lst.add(stmt2);
 		stmt1.setParent(this);
 		stmt2.setParent(this);
+
+		//this.stmts = new ArrayList<>(lst);
+		//改动
 		this.stmts = Collections.unmodifiableList(lst);
 	}
 
@@ -52,7 +59,8 @@ public class StmtBlock extends Statement {
 		String result = "";
 		Iterator<Statement> it = stmts.iterator();
 		while (it.hasNext()) {
-			result += it.next().toString() + "\n";
+			String tmp = it.next().toString();
+			result += tmp + "\n";
 		}
 		return result;
 	}

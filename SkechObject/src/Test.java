@@ -385,4 +385,148 @@ public class Test {
 		String res = me.Synthesize(true,true).toString();
 		System.out.println(res);
 	}
+
+	@org.junit.Test
+	public void testtmp1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 5;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest1/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest1/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmp3() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 4;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest2/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest2/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpRe() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 7;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestRe/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestRe/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpRe1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 17;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestRe/test_re")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestRe/target_re")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpEZ() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 4;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestEZ/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestEZ/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+
+	@org.junit.Test
+	public void testtmpBig() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 5;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestBig/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestBig/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpBig1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 6;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestBig1/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestBig1/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpIfAndFor() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 18;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpifandfor/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpifandfor/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpSimpleRe() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 22;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpSimpleRe/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpSimpleRe/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpLargestGap() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 15;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpLargestGap/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpLargestGap/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpMax() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 9;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpMax/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpMax/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpReWithoutPrint() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 10;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpReWithoutPrint/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpReWithoutPrint/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpReStack() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 16;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestReStack/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestReStack/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
 }
