@@ -49,6 +49,9 @@ public class MainEntrance {
 
 	private List<Integer> repair_range;
 
+	//added 11/18
+	private HashMap<String, String> funtions = new HashMap<>();
+	
 	public MainEntrance(String json, String correctTrace, int indexOfCorrectTrace) {
 		this(json, correctTrace, indexOfCorrectTrace, 0);
 	}
@@ -91,20 +94,54 @@ public class MainEntrance {
 		System.out.println("--------------------");
 		System.out.println(function);
 
+		//added 11/18
+		funtions.put(targetFunc, "");
+		while (JavaVisitor.methodNames.size() != 0)
+		{
+			ANTLRInputStream input1 = new ANTLRInputStream(code);
+			String name = JavaVisitor.methodNames.poll();
+			if(funtions.containsKey(name))
+				continue;
+
+			Function function1 = (Function)javaCompile(input1, name);
+			System.out.println(function1);
+			funtions.put(name, function1.toString());
+		}
+		//added 11/18
+		
+		// added
+		System.out.println("--------------------");
+		boolean prime_mod = true;
+		boolean rec_mod = false;
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod);
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
 		String script;
 		// if (useLC)
 		//script = cf.getScript_linearCombination(function.getBody(), function.getParames());
-		script = cf.getScript_linearCombination(function.getBody());
+		
+		// added
+		if (rec_mod)
+			script = cf.getScript_linearCombination(function.getBody(), funtions);	
+		else
+			script = cf.getScript_linearCombination(function.getBody());
+		//System.err.println("2--------------------------------------------"); // added
+		//System.err.println(script); // added
+		//System.err.println("2--------------------------------------------"); // added
 
-		//script = tranScript(script);
-		script = tranScriptCall(script);
+		// added
+		if (prime_mod)
+			script = tranScript(script);
+		System.err.println("3--------------------------------------------");
+		if (rec_mod)
+			script = tranScriptCall(script);
 
-
+		System.err.println("4--------------------------------------------"); // added
+		System.err.println(script); // added
+		System.err.println("4--------------------------------------------"); // added
+		
 		//----added
 		SketchResult resultS = CallSketch.CallByString(script);
 
@@ -118,6 +155,79 @@ public class MainEntrance {
 		return null;
 	}
 
+	//added 11/19
+
+
+	private String addGetArrayDistance(int[][] ori, int tarRow, int tarCol, int iValue)
+	{
+		int row = ori.length;
+		int col = ori[0].length;
+		/*
+		int getArrayDistance(int[m] a1, int[n] a2, int illegalValue)
+		{
+			int distance = 0;
+			distance += (a1[0] != a2[0]);
+			for(int i = 1;i<m && i< n && a1[i] != illegalValue && a2[i] != illegalkValue;i++)
+			{
+				distance += (abs(a1[i], a1[i-1])  !=  abs(a2[i], a2[i-1]) );
+			}
+			return distance
+		}
+
+		int[col][row] ori;
+		ori[0] = {};
+
+
+		int[tarCol][tarRow] tar;
+		iValue = ;
+
+		int dis = 0;
+		for(int i = 0;i<tarRow && i < row;i++)
+		{
+			dis += getArrayDistance(ori[i], tar[i], iValue)
+		}
+
+		 */
+		StringBuilder result = new StringBuilder();
+		result.append("int getArrayDistance(int[m] a1, int[n] a2, int illegalValue)\n");
+		result.append("{\n");
+		result.append("int distance = 0;\n");
+		result.append("distance += (a1[0] != a2[0]);\n");
+		result.append("for(int i = 1;i<m && i<n && a1[i] != illegalValue && a2[i] != illegalValue;i++)\n");
+		result.append("{\n");
+		result.append("distance += (abs(a1[i], a1[i-1]) != abs(a2[i], a2[i-1]));\n");
+		result.append("}\n");
+		result.append("return distance;\n");
+		result.append("}\n");
+		result.append("int row = "+row+"\n");
+		result.append("int col = "+col+"\n");
+		result.append("int tarRow = "+tarRow+"\n");
+		result.append("int tarCol = "+tarCol+"\n");
+
+
+		result.append("int[col][row] ori;\n");
+		for(int i = 0;i<ori.length;i++)
+		{
+			StringBuilder tmp = new StringBuilder();
+			for(int j = 0;j<ori[i].length;j++)
+			{
+				tmp.append(ori[i] + ",");
+			}
+			String temp = tmp.toString().substring(0,tmp.length()-1);
+			result.append("ori["+i+"] = {"+temp+"};\n");
+		}
+
+		result.append("int[tarCol][tarRow] tar;\n");
+		result.append("iValue = "+iValue+";\n");
+		result.append("int dis = 0;\n");
+		result.append("for(int i = 0;i<tarRow && i < row;i++)\n");
+		result.append("{\n");
+		result.append("dis += getArrayDistance(ori[i], tar[i], iValue)");
+		result.append("}\n");
+		return result.toString();
+	}
+	//added 11/19
+	
 	//@1int bfinal = 0; need to know nameOfVar, primes
 	//@2int a = 1 + ((Coeff0()) * (Coeff1())); need to know nameOfVar, primes ("Coeff")
 	//@3int[3] oringianlaArray = {0,1,1};
@@ -133,8 +243,9 @@ public class MainEntrance {
 		result.append(script.substring(index0, index1+1));
 		index0 = index1 + 1;
 
-
+		// store the value of the result variable in each iteration 
 		result.append("int[10] resArray = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};\n");
+		// level of recursion
 		result.append("int funcCount = -1;\n");
 
 		index1 = script.indexOf('\n', index0);
@@ -147,12 +258,14 @@ public class MainEntrance {
 		//step 1--done
 
 		index1 = script.indexOf("finalcount = count;", index0);
+		System.err.println("index1: " + index1);
 		index1 = index1 -2;
 		index1 = script.lastIndexOf('\n', index1);
 
 		result.append(script.substring(index0, index1+1));
 		index0 = script.indexOf('\n', index1+1);
 		String tmpVarname = script.substring(index1+1, index0);
+		System.err.println("tmpVarname: " + tmpVarname);
 		int indexEqual = tmpVarname.indexOf('=');
 		int indexSemi = tmpVarname.indexOf(';');
 		tmpVarname = tmpVarname.substring(indexEqual+1, indexSemi).trim();

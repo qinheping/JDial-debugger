@@ -1,7 +1,6 @@
 package visitor;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javaparser.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -16,6 +15,10 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 
 	private String targetFunc;
 
+	//added 11/18
+	public static Queue<String> methodNames = new LinkedList<>();
+	//added 11/18
+	
 	public JavaVisitor(String targetFunc) {
 		this.targetFunc = targetFunc;
 	}
@@ -650,6 +653,11 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		}
 		ParseTree tree = ctx.argumentList();
 		ExpressionList temp;
+		
+		//added 11/18
+		methodNames.add(methodName);
+		//added 11/18
+		
 		if(tree != null)
 		{
 			temp = (ExpressionList)visit(tree);

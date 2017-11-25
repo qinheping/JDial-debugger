@@ -16,12 +16,24 @@ public class AuxMethods {
 		
 		List<Trace> tracelist = traces.getTraces();
 		Trace callTrace = null;
+		
+		//added to handle recursion, keep searching from back until Funcname changes
 		for(int i = targetindex; i >=0; i--){
 			if(tracelist.get(i).getEvent().equals("call")){
 				callTrace = tracelist.get(i);
-			break;
+				// added
+				String name = callTrace.getFuncname();
+				for (int j = i; j >=0; j--){
+					if (tracelist.get(j).getFuncname().equals(name)){
+						callTrace = tracelist.get(j);
+					} else {
+						break;
+					}
+				}
+				break;
 			}
 		}
+		
 		
 		List<Var> args = callTrace.getLocals().getVar();
 		List<Var> heapObjs = callTrace.getHeap().getVar();

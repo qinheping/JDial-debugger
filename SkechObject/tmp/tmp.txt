@@ -1,12 +1,7 @@
-bit line4change = 0;
-bit line5change = 0;
 bit line6change = 0;
-bit line7change = 0;
 bit line8change = 0;
 bit line9change = 0;
-bit line10change = 0;
-bit line11change = 0;
-bit line13change = 0;
+bit line5change = 0;
 
 bit coeff0change = ??;
  int Coeff0(){
@@ -30,10 +25,10 @@ return coeff1change;
 bit coeff2change = ??;
  int Coeff2(){
 if(coeff2change == 0){
-return 1;}
+return 0;}
 
 if(??){
-return 0;}
+return 1;}
 
 return -1;
 }
@@ -49,9 +44,17 @@ return 1;}
 return -1;
 }
 
-bit coeff4change = ??;
+int coeff4change = ??;
  int Coeff4(){
-if(coeff4change == 0){
+if(??){
+return 0;}
+
+return coeff4change;
+}
+
+bit coeff5change = ??;
+ int Coeff5(){
+if(coeff5change == 0){
 return 0;}
 
 if(??){
@@ -60,21 +63,13 @@ return 1;}
 return -1;
 }
 
-int coeff5change = ??;
- int Coeff5(){
-if(??){
-return 0;}
-
-return coeff5change;
-}
-
 bit coeff6change = ??;
  int Coeff6(){
 if(coeff6change == 0){
-return 1;}
+return 0;}
 
 if(??){
-return 0;}
+return 1;}
 
 return -1;
 }
@@ -90,15 +85,12 @@ return 1;}
 return -1;
 }
 
-bit coeff8change = ??;
+int coeff8change = ??;
  int Coeff8(){
-if(coeff8change == 0){
+if(??){
 return 0;}
 
-if(??){
-return 1;}
-
-return -1;
+return coeff8change;
 }
 
 bit coeff9change = ??;
@@ -120,419 +112,84 @@ return 0;}
 return coeff10change;
 }
 
-bit coeff11change = ??;
- int Coeff11(){
-if(coeff11change == 0){
-return 0;}
 
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff12change = ??;
- int Coeff12(){
-if(coeff12change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff13change = ??;
- int Coeff13(){
-if(coeff13change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff14change = ??;
- int Coeff14(){
-if(coeff14change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff15change = ??;
- int Coeff15(){
-if(??){
-return 0;}
-
-return coeff15change;
-}
-
-bit coeff16change = ??;
- int Coeff16(){
-if(coeff16change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff17change = ??;
- int Coeff17(){
-if(??){
-return 0;}
-
-return coeff17change;
-}
-
-bit coeff18change = ??;
- int Coeff18(){
-if(coeff18change == 0){
-return 1;}
-
-if(??){
-return 0;}
-
-return -1;
-}
-
-bit coeff19change = ??;
- int Coeff19(){
-if(coeff19change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff20change = ??;
- int Coeff20(){
-if(coeff20change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff21change = ??;
- int Coeff21(){
-if(coeff21change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff22change = ??;
- int Coeff22(){
-if(coeff22change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff23change = ??;
- int Coeff23(){
-if(??){
-return 0;}
-
-return coeff23change;
-}
-
-bit coeff24change = ??;
- int Coeff24(){
-if(coeff24change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff25change = ??;
- int Coeff25(){
-if(??){
-return 0;}
-
-return coeff25change;
-}
-
-bit coeff26change = ??;
- int Coeff26(){
-if(coeff26change == 0){
-return 1;}
-
-if(??){
-return 0;}
-
-return -1;
-}
-
-bit coeff27change = ??;
- int Coeff27(){
-if(coeff27change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff28change = ??;
- int Coeff28(){
-if(coeff28change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff29change = ??;
- int Coeff29(){
-if(coeff29change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff30change = ??;
- int Coeff30(){
-if(??){
-return 0;}
-
-return coeff30change;
-}
-
-bit coeff31change = ??;
- int Coeff31(){
-if(coeff31change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff32change = ??;
- int Coeff32(){
-if(??){
-return 0;}
-
-return coeff32change;
-}
-
-bit coeff33change = ??;
- int Coeff33(){
-if(coeff33change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff34change = ??;
- int Coeff34(){
-if(coeff34change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff35change = ??;
- int Coeff35(){
-if(coeff35change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-bit coeff36change = ??;
- int Coeff36(){
-if(coeff36change == 0){
-return 0;}
-
-if(??){
-return 1;}
-
-return -1;
-}
-
-int coeff37change = ??;
- int Coeff37(){
-if(??){
-return 0;}
-
-return coeff37change;
-}
-
-bit coeff38change = ??;
- int Coeff38(){
-if(coeff38change == 0){
-return 1;}
-
-if(??){
-return 0;}
-
-return -1;
-}
-
-bit coeff39change = ??;
- int Coeff39(){
-if(coeff39change == 0){
-return 1;}
-
-if(??){
-return 0;}
-
-return -1;
-}
-
-
-int[20] lineArray;
-int[20] resultArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] iArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] minArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] maxArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-int[20] NArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-
-
-int maxfinal = 0;
+int[12] lineArray;
+int[12] iArray = {0,0,0,0,0,0,0,0,0,0,0,0};
+int[12] kArray = {0,0,0,0,0,0,0,0,0,0,0,0};
+int[12] cArray = {0,0,0,0,0,0,0,0,0,0,0,0};
+
+
+int kfinal = 0;
+int k2 = 0;
+int k3 = 0;
+int k5 = 0;
+int sfinal = 0;
+int k2 = 0;
+int k3 = 0;
+int k5 = 0;
+int cfinal = 0;
+int k2 = 0;
+int k3 = 0;
+int k5 = 0;
 int finalcount = 0;
 int count = -1;
 
- int largestGap(){
+ int FindC(){
 int linehit = 0;
 (count)++;
-lineArray[count] = 3;
-
-int[] x = {13,5,4};
-
-(count)++;
-lineArray[count] = 4;
-
-int N = 3 + ((Coeff0()) * (Coeff1()));
-
-(count)++;
-lineArray[count] = 5;
-NArray[count] = N;
-
-int max = (((Coeff2()) * (x[N - 1])) + ((Coeff3()) * N)) + ((Coeff4()) * (Coeff5()));
-
-(count)++;
 lineArray[count] = 6;
-maxArray[count] = max;
-NArray[count] = N;
 
-int min = ((((Coeff6()) * (x[N - 1])) + ((Coeff7()) * max)) + ((Coeff8()) * N)) + ((Coeff9()) * (Coeff10()));
+int k = 3 + ((Coeff0()) * (Coeff1()));
+k2 = ( 3 + ((Coeff0()) * (Coeff1()))) % 2;
+k3 = ( 3 + ((Coeff0()) * (Coeff1()))) % 3;
+k5 = ( 3 + ((Coeff0()) * (Coeff1()))) % 5;
 
 (count)++;
 lineArray[count] = 7;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-(linehit)++;
-if(linehit == 3){
-maxfinal = max;
-finalcount = count;
-return 0;
-}
+kArray[count] = k;
 
-
-for(int i = (((1 + ((Coeff11()) * min)) + ((Coeff12()) * max)) + ((Coeff13()) * N)) + ((Coeff14()) * (Coeff15())); ((i - (N - 1)) + ((Coeff31()) * (Coeff32()))) < 0; (i)++){
-(count)++;
-lineArray[count] = 7;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-(linehit)++;
-if(linehit == 3){
-maxfinal = max;
-finalcount = count;
-return 0;
-}
-
+int[] s = {1,2,3,4};
 
 (count)++;
 lineArray[count] = 8;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+kArray[count] = k;
 
-if(((max - (x[i])) + ((Coeff16()) * (Coeff17()))) < 0){
-(count)++;
-lineArray[count] = 9;
-iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-
-max = (((((Coeff18()) * (x[i])) + ((Coeff19()) * i)) + ((Coeff20()) * min)) + ((Coeff21()) * N)) + ((Coeff22()) * (Coeff23()));
+int c = (4 + ((Coeff2()) * k)) + ((Coeff3()) * (Coeff4()));
+int c2 = ( (4 + ((Coeff2()) * k2)) + ((Coeff3()) * (Coeff4()))) % 2;
+int c3 = ( (4 + ((Coeff2()) * k3)) + ((Coeff3()) * (Coeff4()))) % 3;
+int c5 = ( (4 + ((Coeff2()) * k5)) + ((Coeff3()) * (Coeff4()))) % 5;
 
 (count)++;
 lineArray[count] = 9;
+kArray[count] = k;
+cArray[count] = c;
+
+for(int i = ((0 + ((Coeff5()) * k)) + ((Coeff6()) * c)) + ((Coeff7()) * (Coeff8())); ((i - k) + ((Coeff9()) * (Coeff10()))) < 0; (i)++){
+(count)++;
+lineArray[count] = 9;
 iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-
-}
-
+kArray[count] = k;
+cArray[count] = c;
 
 (count)++;
 lineArray[count] = 10;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+kArray[count] = k;
+cArray[count] = c;
 
-if(((min - (x[i])) + ((Coeff24()) * (Coeff25()))) > 0){
+if(c){
 (count)++;
 lineArray[count] = 11;
 iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+kArray[count] = k;
+cArray[count] = c;
 
-min = ((((Coeff26()) * (x[i])) + ((Coeff27()) * i)) + ((Coeff28()) * N)) + ((Coeff29()) * (Coeff30()));
+return 1;
 
 (count)++;
 lineArray[count] = 11;
 iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+kArray[count] = k;
+cArray[count] = c;
 
 }
 
@@ -540,74 +197,54 @@ NArray[count] = N;
 
 
 (count)++;
-lineArray[count] = 7;
+lineArray[count] = 9;
 iArray[count] = i;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-(linehit)++;
-if(linehit == 3){
-maxfinal = max;
-finalcount = count;
-return 0;
-}
-
+kArray[count] = k;
+cArray[count] = c;
 
 }
 
 
 (count)++;
-lineArray[count] = 7;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-(linehit)++;
-if(linehit == 3){
-maxfinal = max;
-finalcount = count;
-return 0;
-}
-
+lineArray[count] = 9;
+kArray[count] = k;
+cArray[count] = c;
 
 
 (count)++;
 lineArray[count] = 13;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
+kArray[count] = k;
+cArray[count] = c;
+(linehit)++;
+if(linehit == 1){
+kfinal = k;
+cfinal = c;
+finalcount = count;
+return 0;
+}
 
-int result = ((((((Coeff39()) * max) - ((Coeff38()) * min)) + ((Coeff33()) * min)) + ((Coeff34()) * max)) + ((Coeff35()) * N)) + ((Coeff36()) * (Coeff37()));
 
-(count)++;
-lineArray[count] = 14;
-resultArray[count] = result;
-minArray[count] = min;
-maxArray[count] = max;
-NArray[count] = N;
-
-return result;
+return 0;
 
 
 }
 
 harness void Constraint(){
-int[10] oringianlxArray = {0};
-int[10] oringianlresultArray = {0,0,0,0,0,0,0,0,0,0};
-int[10] oringianliArray = {0,0,0,0,0,1,1,1,1,1};
-int[10] oringianlminArray = {0,0,0,0,4,4,4,4,4,4};
-int[10] oringianlmaxArray = {0,0,0,4,4,4,4,4,5,5};
-int[10] oringianlNArray = {0,0,3,3,3,3,3,3,3,3};
-int[10] oringianllineArray = {3,4,5,6,7,7,8,9,10,7};
-int correctFinal_max = 13;
-largestGap();
+int[6] oringianliArray = {0,0,0,0,0,0};
+int[6] oringianlkArray = {0,3,3,3,3,3};
+int[6] oringianlsArray = {0,0};
+int[6] oringianlcArray = {0,0,0,4,4,4};
+int[6] oringianllineArray = {6,7,8,9,9,10};
+int correctFinal_k = 3;
+int correctFinal_s = 143;
+int correctFinal_c = 4;
+FindC();
 int SyntacticDistance = 0;
 int SemanticDistance = 0;
-for(int i = 0; i < 10; (i)++){
-SemanticDistance += (resultArray[i]) != (oringianlresultArray[i]);
+for(int i = 0; i < 6; (i)++){
 SemanticDistance += (iArray[i]) != (oringianliArray[i]);
-SemanticDistance += (minArray[i]) != (oringianlminArray[i]);
-SemanticDistance += (maxArray[i]) != (oringianlmaxArray[i]);
-SemanticDistance += (NArray[i]) != (oringianlNArray[i]);
+SemanticDistance += (kArray[i]) != (oringianlkArray[i]);
+SemanticDistance += (cArray[i]) != (oringianlcArray[i]);
 SemanticDistance += (lineArray[i]) != (oringianllineArray[i]);
 }
 
@@ -622,36 +259,15 @@ SyntacticDistance += coeff7change;
 SyntacticDistance += coeff8change;
 SyntacticDistance += coeff9change;
 SyntacticDistance += coeff10change;
-SyntacticDistance += coeff11change;
-SyntacticDistance += coeff12change;
-SyntacticDistance += coeff13change;
-SyntacticDistance += coeff14change;
-SyntacticDistance += coeff15change;
-SyntacticDistance += coeff16change;
-SyntacticDistance += coeff17change;
-SyntacticDistance += coeff18change;
-SyntacticDistance += coeff19change;
-SyntacticDistance += coeff20change;
-SyntacticDistance += coeff21change;
-SyntacticDistance += coeff22change;
-SyntacticDistance += coeff23change;
-SyntacticDistance += coeff24change;
-SyntacticDistance += coeff25change;
-SyntacticDistance += coeff26change;
-SyntacticDistance += coeff27change;
-SyntacticDistance += coeff28change;
-SyntacticDistance += coeff29change;
-SyntacticDistance += coeff30change;
-SyntacticDistance += coeff31change;
-SyntacticDistance += coeff32change;
-SyntacticDistance += coeff33change;
-SyntacticDistance += coeff34change;
-SyntacticDistance += coeff35change;
-SyntacticDistance += coeff36change;
-SyntacticDistance += coeff37change;
-SyntacticDistance += coeff38change;
-SyntacticDistance += coeff39change;
 
-assert (maxfinal == correctFinal_max);
+assert (k2 % 2 == correctFinal_k %2);
+assert (k3 % 3 == correctFinal_k %3);
+assert (k5 % 5 == correctFinal_k %5);
+assert (k2 % 2 == correctFinal_k %2);
+assert (k3 % 3 == correctFinal_k %3);
+assert (k5 % 5 == correctFinal_k %5);
+assert (k2 % 2 == correctFinal_k %2);
+assert (k3 % 3 == correctFinal_k %3);
+assert (k5 % 5 == correctFinal_k %5);
 minimize(SemanticDistance+5*SyntacticDistance);
 }

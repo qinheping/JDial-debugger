@@ -9,6 +9,8 @@ import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.core.TypeArray;
 import sketchobj.core.TypePrimitive;
+// added
+import constraintfactory.ConstraintFactory;
 
 public class ExprBinary extends Expression {
 	public static final int BINOP_ADD = 1;
@@ -457,7 +459,12 @@ public class ExprBinary extends Expression {
 				this.right = new ExprConstInt(0);
 				this.left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
-				this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
+				// added
+				if (ConstraintFactory.prime_mod)
+					this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
+						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
+				else
+					this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
 				primaryIndex = index;
 				index += 2;

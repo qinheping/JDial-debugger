@@ -24,6 +24,8 @@ import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.ExprStar;
 import sketchobj.expr.ExprVar;
 import sketchobj.expr.Expression;
+//added
+import constraintfactory.ConstraintFactory;
 
 public class StmtVarDecl extends Statement {
 	private List<Type> types;
@@ -447,10 +449,13 @@ public class StmtVarDecl extends Statement {
 					liveVarsNameSet.add(v);
 					index++;
 				}
-				inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
+				// added
+				if (ConstraintFactory.prime_mod)
+					inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()), this.getLineNumber()));
-				//@2 ------added, declaration and initializations
-
+				else
+					inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+							new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()), this.getLineNumber()));
 				index += 2;
 				return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 						primaryIndex);

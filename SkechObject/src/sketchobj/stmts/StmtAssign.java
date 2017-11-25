@@ -18,6 +18,8 @@ import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.ExprVar;
 import sketchobj.expr.Expression;
+//added
+import constraintfactory.ConstraintFactory;
 
 public class StmtAssign extends Statement {
 	private Expression lhs, rhs;
@@ -206,10 +208,16 @@ public class StmtAssign extends Statement {
 			index++;
 			liveVarsNameSet.add(v);
 		}
-		this.rhs = new ExprBinary(this.rhs, "+",
+		if (ConstraintFactory.prime_mod)
+			this.rhs = new ExprBinary(this.rhs, "+",
 				new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),
 				this.getLineNumber());
+		else
+			this.rhs = new ExprBinary(this.rhs, "+",
+					new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+							new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),
+					this.getLineNumber());
 		index = index + 2;
 		return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 				primaryIndex);
