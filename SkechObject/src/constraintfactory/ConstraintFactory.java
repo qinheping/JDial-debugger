@@ -239,6 +239,8 @@ public class ConstraintFactory {
 
 		// add declare of <linehit> and <count>
 		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
+		
+		// TODO add stack increment
 
 		Function f = new Function(ConstraintFactory.fh, s);
 
