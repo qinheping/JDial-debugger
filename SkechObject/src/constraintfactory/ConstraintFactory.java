@@ -810,6 +810,7 @@ public class ConstraintFactory {
 		for (String v : varList) {
 			
 			
+			
 			ExprBinary expBinary1 = new ExprBinary(new ExprArrayRange(v + "Array", "i", 0), "!=",
 					new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0);
 			ExprBinary expBinary2 = new ExprBinary(new ExprArrayRange("stackArray", "i", 0), "!=",
@@ -823,7 +824,8 @@ public class ConstraintFactory {
 		
 		
 		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
-		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
+		//Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
+		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprString("count"), 0);
 		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"), 0), 0);
 
 		return new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0);

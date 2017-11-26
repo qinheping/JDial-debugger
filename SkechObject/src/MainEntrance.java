@@ -144,12 +144,14 @@ public class MainEntrance {
 		System.err.println("2--------------------------------------------"); // added
 
 		// added
+		script = script.replaceAll("External_", "");
 		if (prime_mod)
 			script = tranScript(script);
 		System.err.println("3--------------------------------------------");
-		if (rec_mod)
-			script = tranScriptCall(script);
-
+//		if (rec_mod)
+//			script = tranScriptCall(script);
+//		
+		
 		System.err.println("4--------------------------------------------"); // added
 		System.err.println(script); // added
 		System.err.println("4--------------------------------------------"); // added
