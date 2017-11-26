@@ -818,19 +818,25 @@ public class ConstraintFactory {
 			ExprBinary expBinary2 = new ExprBinary(new ExprArrayRange("stackArray", "i", 0), "!=",
 					new ExprArrayRange("oringianlStackArray", "i", 0), 0);
 			
-			forBody.add(new StmtAssign(new ExprVar("SemanticDistance"),
+			StmtAssign sa = new StmtAssign(new ExprVar("SemanticDistance"),
 					new ExprBinary(expBinary1, "||",
 							expBinary2, 0),
-					1, 1));
+					1, 1);
+
+			
+			forBody.add(sa);
 		}
+		
+		StmtBlock sb = new StmtBlock(forBody);
+		StmtIfThen ifth = new StmtIfThen(new ExprBinary(new ExprString("i"), "<=", new ExprString("count"), 0),
+				sb , null);
 		
 		
 		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
-		//Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
-		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprString("count"), 0);
+		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
 		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"), 0), 0);
 
-		return new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0);
+		return new StmtFor(forinit, forcon, forupdate, ifth, false, 0);
 	}
 
 	
