@@ -95,12 +95,21 @@ public class MainEntrance {
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
+<<<<<<< Updated upstream
 //		for(String funcName: this.func_name_to_code.keySet()){
 //			//if(!funcName.equals(targetFunc))
 //				//TODO
 //				
 //				
 //		}
+=======
+		//for(String funcName: this.func_name_to_code.keySet()){
+			//if(!funcName.equals(targetFunc))
+				//TODO
+				
+				
+		//}
+>>>>>>> Stashed changes
 		System.out.println("function");
 		System.out.println("--------------------");
 		System.out.println(function);
