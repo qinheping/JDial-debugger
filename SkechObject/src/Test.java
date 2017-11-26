@@ -557,10 +557,10 @@ public class Test {
 	// new3
 	@org.junit.Test
 	public void testnew3() throws FileNotFoundException, InterruptedException, ScriptException {
-		int index = 5;
+		int index = 30;
 		String folder = "";
-		String oriTraces = new Scanner(new File("benchmarks/new3/test_nonrec.txt")).useDelimiter("\\Z").next();
-		String correctTrace = new Scanner(new File("benchmarks/new3/target_nonrec.txt")).useDelimiter("\\Z").next();
+		String oriTraces = new Scanner(new File("benchmarks/new3/test_rec_long.txt")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/new3/target_rec_long.txt")).useDelimiter("\\Z").next();
 		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
 		String res = me.Synthesize(true,true).toString();
 		System.err.println(res);
