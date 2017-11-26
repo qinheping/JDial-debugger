@@ -20,7 +20,6 @@ public class StmtBlock extends Statement {
 			s.setParent(this);
 
 		//this.stmts = new ArrayList<>(stmts);
-		//改动
 		this.stmts = Collections.unmodifiableList(stmts);
 
 	}
@@ -47,7 +46,6 @@ public class StmtBlock extends Statement {
 		stmt2.setParent(this);
 
 		//this.stmts = new ArrayList<>(lst);
-		//改动
 		this.stmts = Collections.unmodifiableList(lst);
 	}
 
