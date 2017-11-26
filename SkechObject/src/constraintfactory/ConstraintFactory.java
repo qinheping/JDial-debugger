@@ -654,8 +654,15 @@ public class ConstraintFactory {
 
 		int bound = (length < originalLength) ? length : originalLength;
 
-
-
+		// added get stack trace
+		List<Expression> arrayStack = new ArrayList<>();
+		for (int i = 0; i < bound; i++) {
+			int depth = oriTrace.getTraces().get(i).getRstack().getFrams().size();
+			arrayStack.add(new ExprConstInt(depth));
+		}
+		stmts.add(new StmtVarDecl(new TypeArray(new TypePrimitive(4), new ExprConstInt(originalLength)),
+				"oringianlStackArray", new ExprArrayInit(arrayStack), 0));
+		
 		// load original trace to array
 		for (String v : varList) {
 			List<Expression> arrayInit = new ArrayList<>();
