@@ -135,12 +135,13 @@ public class MainEntrance {
 		
 		// added
 		if (rec_mod)
-			script = cf.getScript_linearCombination(function.getBody(), funtions);	
+			script = cf.getScript_linearCombination(function.getBody());
+			//script = cf.getScript_linearCombination(function.getBody(), funtions);	
 		else
 			script = cf.getScript_linearCombination(function.getBody());
-		//System.err.println("2--------------------------------------------"); // added
-		//System.err.println(script); // added
-		//System.err.println("2--------------------------------------------"); // added
+		System.err.println("2--------------------------------------------"); // added
+		System.err.println(script); // added
+		System.err.println("2--------------------------------------------"); // added
 
 		// added
 		if (prime_mod)
