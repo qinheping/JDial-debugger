@@ -266,7 +266,7 @@ public class ConstraintFactory {
 		System.err.println("-----------------------------------------------------5");
 		System.err.println(constraintFunction_linearCombination().toString());
 		// args of getAugFunctions() need change
-		return block.toString() + "\n" + f.toString() + "\n" + tmp+ getAugFunctions(17,24) + constraintFunction_linearCombination().toString();
+		return block.toString() + "\n" + f.toString() + "\n" + tmp+ getAugFunctions() + constraintFunction_linearCombination().toString();
 	}
 	//added 11/18
 	
@@ -353,7 +353,7 @@ public class ConstraintFactory {
 		String tmp1 = block.toString() + "\n";
 		String tmp2 = f.toString() + "\n";
 		// args of getAugFunctions() need change
-		String tmp3 = getAugFunctions(17,24) + constraintFunction_linearCombination().toString();
+		String tmp3 = getAugFunctions() + constraintFunction_linearCombination().toString();
 		return tmp1 + tmp2 + tmp3;
 	}
 
@@ -445,7 +445,7 @@ public class ConstraintFactory {
 		String tmp1 = block.toString() + "\n";
 		String tmp2 = f.toString() + "\n";
 		// args of getAugFunctions() need change
-		String tmp3 = getAugFunctions(17,24) + constraintFunction_linearCombination().toString();
+		String tmp3 = getAugFunctions() + constraintFunction_linearCombination().toString();
 		return tmp1 + tmp2 + tmp3;
 	}
 
@@ -715,8 +715,21 @@ public class ConstraintFactory {
 		// syntactic distance
 		// added 1125
 		//editDistance(5,3,"ori","tar");
+		
+		
+//		if (sign_distance == 0)
+//			stmts.add(HammingDistance(bound));
+		
 		if (sign_distance == 0)
-			stmts.add(HammingDistance(bound));
+			stmts.add(semanticDistance(bound));
+		
+		
+		List<Expression> ex = new ArrayList<>();
+		ex.add(new ExprString("oringianlStackArray"));
+		ex.add(new ExprString("stackArray"));
+		stmts.add(new StmtAssign(new ExprVar("SemanticDistance"),
+				new ExprFunCall("getDistance",ex,"getDistance"),
+				1, 1));
 
 		// semantic distance
 		StmtBlock editsb = new StmtBlock();
@@ -785,6 +798,31 @@ public class ConstraintFactory {
 		return result;
 	}
 
+	private Statement semanticDistance(Integer bound) {
+		List<Statement> forBody = new ArrayList<Statement>();
+		for (String v : varList) {
+			
+			
+			ExprBinary expBinary1 = new ExprBinary(new ExprArrayRange(v + "Array", "i", 0), "!=",
+					new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0);
+			ExprBinary expBinary2 = new ExprBinary(new ExprArrayRange("stackArray", "i", 0), "!=",
+					new ExprArrayRange("oringianlStackArray", "i", 0), 0);
+			
+			forBody.add(new StmtAssign(new ExprVar("SemanticDistance"),
+					new ExprBinary(expBinary1, "||",
+							expBinary2, 0),
+					1, 1));
+		}
+		
+		
+		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
+		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
+		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"), 0), 0);
+
+		return new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0);
+	}
+
+	
 	private Statement HammingDistance(Integer bound) {
 		List<Statement> forBody = new ArrayList<Statement>();
 		for (String v : varList) {
@@ -865,7 +903,7 @@ public class ConstraintFactory {
 		// ExprConstInt(varList.size())), 1, 1));
 	}
 
-	private String getAugFunctions(int len1, int len2){
+	private String getAugFunctions(){
 		StringBuilder result = new StringBuilder();
 		result.append("int getMin(int a, int b, int c)\n" +
 			"{\n" +
@@ -904,11 +942,11 @@ public class ConstraintFactory {
 			        "return -c;\n" +
 			    "}\n" +
 			"}\n");
-		result.append("int getDistance(int[" + Integer.toString(len1) + "] ori, int[" + 
-			Integer.toString(len2) + "] tar)\n" +
+		result.append("int getDistance(int[" + originalLength + "] ori, int[" + 
+			length + "] tar)\n" +
 			"{\n" +   
-			    "int n = " + Integer.toString(len1) + ";\n" +
-			    "int m =" + Integer.toString(len2) + ";\n" +
+			    "int n = " + Integer.toString(originalLength) + ";\n" +
+			    "int m =" + Integer.toString(length) + ";\n" +
 			    "int[m+1][n+1] f;\n" +
 			    
 			    "for(int i = 0;i<= n;i++)\n" +
