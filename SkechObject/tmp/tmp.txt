@@ -229,16 +229,10 @@ int[44] cArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 
 int[44] stackArray;
 int dfinal = 0;
-int d2 = 0;
-int d3 = 0;
-int d5 = 0;
-int d7 = 0;
 int finalcount = 0;
 int count = -1;
-int[10] resArray = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int funcCount = -1;
 
-(funcCount)++;
  int SimpleJava(int a){
 funcCount++;
 int linehit = 0;
@@ -247,10 +241,6 @@ stackArray[count] = funcCount;
 lineArray[count] = 3;
 
 int b = (((Coeff2()) * a) + 1) + ((Coeff0()) * (Coeff1()));
-int b2 = ( (((Coeff2()) * a2) + 1) + ((Coeff0()) * (Coeff1()))) % 2;
-int b3 = ( (((Coeff2()) * a3) + 1) + ((Coeff0()) * (Coeff1()))) % 3;
-int b5 = ( (((Coeff2()) * a5) + 1) + ((Coeff0()) * (Coeff1()))) % 5;
-int b7 = ( (((Coeff2()) * a7) + 1) + ((Coeff0()) * (Coeff1()))) % 7;
 
 (count)++;
 stackArray[count] = funcCount;
@@ -278,11 +268,7 @@ stackArray[count] = funcCount;
 lineArray[count] = 6;
 bArray[count] = b;
 
-int c = (((Coeff5()) * (SimpleJava(a - 1))) + ((Coeff6()) * b)) + ((Coeff7()) * (Coeff8()));
-int c2 = ( (((Coeff5()) * (SimpleJava(a - 1))) + ((Coeff6()) * b2)) + ((Coeff7()) * (Coeff8()))) % 2;
-int c3 = ( (((Coeff5()) * (SimpleJava(a - 1))) + ((Coeff6()) * b3)) + ((Coeff7()) * (Coeff8()))) % 3;
-int c5 = ( (((Coeff5()) * (SimpleJava(a - 1))) + ((Coeff6()) * b5)) + ((Coeff7()) * (Coeff8()))) % 5;
-int c7 = ( (((Coeff5()) * (SimpleJava(a - 1))) + ((Coeff6()) * b7)) + ((Coeff7()) * (Coeff8()))) % 7;
+int c = (((Coeff5()) * (External_SimpleJava(a - 1))) + ((Coeff6()) * b)) + ((Coeff7()) * (Coeff8()));
 
 (count)++;
 stackArray[count] = funcCount;
@@ -291,10 +277,6 @@ bArray[count] = b;
 cArray[count] = c;
 
 int d = (((((Coeff14()) * c) + ((Coeff13()) * a)) + ((Coeff9()) * b)) + ((Coeff10()) * c)) + ((Coeff11()) * (Coeff12()));
-d2 = ( (((((Coeff14()) * c2) + ((Coeff13()) * a2)) + ((Coeff9()) * b2)) + ((Coeff10()) * c2)) + ((Coeff11()) * (Coeff12()))) % 2;
-d3 = ( (((((Coeff14()) * c3) + ((Coeff13()) * a3)) + ((Coeff9()) * b3)) + ((Coeff10()) * c3)) + ((Coeff11()) * (Coeff12()))) % 3;
-d5 = ( (((((Coeff14()) * c5) + ((Coeff13()) * a5)) + ((Coeff9()) * b5)) + ((Coeff10()) * c5)) + ((Coeff11()) * (Coeff12()))) % 5;
-d7 = ( (((((Coeff14()) * c7) + ((Coeff13()) * a7)) + ((Coeff9()) * b7)) + ((Coeff10()) * c7)) + ((Coeff11()) * (Coeff12()))) % 7;
 
 (count)++;
 stackArray[count] = funcCount;
@@ -304,16 +286,13 @@ cArray[count] = c;
 dArray[count] = d;
 (linehit)++;
 if(linehit == 1){
-resArray[funcCount] = d;
+dfinal = d;
 finalcount = count;
+return 0;
 }
 
 
 b = (((((Coeff15()) * a) + ((Coeff16()) * b)) + ((Coeff17()) * c)) + ((Coeff18()) * d)) + ((Coeff19()) * (Coeff20()));
-int b2 = ( (((((Coeff15()) * a2) + ((Coeff16()) * b2)) + ((Coeff17()) * c2)) + ((Coeff18()) * d2)) + ((Coeff19()) * (Coeff20()))) % 2;
-int b3 = ( (((((Coeff15()) * a3) + ((Coeff16()) * b3)) + ((Coeff17()) * c3)) + ((Coeff18()) * d3)) + ((Coeff19()) * (Coeff20()))) % 3;
-int b5 = ( (((((Coeff15()) * a5) + ((Coeff16()) * b5)) + ((Coeff17()) * c5)) + ((Coeff18()) * d5)) + ((Coeff19()) * (Coeff20()))) % 5;
-int b7 = ( (((((Coeff15()) * a7) + ((Coeff16()) * b7)) + ((Coeff17()) * c7)) + ((Coeff18()) * d7)) + ((Coeff19()) * (Coeff20()))) % 7;
 
 (count)++;
 stackArray[count] = funcCount;
@@ -365,10 +344,10 @@ else
 return -c;
 }
 }
-int getDistance(int[17] ori, int[24] tar)
+int getDistance(int[22] ori, int[44] tar)
 {
-int n = 17;
-int m =24;
+int n = 22;
+int m =44;
 int[m+1][n+1] f;
 for(int i = 0;i<= n;i++)
 {
@@ -402,7 +381,7 @@ f[i][j] = getMin(add, del, rep);
 return f[n][m];
 }
 harness void Constraint(){
-int[22] oringianlStack = {2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,5,5,5,5,4,4,4};
+int[22] oringianlStackArray = {0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,3,3,3,3,2,2,2};
 int[22] oringianldArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,0,4};
 int[22] oringianlbArray = {0,6,6,0,5,5,0,4,4,0,3,3,0,2,2,3,3,3,2,4,4,4};
 int[22] oringianlcArray = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,1};
@@ -412,12 +391,12 @@ SimpleJava(5);
 int SyntacticDistance = 0;
 int SemanticDistance = 0;
 for(int i = 0; i < 22; (i)++){
-SemanticDistance += (dArray[i]) != (oringianldArray[i]);
-SemanticDistance += (bArray[i]) != (oringianlbArray[i]);
-SemanticDistance += (cArray[i]) != (oringianlcArray[i]);
-SemanticDistance += (lineArray[i]) != (oringianllineArray[i]);
+SemanticDistance += ((dArray[i]) != (oringianldArray[i])) || ((stackArray[i]) != (oringianlStackArray[i]));
+SemanticDistance += ((bArray[i]) != (oringianlbArray[i])) || ((stackArray[i]) != (oringianlStackArray[i]));
+SemanticDistance += ((cArray[i]) != (oringianlcArray[i])) || ((stackArray[i]) != (oringianlStackArray[i]));
 }
 
+SemanticDistance += getDistance(oringianlStackArray, stackArray);
 SyntacticDistance += coeff0change;
 SyntacticDistance += coeff1change;
 SyntacticDistance += coeff2change;
@@ -440,14 +419,7 @@ SyntacticDistance += coeff18change;
 SyntacticDistance += coeff19change;
 SyntacticDistance += coeff20change;
 
-assert (resArray[0] == correctFinal_d %2 || resArray[1] == correctFinal_d %2 ||
-resArray[2] == correctFinal_d %2 || resArray[3] == correctFinal_d %2 ||
-resArray[4] == correctFinal_d %2 || resArray[5] == correctFinal_d %2 ||
-resArray[6] == correctFinal_d %2 || resArray[7] == correctFinal_d %2 ||
-resArray[8] == correctFinal_d %2 || resArray[9] == correctFinal_d %2);
-assert (d3 % 3 == correctFinal_d %3);
-assert (d5 % 5 == correctFinal_d %5);
-assert (d7 % 7 == correctFinal_d %7);
+assert (dfinal == correctFinal_d);
 line3change = ((coeff0change != 0) || (coeff1change != 0)) || (coeff2change != 0);
 line4change = (coeff3change != 0) || (coeff4change != 0);
 line6change = (((coeff5change != 0) || (coeff6change != 0)) || (coeff7change != 0)) || (coeff8change != 0);
