@@ -95,12 +95,12 @@ public class MainEntrance {
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
-		for(String funcName: this.func_name_to_code.keySet()){
-			//if(!funcName.equals(targetFunc))
-				//TODO
-				
-				
-		}
+//		for(String funcName: this.func_name_to_code.keySet()){
+//			//if(!funcName.equals(targetFunc))
+//				//TODO
+//				
+//				
+//		}
 		System.out.println("function");
 		System.out.println("--------------------");
 		System.out.println(function);
@@ -122,8 +122,8 @@ public class MainEntrance {
 		
 		// added
 		System.out.println("--------------------");
-		boolean prime_mod = true;
-		boolean rec_mod = true;
+		boolean prime_mod = global.Global.prime_mod;
+		boolean rec_mod = global.Global.rec_mod;
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;

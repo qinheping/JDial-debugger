@@ -429,7 +429,9 @@ public class ConstraintFactory {
 		// add line array
 		stmts.add(
 				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
-
+		if(global.Global.rec_mod)
+			stmts.add(varArrayDecl("stack", length, new TypePrimitive(4)));
+		
 		// add final state
 		// System.out.println(finalState.getOrdered_locals().size());
 		for (String v : finalState.getOrdered_locals()) {
@@ -443,7 +445,11 @@ public class ConstraintFactory {
 		// add final count
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
+		
+		if(global.Global.rec_mod)
+			stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
 
+		
 		Statement block = new StmtBlock(stmts);
 
 		String tmp1 = block.toString() + "\n";
@@ -997,6 +1003,14 @@ public class ConstraintFactory {
 		// count ++
 		result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("count"), 0), 0));
 		// varToUpdateArray[count] = varToUpdate;
+		if(global.Global.rec_mod)
+			result.addStmt(
+				new StmtAssign(
+						new ExprArrayRange(new ExprVar("stackArray"),
+								new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0),
+						new ExprVar("funcCount"), 0));
+
+		
 		result.addStmt(
 				new StmtAssign(
 						new ExprArrayRange(new ExprVar("lineArray"),
