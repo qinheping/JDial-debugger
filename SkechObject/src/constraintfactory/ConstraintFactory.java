@@ -959,6 +959,11 @@ public class ConstraintFactory {
 			        "return -c;\n" +
 			    "}\n" +
 			"}\n");
+		result.append("int[length] mapping;\r\n");
+		result.append("for(int i = 0;i< length;i++)\n" +
+			    "{\n" +
+			        "mapping[i] = -5;\n" +
+			    "}\n");
 		result.append("int getDistance(int[" + originalLength + "] ori, int[" + 
 			length + "] tar)\n" +
 			"{\n" +   
@@ -968,12 +973,12 @@ public class ConstraintFactory {
 			    
 			    "for(int i = 0;i<= n;i++)\n" +
 			    "{\n" +
-			        "f[i][0] = 0;\n" +
+			        "f[i][0] = i;\n" +
 			    "}\n" +
 			    
 			    "for(int i = 0;i<= m;i++)\n" +
 			    "{\n" +
-			        "f[0][m] = 0;\n" +
+			        "f[0][i] = i;\n" +
 			    "}\n" +
 			
 			    
@@ -981,6 +986,37 @@ public class ConstraintFactory {
 			    "{\n" +
 			        "if (tar[j-1] == 0)\n" +
 			        "{\n" +
+			        	"int i = n;\r\n" + 
+			        	"j = j-1;\r\n" + 
+			        	"while (j >= 1)\r\n" + 
+			        	"{\r\n" + 
+			        	"    if(ori[i-1] == tar[j-1])\r\n" + 
+			        	"    {\r\n" + 
+			        	"        mapping[j-1] = i-1;\r\n" + 
+			        	"        j -= 1;\r\n" + 
+			        	"        i -= 1;\r\n" + 
+			        	"    }\r\n" + 
+			        	"    else\r\n" + 
+			        	"    {\r\n" + 
+			        	"        int min = getMin(f[i][j-1]+1, f[i-1][j]+1, f[i-1][j-1]+1);\r\n" + 
+			        	"        if(min == f[i][j-1]+1)\r\n" + 
+			        	"        {\r\n" + 
+			        	"            mapping[j-1] = -1;\r\n" + 
+			        	"            j -= 1;\r\n" + 
+			        	"        }\r\n" + 
+			        	"        else if(min == f[i-1][j]+1)\r\n" + 
+			        	"        {\r\n" + 
+			        	"            mapping[j-1] = -1;\r\n" + 
+			        	"            i -= 1;\r\n" + 
+			        	"        }\r\n" + 
+			        	"        else if(min == f[i-1][j-1]+1)\r\n" + 
+			        	"        {\r\n" + 
+			        	"            mapping[j-1] = -1;\r\n" + 
+			        	"            j -= 1;\r\n" + 
+			        	"            i -= 1;\r\n" + 
+			        	"        }\r\n" + 
+			        	"    }\r\n" + 
+			        	"}"+
 			            "return f[n][j-1];\n" +
 			        "}\n" +
 			        "for(int i = 1; i<=n;i++)\n" +
