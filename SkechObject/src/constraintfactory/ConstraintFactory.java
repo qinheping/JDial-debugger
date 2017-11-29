@@ -185,94 +185,6 @@ public class ConstraintFactory {
 	// ------------ main function, generate Sketch script for code <source>
 	// linear combination replace
 
-
-	//added 11/18
-	public String getScript_linearCombination(Statement source, Map<String, String> functions) {
-
-		// a script consists of three parts:
-		// 1) coeff decl and guess functions decl
-		// 2) the interpreted source function with statements recording program
-		// states and expressions rewrote
-		// 3) the constrain function which compute the cost and search for the
-		// least cost rewrite
-
-		Statement s = source;
-		Statement coeffFunDecls = null;
-
-		String resv_funcs = ReservedFuncs();
-
-		System.out.println(source);
-
-		// extract info of external functions
-		externalFuncs = s.extractExternalFuncs(externalFuncs);
-		if (externalFuncs.size() > 0)
-			System.out.println(externalFuncs.get(0).getName_Java());
-
-		buildContext((StmtBlock) source);
-		System.out.println(source.toString_Context());
-		// replace all constants in source code
-		if (!ConstraintFactory.sign_limited_range) {
-			coeffFunDecls = ConstraintFactory.replaceLinearCombination(s);
-			// constFunDecls = ConstraintFactory.replaceConst(s);
-		} else {
-			// coeffFunDecls = ConstraintFactory.replaceLinearCombination(s,
-			// ConstraintFactory.repair_range);
-			// constFunDecls = ConstraintFactory.replaceConst(s);
-		}
-
-		Statement globalVarDecls = getGlobalDecl();
-
-		// add record stmts to source code and collect vars info
-		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
-		ConstraintFactory.namesToType = vars;
-		List<String> varsNames = new ArrayList<String>(vars.keySet());
-		varList = varsNames;
-		List<Type> varsTypes = new ArrayList<Type>();
-		for (int i = 0; i < varsNames.size(); i++) {
-			varsTypes.add(vars.get(varsNames.get(i)));
-		}
-
-		// add declare of <linehit> and <count>
-		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
-
-		Function f = new Function(ConstraintFactory.fh, s);
-
-		List<Statement> stmts = new ArrayList<>();
-
-		stmts.add(globalVarDecls);
-
-		// add declare of const functions
-		stmts.add(coeffFunDecls);
-
-		// add line array
-		stmts.add(
-				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
-
-		// add final state
-		// System.out.println(finalState.getOrdered_locals().size());
-		for (String v : finalState.getOrdered_locals()) {
-			// added @1
-			stmts.add(new StmtVarDecl(new TypePrimitive(4), v + "final", new ExprConstInt(0), 0));
-		}
-
-		// add final count
-		stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
-		stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
-
-		Statement block = new StmtBlock(stmts);
-
-		String tmp = "";
-		for (String fname : functions.keySet())
-		{
-			String func = functions.get(fname);
-			tmp += func + "\n";
-		}
-		System.err.println("-----------------------------------------------------5");
-		System.err.println(constraintFunction_linearCombination().toString());
-		// args of getAugFunctions() need change
-		return block.toString() + "\n" + f.toString() + "\n" + tmp+ getAugFunctions() + constraintFunction_linearCombination().toString();
-	}
-	//added 11/18
 	
 	public String getScript_linearCombination(Statement source, List<Parameter> param)
 	{
@@ -336,7 +248,8 @@ public class ConstraintFactory {
 
 		// add line array
 		stmts.add(
-				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
+				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes,
+						f.getName())));
 
 		// add final state
 		// System.out.println(finalState.getOrdered_locals().size());
@@ -419,6 +332,7 @@ public class ConstraintFactory {
 		Statement coeffFunDecls1 = null;
 		StringBuilder st = new StringBuilder();
 		//Statement globalVarDecls1 = null;
+		Statement declVars = null;
 		for (int i = 0; i < this.otherFunctions.size(); i++) {
 			Function cur = otherFunctions.get(i);
 			FcnHeader fh1 = new FcnHeader(cur.getName(), cur.getReturnType(), cur.getParames());
@@ -445,8 +359,9 @@ public class ConstraintFactory {
 
 			// add record stmts to source code and collect vars info
 			Map<String, Type> vars1 = ConstraintFactory.addRecordStmt((StmtBlock) s1);
-			ConstraintFactory.namesToType.putAll(vars1);
-			varList.addAll(vars1.keySet());
+			//ConstraintFactory.namesToType.putAll(vars1);
+			//varList.addAll(vars1.keySet());
+			List<String> varsNames1 = new ArrayList<String>(vars1.keySet());
 			for (int j = 0; j < varsNames.size(); j++) {
 				varsTypes.add(vars.get(varsNames.get(j)));
 			}
@@ -459,6 +374,7 @@ public class ConstraintFactory {
 			
 			st.append(f1.toString());
 			
+			declVars = varArrayDecls(varsNames1, varsTypes,cur.getName());
 		}
 		
 		stmts.add(getGlobalDecl());
@@ -471,8 +387,16 @@ public class ConstraintFactory {
 			stmts.add(coeffFunDecls1);
 
 		// add line array
+		//stmts.add(
+		//		new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes,
+		//				f1)));
 		stmts.add(
-				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
+				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes,
+						f.getName())));
+		
+		if (declVars != null)
+			stmts.add(declVars);
+		
 		if(global.Global.rec_mod)
 			stmts.add(varArrayDecl("stack", length, new TypePrimitive(4)));
 		
@@ -493,6 +417,7 @@ public class ConstraintFactory {
 		if(global.Global.rec_mod)
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
 
+		
 		
 		Statement block = new StmtBlock(stmts);
 
@@ -1230,7 +1155,8 @@ public class ConstraintFactory {
 		return new StmtVarDecl(t, name + "Array", null, 0);
 	}
 
-	static public StmtBlock varArrayDecls(List<String> names, List<Type> types) {
+	// added function name
+	static public StmtBlock varArrayDecls(List<String> names, List<Type> types, String funcName) {
 		List<Statement> stmts = new ArrayList<Statement>();
 		for (int i = 0; i < names.size(); i++) {
 			if (types.get(i) instanceof TypeArray)
@@ -1242,7 +1168,7 @@ public class ConstraintFactory {
 				arrayinit.add(new ExprConstInt(0));
 			}
 
-			stmts.add(new StmtVarDecl(tarray, names.get(i) + "Array", new ExprArrayInit(arrayinit), 0));
+			stmts.add(new StmtVarDecl(tarray, funcName + names.get(i) + "Array", new ExprArrayInit(arrayinit), 0));
 		}
 		return new StmtBlock(stmts);
 	}
