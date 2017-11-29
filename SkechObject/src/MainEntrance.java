@@ -44,7 +44,7 @@ public class MainEntrance {
 	private String code;
 	private String targetFunc;
 	private List<String> function_names;
-	private Map<String, String> func_name_to_code;
+	private Map<String, Function> func_name_to_code;
 	private Traces traces;
 
 	private int mod;
@@ -63,7 +63,8 @@ public class MainEntrance {
 		this.manipulation = correctTrace;
 		this.indexOfCorrectTrace = indexOfCorrectTrace;
 		this.repair_range = null;
-		this.function_names = new ArrayList<String>(); 
+		this.function_names = new ArrayList<String>();
+		this.func_name_to_code = new HashMap<>();
 		this.mod = mod;
 	}
 
@@ -78,7 +79,8 @@ public class MainEntrance {
 	public Map<Integer, String> Synthesize(boolean useLC, boolean oneLine) throws InterruptedException {
 		this.targetFunc = extractFuncName(manipulation);
 		this.root = jsonRootCompile(this.originalTrace);
-		this.buildFuncNameList();
+		// 11/28
+		System.err.println("original length is: " + root.getTraces().getLength());
 		this.code = root.getCode().getCode();
 	
 		if (oneLine)
@@ -95,12 +97,16 @@ public class MainEntrance {
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
-//		for(String funcName: this.func_name_to_code.keySet()){
-//			//if(!funcName.equals(targetFunc))
-//				//TODO
-//				
-//				
-//		}
+		this.buildFuncNameList();
+		
+		List<Function> otherFunctions = new ArrayList<>();
+		for(int i = 0; i < this.function_names.size(); i++){
+			String curName = this.function_names.get(i);
+			System.err.println("function name is" + curName);
+			if(!curName.equals(targetFunc)) {
+				otherFunctions.add(this.func_name_to_code.get(curName));
+			}
+		}
 		System.out.println("function");
 		System.out.println("--------------------");
 		System.out.println(function);
@@ -125,7 +131,8 @@ public class MainEntrance {
 		boolean prime_mod = global.Global.prime_mod;
 		boolean rec_mod = global.Global.rec_mod;
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod);
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod,
+				otherFunctions);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
@@ -170,10 +177,23 @@ public class MainEntrance {
 
 
 	private void buildFuncNameList() {
-		List<Trace> traces = this.root.getTraces().getTraces();
+		Root curRoot = jsonRootCompile(this.originalTrace);
+		//String curCode = curRoot.getCode().getCode();
+		//curCode = curCode.replace("\\n", "\n");
+		//curCode = curCode.replace("\\t", "\t");
+		
+		List<Trace> traces = curRoot.getTraces().getTraces();
 		for(Trace trace: traces){
-			if(!this.function_names.contains(trace.getFuncname()))
-				this.function_names.add(trace.getFuncname());
+			String name = trace.getFuncname();
+			// need to improve
+			if (name.equals("main"))
+				continue;
+			if(!this.function_names.contains(name)) {
+				ANTLRInputStream input1 = new ANTLRInputStream(code);
+				this.function_names.add(name);
+				Function function = (Function) javaCompile(input1, name);
+				this.func_name_to_code.put(name, function);
+			}
 		}
 	}
 

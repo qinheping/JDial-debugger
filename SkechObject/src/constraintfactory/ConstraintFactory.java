@@ -69,16 +69,20 @@ public class ConstraintFactory {
 
 	// added whether use prime mod
     public static boolean prime_mod;	
+    public List<Function> otherFunctions;
+    public static int coeffIndex;
 	
 	// ------------ Construct method
     // added
     public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args, Integer mod,
-    		boolean prime_mod) {
+    		boolean prime_mod, List<Function> otherFunctions) {
 	//public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args, Integer mod) {
 		ConstraintFactory.fh = fh;
 		ConstraintFactory.oriTrace = oriTrace;
 		ConstraintFactory.finalState = finalState;
 		ConstraintFactory.hitline = finalState.getLine();
+		this.otherFunctions = otherFunctions;
+		this.coeffIndex = 0;
 		// added
 		System.err.println("----------------------------------------7\n");
 		System.err.println(finalState.toString());
@@ -106,7 +110,7 @@ public class ConstraintFactory {
 	}
 
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh, List<Expression> args) {
-		this(oriTrace, finalState, fh, args, 0, false);
+		this(oriTrace, finalState, fh, args, 0, false, new ArrayList<Function>());
 	}
 
 	public ConstraintFactory(Traces oriTrace, Trace finalState, FcnHeader fh) {
@@ -411,10 +415,60 @@ public class ConstraintFactory {
 
 		List<Statement> stmts = new ArrayList<>();
 
-		stmts.add(globalVarDecls);
+		// 11/28 handle other functions
+		Statement coeffFunDecls1 = null;
+		StringBuilder st = new StringBuilder();
+		//Statement globalVarDecls1 = null;
+		for (int i = 0; i < this.otherFunctions.size(); i++) {
+			Function cur = otherFunctions.get(i);
+			FcnHeader fh1 = new FcnHeader(cur.getName(), cur.getReturnType(), cur.getParames());
+			
+			Statement s1 = cur.getBody();
+			
+			System.out.println(s1);
+
+
+			buildContext((StmtBlock) s1);
+			System.out.println(s1.toString_Context());
+			// replace all constants in source code
+			
+			if (!ConstraintFactory.sign_limited_range) {
+				coeffFunDecls1 = ConstraintFactory.replaceLinearCombination(s1);
+				// constFunDecls = ConstraintFactory.replaceConst(s);
+			} else {
+				// coeffFunDecls = ConstraintFactory.replaceLinearCombination(s,
+				// ConstraintFactory.repair_range);
+				// constFunDecls = ConstraintFactory.replaceConst(s);
+			}
+
+			//globalVarDecls1 = getGlobalDecl();
+
+			// add record stmts to source code and collect vars info
+			Map<String, Type> vars1 = ConstraintFactory.addRecordStmt((StmtBlock) s1);
+			ConstraintFactory.namesToType.putAll(vars1);
+			varList.addAll(vars1.keySet());
+			for (int j = 0; j < varsNames.size(); j++) {
+				varsTypes.add(vars.get(varsNames.get(j)));
+			}
+
+			// add declare of <linehit> and <count>
+			s1 = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s1);
+
+			Function f1 = new Function(fh1, s1);
+			
+			
+			st.append(f1.toString());
+			
+		}
+		
+		stmts.add(getGlobalDecl());
+		//stmts.add(globalVarDecls);
 
 		// add declare of const functions
+		System.err.println("coeffFunDecls is " + coeffFunDecls.toString());
 		stmts.add(coeffFunDecls);
+		if (coeffFunDecls1 != null)
+			stmts.add(coeffFunDecls1);
 
 		// add line array
 		stmts.add(
@@ -442,11 +496,12 @@ public class ConstraintFactory {
 		
 		Statement block = new StmtBlock(stmts);
 
-		String tmp1 = block.toString() + "\n";
-		String tmp2 = f.toString() + "\n";
+		
+		String tmp1 = block.toString();
+		String tmp2 = f.toString();
 		// args of getAugFunctions() need change
 		String tmp3 = getAugFunctions() + constraintFunction_linearCombination().toString();
-		return tmp1 + tmp2 + tmp3;
+		return tmp1 + tmp2 + st + tmp3;
 	}
 
 	private Statement getGlobalDecl() {
@@ -472,23 +527,23 @@ public class ConstraintFactory {
 	private static Statement replaceLinearCombination(Statement s) {
 		List<Statement> list = new ArrayList<Statement>();
 		Stack<SketchObject> stmtStack = new Stack<SketchObject>();
-		int index = 0;
+		//int coeffIndex = 0;
 		stmtStack.push(s);
 		while (!stmtStack.empty()) {
 			SketchObject target = stmtStack.pop();
 			ConstData data = null;
 			if (ConstraintFactory.sign_limited_range) {
-				data = target.replaceLinearCombination(index, ConstraintFactory.repair_range);
+				data = target.replaceLinearCombination(coeffIndex, ConstraintFactory.repair_range);
 			} else {
-				data = target.replaceLinearCombination(index);//@2-------added here
+				data = target.replaceLinearCombination(coeffIndex);//@2-------added here
 			}
 
 			if (data.getType() != null) {
-				while (index <= data.getPrimaryCoeffIndex()) {
-					list.add(coeffChangeDecl(index, new TypePrimitive(1)));
-					list.add(new StmtFunDecl(addCoeffFun(index, 1, data.getType())));
-					coeffIndex_to_Line.put(index, data.getOriline());
-					index++;
+				while (coeffIndex <= data.getPrimaryCoeffIndex()) {
+					list.add(coeffChangeDecl(coeffIndex, new TypePrimitive(1)));
+					list.add(new StmtFunDecl(addCoeffFun(coeffIndex, 1, data.getType())));
+					coeffIndex_to_Line.put(coeffIndex, data.getOriline());
+					coeffIndex++;
 				}
 				if (data.getLiveVarsIndexSet() != null) {
 					for (int ii : data.getLiveVarsIndexSet()) {
@@ -498,21 +553,21 @@ public class ConstraintFactory {
 					}
 
 				}
-				index = data.getIndex();
+				coeffIndex = data.getIndex();
 				if (!data.isIfLC()) {
-					ConstraintFactory.noWeightCoeff.add(index - 2);
-					list.add(coeffChangeDecl(index - 2, new TypePrimitive(1)));//bit coeff0change = ??;
-					list.add(new StmtFunDecl(addCoeffFun(index - 2, 0, data.getType())));//Coeff0() 函数
-					list.add(coeffChangeDecl(index - 1, new TypePrimitive(4)));
-					list.add(new StmtFunDecl(addLCConstFun(index - 1, data.getType())));
-					coeffIndex_to_Line.put(index - 1, data.getOriline());
-					coeffIndex_to_Line.put(index - 2, data.getOriline());
+					ConstraintFactory.noWeightCoeff.add(coeffIndex - 2);
+					list.add(coeffChangeDecl(coeffIndex - 2, new TypePrimitive(1)));//bit coeff0change = ??;
+					list.add(new StmtFunDecl(addCoeffFun(coeffIndex - 2, 0, data.getType())));//Coeff0() 函数
+					list.add(coeffChangeDecl(coeffIndex - 1, new TypePrimitive(4)));
+					list.add(new StmtFunDecl(addLCConstFun(coeffIndex - 1, data.getType())));
+					coeffIndex_to_Line.put(coeffIndex - 1, data.getOriline());
+					coeffIndex_to_Line.put(coeffIndex - 2, data.getOriline());
 				}
 			}
-			index = data.getIndex();
+			coeffIndex = data.getIndex();
 			pushAll(stmtStack, data.getChildren());
 		}
-		constNumber = index;
+		constNumber = coeffIndex;
 
 		s.ConstructLineToString(line_to_string);
 
