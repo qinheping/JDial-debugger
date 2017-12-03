@@ -939,7 +939,7 @@ public class ConstraintFactory {
 			        "return -c;\n" +
 			    "}\n" +
 			"}\n");
-		result.append("int[length] mapping;\r\n");
+		result.append("int[" + length + "] mapping;\r\n");
 		result.append("for(int i = 0;i< length;i++)\n" +
 			    "{\n" +
 			        "mapping[i] = -5;\n" +
