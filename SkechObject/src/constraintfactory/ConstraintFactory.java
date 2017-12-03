@@ -11,6 +11,8 @@ import java.util.Stack;
 import jsonast.Trace;
 import jsonast.Traces;
 import org.apache.tools.ant.taskdefs.XSLTProcess;
+
+import global.Global;
 import sketchobj.core.*;
 import sketchobj.core.Function.FcnType;
 import sketchobj.expr.*;
@@ -312,6 +314,8 @@ public class ConstraintFactory {
 		Statement globalVarDecls = getGlobalDecl();
 
 		// add record stmts to source code and collect vars info
+		Global.curFunc = ConstraintFactory.fh.getName();
+		
 		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
 		ConstraintFactory.namesToType = vars;
 		List<String> varsNames = new ArrayList<String>(vars.keySet());
@@ -335,6 +339,7 @@ public class ConstraintFactory {
 		Statement declVars = null;
 		for (int i = 0; i < this.otherFunctions.size(); i++) {
 			Function cur = otherFunctions.get(i);
+			Global.curFunc = cur.getName();
 			FcnHeader fh1 = new FcnHeader(cur.getName(), cur.getReturnType(), cur.getParames());
 			
 			Statement s1 = cur.getBody();
@@ -362,6 +367,7 @@ public class ConstraintFactory {
 			//ConstraintFactory.namesToType.putAll(vars1);
 			//varList.addAll(vars1.keySet());
 			List<String> varsNames1 = new ArrayList<String>(vars1.keySet());
+			varList.addAll(varsNames1);
 			for (int j = 0; j < varsNames.size(); j++) {
 				varsTypes.add(vars.get(varsNames.get(j)));
 			}
@@ -1201,7 +1207,7 @@ public class ConstraintFactory {
 		for (String s : Vars) {
 			if (allVars.get(s) instanceof TypeArray)
 				continue;
-			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(s + "Array"),
+			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(Global.curFunc + s + "Array"),
 					new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0), new ExprVar(s), 0));
 		}
 		if (lineNumber == hitline) {
