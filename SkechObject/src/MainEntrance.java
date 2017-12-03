@@ -86,7 +86,9 @@ public class MainEntrance {
 		if (oneLine)
 			mod = 1;
 
-		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace);
+		// added
+		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace,
+				this.targetFunc);
 
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 		code = code.replace("\\n", "\n");

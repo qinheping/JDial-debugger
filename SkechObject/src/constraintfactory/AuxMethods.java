@@ -11,18 +11,18 @@ import sketchobj.stmts.*;
 public class AuxMethods {
 
 	
-	static public List<Expression> extractArguments(Traces traces, int targetindex){
+	static public List<Expression> extractArguments(Traces traces, int targetindex, String targetName){
 		List<Expression> result = new ArrayList<>();
 		
 		List<Trace> tracelist = traces.getTraces();
 		Trace callTrace = null;
 		
 		//added to handle recursion, keep searching from back until Funcname changes
-		for(int i = targetindex; i >=0; i--){
+		/*for(int i = targetindex; i >=0; i--){
 			if(tracelist.get(i).getEvent().equals("call")){
 				callTrace = tracelist.get(i);
 				// added
-				String name = callTrace.getFuncname();
+				//String name = callTrace.getFuncname();
 				for (int j = i; j >=0; j--){
 					if (tracelist.get(j).getFuncname().equals(name)){
 						callTrace = tracelist.get(j);
@@ -32,8 +32,14 @@ public class AuxMethods {
 				}
 				break;
 			}
-		}
+		}*/
 		
+		for(int i = targetindex; i >=0; i--){
+			if(tracelist.get(i).getEvent().equals("call") && 
+					tracelist.get(i).getFuncname().equals(targetName)){
+				callTrace = tracelist.get(i);
+			}
+		}
 		
 		List<Var> args = callTrace.getLocals().getVar();
 		List<Var> heapObjs = callTrace.getHeap().getVar();
