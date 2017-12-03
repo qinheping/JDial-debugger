@@ -318,7 +318,7 @@ public class ConstraintFactory {
 		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
 		ConstraintFactory.namesToType = vars;
 		List<String> varsNames = new ArrayList<String>(vars.keySet());
-		varList = varsNames;
+		varList = new ArrayList(varsNames);
 		for(int i = 0;i<vars.keySet().size();i++)
 		{
 			funcVarList.add(Global.curFunc);
@@ -1214,7 +1214,9 @@ public class ConstraintFactory {
 								new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0),
 						new ExprConstInt(lineNumber), 0));
 
-		for (String s : Vars) {
+		for (int h = 0;h<Vars.size();h++)
+		{
+			String s = Vars.get(h);
 			if (allVars.get(s) instanceof TypeArray)
 				continue;
 			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(Global.curFunc + s + "Array"),
