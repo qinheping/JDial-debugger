@@ -45,7 +45,7 @@ public class Traces extends JsonNode {
 			}*/
 			//chenged
 			if (!tracelist.get(i).getEvent().equals("step_line") || 
-					(i < this.tracelist.size() - 1 && tracelist.get(i+1).getEvent().equals("call"))) {
+					(i > 0 && tracelist.get(i-1).getEvent().equals("return"))) {
 				toRemove.add(i);
 				continue;
 			}
