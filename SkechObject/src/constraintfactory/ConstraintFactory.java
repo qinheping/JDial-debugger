@@ -30,6 +30,7 @@ public class ConstraintFactory {
 	static int constNumber = 0;
 	static Map<String, Set<Integer>> constMap = new HashMap<String, Set<Integer>>();
 	static List<String> varList = new ArrayList<String>();
+	static List<String> funcVarList = new ArrayList<String>();	
 	static Map<String, Type> namesToType = new HashMap<String, Type>();
 	static Map<Integer, Integer> constMapLine = new HashMap<Integer, Integer>();
 	static List<Integer> noWeightCoeff = new ArrayList<Integer>();
@@ -105,6 +106,7 @@ public class ConstraintFactory {
 
 		constMap = new HashMap<String, Set<Integer>>();
 		varList = new ArrayList<String>();
+		funcVarList = new ArrayList<String>();
 
 		this.args = args;
 		ConstraintFactory.mod = mod;
@@ -226,11 +228,8 @@ public class ConstraintFactory {
 
 		ConstraintFactory.namesToType = vars;
 		List<String> varsNames = new ArrayList<String>(vars.keySet());
-
-
-
-
 		varList = varsNames;
+
 		List<Type> varsTypes = new ArrayList<Type>();
 		for (int i = 0; i < varsNames.size(); i++) {
 			varsTypes.add(vars.get(varsNames.get(i)));
@@ -320,6 +319,10 @@ public class ConstraintFactory {
 		ConstraintFactory.namesToType = vars;
 		List<String> varsNames = new ArrayList<String>(vars.keySet());
 		varList = varsNames;
+		for(int i = 0;i<vars.keySet().size();i++)
+		{
+			funcVarList.add(Global.curFunc);
+		}
 		List<Type> varsTypes = new ArrayList<Type>();
 		for (int i = 0; i < varsNames.size(); i++) {
 			varsTypes.add(vars.get(varsNames.get(i)));
@@ -368,6 +371,10 @@ public class ConstraintFactory {
 			//varList.addAll(vars1.keySet());
 			List<String> varsNames1 = new ArrayList<String>(vars1.keySet());
 			varList.addAll(varsNames1);
+			for(int h = 0;h<vars1.keySet().size();h++)
+			{
+				funcVarList.add(Global.curFunc);
+			}
 			for (int j = 0; j < varsNames.size(); j++) {
 				varsTypes.add(vars.get(varsNames.get(j)));
 			}
@@ -652,7 +659,9 @@ public class ConstraintFactory {
 				"oringianlStackArray", new ExprArrayInit(arrayStack), 0));
 		
 		// load original trace to array
-		for (String v : varList) {
+		for (int h = 0;h < varList.size();h++) {
+			String v = varList.get(h);
+			String funcV = funcVarList.get(h);
 			List<Expression> arrayInit = new ArrayList<>();
 			for (int i = 0; i < bound; i++) {
 				if (oriTrace.getTraces().get(i).getOrdered_locals().contains(v)) {
@@ -672,7 +681,7 @@ public class ConstraintFactory {
 					"@3oringianl" + v + "Array", new ExprArrayInit(arrayInit), 0));
 			else
 				stmts.add(new StmtVarDecl(new TypeArray(new TypePrimitive(4), new ExprConstInt(originalLength)),
-					"oringianl" + v + "Array", new ExprArrayInit(arrayInit), 0));
+					"oringianl" + funcV + v + "Array", new ExprArrayInit(arrayInit), 0));
 		}
 
 
@@ -795,12 +804,13 @@ public class ConstraintFactory {
 
 	private Statement semanticDistance(Integer bound) {
 		List<Statement> forBody = new ArrayList<Statement>();
-		for (String v : varList) {
+		for (int i = 0;i<varList.size();i++)
+		{
+			String v = varList.get(i);
+			String funcV = funcVarList.get(i);
 			
-			
-			
-			ExprBinary expBinary1 = new ExprBinary(new ExprArrayRange(v + "Array", "i", 0), "!=",
-					new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0);
+			ExprBinary expBinary1 = new ExprBinary(new ExprArrayRange(funcV + v + "Array", "i", 0), "!=",
+					new ExprArrayRange("oringianl" + funcV+ v + "Array", "i", 0), 0);
 			ExprBinary expBinary2 = new ExprBinary(new ExprArrayRange("stackArray", "i", 0), "!=",
 					new ExprArrayRange("oringianlStackArray", "i", 0), 0);
 			
