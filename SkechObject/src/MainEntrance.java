@@ -98,7 +98,6 @@ public class MainEntrance {
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
 		this.buildFuncNameList();
-		
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){
 			String curName = this.function_names.get(i);
@@ -111,8 +110,8 @@ public class MainEntrance {
 		System.out.println("--------------------");
 		System.out.println(function);
 
-		//added 11/18
-		funtions.put(targetFunc, "");
+		//added 11/18 
+		/*funtions.put(targetFunc, "");
 		while (JavaVisitor.methodNames.size() != 0)
 		{
 			ANTLRInputStream input1 = new ANTLRInputStream(code);
@@ -123,13 +122,14 @@ public class MainEntrance {
 			Function function1 = (Function)javaCompile(input1, name);
 			System.out.println(function1);
 			funtions.put(name, function1.toString());
-		}
+		}*/
 		//added 11/18
 		
 		// added
 		System.out.println("--------------------");
 		boolean prime_mod = global.Global.prime_mod;
 		boolean rec_mod = global.Global.rec_mod;
+		System.err.println("original length3 is: " + root.getTraces().getLength());
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod,
 				otherFunctions);
