@@ -99,6 +99,9 @@ public class MainEntrance {
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
+		// rp added
+		CFG cfg = new CFG(function);
+		cfg.printCFG();
 		this.buildFuncNameList();
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){
@@ -343,7 +346,7 @@ public class MainEntrance {
 	{
 
 
-		int beishu = 5;
+		int times = 5;
 		int[] primeNumber = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 39};
 		ArrayList<Integer> primes = new ArrayList<>();
 		int finalValue;
@@ -376,10 +379,11 @@ public class MainEntrance {
 			for(String s : tmpArray)
 			{
 				int tmpInt = Math.abs(Integer.valueOf(s));
+				System.err.println("current num is" + tmpInt);
 				maxValue = Math.max(maxValue, tmpInt);
 			}
 		}
-		maxValue = Math.max(maxValue, finalValue) * beishu;
+		maxValue = Math.max(maxValue, finalValue) * times;
 		int tmpp = 1;
 		for(int n : primeNumber)
 		{

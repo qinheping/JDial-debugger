@@ -17,6 +17,39 @@ public class StmtFor extends Statement {
 	private Expression cond;
 	private Statement init, incr, body;
 
+	// rp added
+	public Expression getCond() {
+		return cond;
+	}
+
+	public void setCond(Expression cond) {
+		this.cond = cond;
+	}
+
+	public Statement getInit() {
+		return init;
+	}
+
+	public void setInit(Statement init) {
+		this.init = init;
+	}
+
+	public Statement getIncr() {
+		return incr;
+	}
+
+	public void setIncr(Statement incr) {
+		this.incr = incr;
+	}
+
+	public Statement getBody() {
+		return body;
+	}
+
+	public void setBody(Statement body) {
+		this.body = body;
+	}
+
 	public StmtFor(Statement init, Expression cond, Statement incr, Statement body, boolean isCanonical, int i) {
 		this.init = init;
 		init.setParent(this);
