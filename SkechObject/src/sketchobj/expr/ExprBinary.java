@@ -67,7 +67,7 @@ public class ExprBinary extends Expression {
 
 	@Override
 	public ExprBinary clone() {
-		return new ExprBinary(this.op, this.left, this.right, this.lineNumber);
+		return new ExprBinary(this.op, this.left.clone(), this.right.clone(), this.lineNumber);
 	}
 
 	/**
@@ -459,13 +459,8 @@ public class ExprBinary extends Expression {
 				this.right = new ExprConstInt(0);
 				this.left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
-				// added
-				if (ConstraintFactory.prime_mod)
-					this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
-						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
-				else
-					this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
-						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
+				this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+					new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
 				primaryIndex = index;
 				index += 2;
 				left.setCtx(this.getCtx());

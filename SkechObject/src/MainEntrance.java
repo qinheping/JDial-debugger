@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import constraintfactory.AuxMethods;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import javaparser.simpleJavaLexer;
 import javaparser.simpleJavaParser;
 import jsonast.Root;
@@ -80,7 +81,6 @@ public class MainEntrance {
 		this.targetFunc = extractFuncName(manipulation);
 		this.root = jsonRootCompile(this.originalTrace);
 		// 11/28
-		System.err.println("original length is: " + root.getTraces().getLength());
 		this.code = root.getCode().getCode();
 	
 		if (oneLine)
@@ -102,6 +102,8 @@ public class MainEntrance {
 		// rp added
 		CFG cfg = new CFG(function);
 		cfg.printCFG();
+		Map<Integer, Set<String>> facts = cfg.dataflow();
+		Global.facts = facts;
 		this.buildFuncNameList();
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){
@@ -151,19 +153,19 @@ public class MainEntrance {
 			//script = cf.getScript_linearCombination(function.getBody(), funtions);	
 		else
 			script = cf.getScript_linearCombination(function.getBody());
-		System.err.println("2--------------------------------------------"); // added
-		System.err.println(script); // added
-		System.err.println("2--------------------------------------------"); // added
+		//System.err.println("2--------------------------------------------"); // added
+		//System.err.println(script); // added
+		//System.err.println("2--------------------------------------------"); // added
 
 		// added
 		script = script.replaceAll("External_", "");
-		if (prime_mod)
-			script = tranScript(script);
+		//if (prime_mod)
+		//	script = tranScript(script);
 		System.err.println("3--------------------------------------------");
 		
-		System.err.println("4--------------------------------------------"); // added
-		System.err.println(script); // added
-		System.err.println("4--------------------------------------------"); // added
+		//System.err.println("4--------------------------------------------"); // added
+		//System.err.println(script); // added
+		//System.err.println("4--------------------------------------------"); // added
 		
 		//----added
 		SketchResult resultS = CallSketch.CallByString(script);

@@ -17,6 +17,15 @@ import sketchobj.expr.Expression;
 public class StmtExpr extends Statement {
 	private Expression expr;
 
+	// rp added auto-gen
+	public Expression getExpr() {
+		return expr;
+	}
+
+	public void setExpr(Expression expr) {
+		this.expr = expr;
+	}
+
 	public StmtExpr(Expression expr, int i) {
 		this.expr = expr;
 		expr.setParent(this);

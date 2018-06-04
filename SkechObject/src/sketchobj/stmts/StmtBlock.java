@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 
@@ -19,8 +21,8 @@ public class StmtBlock extends Statement {
 		for(Statement s:stmts)
 			s.setParent(this);
 
-		//this.stmts = new ArrayList<>(stmts);
-		this.stmts = Collections.unmodifiableList(stmts);
+		this.stmts = new ArrayList<>(stmts);
+		//this.stmts = Collections.unmodifiableList(stmts);
 
 	}
 
@@ -110,6 +112,10 @@ public class StmtBlock extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		for (int i = 0; i < stmts.size(); i++) {
+			if (Global.prime_mod) {
+				if (ConstraintFactory.dupStmt.contains(stmts.get(i)))
+					continue;
+			}
 			m.putAll(stmts.get(i).addRecordStmt(this, i, m));
 		}
 		return m;

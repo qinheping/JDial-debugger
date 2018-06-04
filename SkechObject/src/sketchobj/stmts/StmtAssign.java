@@ -7,6 +7,7 @@ import java.util.Map;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -62,6 +63,14 @@ public class StmtAssign extends Statement {
 	/** Returns the right-hand side of this. */
 	public Expression getRHS() {
 		return rhs;
+	}
+
+	public void setLhs(Expression lhs) {
+		this.lhs = lhs;
+	}
+
+	public void setRhs(Expression rhs) {
+		this.rhs = rhs;
 	}
 
 	/**
@@ -133,8 +142,13 @@ public class StmtAssign extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
-		parent.stmts.set(index, new StmtBlock(
+		if (Global.prime_mod) {
+			parent.stmts.set(index, new StmtBlock(this,
+					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
+		} else {
+			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
+		}
 		m.putAll(this.getPrectx().getAllVars());
 		return m;
 	}
@@ -208,16 +222,10 @@ public class StmtAssign extends Statement {
 			index++;
 			liveVarsNameSet.add(v);
 		}
-		if (ConstraintFactory.prime_mod)
-			this.rhs = new ExprBinary(this.rhs, "+",
-				new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
+		this.rhs = new ExprBinary(this.rhs, "+",
+				new ExprBinary(new ExprFunCall("Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),
 				this.getLineNumber());
-		else
-			this.rhs = new ExprBinary(this.rhs, "+",
-					new ExprBinary(new ExprFunCall("Coeff" + index), "*",
-							new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),
-					this.getLineNumber());
 		index = index + 2;
 		return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 				primaryIndex);
