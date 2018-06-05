@@ -1,3 +1,4 @@
+package cfg;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -558,7 +559,7 @@ public class CFG {
 	}
 		
 	// extract all vars
-	private Set<String> extractAllVarExpr(Expression expr) {
+	public static Set<String> extractAllVarExpr(Expression expr) {
 		Set<String> res = new HashSet<String>();
 		if (expr instanceof ExprUnary) {
 			return extractAllVarExpr(((ExprUnary) expr).getExpr());
@@ -579,4 +580,5 @@ public class CFG {
 		}
 		return res;
 	}
+	
 }	

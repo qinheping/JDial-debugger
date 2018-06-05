@@ -1,6 +1,7 @@
 package constraintfactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Stack;
 
 import jsonast.Trace;
 import jsonast.Traces;
+
 import org.apache.tools.ant.taskdefs.XSLTProcess;
 
 import global.Global;
@@ -17,6 +19,7 @@ import sketchobj.core.*;
 import sketchobj.core.Function.FcnType;
 import sketchobj.expr.*;
 import sketchobj.stmts.*;
+import cfg.*;
 
 public class ConstraintFactory {
 	// TODO: repair arrayInit.replaceConst(), else statement, Expr.field, all
@@ -75,6 +78,7 @@ public class ConstraintFactory {
     public List<Function> otherFunctions;
     public static int coeffIndex;
     public static Set<Statement> dupStmt = new HashSet<>();
+    public Set<String> primeVars = new HashSet<>(); 
 	
 	// ------------ Construct method
     // added
@@ -711,9 +715,12 @@ public class ConstraintFactory {
 				System.err.println("size is : " + ((StmtBlock) s).stmts.size());
 				System.err.println("i is : " + i);
 				Statement si = ((StmtBlock) s).stmts.get(i);
-				if (Global.facts.get(si.getLineNumber()).size() != 0)
-					continue;
+				/*if (Global.facts.get(si.getLineNumber()).size() != 0)
+					continue;*/
 				if (si instanceof StmtAssign) {
+					Expression l = ((StmtAssign) si).getLHS();
+					if (!Collections.disjoint(Global.facts.get(si.getLineNumber()), CFG.extractAllVarExpr(l)))
+						continue;
 					((StmtBlock) s).stmts.remove(i);
 					Context con = si.getPostctx();
 					Map<String, Type> allvars = con.getAllVars();
@@ -740,6 +747,8 @@ public class ConstraintFactory {
 					continue;
 				}
 				if (si instanceof StmtVarDecl) {
+					if (Global.facts.get(si.getLineNumber()).contains(((StmtVarDecl) si).getName(0)))
+						continue;
 					((StmtBlock) s).stmts.remove(i);
 					
 					String finalVar = finalState.getOrdered_locals().get(0);
