@@ -67,12 +67,20 @@ public class StmtIfThen extends Statement {
 		return cons;
 	}
 
+	public void setCons(Statement cons) {
+		this.cons = cons;
+	}
+	
 	/**
 	 * Return the alternative statement of this, which is executed if the
 	 * condition is false.
 	 */
 	public Statement getAlt() {
 		return alt;
+	}
+	
+	public void setAlt(Statement alt) {
+		this.alt = alt;
 	}
 
 	public boolean isSingleFunCall() {
@@ -172,6 +180,8 @@ public class StmtIfThen extends Statement {
 		
 		this.cons = new StmtBlock(cons,ConstraintFactory.recordState(cons.getPostctx().getLinenumber(), cons.getPostctx().getAllVars()));
 		m.putAll(((StmtBlock) cons).stmts.get(0).addRecordStmt((StmtBlock) cons, 0, m));
+		//System.err.println("record cons: " + cons);
+		//System.err.println("cons is " + cons.getPostctx().getLinenumber() + cons.getPostctx().getAllVars());
 		if (alt != null) {
 			this.alt = new StmtBlock(alt,ConstraintFactory.recordState(alt.getPostctx().getLinenumber(), alt.getPostctx().getAllVars()));
 			m.putAll(((StmtBlock) alt).stmts.get(0).addRecordStmt((StmtBlock) alt, 0, m));

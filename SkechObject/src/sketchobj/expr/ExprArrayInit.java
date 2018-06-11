@@ -68,7 +68,11 @@ public class ExprArrayInit extends Expression {
 
 	@Override
 	public ExprArrayInit clone() {
-		return new ExprArrayInit(this.elements);
+		List<Expression> newList = new ArrayList<>();
+		for (int i = 0; i < this.elements.size(); i++) {
+			newList.add(this.elements.get(i).clone());
+		}
+		return new ExprArrayInit(newList);
 	}
 
 	/**

@@ -112,9 +112,13 @@ public class StmtBlock extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		for (int i = 0; i < stmts.size(); i++) {
+			//System.err.println("add stmt is: " + stmts.get(i));
 			if (Global.prime_mod) {
-				if (ConstraintFactory.dupStmt.contains(stmts.get(i)))
+				if (ConstraintFactory.dupStmt.contains(stmts.get(i))) {
+					//System.err.println("dup");
 					continue;
+				}
+				//System.err.println("not");
 			}
 			m.putAll(stmts.get(i).addRecordStmt(this, i, m));
 		}

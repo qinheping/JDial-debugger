@@ -92,6 +92,8 @@ public class MainEntrance {
 				this.targetFunc);
 
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
+		//System.err.println("trace length is " + root.getTraces().getLength());
+		//System.err.println("trace is " + root.getTraces().toString());
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
 		System.out.println("code");
@@ -103,9 +105,11 @@ public class MainEntrance {
 		// rp added
 		CFG cfg = new CFG(function);
 		cfg.printCFG();
+		System.out.println(Global.seenVars);
 		Map<Integer, Set<String>> facts = cfg.dataflow();
 		Global.facts = facts;
 		this.buildFuncNameList();
+		CFG.GenfeasibleVars();
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){
 			String curName = this.function_names.get(i);
@@ -175,6 +179,7 @@ public class MainEntrance {
 
 		// else
 		// script = cf.getScript(function.getBody());
+		System.err.println("mod is " + mod);
 		if (mod != 2)
 			return this.actualSynthesize(useLC, script, cf, null);
 

@@ -7,11 +7,13 @@ import java.util.Map;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.*;
 import sketchobj.expr.ExprBinary;
 import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.Expression;
+import cfg.CFG;
 
 public class StmtFor extends Statement {
 	private Expression cond;
@@ -109,6 +111,8 @@ public class StmtFor extends Statement {
 
 	@Override
 	public Context buildContext(Context prectx, int position) {
+		Global.nestedVars.addAll(CFG.extractLVarStmt(init));
+		
 		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		this.setPrectx(prectx);

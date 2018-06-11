@@ -381,13 +381,13 @@ public class StmtVarDecl extends Statement {
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 		
-		if (Global.prime_mod) {
+		/*if (Global.prime_mod) {
 			parent.stmts.set(index, new StmtBlock(this,
 					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
-		} else {
+		} else {*/
 			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
-		}
+		//}
 		m.putAll(this.getPostctx().getAllVars());
 		return m;
 	}

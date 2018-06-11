@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
+import global.Global;
 import sketchobj.core.Function;
 import sketchobj.expr.ExprArrayRange;
 import sketchobj.expr.ExprBinary;
@@ -184,7 +185,8 @@ public class CFG {
     		return new Connection(in, in);
         }
         
-        if (stmt instanceof StmtVarDecl) {	
+        if (stmt instanceof StmtVarDecl) {
+        	Global.seenVars.addAll(((StmtVarDecl) stmt).getNames());
         	in = new Node(stmt.getLineNumber(), ((StmtVarDecl) stmt).toString(), (StmtVarDecl) stmt, null);
     		this.nodes.put(stmt.getLineNumber(), in);
     		return new Connection(in, in);
@@ -317,8 +319,8 @@ public class CFG {
 			if (nodes.get(s).isStmt()) {
 				Statement st = nodes.get(s).getStmt();
 				if (st instanceof StmtAssign) {
-					Set<String> leftVars = this.extractAllVarExpr(((StmtAssign) st).getLHS());
-					Set<String> rightVars = this.extractAllVarExpr(((StmtAssign) st).getRHS());
+					Set<String> leftVars = extractAllVarExpr(((StmtAssign) st).getLHS());
+					Set<String> rightVars = extractAllVarExpr(((StmtAssign) st).getRHS());
 					//System.out.println("node num: " + s);
 					//System.out.println("left vars are " + leftVars);
 					//System.out.println("right vars are " + rightVars);
@@ -339,9 +341,9 @@ public class CFG {
 							Expression e = ((StmtVarDecl) st).getInit(i);
 							if (e != null) {
 								if (gen.containsKey(s)) {
-									gen.get(s).addAll(this.extractAllVarExpr(e));
+									gen.get(s).addAll(extractAllVarExpr(e));
 								} else {
-									gen.put(s, this.extractAllVarExpr(e));
+									gen.put(s, extractAllVarExpr(e));
 								}
 							}
 						}
@@ -531,7 +533,7 @@ public class CFG {
 	}
 	
 	// extract all vars, ignore StmtFunDecl for now
-	private Set<String> extractAllVarStmt(Statement stmt) {
+	public static Set<String> extractRVarStmt(Statement stmt) {
 		Set<String> res = new HashSet<String>();
 		if (stmt instanceof StmtAssert) {
 			return extractAllVarExpr(((StmtAssert) stmt).getCond());
@@ -557,6 +559,29 @@ public class CFG {
 		}
 		return res;
 	}
+	
+	public static Set<String> extractLVarStmt(Statement stmt) {
+		Set<String> res = new HashSet<String>();
+		if (stmt instanceof StmtAssert) {
+			return extractAllVarExpr(((StmtAssert) stmt).getCond());
+		}
+		if (stmt instanceof StmtAssign) {
+			return extractAllVarExpr(((StmtAssign) stmt).getLHS());
+		} 
+		if (stmt instanceof StmtExpr) {
+			return extractAllVarExpr(((StmtExpr) stmt).getExpr());
+		}
+		if (stmt instanceof StmtMinimize) {
+			return extractAllVarExpr(((StmtMinimize) stmt).getMinimizeExpr());
+		}
+		if (stmt instanceof StmtReturn) {
+			return extractAllVarExpr(((StmtReturn) stmt).getValue());
+		}
+		if (stmt instanceof StmtVarDecl) {
+			return new HashSet<>(((StmtVarDecl) stmt).getNames());
+		}
+		return res;
+	}
 		
 	// extract all vars
 	public static Set<String> extractAllVarExpr(Expression expr) {
@@ -579,6 +604,20 @@ public class CFG {
 			return res;
 		}
 		return res;
+	}
+	
+	public static void GenfeasibleVars() {
+		for (String cur : Global.seenVars) {
+			boolean feasible = false;
+			for (Map.Entry<Integer, Set<String>> entry : Global.facts.entrySet()) {
+				if (entry.getValue().contains(cur)) {
+					feasible = true;
+					break;
+				}
+			}
+			if (feasible)
+				Global.feasibleVars.put(cur, false);
+		}
 	}
 	
 }	
