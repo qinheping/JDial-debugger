@@ -52,6 +52,10 @@ public class MainEntrance {
 	private int mod;
 
 	private List<Integer> repair_range;
+	
+	private List<String> ori_trace;
+	private List<String> target_trace;
+	public static boolean iomod = false;
 
 	//added 11/18
 	private HashMap<String, String> funtions = new HashMap<>();
@@ -68,7 +72,12 @@ public class MainEntrance {
 		this.function_names = new ArrayList<String>();
 		this.func_name_to_code = new HashMap<>();
 		this.mod = mod;
+		this.ori_trace = new ArrayList<>();
+		this.target_trace = new ArrayList<>();
 	}
+	
+	public void addOriTrace (String ori){ this.ori_trace.add(ori);}
+	public void addTargetTrace (String target){ this.target_trace.add(target);}
 
 	public Map<Integer, String> Synthesize() throws InterruptedException {
 		return this.Synthesize(false, false);
@@ -152,12 +161,25 @@ public class MainEntrance {
 		// if (useLC)
 		//script = cf.getScript_linearCombination(function.getBody(), function.getParames());
 		
+		// IOmod
+		if(iomod){
+			for(int i = 0; i < this.ori_trace.size(); i++){
+				Root addRoot =  jsonRootCompile(ori_trace.get(i));
+				Traces addtraces = addRoot.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
+				cf.addOriTraces(addtraces);
+				cf.addTargetTrace(jsonTraceCompile(this.target_trace.get(i)));
+			}
+
+			cf.iomod = true;
+		}
+		
 		// added
-		if (rec_mod)
+		if (rec_mod){
 			script = cf.getScript_linearCombination(function.getBody());
 			//script = cf.getScript_linearCombination(function.getBody(), funtions);	
-		else
-			script = cf.getScript_linearCombination(function.getBody());
+		}
+		else{
+			script = cf.getScript_linearCombination(function.getBody());}
 		//System.err.println("2--------------------------------------------"); // added
 		//System.err.println(script); // added
 		//System.err.println("2--------------------------------------------"); // added

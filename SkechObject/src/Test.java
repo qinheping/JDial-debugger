@@ -241,6 +241,20 @@ public class Test {
 		String res = me.Synthesize(true,true).toString();
 		System.out.println(res);
 	}
+	
+	@org.junit.Test
+	public void testtmpIO() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 11;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		me.iomod = true;
+		me.addOriTrace(new Scanner(new File("benchmarks/tmptest/test1")).useDelimiter("\\Z").next());
+		me.addTargetTrace(new Scanner(new File("benchmarks/tmptest/target1")).useDelimiter("\\Z").next());
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
 
 	@org.junit.Test
 	public void testtmp1() throws FileNotFoundException, InterruptedException, ScriptException {
