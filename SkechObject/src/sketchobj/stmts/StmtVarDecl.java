@@ -385,6 +385,7 @@ public class StmtVarDecl extends Statement {
 			parent.stmts.set(index, new StmtBlock(this,
 					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
 		} else {*/
+		if (!ConstraintFactory.dupStmt.contains(this))
 			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		//}

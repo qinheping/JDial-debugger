@@ -131,9 +131,15 @@ public class StmtAssign extends Statement {
 		prectx.setLinenumber(this.getLineNumber());
 
 		List<String> tmp = postctx.getVarsInScope();
-		if (!tmp.contains(lhs.toString())&& (position > 0 || Global.dupFinals.contains(lhs.toString()))) {
-			tmp.add(lhs.toString());
+		if (!tmp.contains(lhs.toString())&& (position > 0 || Global.dupFinals.contains(lhs.toString())
+				|| Global.params.contains(lhs.toString()))) {
+			//tmp.add(lhs.toString());
 			postctx.addVar(lhs.toString(), TypePrimitive.inttype);
+		} else if (!postctx.getAllVars().containsKey(lhs.toString())) {
+			postctx.addVar(lhs.toString(), TypePrimitive.inttype);
+		}
+		if (!tmp.contains(lhs.toString()) && position > 0) {
+			tmp.add(lhs.toString());
 		}
 		postctx.setVarsInScope(tmp);
 		this.setPostctx(new Context(postctx));
@@ -154,12 +160,15 @@ public class StmtAssign extends Statement {
 			parent.stmts.set(index, new StmtBlock(this,
 					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
 		} else {*/
+		if (!ConstraintFactory.dupStmt.contains(this))
 			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		//}
 		//System.err.println("parent is: " + parent);
 		//System.err.println("index: " + parent.stmts.get(index));
 		m.putAll(this.getPrectx().getAllVars());
+		System.err.println("assign is: " + this);
+		System.err.println("m is: " + m);
 		return m;
 	}
 
@@ -202,6 +211,9 @@ public class StmtAssign extends Statement {
 		}
 		List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
 		for (String v : vars) {
+			System.err.println("stmt: " + this);
+			System.err.println("available vars: " + vars);
+			System.err.println("current var: " + v);
 			// all 1 dimension array
 
 			if (this.getPrectx().getAllVars().get(v) instanceof TypeArray) {
@@ -223,8 +235,10 @@ public class StmtAssign extends Statement {
 			/*
 			 * if(v.equals(lhs.toString())) continue;
 			 */
-			if (this.getPostctx().getVarsInScope().contains(v))
+			if (this.getPostctx().getVarsInScope().contains(v)){
+				System.err.println("case: contain");
 				continue;
+			}
 			Expression newTerm = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*",
 					new ExprVar(v, t), this.getLineNumber());
 			this.rhs = new ExprBinary(rhs, "+", newTerm, this.getLineNumber());

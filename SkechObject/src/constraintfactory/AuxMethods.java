@@ -41,6 +41,7 @@ public class AuxMethods {
 			}
 		}
 		
+		System.err.println("callTrace is " + callTrace);
 		List<Var> args = callTrace.getLocals().getVar();
 		List<Var> heapObjs = callTrace.getHeap().getVar();
 		

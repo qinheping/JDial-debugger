@@ -114,11 +114,10 @@ public class MainEntrance {
 		// rp added
 		CFG cfg = new CFG(function);
 		cfg.printCFG();
-		System.out.println(Global.seenVars);
 		Map<Integer, Set<String>> facts = cfg.dataflow();
 		Global.facts = facts;
-		this.buildFuncNameList();
 		CFG.GenfeasibleVars();
+		this.buildFuncNameList();
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){
 			String curName = this.function_names.get(i);
@@ -168,6 +167,10 @@ public class MainEntrance {
 				Traces addtraces = addRoot.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 				cf.addOriTraces(addtraces);
 				cf.addTargetTrace(jsonTraceCompile(this.target_trace.get(i)));
+				Root cur_root = jsonRootCompile(ori_trace.get(i));
+				List<Expression> cur_args = AuxMethods.extractArguments(cur_root.getTraces(), cur_root.getTraces().getLength() - 1,
+						this.targetFunc);
+				ConstraintFactory.extra_args.add(cur_args);
 			}
 
 			cf.iomod = true;

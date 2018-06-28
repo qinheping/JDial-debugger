@@ -11,6 +11,9 @@ import java.util.Set;
 
 import global.Global;
 import sketchobj.core.Function;
+import sketchobj.core.Parameter;
+import sketchobj.core.Type;
+import sketchobj.core.TypeArray;
 import sketchobj.expr.ExprArrayRange;
 import sketchobj.expr.ExprBinary;
 import sketchobj.expr.ExprUnary;
@@ -31,6 +34,12 @@ public class CFG {
     	this.edges = new HashMap<Integer, List<Integer>>();
     	this.nodes = new HashMap<Integer, Node>();
     	this.keepActual = new HashMap<Integer, List<String>>();
+    	List<Parameter> params = function.getParames();
+    	for (Parameter param : params) {
+    		if (!Global.allvars.containsKey(param.getName())) {
+    			Global.allvars.put(param.getName(), param.getType() instanceof TypeArray);
+    		}
+    	}
     	Connection con = buildStmt(function.getBody());
     	this.enter = con.getIn();
     	for (Map.Entry<Integer, Node> entry : this.nodes.entrySet()) {
@@ -186,7 +195,18 @@ public class CFG {
         }
         
         if (stmt instanceof StmtVarDecl) {
-        	Global.seenVars.addAll(((StmtVarDecl) stmt).getNames());
+        	List<Type> types = ((StmtVarDecl) stmt).getTypes();
+        	List<String> names = ((StmtVarDecl) stmt).getNames();
+        	for (int i = 0; i < types.size(); i++) {
+        		if (!Global.allvars.containsKey(names.get(i))) {
+	        		if (types.get(i) instanceof TypeArray) {
+	        			Global.allvars.put(names.get(i), true);
+	        		} else {
+	        			Global.allvars.put(names.get(i), false);
+	        		}
+        		}
+    		}
+        	
         	in = new Node(stmt.getLineNumber(), ((StmtVarDecl) stmt).toString(), (StmtVarDecl) stmt, null);
     		this.nodes.put(stmt.getLineNumber(), in);
     		return new Connection(in, in);
@@ -276,6 +296,7 @@ public class CFG {
 		}
 		
 		System.out.println(res);
+		System.out.println(Global.allvars);
 	}
     
 	/* backward may dataflow analysis framework
@@ -607,17 +628,21 @@ public class CFG {
 	}
 	
 	public static void GenfeasibleVars() {
-		for (String cur : Global.seenVars) {
-			boolean feasible = false;
-			for (Map.Entry<Integer, Set<String>> entry : Global.facts.entrySet()) {
-				if (entry.getValue().contains(cur)) {
-					feasible = true;
-					break;
+		for (Map.Entry<String, Boolean> entry : Global.allvars.entrySet()) {
+			if (!entry.getValue()) {
+				boolean feasible = false;
+				String name = entry.getKey();
+				for (Map.Entry<Integer, Set<String>> entry1 : Global.facts.entrySet()) {
+					if (!entry1.getValue().contains(name)) {
+						feasible = true;
+						break;
+					}
 				}
+				if (feasible)
+					Global.feasibleVars.put(name, false);
 			}
-			if (feasible)
-				Global.feasibleVars.put(cur, false);
 		}
+		//System.err.println(Global.feasibleVars);
 	}
 	
 }	
