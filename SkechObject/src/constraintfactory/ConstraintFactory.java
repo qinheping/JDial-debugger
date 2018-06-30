@@ -87,7 +87,7 @@ public class ConstraintFactory {
     public List<Function> otherFunctions;
     public static int coeffIndex;
     public static Set<Statement> dupStmt = new HashSet<>();
-    public static Set<Statement> frozenStmt = new HashSet<>();
+    //public static Set<Statement> frozenStmt = new HashSet<>();
     public Set<String> primeVars = new HashSet<>(); 
 	
 	// ------------ Construct method
@@ -151,6 +151,7 @@ public class ConstraintFactory {
 	public void addOriTraces(Traces ori_list){
 		System.out.println("-asdfjalsdfjasjdfklajdsfkasdfj" +ori_trace_list.size());
 		this.ori_trace_list.add(ori_list);
+		System.err.println("added trace length is" + ori_list.getLength());
 	}
 	public void addTargetTrace(Trace target_list){
 		this.target_trace_list.add(target_list);
@@ -181,11 +182,8 @@ public class ConstraintFactory {
 
 		System.out.println(source);
 		
-		System.err.println("args");
-		List<Expression> args = ConstraintFactory.args;
+		/*List<Expression> args = ConstraintFactory.args;
 		List<Parameter> params = ConstraintFactory.fh.getPara();
-		System.out.println(args);
-		System.out.println(params);
 		if (s instanceof StmtBlock) {
 			for (int i = args.size() - 1; i >= 0; i--) {
 				StmtAssign assign = new StmtAssign(new ExprVar(params.get(i).getName(), params.get(i).getType()), 
@@ -195,7 +193,7 @@ public class ConstraintFactory {
 				frozenStmt.add(assign);
 				Global.params.add(params.get(i).getName());
 			}
-		}
+		}*/
 		
 		// extract info of external functions
 		/*externalFuncs = s.extractExternalFuncs(externalFuncs);
@@ -250,6 +248,12 @@ public class ConstraintFactory {
 
 		// add declare of <linehit> and <count>
 		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
+		if (Global.prime_mod) {
+			for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
+				s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), entry.getKey() + "ini"
+						, new ExprConstInt(0), 0), s);
+			}
+		}
 
 		Function f = new Function(ConstraintFactory.fh, s);
 		
@@ -318,9 +322,21 @@ public class ConstraintFactory {
 			stmts.add(coeffFunDecls1);
 
 		System.err.println("var names:" + varsNames);
+		if (Global.prime_mod) {
+			for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
+				String var = entry.getKey();
+				for (int p : Global.primes) {
+					if (!varsNames.contains(var + Integer.toString(p))) {
+						varsNames.add(var + Integer.toString(p));
+						varsTypes.add(new TypePrimitive(4));
+					}
+				}
+			}
+		}
 		stmts.add(
 				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes,
 						f.getName())));
+		
 		/*if (Global.prime_mod){
 			for (int i = 0; i < varsNames.size(); i++) {
 				varsNames.set(i, varsNames.get(i) + "2");
@@ -413,8 +429,8 @@ public class ConstraintFactory {
 		//int level = 0;
 		while (!stmtStack.empty()) {
 			SketchObject target = stmtStack.pop();
-			if (frozenStmt.contains(target))
-				continue;
+			//if (frozenStmt.contains(target))
+				//continue;
 			ConstData data = null;
 			/*System.err.println("coeffIndex is: " + coeffIndex);
 			System.err.println("target is: ");
@@ -431,10 +447,10 @@ public class ConstraintFactory {
 					//System.err.println("case1");
 					//System.err.println(coeffChangeDecl(coeffIndex, new TypePrimitive(1)));
 					//System.err.println(new StmtFunDecl(addCoeffFun(coeffIndex, 1, data.getType())));
-					if (coeffIndex == 0) {
+					/*if (coeffIndex == 0) {
 						coeffIndex++;
 						continue;
-					}
+					}*/
 					list.add(coeffChangeDecl(coeffIndex, new TypePrimitive(1)));
 					list.add(new StmtFunDecl(addCoeffFun(coeffIndex, 1, data.getType())));
 					coeffIndex_to_Line.put(coeffIndex, data.getOriline());
@@ -475,15 +491,74 @@ public class ConstraintFactory {
 		return new StmtBlock(list);
 	}
 	
+	private static List<Statement> recover(Statement s) {
+		// to be initialize
+		Set<String> tbi = new HashSet<>();
+		List<Statement> sts;
+		List<Statement> res = new ArrayList<>();
+		/*for (Map.Entry<String, Boolean> entry : Global.allvars.entrySet()) {
+			String var = entry.getKey();
+			if (!Global.feasibleVars.get(var)) {
+				if (!Global.facts.get(s.getLineNumber()).contains(var)) {
+					tbi.add(var);
+					Global.feasibleVars.put(var, true);
+				}
+			}
+		}*/
+		
+		int line = s.getLineNumber();
+		for (Map.Entry<String, Set<Integer>> entry : Global.inilocs.entrySet()) {
+			if (entry.getValue().contains(line)) {
+				for (Parameter para :fh.getPara()) {
+					if (para.getName().equals(entry.getKey())) {
+						tbi.add(entry.getKey());
+						break;
+					}
+				}
+			}
+		}
+		for (String str : tbi) {
+			sts = new ArrayList<>();
+			for (int p : Global.primes) {
+				ExprBinary rhs = new ExprBinary(5, new ExprVar(str), new ExprConstInt(p), line);
+				Statement assign = new StmtAssign(new ExprVar(str + Integer.toString(p)), rhs, line);
+				sts.add(assign);
+				dupStmt.add(assign);
+			}
+			Statement update = new StmtAssign(new ExprVar(str + "ini"), new ExprConstInt(1), line);
+			sts.add(update);
+			dupStmt.add(update);
+			
+			Expression cond = new ExprBinary(8, new ExprVar(str + "ini"), new ExprConstInt(0), line);
+			Statement cons = new StmtBlock(sts);
+			dupStmt.add(cons);
+			Statement ifthen = new StmtIfThen(cond, cons, null, line);
+			res.add(ifthen);
+			dupStmt.add(ifthen);
+		}
+		
+		return res;
+	}
+	
 	private static void dupPrimes(Statement s) {
 		System.err.println("in dup ");
+		if (s == null)
+			return;
+		Global.line = s.getLineNumber();
 		if (s instanceof StmtBlock) {
 			for (int i = 0; i < ((StmtBlock) s).stmts.size(); i++) {
 				//System.err.println("size is : " + ((StmtBlock) s).stmts.size());
 				//System.err.println("i is : " + i);
 				Statement si = ((StmtBlock) s).stmts.get(i);
+				Global.line = si.getLineNumber();
 				/*if (Global.facts.get(si.getLineNumber()).size() != 0)
 					continue;*/
+				List<Statement> rec = recover(si);
+				if (rec.size() > 0) {
+					((StmtBlock) s).stmts.add(i, new StmtBlock(rec));
+					i++;
+				}
+				System.err.println("rec is" + rec);
 				if (si instanceof StmtAssign) {
 					//System.err.println("cur assign: " + si);
 					boolean keepActual = true;
@@ -491,11 +566,19 @@ public class ConstraintFactory {
 					if (Global.facts.get(si.getLineNumber()) == null || 
 							Collections.disjoint(Global.facts.get(si.getLineNumber()), CFG.extractAllVarExpr(l)))
 						keepActual = false;
-					if (frozenStmt.contains(si))
-						keepActual = false;
-						//continue;
-					if (!keepActual)
+					//if (frozenStmt.contains(si))
+						//keepActual = false;
+					if (!keepActual) {
 						((StmtBlock) s).stmts.remove(i);
+						i--;
+					} else {
+						continue;
+					}
+					
+					/*for (String var : CFG.extractAllVarExpr(l)) {
+						if (!Global.feasibleVars.get(var))
+							Global.feasibleVars.put(var, true);
+					}*/
 					//Context con = si.getPostctx();
 					//Map<String, Type> allvars = con.getAllVars();
 					//dupVars(allvars);
@@ -505,32 +588,25 @@ public class ConstraintFactory {
 						Expression lhs = newSt.getLHS();
 						changeExpr(lhs, p);
 						Expression rhs = newSt.getRHS();
-						if (!frozenStmt.contains(si))
+						//if (!frozenStmt.contains(si))
 							changeExpr(rhs, p);
-						else
-							Global.dupFinals.add(rhs.toString() + Integer.toString(i));
+						//else
+							//Global.dupFinals.add(rhs.toString() + Integer.toString(i));
 						rhs = modExpr(rhs, p);
 						newSt.setLhs(lhs);
 						newSt.setRhs(rhs);
 						//newSt.setPrectx(con);
 						//newSt.setPostctx(con);
-						if (!keepActual) {
-							((StmtBlock) s).stmts.add(i, newSt);
-							i++;
-						} else {
-							i++;
-							((StmtBlock) s).stmts.add(i, newSt);
-						}
+						i++;
+						((StmtBlock) s).stmts.add(i, newSt);
 						if (keepActual) {
 							ConstraintFactory.dupStmt.add(newSt);
 						} else if (p != Global.primes[0]) {
 							ConstraintFactory.dupStmt.add(newSt);
 						}
-						if (frozenStmt.contains(si))
-							ConstraintFactory.dupStmt.add(newSt);
+						//if (frozenStmt.contains(si))
+							//ConstraintFactory.dupStmt.add(newSt);
 					}
-					if (!keepActual)
-						i--;
 					//ConstraintFactory.dupStmt.add(si);
 					continue;
 				}
@@ -540,8 +616,15 @@ public class ConstraintFactory {
 					if (Global.facts.get(si.getLineNumber()).contains(declaredVar)) {
 						keepActual = true;
 					}
-					if (!keepActual)
+					if (!keepActual) {
 						((StmtBlock) s).stmts.remove(i);
+						i--;
+					} else {
+						continue;
+					}
+					
+					//if (!Global.feasibleVars.get(declaredVar))
+						//Global.feasibleVars.put(declaredVar, true);
 					
 					String finalVar = finalState.getOrdered_locals().get(0);
 					//System.err.println("final var is "+ finalVar);
@@ -561,23 +644,14 @@ public class ConstraintFactory {
 							StmtAssign assign = new StmtAssign(new ExprVar(finalVar + Integer.toString(p)), 
 									init, si.getLineNumber());
 							//assign.buildContext(con, 0);
-							if (!keepActual) {
-								((StmtBlock) s).stmts.add(i, assign);
-								i++;
-							} else {
-								i++;
-								((StmtBlock) s).stmts.add(i, assign);
-							}
+							i++;
+							((StmtBlock) s).stmts.add(i, assign);
 							if (keepActual) {
-								System.err.println("added dup: " + assign);
 								ConstraintFactory.dupStmt.add(assign);
 							} else if (p != Global.primes[0]) {
-								System.err.println("added dup: " + assign);
 								ConstraintFactory.dupStmt.add(assign);
 							}
 						}
-						if (!keepActual)
-							i--;
 						//ConstraintFactory.dupStmt.add(si);
 						continue;
 					} else {
@@ -595,13 +669,8 @@ public class ConstraintFactory {
 							newSt.setInit(0, init);
 							//newSt.setPrectx(con);
 							//newSt.setPostctx(con);
-							if (!keepActual) {
-								((StmtBlock) s).stmts.add(i, newSt);
-								i++;
-							} else {
-								i++;
-								((StmtBlock) s).stmts.add(i, newSt);
-							}
+							i++;
+							((StmtBlock) s).stmts.add(i, newSt);
 							if (keepActual) {
 								System.err.println("added dup: " + newSt);
 								ConstraintFactory.dupStmt.add(newSt);
@@ -610,8 +679,6 @@ public class ConstraintFactory {
 								ConstraintFactory.dupStmt.add(newSt);
 							}
 						}
-						if (!keepActual)
-							i--;
 						//ConstraintFactory.dupStmt.add(si);
 						continue;
 					}
@@ -710,10 +777,13 @@ public class ConstraintFactory {
 		if (e instanceof ExprVar) {
 			//System.err.println("var is " + ((ExprVar) e).getName());
 			//System.err.println("nested var is " + Global.nestedVars);
-			if (!Global.nestedVars.contains(((ExprVar) e).getName())) {
-				((ExprVar) e).setName(((ExprVar) e).getName() + Integer.toString(p));
+			String varName = ((ExprVar) e).getName();
+			if (!Global.nestedVars.contains(varName)) {
+				//if (Global.feasibleVars.get(varName))
+				if (!Global.facts.get(Global.line).contains(varName))
+					((ExprVar) e).setName(varName + Integer.toString(p));
 			} else {
-				((ExprVar) e).setName("(" + ((ExprVar) e).getName() + "%" + Integer.toString(p) + ")");
+				((ExprVar) e).setName("(" + varName + "%" + Integer.toString(p) + ")");
 			}
 		}
 	}
@@ -1267,6 +1337,7 @@ public class ConstraintFactory {
 			for(int i = 0; i < this.ori_trace_list.size();i++){
 				System.err.println("bound is " + bound);
 				System.err.println("size is " + this.ori_trace_list.get(i).getTraces().size());
+				bound = this.ori_trace_list.get(i).getLength();
 				stmts.addAll(genSemCompareIO(bound,this.ori_trace_list.get(i), this.target_trace_list.get(i)));
 			}
 		}
@@ -1508,8 +1579,35 @@ public class ConstraintFactory {
 			String s = Vars.get(h);
 			if (allVars.get(s) instanceof TypeArray)
 				continue;
+			if (Global.prime_mod) {
+				if (Global.allvars.containsKey(s)) {
+					if (!Global.facts.get(lineNumber).contains(s)) {
+						for (int p : Global.primes)
+							result.addStmt(new StmtAssign(new ExprArrayRange(
+									new ExprVar(Global.curFunc + s + Integer.toString(p) + "Array"),
+									new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0),
+									new ExprVar(s + Integer.toString(p)), 0));
+					} else {
+						result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(Global.curFunc + s + "Array"),
+								new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0), new ExprVar(s), 0));
+					}
+				} else {
+				}
+				continue;
+			}
 			result.addStmt(new StmtAssign(new ExprArrayRange(new ExprVar(Global.curFunc + s + "Array"),
 					new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0), new ExprVar(s), 0));
+		}
+		if (Global.prime_mod) {
+			for (String al : Global.alwaysVars) {
+				if (!Vars.contains(al) && Vars.contains(al + Integer.toString(Global.primes[1]))) {
+					for (int p : Global.primes)
+						result.addStmt(new StmtAssign(new ExprArrayRange(
+								new ExprVar(Global.curFunc + al + Integer.toString(p) + "Array"),
+								new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0),
+								new ExprVar(al + Integer.toString(p)), 0));
+				}
+			}
 		}
 		if (lineNumber == hitline) {
 			result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("linehit"), 0), 0));
@@ -1585,7 +1683,14 @@ public class ConstraintFactory {
 	}
 
 	static public void buildContext(StmtBlock sb) {
-		sb.buildContext(new Context(), 0);
+		Context prectx = new Context();
+		prectx.setLinenumber(sb.getLineNumber());
+		List<Parameter> params = fh.getPara();
+    	for (Parameter param : params) {
+    		prectx.addVar(param.getName(), param.getType());
+    	}
+		
+		sb.buildContext(prectx, 0);
 	}
 
 	static public Map<String, Type> addRecordStmt(StmtBlock sorce) {

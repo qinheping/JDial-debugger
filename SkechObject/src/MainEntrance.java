@@ -56,6 +56,7 @@ public class MainEntrance {
 	private List<String> ori_trace;
 	private List<String> target_trace;
 	public static boolean iomod = false;
+	public List<Integer> indexes = new ArrayList<>();
 
 	//added 11/18
 	private HashMap<String, String> funtions = new HashMap<>();
@@ -76,6 +77,7 @@ public class MainEntrance {
 		this.target_trace = new ArrayList<>();
 	}
 	
+	public void addindex (int index){ this.indexes.add(index);}
 	public void addOriTrace (String ori){ this.ori_trace.add(ori);}
 	public void addTargetTrace (String target){ this.target_trace.add(target);}
 
@@ -117,6 +119,8 @@ public class MainEntrance {
 		Map<Integer, Set<String>> facts = cfg.dataflow();
 		Global.facts = facts;
 		CFG.GenfeasibleVars();
+		CFG.GenAlwaysVars();
+		cfg.inilocs();
 		this.buildFuncNameList();
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){
@@ -163,7 +167,11 @@ public class MainEntrance {
 		// IOmod
 		if(iomod){
 			for(int i = 0; i < this.ori_trace.size(); i++){
+				//if (i > 0)
+					//indexOfCorrectTrace = this.indexes.get(i - 1);
 				Root addRoot =  jsonRootCompile(ori_trace.get(i));
+				indexOfCorrectTrace = addRoot.getTraces().getLength() - 1;
+				//System.err.println("index: " + indexOfCorrectTrace);
 				Traces addtraces = addRoot.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
 				cf.addOriTraces(addtraces);
 				cf.addTargetTrace(jsonTraceCompile(this.target_trace.get(i)));

@@ -129,7 +129,12 @@ public class StmtAssign extends Statement {
 		prectx = new Context(prectx);
 		postctx.setLinenumber(this.getLineNumber());
 		prectx.setLinenumber(this.getLineNumber());
-
+		if (lhs.toString().contains("ini")) {
+			this.setPostctx(new Context(postctx));
+			this.setPrectx(new Context(prectx));
+			return postctx;
+		}
+		
 		List<String> tmp = postctx.getVarsInScope();
 		if (!tmp.contains(lhs.toString())&& (position > 0 || Global.dupFinals.contains(lhs.toString())
 				|| Global.params.contains(lhs.toString()))) {
@@ -166,9 +171,9 @@ public class StmtAssign extends Statement {
 		//}
 		//System.err.println("parent is: " + parent);
 		//System.err.println("index: " + parent.stmts.get(index));
-		m.putAll(this.getPrectx().getAllVars());
-		System.err.println("assign is: " + this);
-		System.err.println("m is: " + m);
+		m.putAll(this.getPostctx().getAllVars());
+		//System.err.println("assign is: " + this);
+		//System.err.println("m is: " + m);
 		return m;
 	}
 
@@ -211,9 +216,9 @@ public class StmtAssign extends Statement {
 		}
 		List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
 		for (String v : vars) {
-			System.err.println("stmt: " + this);
-			System.err.println("available vars: " + vars);
-			System.err.println("current var: " + v);
+			//System.err.println("stmt: " + this);
+			//System.err.println("available vars: " + vars);
+			//System.err.println("current var: " + v);
 			// all 1 dimension array
 
 			if (this.getPrectx().getAllVars().get(v) instanceof TypeArray) {

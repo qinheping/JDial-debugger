@@ -99,7 +99,10 @@ public class StmtBlock extends Statement {
 	public Context buildContext(Context prectx, int sposition) {
 		prectx = new Context(prectx);
 		Context postctx = new Context(prectx);
+		//System.err.println("block is " + this.stmts);
+		//System.err.println("size is " + this.stmts.size());
 		for (int i = 1; i < this.stmts.size(); i++) {
+			//System.err.println("cur stmt: " + stmts.get(i - 1));
 			postctx = stmts.get(i - 1).buildContext(postctx, sposition);
 		}
 		postctx = this.stmts.get(this.stmts.size()-1).buildContext(postctx, sposition);

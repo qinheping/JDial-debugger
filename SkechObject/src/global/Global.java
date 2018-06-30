@@ -16,12 +16,19 @@ public class Global {
 	public static Map<String, Boolean> allvars = new HashMap<>();
 	// vars that could be tracked modulaly at some location <name, modular values initialized?> 
 	public static Map<String, Boolean> feasibleVars = new HashMap<>();
+	// vars that could be always tracked modulaly
+	public static Set<String> alwaysVars = new HashSet<>();
 	// store dataflow facts
 	public static Map<Integer, Set<String>> facts = null;
+	// for each feasible var, when the modular values should initialized
+	public static Map<String, Set<Integer>> inilocs = new HashMap<>();
 	// "finalvar" + "2", "finalvar" + "3", ...
 	public static Set<String> dupFinals = new HashSet<>();
 	// for (int i = 0; i < ) --> "i":
 	public static Set<String> nestedVars = new HashSet<>();
 	// function(int x, int y) --> x, y
 	public static Set<String> params = new HashSet<>();
+	// current line number of statement
+	public static int line = 0;
+	
 }

@@ -213,12 +213,12 @@ public class CFG {
         }
         
         if (stmt instanceof StmtWhile) {
-        	in = new Node(stmt.getLineNumber(), ((StmtWhile) stmt).getCond().getCtx().toString(),
+        	in = new Node(stmt.getLineNumber(), ((StmtWhile) stmt).toString(),
         			null, ((StmtWhile) stmt).getCond());
         	this.nodes.put(stmt.getLineNumber(), in);
     		Connection con1 = new Connection(in, in);
         	Connection con2 = buildStmt(((StmtWhile) stmt).getBody());
-        	if (con2.getIn() != null) {
+        	if (con2.getIn() == null) {
         		return con1;
         	} else {
         		ArrayList<Connection> list = new ArrayList<Connection>();
@@ -629,20 +629,54 @@ public class CFG {
 	
 	public static void GenfeasibleVars() {
 		for (Map.Entry<String, Boolean> entry : Global.allvars.entrySet()) {
-			if (!entry.getValue()) {
-				boolean feasible = false;
-				String name = entry.getKey();
-				for (Map.Entry<Integer, Set<String>> entry1 : Global.facts.entrySet()) {
-					if (!entry1.getValue().contains(name)) {
-						feasible = true;
-						break;
-					}
+			boolean feasible = false;
+			String name = entry.getKey();
+			for (Map.Entry<Integer, Set<String>> entry1 : Global.facts.entrySet()) {
+				if (!entry1.getValue().contains(name)) {
+					feasible = true;
+					break;
 				}
-				if (feasible)
-					Global.feasibleVars.put(name, false);
 			}
+			if (feasible)
+				Global.feasibleVars.put(name, false);
 		}
 		//System.err.println(Global.feasibleVars);
+	}
+	
+	public static void GenAlwaysVars() {
+		for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
+			boolean always = true;
+			String name = entry.getKey();
+			for (Map.Entry<Integer, Set<String>> entry1 : Global.facts.entrySet()) {
+				if (entry1.getValue().contains(name)) {
+					always = false;
+					break;
+				}
+			}
+			if (always)
+				Global.alwaysVars.add(name);
+		}
+		//System.err.println(Global.feasibleVars);
+	}
+	
+	public void inilocs() {
+		for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
+			Global.inilocs.put(entry.getKey(), new HashSet<>());
+		}
+		for (String var : Global.alwaysVars)
+			Global.inilocs.get(var).add(enter.getId());
+		for (Map.Entry<Integer, List<Integer>> entry : this.edges.entrySet()) {
+			for (Map.Entry<String, Boolean> entry1 : Global.allvars.entrySet()) {
+				String var = entry1.getKey();
+				if (Global.facts.get(entry.getKey()).contains(var)) {
+					for (int tail : entry.getValue()) {
+						if (!Global.facts.get(tail).contains(var)) {
+							Global.inilocs.get(var).add(tail);
+						}
+					}
+				}
+			}
+		}
 	}
 	
 }	
