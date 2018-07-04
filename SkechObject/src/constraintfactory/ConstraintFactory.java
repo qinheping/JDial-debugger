@@ -2125,7 +2125,6 @@ public class ConstraintFactory {
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
 
 		
-		
 		Statement block = new StmtBlock(stmts);
 
 		
