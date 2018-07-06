@@ -438,7 +438,7 @@ public class StmtVarDecl extends Statement {
 					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, this.getLineNumber());
 				}
 				List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
-				for (String v : vars) {
+	/*			for (String v : vars) {
 					// all 1 dimension array
 
 					if (this.getPrectx().getAllVars().get(v) instanceof TypeArray) {
@@ -455,7 +455,7 @@ public class StmtVarDecl extends Statement {
 						 * liveVarsIndexSet.add(index); liveVarsNameSet.add(v);
 						 * index++;
 						 */
-						continue;
+	/*					continue;
 					} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
 							.getType())
 						continue;
