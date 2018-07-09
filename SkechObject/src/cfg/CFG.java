@@ -1,6 +1,7 @@
 package cfg;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -672,21 +673,48 @@ public class CFG {
 		for (String var : Global.alwaysVars)
 			if (!Global.allvars.get(var))
 				Global.inilocs.get(var).add(enter.getId());
-		for (Map.Entry<Integer, List<Integer>> entry : this.edges.entrySet()) {
-			for (Map.Entry<String, Boolean> entry1 : Global.allvars.entrySet()) {
-				String var = entry1.getKey();
-				if (Global.allvars.get(var))
-					continue;
-				if (Global.facts.get(entry.getKey()).contains(var)) {
-					for (int tail : entry.getValue()) {
-						if (!Global.facts.get(tail).contains(var)) {
-							Global.inilocs.get(var).add(tail);
+		if (!Global.only_mod)
+			for (Map.Entry<Integer, List<Integer>> entry : this.edges.entrySet()) {
+				for (Map.Entry<String, Boolean> entry1 : Global.allvars.entrySet()) {
+					String var = entry1.getKey();
+					if (Global.allvars.get(var))
+						continue;
+					if (Global.facts.get(entry.getKey()).contains(var)) {
+						for (int tail : entry.getValue()) {
+							if (!Global.facts.get(tail).contains(var)) {
+								Global.inilocs.get(var).add(tail);
+							}
 						}
 					}
 				}
 			}
-		}
 		System.err.println("inilocs: " + Global.inilocs);
+	}
+	
+	public void getAltFacts() {
+		Set<String> nonvars = new HashSet<>();
+		for (String var : Global.allvars.keySet()) {
+			if (!Global.alwaysVars.contains(var))
+				nonvars.add(var);
+		}
+		for (Map.Entry<Integer, Node> entry : this.nodes.entrySet()) {
+			Set<String> curvars = new HashSet<>();
+			Node node = entry.getValue();
+			if (node.getType() == 1) {
+				Set<String> leftvars = extractLVarStmt(node.getStmt());
+				curvars.addAll(leftvars);
+				if (node.getStmt() instanceof StmtAssign || node.getStmt() instanceof StmtVarDecl) {
+					for (String lv : leftvars)
+						Global.inilocs.remove(lv);
+				}
+				curvars.addAll(extractRVarStmt(node.getStmt()));
+			} else if (node.getType() == 2) {
+				curvars.addAll(extractAllVarExpr(node.getExpr()));
+			}
+			if (!Collections.disjoint(nonvars, curvars))
+				Global.altfacts.add(entry.getKey());
+		}
+		
 	}
 	
 }	

@@ -121,6 +121,8 @@ public class MainEntrance {
 		CFG.GenfeasibleVars();
 		CFG.GenAlwaysVars();
 		cfg.inilocs();
+		if (Global.only_mod)
+			cfg.getAltFacts();
 		this.buildFuncNameList();
 		List<Function> otherFunctions = new ArrayList<>();
 		for(int i = 0; i < this.function_names.size(); i++){

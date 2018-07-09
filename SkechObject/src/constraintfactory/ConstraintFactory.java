@@ -489,9 +489,14 @@ public class ConstraintFactory {
 							((StmtAssign) si).getOp() == ExprBinary.BINOP_SUB;
 					System.err.println("isAdd is : " + isAdd);
 					Expression l = ((StmtAssign) si).getLHS();
-					if (Global.facts.get(si.getLineNumber()) == null || 
+					if (!Global.only_mod) {
+						if (Global.facts.get(si.getLineNumber()) == null || 
 							Collections.disjoint(Global.facts.get(si.getLineNumber()), CFG.extractAllVarExpr(l)))
-						keepActual = false;
+							keepActual = false;
+					} else {
+						if (!Global.altfacts.contains(si.getLineNumber()))
+							keepActual = false;
+					}
 					//if (frozenStmt.contains(si))
 						//keepActual = false;
 					if (!keepActual) {
@@ -509,6 +514,8 @@ public class ConstraintFactory {
 					//Map<String, Type> allvars = con.getAllVars();
 					//dupVars(allvars);
 					//con.setCurrentVars(allvars);
+					if (CFG.extractAllVarExpr(((StmtAssign) si).getLHS()).contains(final_var))
+						Global.finalTracked = true;
 					for (int p : Global.primes) {
 						StmtAssign newSt = ((StmtAssign) si).clone();
 						Expression lhs = newSt.getLHS();
@@ -546,8 +553,13 @@ public class ConstraintFactory {
 				if (si instanceof StmtVarDecl) {
 					String declaredVar = ((StmtVarDecl) si).getName(0);
 					boolean keepActual = false;
-					if (Global.facts.get(si.getLineNumber()).contains(declaredVar)) {
-						keepActual = true;
+					if (!Global.only_mod) {
+						if (Global.facts.get(si.getLineNumber()).contains(declaredVar)) {
+							keepActual = true;
+						}
+					} else {
+						if (Global.altfacts.contains(si.getLineNumber()))
+							keepActual = true;
 					}
 					if (!keepActual) {
 						((StmtBlock) s).stmts.remove(i);
@@ -563,7 +575,7 @@ public class ConstraintFactory {
 					//System.err.println("final var is "+ finalVar);
 					//System.err.println("var name is " + ((StmtVarDecl) si).getName(0));
 					if (((StmtVarDecl) si).getName(0).equals(finalVar)) {
-						
+						Global.finalTracked = true;
 						//Context con = si.getPostctx();
 						//Map<String, Type> allvars = con.getAllVars();
 						//dupVars(allvars);
@@ -682,7 +694,11 @@ public class ConstraintFactory {
 			return;
 		}
 		if (s instanceof StmtReturn) {
-			((StmtReturn) s).setValue(new ExprConstInt(0));
+			if (Global.finalTracked)
+				((StmtReturn) s).setValue(new ExprConstInt(0));
+			else {
+				
+			}
 		}
 	}
 	
@@ -938,12 +954,12 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod)
+		if (Global.prime_mod && Global.finalTracked)
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
 
 		// hard constrain
 		for (String v : finalState.getOrdered_locals()) {
-			if (ConstraintFactory.prime_mod) {
+			if (ConstraintFactory.prime_mod && Global.finalTracked) {
 				for (int i : Global.primes) {
 					String num = Integer.toString(i);
 					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
@@ -1006,26 +1022,26 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod)
+		if (Global.prime_mod && Global.finalTracked)
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()), 0));
 		
 		// hard constrain
-				for (String v : tar.getOrdered_locals()) {
-					if (ConstraintFactory.prime_mod) {
-						for (int i : Global.primes) {
-							String num = Integer.toString(i);
-							stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
-									new ExprVar("correctFinal_" + v + " % " + num), 0)));
-						}
-						//stmts.add(new StmtAssert(this.genAssertPrime(v)));
-					}
-					else
-						//stmts.add(new StmtAssert(
-						//		new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v), 0)));
-						stmts.add(new StmtAssert(
-										new ExprBinary(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()),
-												"==", new ExprVar("correctFinal_" + v), 0)));
+		for (String v : tar.getOrdered_locals()) {
+			if (ConstraintFactory.prime_mod && Global.finalTracked) {
+				for (int i : Global.primes) {
+					String num = Integer.toString(i);
+					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
+							new ExprVar("correctFinal_" + v + " % " + num), 0)));
 				}
+				//stmts.add(new StmtAssert(this.genAssertPrime(v)));
+			}
+			else
+				//stmts.add(new StmtAssert(
+				//		new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v), 0)));
+				stmts.add(new StmtAssert(
+								new ExprBinary(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()),
+										"==", new ExprVar("correctFinal_" + v), 0)));
+		}
 		
 		return stmts;
 	}

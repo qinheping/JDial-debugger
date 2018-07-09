@@ -6,8 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class Global {
-	public static final boolean prime_mod = false;
+	public static final boolean prime_mod = true;
+	// track a var modularly only when it could always be tracked modularly 
+	public static final boolean only_mod = true;
 	public static final boolean rec_mod = false;
+	public static boolean finalTracked = false;
 	public static String curFunc = "";
 	public static int[] primes = {2,3,5,7,11,13,17,19,23,29};
 	//public static int[] primes = {2,3,5,7,11,13};
@@ -20,6 +23,8 @@ public class Global {
 	public static Set<String> alwaysVars = new HashSet<>();
 	// store dataflow facts
 	public static Map<Integer, Set<String>> facts = null;
+	// alternative dataflow facts
+	public static Set<Integer> altfacts = new HashSet<>();
 	// for each feasible var, when the modular values should initialized
 	public static Map<String, Set<Integer>> inilocs = new HashMap<>();
 	// "finalvar" + "2", "finalvar" + "3", ...
