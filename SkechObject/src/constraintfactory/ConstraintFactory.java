@@ -214,7 +214,8 @@ public class ConstraintFactory {
 		//s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
 		if (Global.prime_mod) {
 			for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
-				s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), entry.getKey() + "ini"
+				if (!finalState.getOrdered_locals().contains(entry.getKey()))
+					s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), entry.getKey() + "ini"
 						, new ExprConstInt(0), 0), s);
 			}
 		}
@@ -433,7 +434,8 @@ public class ConstraintFactory {
 			if (entry.getValue().contains(line)) {
 				//for (Parameter para :fh.getPara()) {
 					//if (para.getName().equals(entry.getKey())) {
-						tbi.add(entry.getKey());
+				if (!finalState.getOrdered_locals().contains(entry.getKey()))
+					tbi.add(entry.getKey());
 					//	break;
 				//	}
 				//}
@@ -522,10 +524,10 @@ public class ConstraintFactory {
 						changeExpr(lhs, p);
 						Expression rhs = newSt.getRHS();
 						//if (!frozenStmt.contains(si))
-							changeExpr(rhs, p);
+							//changeExpr(rhs, p);
 						//else
 							//Global.dupFinals.add(rhs.toString() + Integer.toString(i));
-						rhs = modExpr(rhs, p);
+						rhs = ConvertExpr(rhs, p);
 						newSt.setLhs(lhs);
 						newSt.setRhs(rhs);
 						//newSt.setPrectx(con);
@@ -583,11 +585,11 @@ public class ConstraintFactory {
 						for (int p : Global.primes) {
 							
 							Expression init = ((StmtVarDecl) si).clone().getInit(0);
-							changeExpr(init, p);
-							if (!(init instanceof ExprArrayInit))
-								init = modExpr(init, p);
+							//changeExpr(init, p);
+							//if (!(init instanceof ExprArrayInit))
+							//	init = modExpr(init, p);
 							StmtAssign assign = new StmtAssign(new ExprVar(finalVar + Integer.toString(p)), 
-									init, si.getLineNumber());
+									ConvertExpr(init, p), si.getLineNumber());
 							//assign.buildContext(con, 0);
 							i++;
 							((StmtBlock) s).stmts.add(i, assign);
@@ -608,10 +610,10 @@ public class ConstraintFactory {
 							StmtVarDecl newSt = ((StmtVarDecl) si).clone();
 							newSt.SetName(newSt.getName(0) + Integer.toString(p));
 							Expression init = newSt.getInit(0);
-							changeExpr(init, p);
-							if (!(init instanceof ExprArrayInit))
-								init = modExpr(init, p);
-							newSt.setInit(0, init);
+							//changeExpr(init, p);
+							//if (!(init instanceof ExprArrayInit))
+								//init = modExpr(init, p);
+							newSt.setInit(0, ConvertExpr(init, p));
 							//newSt.setPrectx(con);
 							//newSt.setPostctx(con);
 							i++;
@@ -702,6 +704,53 @@ public class ConstraintFactory {
 		}
 	}
 	
+	private static Expression ConvertExpr(Expression e, int p) {
+		if (e instanceof ExprArrayInit) {
+			List<Expression> list = ((ExprArrayInit) e).getElements();
+			for (int i = 0; i < list.size(); i++) {
+				Expression expr = list.get(i);
+				if (expr instanceof ExprConstInt) {
+					list.remove(i);
+					list.add(i, modExpr(expr, p));
+				} else {
+					list.remove(i);
+					list.add(i, ConvertExpr(expr, p));
+				}
+			}
+			return e;
+		}
+		if (e instanceof ExprArrayRange) {
+			ExprArrayRange newExpr = ((ExprArrayRange) e).clone();
+			changeExpr(newExpr.getBase(), p);
+			return newExpr;
+		}
+		if (e instanceof ExprBinary) {
+			Expression l = ConvertExpr(((ExprBinary) e).getLeft(), p);
+			Expression r = ConvertExpr(((ExprBinary) e).getRight(), p);
+			return modExpr(new ExprBinary(((ExprBinary) e).getOp(), l, r, e.lineNumber), p);
+		}
+		if (e instanceof ExprVar) {
+			//System.err.println("var is " + ((ExprVar) e).getName());
+			//System.err.println("nested var is " + Global.nestedVars);
+			String varName = ((ExprVar) e).getName();
+			if (!Global.nestedVars.contains(varName)) {
+				//if (Global.feasibleVars.get(varName))
+				if (!Global.facts.get(Global.line).contains(varName))
+					((ExprVar) e).setName(varName + Integer.toString(p));
+			} else {
+				((ExprVar) e).setName("(" + varName + "%" + Integer.toString(p) + ")");
+			}
+			return modExpr(e, p);
+		}
+		if (e instanceof ExprFunCall) {
+			return modExpr(e, p);
+		}
+		if (e instanceof ExprConstInt) {
+			return modExpr(e, p);
+		}
+		return e;
+	}
+
 	private static void changeExpr(Expression e, int p) {
 		if (e instanceof ExprArrayInit) {
 			List<Expression> list = ((ExprArrayInit) e).getElements();
@@ -732,11 +781,11 @@ public class ConstraintFactory {
 				if (!Global.facts.get(Global.line).contains(varName))
 					((ExprVar) e).setName(varName + Integer.toString(p));
 			} else {
-				((ExprVar) e).setName("(" + varName + "%" + Integer.toString(p) + ")");
+				//((ExprVar) e).setName("(" + varName + "%" + Integer.toString(p) + ")");
 			}
 		}
 	}
-
+	
 	private static ExprBinary modExpr(Expression e, int p) {
 		Expression left = e;
 		int op = ExprBinary.BINOP_MOD;
@@ -954,8 +1003,17 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked)
+		if (Global.prime_mod && Global.finalTracked) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
+			
+			for (int p : Global.primes) {
+				for (String v : finalState.getOrdered_locals()) {
+					String var = v + Integer.toString(p);
+					stmts.add(new StmtExpr(new ExprVar(var + " = (" + var + " < 0)? " + var + "+" +
+					Integer.toString(p) + " : " + var),0));
+				}
+			}
+		}
 
 		// hard constrain
 		for (String v : finalState.getOrdered_locals()) {
@@ -1022,8 +1080,18 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked)
+		if (Global.prime_mod && Global.finalTracked) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()), 0));
+			
+			for (int p : Global.primes) {
+				for (String v : finalState.getOrdered_locals()) {
+					String var = v + Integer.toString(p);
+					stmts.add(new StmtExpr(new ExprVar(var + " = (" + var + " < 0)? " + var + "+" +
+					Integer.toString(p) + " : " + var),0));
+				}
+			}
+			
+		}
 		
 		// hard constrain
 		for (String v : tar.getOrdered_locals()) {

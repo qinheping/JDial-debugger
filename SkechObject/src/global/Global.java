@@ -8,11 +8,11 @@ import java.util.Set;
 public class Global {
 	public static final boolean prime_mod = true;
 	// track a var modularly only when it could always be tracked modularly 
-	public static final boolean only_mod = true;
+	public static final boolean only_mod = false;
 	public static final boolean rec_mod = false;
 	public static boolean finalTracked = false;
 	public static String curFunc = "";
-	public static int[] primes = {2,3,5,7,11,13,17,19,23,29};
+	public static int[] primes = {2,3,5,7,11,13,17};
 	//public static int[] primes = {2,3,5,7,11,13};
 	
 	// all vars in the program <name, isTypeArray?>
