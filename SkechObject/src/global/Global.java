@@ -6,8 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class Global {
-	public static final boolean prime_mod = true;
-	// track a var modularly only when it could always be tracked modularly 
+	public static final boolean prime_mod = false;
+	public static final boolean inc_mod = false;
+	// track a var modularly only when it could always be tracked modularly
 	public static final boolean only_mod = false;
 	public static final boolean rec_mod = false;
 	public static boolean finalTracked = false;
