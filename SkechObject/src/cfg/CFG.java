@@ -1,6 +1,7 @@
 package cfg;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -29,6 +30,7 @@ public class CFG {
     private Map<Integer, List<Integer>> edges;
     private Map<Integer, Node> nodes;
     private Map<Integer, List<String>> keepActual;
+    private boolean forInit = false;
 	
     public CFG(Function function) {
     	this.edges = new HashMap<Integer, List<Integer>>();
@@ -126,7 +128,9 @@ public class CFG {
         // assume init, cond, incr are non-empty, although body might be empty
         if (stmt instanceof StmtFor) {
     		ArrayList<Connection> list = new ArrayList<Connection>();
+    		this.forInit = true;
     		Connection InitCon = buildStmt(((StmtFor) stmt).getInit());
+    		this.forInit = false;
     		in = InitCon.getIn();
     		
     		Node condNode = new Node(stmt.getLineNumber(), ((StmtFor) stmt).getCond().toString(),
@@ -136,16 +140,17 @@ public class CFG {
     		Connection condCon = new Connection(condNode, condNode);
     		
     		Connection bodyCon = buildStmt(((StmtFor) stmt).getBody());
-    		Connection incrCon = buildStmt(((StmtFor) stmt).getIncr());
+    		//Connection incrCon = buildStmt(((StmtFor) stmt).getIncr());
     		
     		list.add(InitCon);
     		list.add(condCon);
     		list.add(bodyCon);
-    		list.add(incrCon);
+    		//list.add(incrCon);
     		combineList(list);
     		
     		ArrayList<Connection> loop = new ArrayList<Connection>();
-    		loop.add(incrCon);
+    		loop.add(bodyCon);
+    		//loop.add(incrCon);
     		loop.add(condCon);
     		combineList(loop);
     		
@@ -198,7 +203,7 @@ public class CFG {
         	List<Type> types = ((StmtVarDecl) stmt).getTypes();
         	List<String> names = ((StmtVarDecl) stmt).getNames();
         	for (int i = 0; i < types.size(); i++) {
-        		if (!Global.allvars.containsKey(names.get(i))) {
+        		if (!Global.allvars.containsKey(names.get(i)) && !this.forInit) {
 	        		if (types.get(i) instanceof TypeArray) {
 	        			Global.allvars.put(names.get(i), true);
 	        		} else {
@@ -660,23 +665,56 @@ public class CFG {
 	}
 	
 	public void inilocs() {
+		System.err.println("always: " + Global.alwaysVars);
 		for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
-			Global.inilocs.put(entry.getKey(), new HashSet<>());
+			if (!Global.allvars.get(entry.getKey()))
+				Global.inilocs.put(entry.getKey(), new HashSet<>());
 		}
 		for (String var : Global.alwaysVars)
-			Global.inilocs.get(var).add(enter.getId());
-		for (Map.Entry<Integer, List<Integer>> entry : this.edges.entrySet()) {
-			for (Map.Entry<String, Boolean> entry1 : Global.allvars.entrySet()) {
-				String var = entry1.getKey();
-				if (Global.facts.get(entry.getKey()).contains(var)) {
-					for (int tail : entry.getValue()) {
-						if (!Global.facts.get(tail).contains(var)) {
-							Global.inilocs.get(var).add(tail);
+			if (!Global.allvars.get(var))
+				Global.inilocs.get(var).add(enter.getId());
+		if (!Global.only_mod)
+			for (Map.Entry<Integer, List<Integer>> entry : this.edges.entrySet()) {
+				for (Map.Entry<String, Boolean> entry1 : Global.allvars.entrySet()) {
+					String var = entry1.getKey();
+					if (Global.allvars.get(var))
+						continue;
+					if (Global.facts.get(entry.getKey()).contains(var)) {
+						for (int tail : entry.getValue()) {
+							if (!Global.facts.get(tail).contains(var)) {
+								Global.inilocs.get(var).add(tail);
+							}
 						}
 					}
 				}
 			}
+		System.err.println("inilocs: " + Global.inilocs);
+	}
+	
+	public void getAltFacts() {
+		Set<String> nonvars = new HashSet<>();
+		for (String var : Global.allvars.keySet()) {
+			if (!Global.alwaysVars.contains(var))
+				nonvars.add(var);
 		}
+		for (Map.Entry<Integer, Node> entry : this.nodes.entrySet()) {
+			Set<String> curvars = new HashSet<>();
+			Node node = entry.getValue();
+			if (node.getType() == 1) {
+				Set<String> leftvars = extractLVarStmt(node.getStmt());
+				curvars.addAll(leftvars);
+				if (node.getStmt() instanceof StmtAssign || node.getStmt() instanceof StmtVarDecl) {
+					for (String lv : leftvars)
+						Global.inilocs.remove(lv);
+				}
+				curvars.addAll(extractRVarStmt(node.getStmt()));
+			} else if (node.getType() == 2) {
+				curvars.addAll(extractAllVarExpr(node.getExpr()));
+			}
+			if (!Collections.disjoint(nonvars, curvars))
+				Global.altfacts.add(entry.getKey());
+		}
+		
 	}
 	
 }	

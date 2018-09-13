@@ -194,6 +194,10 @@ public class ExprArrayRange extends Expression
 	public Expression getBase() {
 		return base;
 	}
+	
+	public void setBase(Expression expr) {
+		this.base = expr;
+	}
 
 	public Expression getSingleIndex() {		
 		RangeLen r=index;

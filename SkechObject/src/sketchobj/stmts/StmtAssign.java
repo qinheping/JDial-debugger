@@ -215,7 +215,7 @@ public class StmtAssign extends Statement {
 			return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, this.getLineNumber());
 		}
 		List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
-		for (String v : vars) {
+	/*	for (String v : vars) {
 			//System.err.println("stmt: " + this);
 			//System.err.println("available vars: " + vars);
 			//System.err.println("current var: " + v);
@@ -233,14 +233,14 @@ public class StmtAssign extends Statement {
 				 * inits.set(i, new ExprBinary(inits.get(i), "+", newTerm));
 				 * liveVarsIndexSet.add(index); liveVarsNameSet.add(v); index++;
 				 */
-				continue;
-			} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
+	//			continue;
+	/*		} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
 					.getType())
 				continue;
 			/*
 			 * if(v.equals(lhs.toString())) continue;
 			 */
-			if (this.getPostctx().getVarsInScope().contains(v)){
+	/*		if (this.getPostctx().getVarsInScope().contains(v)){
 				System.err.println("case: contain");
 				continue;
 			}
@@ -250,7 +250,7 @@ public class StmtAssign extends Statement {
 			liveVarsIndexSet.add(index);
 			index++;
 			liveVarsNameSet.add(v);
-		}
+		}*/
 		this.rhs = new ExprBinary(this.rhs, "+",
 				new ExprBinary(new ExprFunCall("Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),
