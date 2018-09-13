@@ -10,7 +10,7 @@ public class Global {
 	public static final boolean inc_mod = false;
 	// track a var modularly only when it could always be tracked modularly
 	public static final boolean only_mod = false;
-	public static final boolean rec_mod = false;
+	//public static final boolean rec_mod = false;
 	public static final boolean sem_dis = true;
 	public static final boolean test_mod = false;
 	//public static boolean finalTracked = false;

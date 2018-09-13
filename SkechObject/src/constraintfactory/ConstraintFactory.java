@@ -284,8 +284,8 @@ public class ConstraintFactory {
 				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes,
 						f.getName())));
 		
-		if(global.Global.rec_mod)
-			stmts.add(varArrayDecl("stack", length, new TypePrimitive(4)));
+		//if(global.Global.rec_mod)
+			//stmts.add(varArrayDecl("stack", length, new TypePrimitive(4)));
 		
 		// add final state
 		// System.out.println(finalState.getOrdered_locals().size());
@@ -305,8 +305,8 @@ public class ConstraintFactory {
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
 		
-		if(global.Global.rec_mod)
-			stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
+		//if(global.Global.rec_mod)
+			//stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
 		
 		if (Global.prime_mod) {
 			for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
@@ -1581,12 +1581,12 @@ public class ConstraintFactory {
 		// count ++
 		result.addStmt(new StmtExpr(new ExprUnary(5, new ExprVar("count"), 0), 0));
 		// varToUpdateArray[count] = varToUpdate;
-		if(global.Global.rec_mod)
+		/*if(global.Global.rec_mod)
 			result.addStmt(
 				new StmtAssign(
 						new ExprArrayRange(new ExprVar("stackArray"),
 								new ExprArrayRange.RangeLen(new ExprVar("count"), null), 0),
-						new ExprVar("funcCount"), 0));
+						new ExprVar("funcCount"), 0));*/
 
 		
 		result.addStmt(
