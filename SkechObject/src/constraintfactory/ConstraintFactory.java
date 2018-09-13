@@ -195,7 +195,7 @@ public class ConstraintFactory {
 						Global.dupFinals.add(v + Integer.toString(i));
 					}
 				}
-				//buildContext((StmtBlock) s);
+				buildContext((StmtBlock) s);
 			}
 			//System.err.println("s2 is: ");
 			//System.err.println(s);
@@ -206,8 +206,26 @@ public class ConstraintFactory {
 		// add record stmts to source code and collect vars info
 		Global.curFunc = ConstraintFactory.fh.getName();
 		
+		Map<String, Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s);
+		//System.err.println("s3 is: ");
+		//System.err.println(s);
+		ConstraintFactory.namesToType = vars;
+		List<String> varsNames = new ArrayList<String>(vars.keySet());
+		for (String str : varsNames) {
+			varList.put(str, ConstraintFactory.fh.getName());
+		}
+		//varList = new ArrayList<>(varsNames);
+		for(int i = 0;i<vars.keySet().size();i++)
+		{
+			funcVarList.add(Global.curFunc);
+		}
+		List<Type> varsTypes = new ArrayList<Type>();
+		for (int i = 0; i < varsNames.size(); i++) {
+			varsTypes.add(vars.get(varsNames.get(i)));
+		}
+		
 		// add declare of <linehit> and <count>
-		//s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
+		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
 		if (Global.prime_mod) {
 			for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
 				if (!finalState.getOrdered_locals().contains(entry.getKey()))
@@ -224,7 +242,6 @@ public class ConstraintFactory {
 		Statement coeffFunDecls1 = null;
 		StringBuilder st = new StringBuilder();
 		//Statement globalVarDecls1 = null;
-		//Statement declVars = null;
 		for (int i = 0; i < this.otherFunctions.size(); i++) {
 			Function cur = otherFunctions.get(i);
 			Global.curFunc = cur.getName();
@@ -251,8 +268,6 @@ public class ConstraintFactory {
 			
 			
 			st.append(f1.toString());
-			
-			//declVars = varArrayDecls(varsNames1, varsTypes,cur.getName());
 		}
 		
 		stmts.add(getGlobalDecl());
@@ -265,25 +280,30 @@ public class ConstraintFactory {
 		if (coeffFunDecls1 != null)
 			stmts.add(coeffFunDecls1);
 
+		stmts.add(
+				new StmtBlock(varArrayDecl("line", length, new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes,
+						f.getName())));
+		
 		if(global.Global.rec_mod)
 			stmts.add(varArrayDecl("stack", length, new TypePrimitive(4)));
 		
 		// add final state
 		// System.out.println(finalState.getOrdered_locals().size());
-		for (String v : finalState.getOrdered_locals()) {
-			// added
-			/*if (ConstraintFactory.prime_mod) {
-				for (int i : Global.primes) {
-					stmts.add(new StmtVarDecl(new TypePrimitive(4), v + Integer.toString(i), new ExprConstInt(0), 0));
-					Global.dupFinals.add(v + Integer.toString(i));
-				}
-			}*/
-			//stmts.add(new StmtVarDecl(new TypePrimitive(4), v + "final", new ExprConstInt(0), 0));
-		}
+		if (!Global.test_mod)
+			for (String v : finalState.getOrdered_locals()) {
+				// added
+				/*if (ConstraintFactory.prime_mod) {
+					for (int i : Global.primes) {
+						stmts.add(new StmtVarDecl(new TypePrimitive(4), v + Integer.toString(i), new ExprConstInt(0), 0));
+						Global.dupFinals.add(v + Integer.toString(i));
+					}
+				}*/
+				stmts.add(new StmtVarDecl(new TypePrimitive(4), v + "final", new ExprConstInt(0), 0));
+			}
 
 		// add final count
-		//stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
-		//stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
+		stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
+		stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
 		
 		if(global.Global.rec_mod)
 			stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
@@ -305,9 +325,6 @@ public class ConstraintFactory {
 		String tmp2 = f.toString();
 		// args of getAugFunctions() need change
 		String tmp3 = "";
-		/*if (Global.rec_mod) {
-			tmp3 = getAugFunctions() + constraintFunction_linearCombination().toString();
-		} else {*/
 		if (Global.inc_mod) {
 			int[] fixedPrimes = Global.primes.clone();
 			for (int cur_p : fixedPrimes) {
@@ -321,7 +338,6 @@ public class ConstraintFactory {
 		} else {
 			tmp3 = constraintFunction().toString();
 		}
-		//}
 		System.out.println("tmp1: ");
 		System.err.println(tmp1);
 		System.out.println("tmp2: ");
@@ -527,8 +543,8 @@ public class ConstraintFactory {
 					//Map<String, Type> allvars = con.getAllVars();
 					//dupVars(allvars);
 					//con.setCurrentVars(allvars);
-					if (CFG.extractAllVarExpr(((StmtAssign) si).getLHS()).contains(final_var))
-						Global.finalTracked = true;
+					//if (CFG.extractAllVarExpr(((StmtAssign) si).getLHS()).contains(final_var))
+						//Global.finalTracked = true;
 					for (int p : Global.primes) {
 						StmtAssign newSt = ((StmtAssign) si).clone();
 						Expression lhs = newSt.getLHS();
@@ -588,7 +604,7 @@ public class ConstraintFactory {
 					//System.err.println("final var is "+ finalVar);
 					//System.err.println("var name is " + ((StmtVarDecl) si).getName(0));
 					if (((StmtVarDecl) si).getName(0).equals(finalVar)) {
-						Global.finalTracked = true;
+						//Global.finalTracked = true;
 						//Context con = si.getPostctx();
 						//Map<String, Type> allvars = con.getAllVars();
 						//dupVars(allvars);
@@ -707,7 +723,7 @@ public class ConstraintFactory {
 			return;
 		}
 		if (s instanceof StmtReturn) {
-			if (Global.finalTracked)
+			if (!Global.test_mod)
 				((StmtReturn) s).setValue(new ExprConstInt(0));
 			else {
 				
@@ -874,7 +890,7 @@ public class ConstraintFactory {
 	}
 	
 	// added 11/19
-	static public void get_final_var_2dArray() {
+	static private void get_final_var_2dArray() {
 		int bound = originalLength;
 		String v = ConstraintFactory.final_var;
 		List<Integer> arrayInit = new ArrayList<>();
@@ -1013,7 +1029,7 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked) {
+		if (Global.prime_mod) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
 			
 			for (int p : Global.primes) {
@@ -1027,7 +1043,7 @@ public class ConstraintFactory {
 
 		// hard constrain
 		for (String v : finalState.getOrdered_locals()) {
-			if (ConstraintFactory.prime_mod && Global.finalTracked) {
+			if (ConstraintFactory.prime_mod) {
 				for (int i : Global.primes) {
 					String num = Integer.toString(i);
 					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
@@ -1107,7 +1123,7 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked) {
+		if (Global.prime_mod) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
 			
 			for (int p : Global.primes) {
@@ -1121,7 +1137,7 @@ public class ConstraintFactory {
 
 		// hard constrain
 		for (String v : finalState.getOrdered_locals()) {
-			if (ConstraintFactory.prime_mod && Global.finalTracked) {
+			if (ConstraintFactory.prime_mod) {
 				for (int i : Global.primes) {
 					String num = Integer.toString(i);
 					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
@@ -1168,7 +1184,7 @@ public class ConstraintFactory {
 		// stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 		
 		// added 11/19
-		ConstraintFactory.get_final_var_2dArray();
+		//ConstraintFactory.get_final_var_2dArray();
 
 		return new Function("Constraint" + Integer.toString(cur_p), new TypeVoid(), new ArrayList<Parameter>(), new StmtBlock(stmts),
 				FcnType.Harness);
@@ -1182,7 +1198,7 @@ public class ConstraintFactory {
 
 		// TODO int distance = |finalcount-originalLength|;
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "SyntacticDistance", new ExprConstInt(0), 0));
-		//stmts.add(new StmtVarDecl(new TypePrimitive(4), "SemanticDistance", new ExprConstInt(0), 0));
+		stmts.add(new StmtVarDecl(new TypePrimitive(4), "SemanticDistance", new ExprConstInt(0), 0));
 
 		Set<String> addedVars = new HashSet<String>();
 		System.err.println("varList is" + varList);
@@ -1224,7 +1240,48 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked) {
+		stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
+ 		List<Statement> forBody = new ArrayList<Statement>();
+		for (Map.Entry<String, String> entry : varList.entrySet()) {
+			String v = entry.getKey();
+			if (!addedVars.contains(v))
+				continue;
+			if (constMap.containsKey(v)) {
+				List<Expression> subCondition = new ArrayList<Expression>();
+				for (Integer indexOfv : constMap.get(v)) {
+					subCondition.add(new ExprBinary(new ExprVar("const" + (indexOfv - 1) + "change"), "==",
+							new ExprConstInt(0), 0));
+				}
+				Expression ifCondition;
+				ifCondition = subCondition.get(0);
+				if (subCondition.size() > 1) {
+					for (int i = 1; i < subCondition.size(); i++) {
+						ifCondition = new ExprBinary(ifCondition, "&&", subCondition.get(i), 0);
+					}
+				}
+				forBody.add(
+						new StmtIfThen(ifCondition,
+								new StmtAssign(new ExprVar("SemanticDistance"),
+										new ExprBinary(new ExprArrayRange(v + "Array", "i", 0), "!=",
+												new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0),
+										1, 1),
+								null, 0));
+ 			} else {
+				if (Global.prime_mod) {
+					forBody.add(genSemDisPrime(v, varList.get(v)));
+				} 
+				else
+					forBody.add(new StmtAssign(new ExprVar("SemanticDistance"),
+						new ExprBinary(new ExprArrayRange(varList.get(v) + v + "Array", "i", 0), "!=",
+								new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0),
+						1, 1));
+			}
+ 		}
+		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
+		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
+		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"), 0), 0);
+		stmts.add(new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0));
+		if (Global.prime_mod) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
 			
 			for (int p : Global.primes) {
@@ -1238,7 +1295,7 @@ public class ConstraintFactory {
 
 		// hard constrain
 		for (String v : finalState.getOrdered_locals()) {
-			if (ConstraintFactory.prime_mod && Global.finalTracked) {
+			if (ConstraintFactory.prime_mod) {
 				for (int i : Global.primes) {
 					String num = Integer.toString(i);
 					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
@@ -1247,9 +1304,11 @@ public class ConstraintFactory {
 				//stmts.add(new StmtAssert(this.genAssertPrime(v)));
 			}
 			else
-				//stmts.add(new StmtAssert(
-				//		new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v), 0)));
-				stmts.add(new StmtAssert(
+				if (!Global.test_mod)
+					stmts.add(new StmtAssert(
+						new ExprBinary(new ExprVar(v + "final"), "==", new ExprVar("correctFinal_" + v), 0)));
+				else
+					stmts.add(new StmtAssert(
 								new ExprBinary(new ExprFunCall(fh.getName(), args, fh.getName()),
 										"==", new ExprVar("correctFinal_" + v), 0)));
 		}
@@ -1280,12 +1339,12 @@ public class ConstraintFactory {
 		// constrain on # of change
 		Expression sumOfConstxchange = new ExprVar("const" + 0 + "change");
 		// minimize cost statement
-		stmts.add(new StmtMinimize(new ExprVar("SyntacticDistance"), true));
+		stmts.add(new StmtMinimize(new ExprVar("SemanticDistance+5*SyntacticDistance"), true));
 
 		// stmts.add(new StmtMinimize(new ExprVar("HammingDistance"), true));
 		
 		// added 11/19
-		ConstraintFactory.get_final_var_2dArray();
+		//ConstraintFactory.get_final_var_2dArray();
 
 		return new Function("Constraint", new TypeVoid(), new ArrayList<Parameter>(), new StmtBlock(stmts),
 				FcnType.Harness);
@@ -1301,7 +1360,7 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked) {
+		if (Global.prime_mod) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()), 0));
 			
 			for (int p : Global.primes) {
@@ -1316,7 +1375,7 @@ public class ConstraintFactory {
 		
 		// hard constrain
 		for (String v : tar.getOrdered_locals()) {
-			if (ConstraintFactory.prime_mod && Global.finalTracked) {
+			if (ConstraintFactory.prime_mod) {
 				for (int i : Global.primes) {
 					String num = Integer.toString(i);
 					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
@@ -1338,6 +1397,38 @@ public class ConstraintFactory {
 	private List<Statement> genSemCompareIO(int bound, Traces ori, Trace tar){
 		 List<Statement> stmts = new ArrayList<>();
 		 
+		 stmts.add(new StmtAssign(new ExprVar("count"), new ExprConstInt(-1), 0));
+			Set<String> addedVars = new HashSet<String>();
+			System.err.println("varList is" + varList);
+			for (Map.Entry<String, String> entry : varList.entrySet()) {
+				String v = entry.getKey();
+				if (ConstraintFactory.namesToType.get(v) instanceof TypeArray)
+					continue;
+				List<Expression> arrayInit = new ArrayList<>();
+				boolean vIsOriginal = false;
+				for (int i = 0; i < bound; i++) {
+					if (ori.getLength() <= i) {
+						arrayInit.add(new ExprConstInt(0));
+						continue;
+					}
+					if (ori.getTraces().get(i).getOrdered_locals().contains(v)) {
+						vIsOriginal = true;
+						if (ori.getTraces().get(i).getLocals().find(v).getType() == 0)
+							arrayInit.add(
+									new ExprConstInt((int) ori.getTraces().get(i).getLocals().find(v).getValue()));
+					} else {
+						// TODO check if int can be null in Sketch
+						arrayInit.add(new ExprConstInt(0));
+					}
+				}
+				for (int i = bound; i < ori.getLength(); i++) {
+					arrayInit.add(new ExprConstInt(0));
+				}
+				if (vIsOriginal) {
+					stmts.add(new StmtAssign(new ExprVar("oringianl" + v + "Array"), new ExprArrayInit(arrayInit), 0));
+					addedVars.add(v);
+				}
+			}
 		for (String v : tar.getOrdered_locals()) {
 			if (tar.getLocals().find(v) != null)
 				stmts.add(new StmtAssign(new ExprVar("correctFinal_" + v),
@@ -1345,7 +1436,48 @@ public class ConstraintFactory {
 		}
 
 		// f(args)
-		if (Global.prime_mod && Global.finalTracked) {
+		stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()), 0));
+ 		List<Statement> forBody = new ArrayList<Statement>();
+		for (Map.Entry<String, String> entry : varList.entrySet()) {
+			String v = entry.getKey();
+			if (!addedVars.contains(v))
+				continue;
+			if (constMap.containsKey(v)) {
+				List<Expression> subCondition = new ArrayList<Expression>();
+				for (Integer indexOfv : constMap.get(v)) {
+					subCondition.add(new ExprBinary(new ExprVar("const" + (indexOfv - 1) + "change"), "==",
+							new ExprConstInt(0), 0));
+				}
+				Expression ifCondition;
+				ifCondition = subCondition.get(0);
+				if (subCondition.size() > 1) {
+					for (int i = 1; i < subCondition.size(); i++) {
+						ifCondition = new ExprBinary(ifCondition, "&&", subCondition.get(i), 0);
+					}
+				}
+				forBody.add(
+						new StmtIfThen(ifCondition,
+								new StmtAssign(new ExprVar("SemanticDistance"),
+										new ExprBinary(new ExprArrayRange(v + "Array", "i", 0), "!=",
+												new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0),
+										1, 1),
+								null, 0));
+ 			} else {
+				if (Global.prime_mod) {
+					forBody.add(genSemDisPrime(v, varList.get(v)));
+				} 
+				else
+					forBody.add(new StmtAssign(new ExprVar("SemanticDistance"),
+						new ExprBinary(new ExprArrayRange(varList.get(v) + v + "Array", "i", 0), "!=",
+								new ExprArrayRange("oringianl" + v + "Array", "i", 0), 0),
+						1, 1));
+			}
+ 		}
+		Statement forinit = new StmtVarDecl(new TypePrimitive(4), "i", new ExprConstInt(0), 0);
+		Expression forcon = new ExprBinary(new ExprVar("i"), "<", new ExprConstInt(bound), 0);
+		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"), 0), 0);
+		stmts.add(new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0));
+		if (Global.prime_mod) {
 			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), extra_args.get(extra_index++), fh.getName()), 0));
 			
 			for (int p : Global.primes) {
@@ -1360,7 +1492,7 @@ public class ConstraintFactory {
 		
 		// hard constrain
 		for (String v : tar.getOrdered_locals()) {
-			if (ConstraintFactory.prime_mod && Global.finalTracked) {
+			if (ConstraintFactory.prime_mod) {
 				for (int i : Global.primes) {
 					String num = Integer.toString(i);
 					stmts.add(new StmtAssert( new ExprBinary(new ExprVar(v + num), "==", 
@@ -1379,6 +1511,22 @@ public class ConstraintFactory {
 		return stmts;
 	}
 
+	private Statement genSemDisPrime(String v, String funcName){
+		StringBuilder tmp = new StringBuilder();
+		for (int i : Global.primes) {
+			if (i == Global.primes[0]) {
+				tmp.append("((" + funcName + v + Integer.toString(i) + "Array[i]) != (");
+				tmp.append("oringianl" + v + "Array[i] % " + Integer.toString(i) + "))");
+			} else {
+				tmp.append("||\n((" + funcName + v + Integer.toString(i) + "Array[i]) != (");
+				tmp.append("oringianl" + v + "Array[i] % " + Integer.toString(i) + "))");
+			}
+		}
+		Statement res = new StmtAssign(new ExprVar("SemanticDistance"),
+				new ExprString(tmp.toString()), 1, 1);
+		return res;
+	}
+	
 	private Expression genAssertPrime(String v){
 		StringBuilder tmp = new StringBuilder();
 		for (int i : Global.primes) {
@@ -1581,59 +1729,5 @@ public class ConstraintFactory {
 	public static Map<Integer, Integer> getconstMapLine() {
 		return constMapLine;
 	}
-
-	// ------------ main function, generate Sketch script for code <source>
-	/*
-	 * // constance replacement public String getScript(Statement source) {
-	 * 
-	 * Statement s = source; Statement constFunDecls = null;
-	 * 
-	 * // extract info of external functions externalFuncs =
-	 * s.extractExternalFuncs(externalFuncs); if (externalFuncs.size() > 0)
-	 * System.out.println(externalFuncs.get(0).getName_Java());
-	 * 
-	 * buildContext((StmtBlock) source); // replace all constants in source code
-	 * if (!ConstraintFactory.sign_limited_range) { //
-	 * s.replaceLinearCombination(); constFunDecls =
-	 * ConstraintFactory.replaceConst(s); } else { //
-	 * s.replaceLinearCombination(ConstraintFactory.repair_range); constFunDecls
-	 * = ConstraintFactory.replaceConst(s); }
-	 * 
-	 * // add record stmts to source code and collect vars info Map<String,
-	 * Type> vars = ConstraintFactory.addRecordStmt((StmtBlock) s); List<String>
-	 * varsNames = new ArrayList<String>(vars.keySet()); varList = varsNames;
-	 * List<Type> varsTypes = new ArrayList<Type>(); for (int i = 0; i <
-	 * varsNames.size(); i++) { varsTypes.add(vars.get(varsNames.get(i))); }
-	 * 
-	 * // add declare of <linehit> and <count> s = new StmtBlock(new
-	 * StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
-	 * s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "count", new
-	 * ExprConstInt(-1), 0), s);
-	 * 
-	 * Function f = new Function(ConstraintFactory.fh, s);
-	 * 
-	 * List<Statement> stmts = new ArrayList<>();
-	 * 
-	 * // add declare of const functions stmts.add(constFunDecls);
-	 * 
-	 * // add line array stmts.add( new StmtBlock(varArrayDecl("line", length,
-	 * new TypePrimitive(4)), varArrayDecls(varsNames, varsTypes)));
-	 * 
-	 * // add final state //
-	 * System.out.println(finalState.getOrdered_locals().size()); for (String v
-	 * : finalState.getOrdered_locals()) { stmts.add(new StmtVarDecl(new
-	 * TypePrimitive(4), v + "final", new ExprConstInt(0), 0)); }
-	 * 
-	 * // add final count stmts.add(new StmtVarDecl(new TypePrimitive(4),
-	 * "finalcount", new ExprConstInt(0), 0));
-	 * 
-	 * Statement block = new StmtBlock(stmts);
-	 * 
-	 * return block.toString() + "\n" + f.toString() + "\n" +
-	 * constraintFunction().toString(); }
-	 */
-
-	// ------------ main function, generate Sketch script for code <source>
-	// linear combination replace
 
 }

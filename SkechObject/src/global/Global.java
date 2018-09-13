@@ -6,12 +6,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class Global {
-	public static final boolean prime_mod = false;
+	public static final boolean prime_mod = true;
 	public static final boolean inc_mod = false;
 	// track a var modularly only when it could always be tracked modularly
 	public static final boolean only_mod = false;
 	public static final boolean rec_mod = false;
-	public static boolean finalTracked = false;
+	public static final boolean sem_dis = true;
+	public static final boolean test_mod = false;
+	//public static boolean finalTracked = false;
 	public static String curFunc = "";
 	public static int[] primes = {2,3,5,7,11,13,17};
 	//public static int[] primes = {2,3,5,7,11,13};
