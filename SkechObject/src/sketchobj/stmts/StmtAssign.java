@@ -7,6 +7,7 @@ import java.util.Map;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -18,6 +19,8 @@ import sketchobj.expr.ExprConstant;
 import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.ExprVar;
 import sketchobj.expr.Expression;
+//added
+import constraintfactory.ConstraintFactory;
 
 public class StmtAssign extends Statement {
 	private Expression lhs, rhs;
@@ -60,6 +63,14 @@ public class StmtAssign extends Statement {
 	/** Returns the right-hand side of this. */
 	public Expression getRHS() {
 		return rhs;
+	}
+
+	public void setLhs(Expression lhs) {
+		this.lhs = lhs;
+	}
+
+	public void setRhs(Expression rhs) {
+		this.rhs = rhs;
 	}
 
 	/**
@@ -118,22 +129,51 @@ public class StmtAssign extends Statement {
 		prectx = new Context(prectx);
 		postctx.setLinenumber(this.getLineNumber());
 		prectx.setLinenumber(this.getLineNumber());
-
+		if (lhs.toString().contains("ini")) {
+			this.setPostctx(new Context(postctx));
+			this.setPrectx(new Context(prectx));
+			return postctx;
+		}
+		
 		List<String> tmp = postctx.getVarsInScope();
-		if (!tmp.contains(lhs.toString())&& position > 0)
+		if (!tmp.contains(lhs.toString())&& (position > 0 || Global.dupFinals.contains(lhs.toString())
+				|| Global.params.contains(lhs.toString()))) {
+			//tmp.add(lhs.toString());
+			postctx.addVar(lhs.toString(), TypePrimitive.inttype);
+		} else if (!postctx.getAllVars().containsKey(lhs.toString())) {
+			postctx.addVar(lhs.toString(), TypePrimitive.inttype);
+		}
+		if (!tmp.contains(lhs.toString()) && position > 0) {
 			tmp.add(lhs.toString());
+		}
 		postctx.setVarsInScope(tmp);
 		this.setPostctx(new Context(postctx));
 		this.setPrectx(new Context(prectx));
+		//System.err.println("assign is: " + this);
+		//System.err.println("pretext is" + prectx);
+		//System.err.println("postext is" + postctx);
 		return postctx;
 	}
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
-		parent.stmts.set(index, new StmtBlock(
+		//System.err.println("add assign is: " + this);
+		//System.err.println("context is: " + this.getPrectx().getLinenumber() + this.getPrectx().getAllVars());
+		//System.err.println("added is: " + ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()));
+		/*if (Global.prime_mod) {
+			parent.stmts.set(index, new StmtBlock(this,
+					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
+		} else {*/
+		if (!ConstraintFactory.dupStmt.contains(this))
+			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
-		m.putAll(this.getPrectx().getAllVars());
+		//}
+		//System.err.println("parent is: " + parent);
+		//System.err.println("index: " + parent.stmts.get(index));
+		m.putAll(this.getPostctx().getAllVars());
+		//System.err.println("assign is: " + this);
+		//System.err.println("m is: " + m);
 		return m;
 	}
 
@@ -175,7 +215,10 @@ public class StmtAssign extends Statement {
 			return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, this.getLineNumber());
 		}
 		List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
-		for (String v : vars) {
+	/*	for (String v : vars) {
+			//System.err.println("stmt: " + this);
+			//System.err.println("available vars: " + vars);
+			//System.err.println("current var: " + v);
 			// all 1 dimension array
 
 			if (this.getPrectx().getAllVars().get(v) instanceof TypeArray) {
@@ -190,22 +233,24 @@ public class StmtAssign extends Statement {
 				 * inits.set(i, new ExprBinary(inits.get(i), "+", newTerm));
 				 * liveVarsIndexSet.add(index); liveVarsNameSet.add(v); index++;
 				 */
-				continue;
-			} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
+	//			continue;
+	/*		} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
 					.getType())
 				continue;
 			/*
 			 * if(v.equals(lhs.toString())) continue;
 			 */
-			if (this.getPostctx().getVarsInScope().contains(v))
+	/*		if (this.getPostctx().getVarsInScope().contains(v)){
+				System.err.println("case: contain");
 				continue;
+			}
 			Expression newTerm = new ExprBinary(new ExprFunCall("Coeff" + index, new ArrayList<Expression>()), "*",
 					new ExprVar(v, t), this.getLineNumber());
 			this.rhs = new ExprBinary(rhs, "+", newTerm, this.getLineNumber());
 			liveVarsIndexSet.add(index);
 			index++;
 			liveVarsNameSet.add(v);
-		}
+		}*/
 		this.rhs = new ExprBinary(this.rhs, "+",
 				new ExprBinary(new ExprFunCall("Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()),

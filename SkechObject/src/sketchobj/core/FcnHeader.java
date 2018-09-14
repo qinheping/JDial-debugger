@@ -43,6 +43,10 @@ public class FcnHeader extends SketchObject {
     	result = result + ")";
     	return result;
     }
+    
+    public List<Parameter> getPara(){
+    	return this.params;
+    }
 	@Override
 	public ConstData replaceLinearCombination(int index) {
 		// TODO Auto-generated method stub

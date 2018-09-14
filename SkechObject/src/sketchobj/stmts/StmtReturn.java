@@ -7,6 +7,7 @@ import java.util.Map;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -65,6 +66,11 @@ public class StmtReturn extends Statement
         return value;
     }
 
+    public void setValue(Expression e)
+    {
+        this.value = e;
+    }
+    
     public String toString(){
         if(value != null){
             return "return " + value + ";";
@@ -106,9 +112,18 @@ public class StmtReturn extends Statement
 
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
-		parent.stmts.set(index,
-				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
+//		StmtBlock tmpSB = new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this);
+//
+//		parent.stmts.set(index, tmpSB);
+//		return m;
+//
+		if (Global.prime_mod) {
+			return m;
+		}
+		parent.stmts = new ArrayList<Statement>(parent.stmts);
+		parent.stmts.set(index, new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		return m;
+
 	}
 
 
@@ -132,7 +147,8 @@ public class StmtReturn extends Statement
 	}
 	@Override
 	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = "return "+ value;
+		line_to_string.put(this.getLineNumber(), result);
+		return line_to_string;
 	}
 }

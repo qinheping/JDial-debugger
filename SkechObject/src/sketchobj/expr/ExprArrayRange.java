@@ -55,7 +55,7 @@ public class ExprArrayRange extends Expression
 
 	@Override
 	public ExprArrayRange clone() {
-		return new ExprArrayRange(this.base,this.index, this.unchecked,this.line);
+		return new ExprArrayRange(this.base.clone(),this.index, this.unchecked,this.line);
 	}
 	
 	private Expression base;
@@ -193,6 +193,10 @@ public class ExprArrayRange extends Expression
 
 	public Expression getBase() {
 		return base;
+	}
+	
+	public void setBase(Expression expr) {
+		this.base = expr;
 	}
 
 	public Expression getSingleIndex() {		

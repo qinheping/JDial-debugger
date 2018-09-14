@@ -32,6 +32,7 @@ public class ExprVar extends Expression
     /** Return the name of the variable referenced. */
     public String getName() { return name; }
 
+    public void setName(String newName) { name = newName; }
 //    /** Accept a front-end visitor. */
 //    public Object accept(FEVisitor v)
 //    {

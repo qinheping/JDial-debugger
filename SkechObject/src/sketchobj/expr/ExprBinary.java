@@ -9,6 +9,8 @@ import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
 import sketchobj.core.TypeArray;
 import sketchobj.core.TypePrimitive;
+// added
+import constraintfactory.ConstraintFactory;
 
 public class ExprBinary extends Expression {
 	public static final int BINOP_ADD = 1;
@@ -65,7 +67,7 @@ public class ExprBinary extends Expression {
 
 	@Override
 	public ExprBinary clone() {
-		return new ExprBinary(this.op, this.left, this.right, this.lineNumber);
+		return new ExprBinary(this.op, this.left.clone(), this.right.clone(), this.lineNumber);
 	}
 
 	/**
@@ -451,6 +453,7 @@ public class ExprBinary extends Expression {
 		// System.out.println(this);
 		// System.out.println(this.getCtx());
 		if (this.isBoolean()) {
+			System.err.println("is boolean");
 			Integer primaryIndex = -1;
 			if (this.op == 8 || this.op == 9 || this.op == 10 || this.op == 11 || this.op == 12 || this.op == 13) {
 				this.left = new ExprBinary(this.left, "-", this.right,this.lineNumber);
@@ -458,13 +461,14 @@ public class ExprBinary extends Expression {
 				this.left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
 				this.left = new ExprBinary(this.left, "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
-						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
-				primaryIndex = index;
+					new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.lineNumber), this.lineNumber);
+				//primaryIndex = index;
 				index += 2;
 				left.setCtx(this.getCtx());
 				this.left.setT(new TypePrimitive(4));
 				List<SketchObject> toAdd = new ArrayList<SketchObject>();
-				return new ConstData(new TypePrimitive(4), toAdd, index, 0, null, this.lineNumber, null, null, 0);
+				System.err.println("case 1 return");
+				return new ConstData(new TypePrimitive(4), toAdd, index, 0, null, this.lineNumber, null, null, primaryIndex);
 			} else {
 				this.left.setBoolean(true);
 				this.right.setBoolean(true);
@@ -473,7 +477,8 @@ public class ExprBinary extends Expression {
 				toAdd.add(this.left);
 				right.setCtx(this.getCtx());
 				toAdd.add(this.right);
-				return new ConstData(null, toAdd, index, 0, null, 0);
+				System.err.println("case 2 return");
+				return new ConstData(null, toAdd, index, 0, null, primaryIndex);
 			}
 		}
 		if (this.op == 1 || this.op == 2) {

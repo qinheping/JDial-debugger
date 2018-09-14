@@ -11,6 +11,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import constraintfactory.AuxMethods;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import javaparser.simpleJavaLexer;
 import javaparser.simpleJavaParser;
 import jsonast.Root;
@@ -25,6 +26,7 @@ import sketchobj.expr.Expression;
 import sketchobj.stmts.Statement;
 import visitor.JavaVisitor;
 import visitor.JsonVisitor;
+import cfg.*;
 
 import static org.matheclipse.core.expression.F.*;
 
@@ -36,30 +38,48 @@ import org.matheclipse.parser.client.SyntaxError;
 import org.matheclipse.parser.client.math.MathException;
 
 public class MainEntrance {
-	private String json;
-	private String correctTrace;
+	private String originalTrace;
+	private String manipulation;
 	private int indexOfCorrectTrace;
 
 	private Root root;
 	private String code;
 	private String targetFunc;
+	private List<String> function_names;
+	private Map<String, Function> func_name_to_code;
 	private Traces traces;
 
 	private int mod;
 
 	private List<Integer> repair_range;
+	
+	private List<String> ori_trace;
+	private List<String> target_trace;
+	public static boolean iomod = false;
+	public List<Integer> indexes = new ArrayList<>();
 
+	//added 11/18
+	private HashMap<String, String> funtions = new HashMap<>();
+	
 	public MainEntrance(String json, String correctTrace, int indexOfCorrectTrace) {
 		this(json, correctTrace, indexOfCorrectTrace, 0);
 	}
 
 	public MainEntrance(String json, String correctTrace, int indexOfCorrectTrace, int mod) {
-		this.json = json;
-		this.correctTrace = correctTrace;
+		this.originalTrace = json;
+		this.manipulation = correctTrace;
 		this.indexOfCorrectTrace = indexOfCorrectTrace;
 		this.repair_range = null;
+		this.function_names = new ArrayList<String>();
+		this.func_name_to_code = new HashMap<>();
 		this.mod = mod;
+		this.ori_trace = new ArrayList<>();
+		this.target_trace = new ArrayList<>();
 	}
+	
+	public void addindex (int index){ this.indexes.add(index);}
+	public void addOriTrace (String ori){ this.ori_trace.add(ori);}
+	public void addTargetTrace (String target){ this.target_trace.add(target);}
 
 	public Map<Integer, String> Synthesize() throws InterruptedException {
 		return this.Synthesize(false, false);
@@ -70,37 +90,474 @@ public class MainEntrance {
 	}
 
 	public Map<Integer, String> Synthesize(boolean useLC, boolean oneLine) throws InterruptedException {
-		this.targetFunc = extractFuncName(correctTrace);
-		this.root = jsonRootCompile(this.json);
+		this.targetFunc = extractFuncName(manipulation);
+		this.root = jsonRootCompile(this.originalTrace);
+		// 11/28
 		this.code = root.getCode().getCode();
+	
 		if (oneLine)
 			mod = 1;
 
-		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace);
+		// added
+		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace,
+				this.targetFunc);
 
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
+		//System.err.println("trace length is " + root.getTraces().getLength());
+		//System.err.println("trace is " + root.getTraces().toString());
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");
+		System.out.println("code");
+		System.out.println("--------------------");
 		System.out.println(code);
 
 		ANTLRInputStream input = new ANTLRInputStream(code);
 		Function function = (Function) javaCompile(input, targetFunc);
+		// rp added
+		CFG cfg = new CFG(function);
+		cfg.printCFG();
+		Map<Integer, Set<String>> facts = cfg.dataflow();
+		Global.facts = facts;
+		CFG.GenfeasibleVars();
+		CFG.GenAlwaysVars();
+		cfg.inilocs();
+		if (Global.only_mod)
+			cfg.getAltFacts();
+		this.buildFuncNameList();
+		List<Function> otherFunctions = new ArrayList<>();
+		for(int i = 0; i < this.function_names.size(); i++){
+			String curName = this.function_names.get(i);
+			System.err.println("function name is" + curName);
+			if(!curName.equals(targetFunc)) {
+				otherFunctions.add(this.func_name_to_code.get(curName));
+			}
+		}
+		System.out.println("function");
+		System.out.println("--------------------");
 		System.out.println(function);
 
-		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(correctTrace),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod);
+		//added 11/18 
+		/*funtions.put(targetFunc, "");
+		while (JavaVisitor.methodNames.size() != 0)
+		{
+			ANTLRInputStream input1 = new ANTLRInputStream(code);
+			String name = JavaVisitor.methodNames.poll();
+			if(funtions.containsKey(name))
+				continue;
+
+			Function function1 = (Function)javaCompile(input1, name);
+			System.out.println(function1);
+			funtions.put(name, function1.toString());
+		}*/
+		//added 11/18
+		
+		// added
+		System.out.println("--------------------");
+		boolean prime_mod = global.Global.prime_mod;
+		boolean rec_mod = global.Global.rec_mod;
+		System.err.println("original length3 is: " + root.getTraces().getLength());
+		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod,
+				otherFunctions);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
 			cf.setRange(this.repair_range);
 		String script;
 		// if (useLC)
-		script = cf.getScript_linearCombination(function.getBody());
+		//script = cf.getScript_linearCombination(function.getBody(), function.getParames());
+		
+		// IOmod
+		if(iomod){
+			for(int i = 0; i < this.ori_trace.size(); i++){
+				//if (i > 0)
+					//indexOfCorrectTrace = this.indexes.get(i - 1);
+				Root addRoot =  jsonRootCompile(ori_trace.get(i));
+				indexOfCorrectTrace = addRoot.getTraces().getLength() - 1;
+				//System.err.println("index: " + indexOfCorrectTrace);
+				Traces addtraces = addRoot.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
+				cf.addOriTraces(addtraces);
+				cf.addTargetTrace(jsonTraceCompile(this.target_trace.get(i)));
+				Root cur_root = jsonRootCompile(ori_trace.get(i));
+				List<Expression> cur_args = AuxMethods.extractArguments(cur_root.getTraces(), cur_root.getTraces().getLength() - 1,
+						this.targetFunc);
+				ConstraintFactory.extra_args.add(cur_args);
+			}
+
+			cf.iomod = true;
+		}
+		
+		// added
+		if (rec_mod){
+			script = cf.getScript_linearCombination(function.getBody());
+			//script = cf.getScript_linearCombination(function.getBody(), funtions);	
+		}
+		else{
+			script = cf.getScript_linearCombination(function.getBody());}
+		//System.err.println("2--------------------------------------------"); // added
+		//System.err.println(script); // added
+		//System.err.println("2--------------------------------------------"); // added
+
+		// added
+		script = script.replaceAll("External_", "");
+		//if (prime_mod)
+		//	script = tranScript(script);
+		System.err.println("3--------------------------------------------");
+		
+		//System.err.println("4--------------------------------------------"); // added
+		//System.err.println(script); // added
+		//System.err.println("4--------------------------------------------"); // added
+		
+		//----added
+		SketchResult resultS = CallSketch.CallByString(script);
+
+		//-----added
+
 		// else
 		// script = cf.getScript(function.getBody());
+		System.err.println("mod is " + mod);
 		if (mod != 2)
 			return this.actualSynthesize(useLC, script, cf, null);
 
 		return null;
+	}
+
+	//added 11/19
+
+
+	private void buildFuncNameList() {
+		Root curRoot = jsonRootCompile(this.originalTrace);
+		//String curCode = curRoot.getCode().getCode();
+		//curCode = curCode.replace("\\n", "\n");
+		//curCode = curCode.replace("\\t", "\t");
+		
+		List<Trace> traces = curRoot.getTraces().getTraces();
+		for(Trace trace: traces){
+			String name = trace.getFuncname();
+			// need to improve
+			if (name.equals("main"))
+				continue;
+			if(!this.function_names.contains(name)) {
+				ANTLRInputStream input1 = new ANTLRInputStream(code);
+				this.function_names.add(name);
+				Function function = (Function) javaCompile(input1, name);
+				this.func_name_to_code.put(name, function);
+			}
+		}
+	}
+
+	private String addGetArrayDistance(int[][] ori, int tarRow, int tarCol, int iValue)
+	{
+		int row = ori.length;
+		int col = ori[0].length;
+		/*
+		int getArrayDistance(int[m] a1, int[n] a2, int illegalValue)
+		{
+			int distance = 0;
+			distance += (a1[0] != a2[0]);
+			for(int i = 1;i<m && i< n && a1[i] != illegalValue && a2[i] != illegalkValue;i++)
+			{
+				distance += (abs(a1[i], a1[i-1])  !=  abs(a2[i], a2[i-1]) );
+			}
+			return distance
+		}
+
+		int[col][row] ori;
+		ori[0] = {};
+
+
+		int[tarCol][tarRow] tar;
+		iValue = ;
+
+		int dis = 0;
+		for(int i = 0;i<tarRow && i < row;i++)
+		{
+			dis += getArrayDistance(ori[i], tar[i], iValue)
+		}
+
+		 */
+		StringBuilder result = new StringBuilder();
+		result.append("int getArrayDistance(int[m] a1, int[n] a2, int illegalValue)\n");
+		result.append("{\n");
+		result.append("int distance = 0;\n");
+		result.append("distance += (a1[0] != a2[0]);\n");
+		result.append("for(int i = 1;i<m && i<n && a1[i] != illegalValue && a2[i] != illegalValue;i++)\n");
+		result.append("{\n");
+		result.append("distance += (abs(a1[i], a1[i-1]) != abs(a2[i], a2[i-1]));\n");
+		result.append("}\n");
+		result.append("return distance;\n");
+		result.append("}\n");
+		result.append("int row = "+row+"\n");
+		result.append("int col = "+col+"\n");
+		result.append("int tarRow = "+tarRow+"\n");
+		result.append("int tarCol = "+tarCol+"\n");
+
+
+		result.append("int[col][row] ori;\n");
+		for(int i = 0;i<ori.length;i++)
+		{
+			StringBuilder tmp = new StringBuilder();
+			for(int j = 0;j<ori[i].length;j++)
+			{
+				tmp.append(ori[i] + ",");
+			}
+			String temp = tmp.toString().substring(0,tmp.length()-1);
+			result.append("ori["+i+"] = {"+temp+"};\n");
+		}
+
+		result.append("int[tarCol][tarRow] tar;\n");
+		result.append("iValue = "+iValue+";\n");
+		result.append("int dis = 0;\n");
+		result.append("for(int i = 0;i<tarRow && i < row;i++)\n");
+		result.append("{\n");
+		result.append("dis += getArrayDistance(ori[i], tar[i], iValue)");
+		result.append("}\n");
+		return result.toString();
+	}
+	//added 11/19
+	
+	//@1int bfinal = 0; need to know nameOfVar, primes
+	//@2int a = 1 + ((Coeff0()) * (Coeff1())); need to know nameOfVar, primes ("Coeff")
+	//@3int[3] oringianlaArray = {0,1,1};
+	//@4int correctFinal_b = 500; need to know nameOfVar, primes
+
+	private String tranScriptCall(String script)
+	{
+		StringBuilder result = new StringBuilder();
+		int index0 = 0;
+		int index1 = 0;
+		index1 = script.indexOf("int count = -1;");
+		index1 = script.indexOf('\n', index1);
+		result.append(script.substring(index0, index1+1));
+		index0 = index1 + 1;
+
+		// store the value of the result variable in each iteration 
+		result.append("int[10] resArray = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};\n");
+		// level of recursion
+		result.append("int funcCount = -1;\n");
+
+		index1 = script.indexOf('\n', index0);
+		index0 = index1+1;
+		index1 = script.indexOf('\n', index0);
+		result.append(script.substring(index0, index1+1));
+		index0 = index1 + 1;
+
+		result.append("(funcCount)++;\n");
+		//step 1--done
+
+		index1 = script.indexOf("finalcount = count;", index0);
+		System.err.println("index1: " + index1);
+		index1 = index1 -2;
+		index1 = script.lastIndexOf('\n', index1);
+
+		result.append(script.substring(index0, index1+1));
+		index0 = script.indexOf('\n', index1+1);
+		String tmpVarname = script.substring(index1+1, index0);
+		System.err.println("tmpVarname: " + tmpVarname);
+		int indexEqual = tmpVarname.indexOf('=');
+		int indexSemi = tmpVarname.indexOf(';');
+		tmpVarname = tmpVarname.substring(indexEqual+1, indexSemi).trim();
+
+		result.append("resArray[funcCount] = "+tmpVarname+";\n");
+		result.append("finalcount = count;\n");
+		result.append("}\n");
+		index0 = script.indexOf('}', index1)+2;
+		//step 2--done
+
+		index1 = script.indexOf("assert", index0);
+		result.append(script.substring(index0, index1));
+		index0 = script.indexOf('\n', index1);
+		String tmpLine = script.substring(index1, index0);
+
+		int corIndex = tmpLine.indexOf("correctFinal_");
+		int parenIndex = tmpLine.indexOf(")");
+		String varName = tmpLine.substring(corIndex, parenIndex);
+
+		String tmpAssert = "assert (resArray[0] == "+varName+" || resArray[1] == "+varName+" ||\n" +
+				"resArray[2] == "+varName+" || resArray[3] == "+varName+" ||\n" +
+				"resArray[4] == "+varName+" || resArray[5] == "+varName+" ||\n" +
+				"resArray[6] == "+varName+" || resArray[7] == "+varName+" ||\n" +
+				"resArray[8] == "+varName+" || resArray[9] == "+varName+");\n";
+		result.append(tmpAssert);
+		result.append(script.substring(index0+1));
+		//step 3--done
+
+
+		return result.toString();
+	}
+
+	private String tranScript(String script)
+	{
+
+
+		int times = 5;
+		int[] primeNumber = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 39};
+		ArrayList<Integer> primes = new ArrayList<>();
+		int finalValue;
+		int maxValue = Integer.MIN_VALUE;
+		String nameOfVar;
+
+		//nameOfVar
+		int index4 = script.indexOf("@4");
+		int last4BN = script.lastIndexOf('\n', index4);
+		int index4_ = script.indexOf('_', last4BN);
+		int index4space = script.indexOf(' ', index4_);
+		nameOfVar = script.substring(index4_+1, index4space);
+		//nameOfVar
+
+		//finalValue
+		int index4equal = script.indexOf('=', index4_);
+		int index4semi = script.indexOf(';', index4equal);
+		String tmpFinalValue = script.substring(index4equal+1, index4semi).trim();
+		finalValue = Integer.valueOf(tmpFinalValue);
+		//finalValue
+
+		//maxValue, primes
+		int index3 = 0;
+		while ((index3 = script.indexOf("@3", index3+1)) != -1)
+		{
+			int tmp3BN = script.lastIndexOf('\n', index3);
+			int left = script.indexOf('{', tmp3BN);
+			int right = script.indexOf('}', tmp3BN);
+			String[] tmpArray = script.substring(left+1, right).split(",");
+			for(String s : tmpArray)
+			{
+				int tmpInt = Math.abs(Integer.valueOf(s));
+				System.err.println("current num is" + tmpInt);
+				maxValue = Math.max(maxValue, tmpInt);
+			}
+		}
+		maxValue = Math.max(maxValue, finalValue) * times;
+		int tmpp = 1;
+		for(int n : primeNumber)
+		{
+			tmpp *= n;
+			primes.add(n);
+			if(tmpp > maxValue)
+				break;
+		}
+		//maxValue, primes
+
+
+
+
+
+		StringBuilder result = new StringBuilder();
+		int lastIndex = 0;
+		int index = 0;
+
+		while ((index = script.indexOf('@',lastIndex)) != -1)
+		{
+			StringBuilder curString = new StringBuilder();
+			int lastBN = script.lastIndexOf('\n', index);
+			int nextBN = script.indexOf('\n', index);
+
+			result.append(script.substring(lastIndex, lastBN+1));
+
+			if(script.charAt(index+1) == '1')
+			{
+				curString.append(script.substring(lastBN+1, index));
+				curString.append(script.substring(index+2, nextBN+1));
+				//@1int bfinal = 0; need to know nameOfVar, primes
+				//int b2 = 0;
+				for(Integer i : primes)
+				{
+					String tmp1 = "int "+nameOfVar+i+" = 0;\n";
+					curString.append(tmp1);
+				}
+			}
+			else if(script.charAt(index+1) == '2')
+			{
+				//@2int a = 1 + ((Coeff0()) * (Coeff1()));
+				//int a2 =
+				// need to know nameOfVar, primes ("Coeff")
+				String tmp2iffor = script.substring(lastBN+1, nextBN+1);
+				if(tmp2iffor.contains("if") || (tmp2iffor.contains("for")))
+				{
+					tmp2iffor = tmp2iffor.replaceAll("@2", "");
+					curString.append(tmp2iffor);
+				}
+				else
+				{
+					curString.append(script.substring(lastBN+1, index));
+					curString.append(script.substring(index+2, nextBN+1));
+					for(Integer i : primes)
+					{
+						String curLine = script.substring(lastBN+1, index) + script.substring(index+2, nextBN+1);
+						String[] tmp2Array = curLine.split(" ");
+						boolean firstIsInt = tmp2Array[0].equals("int");
+						boolean isTargetVar = false;
+						String varName = "";
+						if (firstIsInt)
+						{
+							isTargetVar = tmp2Array[1].equals(nameOfVar);
+							varName = tmp2Array[1];
+						}
+						else
+						{
+							isTargetVar = tmp2Array[0].equals(nameOfVar);
+							varName = tmp2Array[0];
+						}
+
+						curLine = curLine.substring(curLine.indexOf('=')+1, curLine.indexOf(';'));
+						int tmpIndex = 0;
+						int tmpIndex1 = 0;
+						String tmpCurLine = "";
+						//int b = (((10 * a) + 100) + ((Coeff2()) * a)) + ((Coeff3()) * (Coeff4()));
+						//int a = 1 + ((Coeff0()) * (Coeff1()));
+						while ((tmpIndex1 = curLine.indexOf('*', tmpIndex)) != -1)
+						{
+							int tmpPare = curLine.indexOf(')', tmpIndex1);
+							String tmpVar = curLine.substring(tmpIndex1+1, tmpPare).trim();
+							if(!tmpVar.contains("Coeff") && !tmpVar.contains("External_"))
+							{
+								tmpVar = tmpVar+i;
+								tmpCurLine += curLine.substring(tmpIndex, tmpIndex1+1) + " "+ tmpVar+")";
+								tmpIndex = tmpPare+1;
+							}
+							else
+							{
+								tmpCurLine += curLine.substring(tmpIndex, tmpPare+1);
+								tmpIndex = tmpPare+1;
+							}
+						}
+						tmpCurLine += curLine.substring(tmpIndex);
+						curLine = tmpCurLine;
+						String tmp1 = "";
+						if(!isTargetVar)
+						{
+							tmp1 += "int ";
+						}
+						tmp1 += varName+i+" = (" + curLine + ") % "+i+";\n";
+						curString.append(tmp1);
+					}
+				}
+			}
+			if(script.charAt(index+1) == '4' || script.charAt(index+1) == '3')
+			{
+				curString.append(script.substring(lastBN+1, index));
+				curString.append(script.substring(index+2, nextBN+1));
+			}
+			else if(script.charAt(index+1) == '5')
+			{
+				//assert (b@5final == correctFinal_b);
+				//assert (b2 % 2 == correctFinal_b %2)
+				for(Integer i : primes)
+				{
+					String tmp1 = "assert (" + nameOfVar+i +" % "+i+" == "+"correctFinal_"+nameOfVar+" %"+i+");\n";
+					curString.append(tmp1);
+				}
+			}
+			lastIndex = nextBN+1;
+			result.append(curString.toString());
+		}
+		result.append(script.substring(lastIndex));
+
+		//delete External_
+
+		String strResult = result.toString();
+		strResult = strResult.replace("External_", "");
+		return strResult;
+		//delete External_
 	}
 
 	public Map<Integer, String> actualSynthesize(boolean useLC, String script, ConstraintFactory cf,

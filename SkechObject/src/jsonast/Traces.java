@@ -33,19 +33,26 @@ public class Traces extends JsonNode {
 
 	public Traces findSubTraces(String targetFunc, int bound) {
 		List<Integer> toRemove = new ArrayList<Integer>();
+		int firstIndex = bound;
 		for (int i = bound; i >= 0; i--) {
-			if (!tracelist.get(i).getFuncname().equals(targetFunc)) {
+			// adapt for interprocedure
+			if (tracelist.get(i).getFuncname().equals(targetFunc)) {
+				firstIndex = i;
+			}
+			/*if (!tracelist.get(i).getFuncname().equals(targetFunc)) {
 				toRemove.add(i);
 				continue;
-			}
-			if (!tracelist.get(i).getEvent().equals("step_line")) {
+			}*/
+			//chenged
+			if (!tracelist.get(i).getEvent().equals("step_line") || 
+					(i > 0 && tracelist.get(i-1).getEvent().equals("return"))) {
 				toRemove.add(i);
 				continue;
 			}
 
 		}
 		for (int i = this.tracelist.size() - 1; i >= 0; i--) {
-			if (toRemove.contains(i)|| i > bound){
+			if (toRemove.contains(i)|| i > bound || i < firstIndex){
 				tracelist.remove(i);
 			}
 		}

@@ -9,6 +9,7 @@ import java.util.Map;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -67,12 +68,20 @@ public class StmtIfThen extends Statement {
 		return cons;
 	}
 
+	public void setCons(Statement cons) {
+		this.cons = cons;
+	}
+	
 	/**
 	 * Return the alternative statement of this, which is executed if the
 	 * condition is false.
 	 */
 	public Statement getAlt() {
 		return alt;
+	}
+	
+	public void setAlt(Statement alt) {
+		this.alt = alt;
 	}
 
 	public boolean isSingleFunCall() {
@@ -151,9 +160,15 @@ public class StmtIfThen extends Statement {
 		this.setPostctx(prectx);
 		Context postctx = new Context(prectx);
 		
-		postctx.pushNewVars();;
-		postctx = cons.buildContext(postctx, sposition);
-		postctx.popVars();
+		System.err.println("cond is " + cond);
+		if (Global.prime_mod && cond.toString().contains("ini")) {
+			System.err.println("build ");
+			postctx = cons.buildContext(postctx, sposition);
+		} else {
+			postctx.pushNewVars();
+			postctx = cons.buildContext(postctx, sposition);
+			postctx.popVars();
+		}
 		if (alt != null) {
 			postctx.pushNewVars();;
 			postctx = alt.buildContext(postctx, sposition);
@@ -167,14 +182,26 @@ public class StmtIfThen extends Statement {
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		List stmts = new ArrayList(parent.stmts);
 		parent.stmts = stmts;
-		parent.stmts.set(index,
+		if (!ConstraintFactory.dupStmt.contains(this))
+			parent.stmts.set(index,
 				new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()),this));
 		
-		this.cons = new StmtBlock(cons,ConstraintFactory.recordState(cons.getPostctx().getLinenumber(), cons.getPostctx().getAllVars()));
-		m.putAll(((StmtBlock) cons).stmts.get(0).addRecordStmt((StmtBlock) cons, 0, m));
+		
+		if (Global.prime_mod)
+			m.putAll(((StmtBlock) cons).addRecordStmt((StmtBlock) cons, 0, m));
+		if (!ConstraintFactory.dupStmt.contains(cons))
+			this.cons = new StmtBlock(cons,ConstraintFactory.recordState(cons.getPostctx().getLinenumber(), cons.getPostctx().getAllVars()));
+		if (!Global.prime_mod)
+			m.putAll(((StmtBlock) cons).stmts.get(0).addRecordStmt((StmtBlock) cons, 0, m));
+		//System.err.println("record cons: " + cons);
+		//System.err.println("cons is " + cons.getPostctx().getLinenumber() + cons.getPostctx().getAllVars());
 		if (alt != null) {
-			this.alt = new StmtBlock(alt,ConstraintFactory.recordState(alt.getPostctx().getLinenumber(), alt.getPostctx().getAllVars()));
-			m.putAll(((StmtBlock) alt).stmts.get(0).addRecordStmt((StmtBlock) alt, 0, m));
+			if (Global.prime_mod)
+				m.putAll(((StmtBlock) alt).addRecordStmt((StmtBlock) alt, 0, m));
+			if (!ConstraintFactory.dupStmt.contains(alt))
+				this.alt = new StmtBlock(alt,ConstraintFactory.recordState(alt.getPostctx().getLinenumber(), alt.getPostctx().getAllVars()));
+			if (!Global.prime_mod)
+				m.putAll(((StmtBlock) alt).stmts.get(0).addRecordStmt((StmtBlock) alt, 0, m));
 		}
 		return m;
 	}

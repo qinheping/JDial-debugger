@@ -168,150 +168,6 @@ public class Test {
 		}
 	}
 
-	/*
-	 * @org.junit.Test public void testSimpleExample() throws
-	 * InterruptedException { System.out.println();
-	 * System.out.println("testSimpleExample:"); ANTLRInputStream input = new
-	 * ANTLRInputStream( "int SimpleJava(){ " + "int a = 2; " +
-	 * "int b = a + 1; " + "int c = a+ b; " + "return c;}"); Function root =
-	 * (Function) compile(input,"main");
-	 * 
-	 * List<ProgStateTODELETE> traces = new ArrayList<ProgStateTODELETE>(); //
-	 * {line = 1, a = 2} Map<String, Integer> m1 = new HashMap<String,
-	 * Integer>(); m1.put("a", 2); ProgStateTODELETE state1 = new
-	 * ProgStateTODELETE(1, m1); traces.add(state1);
-	 * 
-	 * // {line = 2, a = 2, b = 5} Map<String, Integer> m2 = new HashMap<String,
-	 * Integer>(m1); m2.put("b", 5); ProgStateTODELETE state2 = new
-	 * ProgStateTODELETE(2, m2); traces.add(state2);
-	 * 
-	 * // {line = 3, a = 2, b = 5, c = 7} Map<String, Integer> m3 = new
-	 * HashMap<String, Integer>(m2); m3.put("c", 7); ProgStateTODELETE state3 =
-	 * new ProgStateTODELETE(3, m3); traces.add(state3);
-	 * 
-	 * // correct: {line = 3, c = 8} Map<String, Integer> m4 = new
-	 * HashMap<String, Integer>(); m4.put("c", 8); // m4.put("b", 5);
-	 * ProgStateTODELETE finalState = new ProgStateTODELETE(3, m4);
-	 * 
-	 * TraceTODELETE oriTrace = new TraceTODELETE(traces); ///////
-	 * 
-	 * ConstraintFactory cf = new ConstraintFactory(oriTrace, finalState, new
-	 * FcnHeader(root.getName(), root.getReturnType(), root.getParames()));
-	 * 
-	 * System.out.println(root);
-	 * 
-	 * String script = cf.getScript(root.getBody());
-	 * 
-	 * System.out.println(script);
-	 * 
-	 * System.out.println(CallSketch.CallByString(script)); }
-	 * 
-	 * @org.junit.Test public void testSumUp() throws InterruptedException {
-	 * System.out.println(); System.out.println("testSumUp:"); ANTLRInputStream
-	 * input = new ANTLRInputStream( "int orig(int x){" +
-	 * "\n\n int t = 1;\n\n  int b = 2;\n" + "for(int i = x; i > 0; i--)" +
-	 * "{t = t + i;}" + "return t;}"); Function root = (Function)
-	 * compile(input,"main");
-	 * 
-	 * List<ProgStateTODELETE> traces = new ArrayList<ProgStateTODELETE>(); //
-	 * {line = 1, t = 1} Map<String, Integer> m1 = new HashMap<String,
-	 * Integer>(); m1.put("t", 1); ProgStateTODELETE state1 = new
-	 * ProgStateTODELETE(1, m1); traces.add(state1);
-	 * 
-	 * // {line = 2, t = 1, i = 3} Map<String, Integer> m2 = new HashMap<String,
-	 * Integer>(m1); m2.put("i", 3); ProgStateTODELETE state2 = new
-	 * ProgStateTODELETE(2, m2); traces.add(state2);
-	 * 
-	 * // {line = 3, t = 4, i = 3} Map<String, Integer> m3 = new HashMap<String,
-	 * Integer>(); m3.put("t", 4); m3.put("i", 3); ProgStateTODELETE state3 =
-	 * new ProgStateTODELETE(3, m3); traces.add(state3);
-	 * 
-	 * // {line = 2, t = 4, i = 2} Map<String, Integer> m4 = new HashMap<String,
-	 * Integer>(); m4.put("t", 4); m4.put("i", 2); ProgStateTODELETE state4 =
-	 * new ProgStateTODELETE(2, m3); traces.add(state4);
-	 * 
-	 * // {line = 3, t = 6, i = 2} Map<String, Integer> m = new HashMap<String,
-	 * Integer>(); m.put("t", 4); m.put("i", 2); ProgStateTODELETE state = new
-	 * ProgStateTODELETE(3, m); traces.add(state);
-	 * 
-	 * // {line = 2, t = 6, i = 1} m = new HashMap<String, Integer>();
-	 * m.put("t", 6); m.put("i", 1); state = new ProgStateTODELETE(2, m);
-	 * traces.add(state);
-	 * 
-	 * // correct: {line = 2, t = 5, i = 1} Map<String, Integer> fm = new
-	 * HashMap<String, Integer>(); fm.put("t", 5); fm.put("i", 1);
-	 * ProgStateTODELETE finalState = new ProgStateTODELETE(2, fm);
-	 * 
-	 * TraceTODELETE oriTrace = new TraceTODELETE(traces); ///////
-	 * 
-	 * ConstraintFactory cf = new ConstraintFactory(oriTrace, finalState, new
-	 * FcnHeader(root.getName(), root.getReturnType(), root.getParames()), new
-	 * ExprConstInt(3));
-	 * 
-	 * System.out.println(root);
-	 * 
-	 * String script = cf.getScript(root.getBody()); System.out.println(script);
-	 * //System.out.println(CallSketch.CallByString(script)); }
-	 * 
-	 * @org.junit.Test public void testLargestGap() throws InterruptedException
-	 * { System.out.println(); System.out.println("testLargestGap:");
-	 * ANTLRInputStream input = new ANTLRInputStream("int largestGap(int[] a){"
-	 * + "int max = 100; " + "int min = 0; " +
-	 * "for(int i=0; i < a.Length; i++){" + "if(max < a[i]) " + "max = a[i];" +
-	 * "if(min > a[i]) " + "min = a[i];" + "}" + "return max-min;}"); Function
-	 * root = (Function) compile(input,"main");
-	 * 
-	 * List<ProgStateTODELETE> traces = new ArrayList<ProgStateTODELETE>();
-	 * 
-	 * Map<String, Integer> m = new HashMap<String, Integer>(); m.put("max",
-	 * 100); ProgStateTODELETE state = new ProgStateTODELETE(1, m);
-	 * traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * state = new ProgStateTODELETE(2, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 0); state = new ProgStateTODELETE(3, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 0); state = new ProgStateTODELETE(4, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 0); state = new ProgStateTODELETE(6, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 1); state = new ProgStateTODELETE(3, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 1); state = new ProgStateTODELETE(4, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 1); state = new ProgStateTODELETE(6, m); traces.add(state);
-	 * 
-	 * m = new HashMap<String, Integer>(); m.put("max", 100); m.put("min", 0);
-	 * m.put("i", 2); state = new ProgStateTODELETE(3, m);
-	 * 
-	 * traces.add(state); // correct Map<String, Integer> fm = new
-	 * HashMap<String, Integer>(); fm.put("max", 4); fm.put("min", 1);
-	 * fm.put("i", 2); ProgStateTODELETE finalState = new ProgStateTODELETE(2,
-	 * fm);
-	 * 
-	 * TraceTODELETE oriTrace = new TraceTODELETE(traces); ///////
-	 * 
-	 * List<Expression> parameters = new ArrayList<Expression>();
-	 * parameters.add(new ExprConstInt(1)); parameters.add(new ExprConstInt(4));
-	 * parameters.add(new ExprConstInt(2)); parameters.add(new ExprConstInt(7));
-	 * 
-	 * ConstraintFactory cf = new ConstraintFactory(oriTrace, finalState, new
-	 * FcnHeader(root.getName(), root.getReturnType(), root.getParames()),
-	 * parameters);
-	 * 
-	 * System.out.println(root);
-	 * 
-	 * String script = cf.getScript(root.getBody());
-	 * System.out.println(CallSketch.CallByString(script)); }
-	 */
-
 	public static SketchObject compile(ANTLRInputStream input, String target) {
 		simpleJavaLexer lexer = new simpleJavaLexer(input);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -384,5 +240,201 @@ public class Test {
 		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
 		String res = me.Synthesize(true,true).toString();
 		System.out.println(res);
+	}
+	
+	@org.junit.Test
+	public void testtmpIO() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 11;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		me.iomod = true;
+		me.addOriTrace(new Scanner(new File("benchmarks/tmptest/test1")).useDelimiter("\\Z").next());
+		me.addTargetTrace(new Scanner(new File("benchmarks/tmptest/target1")).useDelimiter("\\Z").next());
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmp1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 5;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest1/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest1/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmp3() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 4;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptest2/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptest2/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpRe() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 7;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestRe/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestRe/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpRe1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 17;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestRe/test_re")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestRe/target_re")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpEZ() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 4;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestEZ/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestEZ/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+
+	@org.junit.Test
+	public void testtmpBig() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 5;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestBig/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestBig/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpBig1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 6;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestBig1/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestBig1/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpIfAndFor() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 18;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpifandfor/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpifandfor/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpSimpleRe() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 22;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpSimpleRe/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpSimpleRe/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpLargestGap() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 15;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpLargestGap/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpLargestGap/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpMax() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 9;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpMax/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpMax/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpReWithoutPrint() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 10;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmpReWithoutPrint/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmpReWithoutPrint/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	@org.junit.Test
+	public void testtmpReStack() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 16;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/tmptestReStack/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/tmptestReStack/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+	
+	// new1
+	@org.junit.Test
+	public void testnew1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 6;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/new1/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/new1/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+
+	// new2
+	@org.junit.Test
+	public void testnew2() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 11;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/new2/test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/new2/target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.out.println(res);
+	}
+	
+	// new3
+	@org.junit.Test
+	public void testnew3() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 7;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/LargestGap-1/largestGap1-test")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/LargestGap-1/largestGap1-target")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
 	}
 }

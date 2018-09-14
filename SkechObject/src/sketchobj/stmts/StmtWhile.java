@@ -75,6 +75,7 @@ public class StmtWhile extends Statement {
 		prectx = new Context(prectx);
 		prectx.setLinenumber(this.getLineNumber());
 		Context postctx  = new Context(prectx);
+		this.setPrectx(prectx);
 		this.setPostctx(new Context(postctx));
 		postctx.pushVars(new HashMap<String, Type>());
 		postctx = body.buildContext(postctx, sp+1);

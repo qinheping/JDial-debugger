@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import constraintfactory.ConstData;
+import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.Type;
 
@@ -18,7 +20,10 @@ public class StmtBlock extends Statement {
 	public StmtBlock(List<? extends Statement> stmts) {
 		for(Statement s:stmts)
 			s.setParent(this);
-		this.stmts = Collections.unmodifiableList(stmts);
+
+		this.stmts = new ArrayList<>(stmts);
+		//this.stmts = Collections.unmodifiableList(stmts);
+
 	}
 
 	public StmtBlock() {
@@ -41,6 +46,8 @@ public class StmtBlock extends Statement {
 		lst.add(stmt2);
 		stmt1.setParent(this);
 		stmt2.setParent(this);
+
+		//this.stmts = new ArrayList<>(lst);
 		this.stmts = Collections.unmodifiableList(lst);
 	}
 
@@ -52,7 +59,8 @@ public class StmtBlock extends Statement {
 		String result = "";
 		Iterator<Statement> it = stmts.iterator();
 		while (it.hasNext()) {
-			result += it.next().toString() + "\n";
+			String tmp = it.next().toString();
+			result += tmp + "\n";
 		}
 		return result;
 	}
@@ -91,7 +99,10 @@ public class StmtBlock extends Statement {
 	public Context buildContext(Context prectx, int sposition) {
 		prectx = new Context(prectx);
 		Context postctx = new Context(prectx);
+		//System.err.println("block is " + this.stmts);
+		//System.err.println("size is " + this.stmts.size());
 		for (int i = 1; i < this.stmts.size(); i++) {
+			//System.err.println("cur stmt: " + stmts.get(i - 1));
 			postctx = stmts.get(i - 1).buildContext(postctx, sposition);
 		}
 		postctx = this.stmts.get(this.stmts.size()-1).buildContext(postctx, sposition);
@@ -104,6 +115,17 @@ public class StmtBlock extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		for (int i = 0; i < stmts.size(); i++) {
+			//System.err.println("add stmt is: " + stmts.get(i));
+			/*if (Global.prime_mod) {
+				if (ConstraintFactory.dupStmt.contains(stmts.get(i))) {
+					//System.err.println("dup");
+					continue;
+				}
+				//System.err.println("not");
+			}
+			if (ConstraintFactory.dupStmt.contains(stmts.get(i))) {
+				continue;
+			}*/
 			m.putAll(stmts.get(i).addRecordStmt(this, i, m));
 		}
 		return m;

@@ -11,6 +11,7 @@ import java.util.Vector;
 import constraintfactory.ConstData;
 import constraintfactory.ConstraintFactory;
 import constraintfactory.ExternalFunction;
+import global.Global;
 import sketchobj.core.Context;
 import sketchobj.core.SketchObject;
 import sketchobj.core.Type;
@@ -24,6 +25,8 @@ import sketchobj.expr.ExprFunCall;
 import sketchobj.expr.ExprStar;
 import sketchobj.expr.ExprVar;
 import sketchobj.expr.Expression;
+//added
+import constraintfactory.ConstraintFactory;
 
 public class StmtVarDecl extends Statement {
 	private List<Type> types;
@@ -66,7 +69,11 @@ public class StmtVarDecl extends Statement {
 
 	@Override
 	public StmtVarDecl clone() {
-		return new StmtVarDecl(this.types, this.names, this.inits, this.getLineNumber());
+		List<Expression> exprs = new ArrayList<>();
+		for (Expression e : this.inits) {
+			exprs.add(e.clone());
+		}
+		return new StmtVarDecl(this.types, this.names, exprs, this.getLineNumber());
 	}
 
 	/**
@@ -139,7 +146,13 @@ public class StmtVarDecl extends Statement {
 	public String getName(int n) {
 		return (String) names.get(n);
 	}
-
+	
+	// added
+	public void SetName(String name) {
+		this.names = new ArrayList<String>();
+		names.add(name);
+	}
+	
 	/**
 	 * Get an immutable list of the names of all of the variables declared by
 	 * this.
@@ -367,9 +380,15 @@ public class StmtVarDecl extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
-
-		parent.stmts.set(index, new StmtBlock(
+		
+		/*if (Global.prime_mod) {
+			parent.stmts.set(index, new StmtBlock(this,
+					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
+		} else {*/
+		if (!ConstraintFactory.dupStmt.contains(this))
+			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
+		//}
 		m.putAll(this.getPostctx().getAllVars());
 		return m;
 	}
@@ -419,7 +438,7 @@ public class StmtVarDecl extends Statement {
 					return new ConstData(null, new ArrayList<SketchObject>(), index, 0, null, this.getLineNumber());
 				}
 				List<String> vars = new ArrayList<String>(this.getPrectx().getAllVars().keySet());
-				for (String v : vars) {
+	/*			for (String v : vars) {
 					// all 1 dimension array
 
 					if (this.getPrectx().getAllVars().get(v) instanceof TypeArray) {
@@ -436,7 +455,7 @@ public class StmtVarDecl extends Statement {
 						 * liveVarsIndexSet.add(index); liveVarsNameSet.add(v);
 						 * index++;
 						 */
-						continue;
+	/*					continue;
 					} else if (((TypePrimitive) this.getPrectx().getAllVars().get(v)).getType() != ((TypePrimitive) t)
 							.getType())
 						continue;
@@ -447,8 +466,13 @@ public class StmtVarDecl extends Statement {
 					liveVarsNameSet.add(v);
 					index++;
 				}
-				inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+				// added
+				/*if (ConstraintFactory.prime_mod)
+					inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("@2Coeff" + index), "*",
 						new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()), this.getLineNumber()));
+				else*/
+					inits.set(i, new ExprBinary(inits.get(i), "+", new ExprBinary(new ExprFunCall("Coeff" + index), "*",
+							new ExprFunCall("Coeff" + (index + 1), new ArrayList<Expression>()), this.getLineNumber()), this.getLineNumber()));
 				index += 2;
 				return new ConstData(t, toAdd, index, 0, null, this.getLineNumber(), liveVarsIndexSet, liveVarsNameSet,
 						primaryIndex);
@@ -459,7 +483,9 @@ public class StmtVarDecl extends Statement {
 
 	@Override
 	public Map<Integer, String> ConstructLineToString(Map<Integer, String> line_to_string) {
-		line_to_string.put(this.getLineNumber(), this.toString());
+		int tmpi = this.getLineNumber();
+		String tmps = this.toString();
+		line_to_string.put(tmpi, tmps);
 		return line_to_string;
 	}
 
