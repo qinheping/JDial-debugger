@@ -1,6 +1,6 @@
 int largestGap(int[] a){
-  int max = -100;
-  int min = 100;
+  int max = -100; 
+  int min = 100; // max = a[0]
   for(int i=1; i < a.Length; i++){
     if(max < a[i]) max = a[i];
     if(min > a[i]) min = a[i];
