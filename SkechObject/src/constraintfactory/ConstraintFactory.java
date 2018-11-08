@@ -223,8 +223,9 @@ public class ConstraintFactory {
 			varsTypes.add(vars.get(varsNames.get(i)));
 		}
 		
-		// add declare of <linehit> and <count>
+		// add declare of <linehit> and <count> 
 		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "linehit", new ExprConstInt(0), 0), s);
+		s = new StmtBlock(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0), s);
 		if (Global.prime_mod) {
 			for (Map.Entry<String, Boolean> entry : Global.feasibleVars.entrySet()) {
 				if (!finalState.getOrdered_locals().contains(entry.getKey()))
@@ -302,7 +303,7 @@ public class ConstraintFactory {
 
 		// add final count
 		stmts.add(new StmtVarDecl(new TypePrimitive(4), "finalcount", new ExprConstInt(0), 0));
-		stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
+		//stmts.add(new StmtVarDecl(new TypePrimitive(4), "count", new ExprConstInt(-1), 0));
 		
 		//if(global.Global.rec_mod)
 			//stmts.add(new StmtVarDecl(new TypePrimitive(4), "funcCount", new ExprConstInt(-1), 0));
