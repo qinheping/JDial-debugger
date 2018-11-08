@@ -1293,7 +1293,7 @@ public class ConstraintFactory {
 		Statement forupdate = new StmtExpr(new ExprUnary(5, new ExprVar("i"), 0), 0);
 		stmts.add(new StmtFor(forinit, forcon, forupdate, new StmtBlock(forBody), false, 0));
 		if (Global.prime_mod) {
-			stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
+			//stmts.add(new StmtExpr(new ExprFunCall(fh.getName(), args, fh.getName()), 0));
 			
 			for (int p : Global.primes) {
 				for (String v : finalState.getOrdered_locals()) {
