@@ -437,4 +437,43 @@ public class Test {
 		System.err.println("--------------------------------------------"); // added
 		System.err.println(res); // added
 	}
+	
+	@org.junit.Test
+	public void testmulia() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 19;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/multIA/test1")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/multIA/target1")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
+	}
+	
+	@org.junit.Test
+	public void testiterPower1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 26;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/iterPower-1/test1")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/iterPower-1/target1")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
+	}
+	
+	@org.junit.Test
+	public void testiterPower2() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 26;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/iterPower-2/test1")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/iterPower-2/target1")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
+	}
 }

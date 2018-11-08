@@ -155,7 +155,6 @@ public class MainEntrance {
 		System.out.println("--------------------");
 		boolean prime_mod = global.Global.prime_mod;
 		boolean rec_mod = global.Global.rec_mod;
-		System.err.println("original length3 is: " + root.getTraces().getLength());
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
 				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod,
 				otherFunctions);
