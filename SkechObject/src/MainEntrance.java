@@ -98,12 +98,17 @@ public class MainEntrance {
 		if (oneLine)
 			mod = 1;
 
-		// added
+		// added, this is for largestGap benchmarks since we don't have the index
+		// for largestGap1 
+		//this.indexOfCorrectTrace = root.getTraces().getLength() - 2;
+		// for largestGap2 and largestGap3
+		//this.indexOfCorrectTrace = root.getTraces().getLength() - 5;
 		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace,
 				this.targetFunc);
+		//System.err.println("trace length " + root.getTraces().getLength());
 
+		//System.err.println("args " + args);
 		this.traces = root.getTraces().findSubTraces(this.targetFunc, indexOfCorrectTrace);
-		//System.err.println("trace length is " + root.getTraces().getLength());
 		//System.err.println("trace is " + root.getTraces().toString());
 		code = code.replace("\\n", "\n");
 		code = code.replace("\\t", "\t");

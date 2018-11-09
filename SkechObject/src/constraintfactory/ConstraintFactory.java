@@ -524,14 +524,14 @@ public class ConstraintFactory {
 							((StmtAssign) si).getOp() == ExprBinary.BINOP_SUB;
 					//System.err.println("isAdd is : " + isAdd);
 					Expression l = ((StmtAssign) si).getLHS();
-					if (!Global.only_mod) {
+					//if (!Global.only_mod) {
 						if (Global.facts.get(si.getLineNumber()) == null || 
 							Collections.disjoint(Global.facts.get(si.getLineNumber()), CFG.extractAllVarExpr(l)))
 							keepActual = false;
-					} else {
+					/*} else {
 						if (!Global.altfacts.contains(si.getLineNumber()))
 							keepActual = false;
-					}
+					}*/
 					//System.err.println("keep actual is " + keepActual);
 					//if (frozenStmt.contains(si))
 						//keepActual = false;
@@ -592,14 +592,15 @@ public class ConstraintFactory {
 				if (si instanceof StmtVarDecl) {
 					String declaredVar = ((StmtVarDecl) si).getName(0);
 					boolean keepActual = false;
-					if (!Global.only_mod) {
-						if (Global.facts.get(si.getLineNumber()).contains(declaredVar)) {
+					//if (!Global.only_mod) {
+						if (Global.facts.get(si.getLineNumber()) == null ||
+								 Global.facts.get(si.getLineNumber()).contains(declaredVar)) {
 							keepActual = true;
 						}
-					} else {
+					/*} else {
 						if (Global.altfacts.contains(si.getLineNumber()))
 							keepActual = true;
-					}
+					}*/
 					if (!keepActual) {
 						((StmtBlock) s).stmts.remove(i);
 						i--;

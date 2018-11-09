@@ -476,4 +476,43 @@ public class Test {
 		System.err.println("--------------------------------------------"); // added
 		System.err.println(res); // added
 	}
+	
+	@org.junit.Test
+	public void testlargestgap1() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 26;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/LargestGap-1/test2")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/LargestGap-1/target2")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
+	}
+	
+	@org.junit.Test
+	public void testlargestgap2() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 26;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/LargestGap-2/test1")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/LargestGap-2/target1")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
+	}
+	
+	@org.junit.Test
+	public void testlargestgap3() throws FileNotFoundException, InterruptedException, ScriptException {
+		int index = 26;
+		String folder = "";
+		String oriTraces = new Scanner(new File("benchmarks/LargestGap-3/test1")).useDelimiter("\\Z").next();
+		String correctTrace = new Scanner(new File("benchmarks/LargestGap-3/target1")).useDelimiter("\\Z").next();
+		MainEntrance me = new MainEntrance(oriTraces, correctTrace, index);
+		String res = me.Synthesize(true,true).toString();
+		System.err.println(res);
+		System.err.println("--------------------------------------------"); // added
+		System.err.println(res); // added
+	}
 }
