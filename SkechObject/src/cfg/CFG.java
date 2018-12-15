@@ -477,6 +477,7 @@ public class CFG {
 	}
 	
 	// get the starting points of backwards data-flow analysis
+	// if there is a < b at line 5, add Map.Entry<5, {a,b}>
 	private Map<Integer, Set<String>> getHead() {
 		Map<Integer, Set<String>> map = new HashMap<Integer, Set<String>>();
 		for (Map.Entry<Integer, Node> entry : this.nodes.entrySet()) {
@@ -488,6 +489,8 @@ public class CFG {
 					map.put(key, set);
 			} else if (node.getType() == 2) {
 				Set<String> set = extractVarFromExpr(node.getExpr(), 0);
+				System.err.println("node is " + node.getExpr());
+				System.err.println("set is " + set);
 				if (set.size() > 0)
 					map.put(key, set);
 			}
@@ -525,6 +528,7 @@ public class CFG {
 	}
 	
 	// extract vars on both sides of a < b
+	// flag = 1 means we need to extract all vars from the current expression
 	private Set<String> extractVarFromExpr(Expression expr, int flag) {
 		if (expr instanceof ExprArrayRange) {
 			return extractAllVarExpr(((ExprArrayRange) expr).getOffset()); 
@@ -538,8 +542,8 @@ public class CFG {
 		}
 		if (expr instanceof ExprBinary) {
 			int op = ((ExprBinary) expr).getOp();
-			if ((op == ExprBinary.BINOP_LT) || (op == ExprBinary.BINOP_LE) ||
-			(op == ExprBinary.BINOP_GT) || (op == ExprBinary.BINOP_GT)){
+			if ((flag == 1) || (op == ExprBinary.BINOP_LT) || (op == ExprBinary.BINOP_LE) ||
+			(op == ExprBinary.BINOP_GT) || (op == ExprBinary.BINOP_GE)){
 				res.addAll(extractVarFromExpr(((ExprBinary) expr).getLeft(), 1));
 				res.addAll(extractVarFromExpr(((ExprBinary) expr).getRight(), 1));
 				return res;

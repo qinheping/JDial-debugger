@@ -1,0 +1,51 @@
+{
+      "stdout": "",
+      "event": "return",
+      "line": 13,
+      "stack_to_render": [
+        {
+          "func_name": "largestGap:13",
+          "encoded_locals": {
+            "z": 7
+          },
+          "ordered_varnames": [
+            "z"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": true,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "165",
+          "frame_id": 165
+        },
+        {
+          "func_name": "main:19",
+          "encoded_locals": {
+            "a": [
+              "REF",
+              165
+            ]
+          },
+          "ordered_varnames": [
+            "a"
+          ],
+          "parent_frame_id_list": [],
+          "is_highlighted": false,
+          "is_zombie": false,
+          "is_parent": false,
+          "unique_hash": "166",
+          "frame_id": 166
+        }
+      ],
+      "globals": {},
+      "ordered_globals": [],
+      "func_name": "largestGap",
+      "heap": {
+        "165": [
+          "LIST",
+          -8,
+          -1,
+          -3
+        ]
+      }
+    }
