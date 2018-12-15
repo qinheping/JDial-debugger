@@ -613,6 +613,15 @@ public class JavaVisitor extends simpleJavaBaseVisitor<SketchObject> {
 		return new ExprBinary((Expression) visit(ctx.getChild(0)), ctx.getChild(1).getText(),
 				(Expression) visit(ctx.getChild(2)), ctx.getStart().getLine());
 	}
+	
+	/** equalityExpression '==' relationalExpression					# expandEqExpr
+	|	equalityExpression '!=' relationalExpression					# expandEqExpr **/
+	@Override
+	public Expression visitExpandEqExpr(simpleJavaParser.ExpandEqExprContext ctx) {
+		// for Matt
+		return new ExprBinary((Expression) visit(ctx.getChild(0)), ctx.getChild(1).getText(),
+				(Expression) visit(ctx.getChild(2)), ctx.getStart().getLine());
+	}
 
 	@Override
 	public Expression visitExpandShiftLeft(simpleJavaParser.ExpandShiftLeftContext ctx) {
