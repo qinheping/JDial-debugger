@@ -6,12 +6,13 @@ import java.util.Map;
 import java.util.Set;
 
 public class Global {
-	public static final boolean prime_mod = false;
+	public static final boolean prime_mod = true;
 	public static final boolean inc_mod = false;
 	// track a var modularly only when it could always be tracked modularly
 	public static final boolean only_mod = true;
 	public static final boolean rec_mod = false;
 	public static final boolean sem_dis = true;
+	// use Qlose-like test cases
 	public static final boolean test_mod = false;
 	//public static boolean finalTracked = false;
 	public static String curFunc = "";
@@ -24,7 +25,7 @@ public class Global {
 	public static Map<String, Boolean> feasibleVars = new HashMap<>();
 	// vars that could be always tracked modulaly
 	public static Set<String> alwaysVars = new HashSet<>();
-	// store dataflow facts
+	// store dataflow facts; for current line number, which vars' actual values must be tracked
 	public static Map<Integer, Set<String>> facts = null;
 	// alternative dataflow facts
 	public static Set<Integer> altfacts = new HashSet<>();

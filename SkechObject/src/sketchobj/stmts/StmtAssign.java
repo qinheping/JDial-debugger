@@ -158,9 +158,6 @@ public class StmtAssign extends Statement {
 	@Override
 	public Map<String, Type> addRecordStmt(StmtBlock parent, int index, Map<String, Type> m) {
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
-		//System.err.println("add assign is: " + this);
-		//System.err.println("context is: " + this.getPrectx().getLinenumber() + this.getPrectx().getAllVars());
-		//System.err.println("added is: " + ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()));
 		/*if (Global.prime_mod) {
 			parent.stmts.set(index, new StmtBlock(this,
 					ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars())));
@@ -169,11 +166,7 @@ public class StmtAssign extends Statement {
 			parent.stmts.set(index, new StmtBlock(
 				ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		//}
-		//System.err.println("parent is: " + parent);
-		//System.err.println("index: " + parent.stmts.get(index));
 		m.putAll(this.getPostctx().getAllVars());
-		//System.err.println("assign is: " + this);
-		//System.err.println("m is: " + m);
 		return m;
 	}
 

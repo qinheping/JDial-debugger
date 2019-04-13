@@ -117,9 +117,9 @@ public class StmtReturn extends Statement
 //		parent.stmts.set(index, tmpSB);
 //		return m;
 //
-		if (Global.prime_mod) {
-			return m;
-		}
+		//if (Global.prime_mod) {
+			//return m;
+		//}
 		parent.stmts = new ArrayList<Statement>(parent.stmts);
 		parent.stmts.set(index, new StmtBlock(ConstraintFactory.recordState(this.getPrectx().getLinenumber(), this.getPrectx().getAllVars()), this));
 		return m;

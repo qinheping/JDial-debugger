@@ -98,11 +98,6 @@ public class MainEntrance {
 		if (oneLine)
 			mod = 1;
 
-		// added, this is for largestGap benchmarks since we don't have the index
-		// for largestGap1 
-		//this.indexOfCorrectTrace = root.getTraces().getLength() - 2;
-		// for largestGap2 and largestGap3
-		//this.indexOfCorrectTrace = root.getTraces().getLength() - 5;
 		List<Expression> args = AuxMethods.extractArguments(root.getTraces(), indexOfCorrectTrace,
 				this.targetFunc);
 		//System.err.println("trace length " + root.getTraces().getLength());
@@ -161,7 +156,7 @@ public class MainEntrance {
 		boolean prime_mod = global.Global.prime_mod;
 		boolean rec_mod = global.Global.rec_mod;
 		ConstraintFactory cf = new ConstraintFactory(traces, jsonTraceCompile(manipulation),
-				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod, prime_mod,
+				new FcnHeader(function.getName(), function.getReturnType(), function.getParames()), args, mod,
 				otherFunctions);
 		ConstraintFactory.correctionIndex = this.indexOfCorrectTrace;
 		if (this.repair_range != null)
